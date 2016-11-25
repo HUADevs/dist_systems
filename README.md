@@ -1,4 +1,4 @@
 # dist_systems
 Distributed Systems Project
 
-contr by E
+contr by EV
