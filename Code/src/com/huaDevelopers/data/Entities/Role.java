@@ -1,11 +1,12 @@
 package com.huaDevelopers.data.Entities;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Role {
+public class Role implements Serializable{
 
-	private int RoleName;
-	private int Competences;
+	private String RoleName;
+	private List<Services> Competences;
 
 	public String getRoleName() {
 		// TODO - implement Role.getRoleName
@@ -16,12 +17,12 @@ public class Role {
 	 * 
 	 * @param RoleName
 	 */
-	public void setRoleName(int RoleName) {
+	public void setRoleName(String RoleName) {
 		// TODO - implement Role.setRoleName
 		throw new UnsupportedOperationException();
 	}
 
-	public List<String> getCompetences() {
+	public List<Services> getCompetences() {
 		// TODO - implement Role.getCompetences
 		throw new UnsupportedOperationException();
 	}
@@ -30,7 +31,7 @@ public class Role {
 	 * 
 	 * @param Competences
 	 */
-	public void setCompetences(int Competences) {
+	public void setCompetences(List<Services> Competences) {
 		// TODO - implement Role.setCompetences
 		throw new UnsupportedOperationException();
 	}

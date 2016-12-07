@@ -1,17 +1,18 @@
 package com.huaDevelopers.data.Entities;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class User {
+public class User implements Serializable{
 
-	private int FirstName;
-	private int LastName;
-	private int EmailAdress;
+	private String FirstName;
+	private String LastName;
+	private String EmailAdress;
 	private int Telephone;
-	private int AssignedRole;
-	private int WorkingDept;
-	private int UserName;
-	private int Password;
+	private Role AssignedRole;
+	private Department WorkingDept;
+	private String UserName;
+	private String Password;
 
 	public String getName() {
 		// TODO - implement User.getName
