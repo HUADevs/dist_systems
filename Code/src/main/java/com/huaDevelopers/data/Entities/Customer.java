@@ -6,10 +6,6 @@ import java.util.Date;
 
 public class Customer implements Serializable{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private String FirstName;
 	private String LastName;
 	private String PersonalId;
