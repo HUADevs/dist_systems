@@ -9,31 +9,21 @@ public class Services implements Serializable{
 	private HashMap<String, Boolean> Rights;
 
 	public String getServiceName() {
-		// TODO - implement Services.getServiceName
-		throw new UnsupportedOperationException();
+		return this.ServiceName;
 	}
 
-	/**
-	 * 
-	 * @param ServiceName
-	 */
+	
 	public void setServiceName(String ServiceName) {
-		// TODO - implement Services.setServiceName
-		throw new UnsupportedOperationException();
+		this.ServiceName = ServiceName;
 	}
 
-	public Boolean getRights() {
-		// TODO - implement Services.getRights
-		throw new UnsupportedOperationException();
+	public HashMap<String,Boolean> getRights() {
+		return this.Rights;
 	}
 
-	/**
-	 * 
-	 * @param Rights
-	 */
+	
 	public void setRights(HashMap<String, Boolean> Rights) {
-		// TODO - implement Services.setRights
-		throw new UnsupportedOperationException();
+		this.Rights = Rights;
 	}
 
 }

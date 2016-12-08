@@ -9,30 +9,20 @@ public class Role implements Serializable{
 	private List<Services> Competences;
 
 	public String getRoleName() {
-		// TODO - implement Role.getRoleName
-		throw new UnsupportedOperationException();
+		return this.RoleName;
 	}
 
-	/**
-	 * 
-	 * @param RoleName
-	 */
+	
 	public void setRoleName(String RoleName) {
-		// TODO - implement Role.setRoleName
-		throw new UnsupportedOperationException();
+		this.RoleName = RoleName;
 	}
 
 	public List<Services> getCompetences() {
-		// TODO - implement Role.getCompetences
-		throw new UnsupportedOperationException();
+		return this.Competences;
 	}
 
-	/**
-	 * 
-	 * @param Competences
-	 */
+	
 	public void setCompetences(List<Services> Competences) {
-		// TODO - implement Role.setCompetences
-		throw new UnsupportedOperationException();
+		this.Competences = Competences;
 	}
 }

@@ -1,9 +1,8 @@
 package com.huaDevelopers.data.Entities;
 
 import java.io.Serializable;
-import java.util.List;
 
-public class User implements Serializable{
+public class User implements Serializable {
 
 	private String FirstName;
 	private String LastName;
@@ -15,88 +14,58 @@ public class User implements Serializable{
 	private String Password;
 
 	public String getName() {
-		// TODO - implement User.getName
-		throw new UnsupportedOperationException();
+		return this.FirstName + " " + this.LastName;
 	}
 
-	/**
-	 * 
-	 * @param FirstName
-	 * @param LastName
-	 */
-	public void setName(int FirstName, int LastName) {
-		// TODO - implement User.setName
-		throw new UnsupportedOperationException();
+	public void setName(String FirstName, String LastName) {
+		this.FirstName = FirstName;
 	}
 
-	public List getContactInfo() {
-		// TODO - implement User.getContactInfo
-		throw new UnsupportedOperationException();
+	public String getEmailAddress() {
+		return this.EmailAdress;
 	}
 
-	/**
-	 * 
-	 * @param Telephone
-	 * @param EmailAdress
-	 */
-	public void setContactInfo(int Telephone, int EmailAdress) {
-		// TODO - implement User.setContactInfo
-		throw new UnsupportedOperationException();
+	public void setEmailAdress(String EmailAdress) {
+		this.EmailAdress = EmailAdress;
 	}
 
-	public String getAssignedRole() {
-		// TODO - implement User.getAssignedRole
-		throw new UnsupportedOperationException();
+	public int getPhoneNumber() {
+		return this.Telephone;
 	}
 
-	/**
-	 * 
-	 * @param AssignedRole
-	 */
-	public void setAssignedRole(int AssignedRole) {
-		// TODO - implement User.setAssignedRole
-		throw new UnsupportedOperationException();
+	public void setPhoneNumber(int Telephone) {
+		this.Telephone = Telephone;
 	}
 
-	public int getWorkingDept() {
-		// TODO - implement User.getWorkingDept
-		throw new UnsupportedOperationException();
+	public Role getAssignedRole() {
+		return this.AssignedRole;
 	}
 
-	/**
-	 * 
-	 * @param WorkingDept
-	 */
-	public void setWorkingDept(int WorkingDept) {
-		// TODO - implement User.setWorkingDept
-		throw new UnsupportedOperationException();
+	public void setAssignedRole(Role AssignedRole) {
+		this.AssignedRole = AssignedRole;
+	}
+
+	public Department getWorkingDept() {
+		return this.WorkingDept;
+	}
+
+	public void setWorkingDept(Department WorkingDept) {
+		this.WorkingDept = WorkingDept;
 	}
 
 	public String getUserName() {
-		// TODO - implement User.getUserName
-		throw new UnsupportedOperationException();
+		return this.UserName;
 	}
 
-	/**
-	 * 
-	 * @param UserName
-	 */
-	public void setUserName(int UserName) {
-		// TODO - implement User.setUserName
-		throw new UnsupportedOperationException();
+	public void setUserName(String UserName) {
+		this.UserName = UserName;
 	}
 
 	public String getPassword() {
-		// TODO - implement User.getPassword
-		throw new UnsupportedOperationException();
+		return this.Password;
 	}
 
-	/**
-	 * 
-	 * @param Password
-	 */
-	public void setPassword(int Password) {
-		// TODO - implement User.setPassword
-		throw new UnsupportedOperationException();
+	public void setPassword(String Password) {
+		this.Password = Password;
 	}
 }
