@@ -1,20 +1,49 @@
 package com.huaDevelopers.data.Entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 
-public class Customer implements Serializable{
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "Customers")
+public class Customer implements Serializable {
+
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+
+	@Column(name = "first_name")
 	private String FirstName;
+
+	@Column(name = "last_name")
 	private String LastName;
+
+	@Column(name = "personal_id")
 	private String PersonalId;
+
+	@Column(name = "tax_reg_number")
 	private int TRN; // TAX REGISTRATION NUMBER
+
+	@Column(name = "license_date")
 	private Date LicenseAqquired;
-	private ArrayList<String> HistoryInc;
 
 	public Customer() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getFirstName() {
@@ -55,14 +84,6 @@ public class Customer implements Serializable{
 
 	public void setLicenseAqquired(Date licenseAqquired) {
 		LicenseAqquired = licenseAqquired;
-	}
-
-	public ArrayList<String> getHistoryInc() {
-		return HistoryInc;
-	}
-
-	public void setHistoryInc(ArrayList<String> historyInc) {
-		HistoryInc = historyInc;
 	}
 
 }
