@@ -3,26 +3,25 @@ package com.huaDevelopers.data.Entities;
 import java.io.Serializable;
 import java.util.List;
 
-public class Role implements Serializable{
+public class Role implements Serializable {
 
 	private String RoleName;
-	private List<Services> Competences;
+	private int RoleId;
 
 	public String getRoleName() {
 		return this.RoleName;
 	}
 
-	
 	public void setRoleName(String RoleName) {
 		this.RoleName = RoleName;
 	}
 
-	public List<Services> getCompetences() {
-		return this.Competences;
+	public int getRoleId() {
+		return RoleId;
 	}
 
-	
-	public void setCompetences(List<Services> Competences) {
-		this.Competences = Competences;
+	public void setRoleId(int roleId) {
+		RoleId = roleId;
 	}
+
 }

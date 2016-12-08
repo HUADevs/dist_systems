@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class DamageForm implements Serializable{
 
+	private int id;
 	private String LicensePlate;
 	private String DamageDescription;
 	private byte[] DamagePhotoShoots;
@@ -12,6 +13,14 @@ public class DamageForm implements Serializable{
 	
 	public DamageForm() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getLicensePlate() {

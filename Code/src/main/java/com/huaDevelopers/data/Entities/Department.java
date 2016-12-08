@@ -2,7 +2,7 @@ package com.huaDevelopers.data.Entities;
 
 import java.io.Serializable;
 
-public class Department implements Serializable{
+public class Department implements Serializable {
 
 	public Department() {
 		// TODO Auto-generated constructor stub
@@ -18,68 +18,40 @@ public class Department implements Serializable{
 		return this.id;
 	}
 
-	/**
-	 * 
-	 * @param id
-	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
 	public String getDepName() {
-		// TODO - implement Department.getDepName
-		throw new UnsupportedOperationException();
+		return DepName;
 	}
 
-	/**
-	 * 
-	 * @param DepName
-	 */
-	public void setDepName(String DepName) {
-		// TODO - implement Department.setDepName
-		throw new UnsupportedOperationException();
+	public void setDepName(String depName) {
+		DepName = depName;
 	}
 
 	public String getLocation() {
-		// TODO - implement Department.getLocation
-		throw new UnsupportedOperationException();
+		return Location;
 	}
 
-	/**
-	 * 
-	 * @param Location
-	 */
-	public void setLocation(String Location) {
-		// TODO - implement Department.setLocation
-		throw new UnsupportedOperationException();
+	public void setLocation(String location) {
+		Location = location;
 	}
 
 	public String getAddress() {
-		// TODO - implement Department.getAddress
-		throw new UnsupportedOperationException();
+		return Address;
 	}
 
-	/**
-	 * 
-	 * @param Address
-	 */
-	public void setAddress(String Address) {
-		// TODO - implement Department.setAddress
-		throw new UnsupportedOperationException();
+	public void setAddress(String address) {
+		Address = address;
 	}
 
 	public int getNumEmp() {
-		// TODO - implement Department.getNumEmp
-		throw new UnsupportedOperationException();
+		return NumEmp;
 	}
 
-	/**
-	 * 
-	 * @param NumEmp
-	 */
-	public void setNumEmp(int NumEmp) {
-		// TODO - implement Department.setNumEmp
-		throw new UnsupportedOperationException();
+	public void setNumEmp(int numEmp) {
+		NumEmp = numEmp;
 	}
 
 }

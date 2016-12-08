@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
+	private int Userid;
 	private String FirstName;
 	private String LastName;
 	private String EmailAdress;
@@ -12,6 +13,14 @@ public class User implements Serializable {
 	private Department WorkingDept;
 	private String UserName;
 	private String Password;
+
+	public int getUserid() {
+		return Userid;
+	}
+
+	public void setUserid(int userid) {
+		Userid = userid;
+	}
 
 	public String getName() {
 		return this.FirstName + " " + this.LastName;
