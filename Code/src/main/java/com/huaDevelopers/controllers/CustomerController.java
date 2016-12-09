@@ -31,15 +31,14 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	@ResponseBody
 	public String saveCustomer(@ModelAttribute("customer") Customer cust) {
 		if (cust.getId() == 0) {
 			this.customerService.addCustomer(cust);
 		} else {
-			return "This user is already added";
+			return "template";
 		}
 
-		return "VICTORY";
+		return "test";
 
 	}
 

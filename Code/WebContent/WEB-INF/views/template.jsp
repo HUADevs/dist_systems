@@ -48,9 +48,9 @@
 <body>
 	<h1>Add a Customer</h1>
 
-	<c:url var="addAction" value="cms/customer/add"></c:url>
+	<spring:url var="addAction" value="/cms/customer/add"></spring:url>
 
-	<form:form action="${addAction}" method="post" commandName="customer">
+	<form:form action="${addAction}" method="post" modelAttribute="customer">
 		<table>
 			<%-- <tr>
 				<td><form:label path="id">
