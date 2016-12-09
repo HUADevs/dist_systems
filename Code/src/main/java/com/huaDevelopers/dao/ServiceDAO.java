@@ -7,9 +7,9 @@ import com.huaDevelopers.data.Entities.User;
 
 public interface ServiceDAO {
 
-	public void addService (User usr);
+	public void addService (Service s);
 
-	public void updateService (User usr);
+	public void updateService (Service s);
 
 	public Service getServiceByID(int id);
 	
