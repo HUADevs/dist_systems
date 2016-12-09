@@ -2,16 +2,44 @@ package com.huaDevelopers.data.Entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="User")
 public class User implements Serializable {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
 	private int Userid;
+	
+	@Column(name="first_name")	
 	private String FirstName;
+	
+	@Column(name="last_name")
 	private String LastName;
+
+	@Column(name="email")
 	private String EmailAdress;
+	
+	@Column(name="phone")
 	private int Telephone;
+	
+	@Column(name="role")
 	private Role AssignedRole;
+	
+	@Column(name="department")
 	private Department WorkingDept;
+	
+	@Column(name="username")
 	private String UserName;
+	
+	@Column(name="password")
 	private String Password;
 
 	public int getUserid() {

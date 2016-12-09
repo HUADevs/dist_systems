@@ -1,11 +1,24 @@
 package com.huaDevelopers.data.Entities;
 
 import java.io.Serializable;
-import java.util.HashMap;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table (name="Service")
 public class Service implements Serializable {
 
+	@Column (name="name")
 	private String ServiceName;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column (name="id")
 	private int ServiceId;
 
 	public String getServiceName() {
