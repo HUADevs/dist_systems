@@ -8,7 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Insurance")
@@ -24,28 +28,34 @@ public class Insurance implements Serializable {
 	@Column (name="id")
 	private int id;
 	
-	@Column(name = "license_plate")
+	@NotEmpty
+	@Column(name = "license_plate", length=7, unique=true, nullable=false)
 	private String LicensePlate;
 	
-	@Column(name = "date_start")
+	@NotEmpty
+	@Column(name = "date_start", nullable=false)
 	private Date InsuranceDate;
 	
-	@Column(name = "price")
+	@NotEmpty
+	@Column(name = "price", nullable=false)
 	private float price;
 	
-	@Column(name = "discount")
+	@Column(name = "discount", nullable=true)
 	private float discount;
 
-	@Column(name = "type")
+	@NotEmpty
+	@Column(name = "type", nullable=false)
 	private String Type;
 
-	@Column(name = "new_driver")
+	@Column(name = "new_driver", nullable=true)
 	private Boolean NewDriver;
-
+	
 	public Insurance() {
 		// TODO Auto-generated constructor stub
 	}
 
+	@OneToOne
+	@PrimaryKeyJoinColumn(name="license_plate")
 	public String getLicensePlate() {
 		return LicensePlate;
 	}

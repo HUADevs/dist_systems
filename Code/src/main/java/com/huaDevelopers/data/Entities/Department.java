@@ -1,13 +1,17 @@
 package com.huaDevelopers.data.Entities;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Department")
@@ -27,18 +31,24 @@ public class Department implements Serializable {
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "name")
+	@NotEmpty
+	@Column(name = "name", unique=true, nullable=false)
 	private String DepName;
 
-	@Column(name = "region")
+	@NotEmpty
+	@Column(name = "region", nullable=false)
 	private String Location;
 
-	@Column(name = "address")
+	@NotEmpty
+	@Column(name = "address", nullable=false)
 	private String Address;
 
-	@Column(name = "num_of_emp")
+	@NotEmpty
+	@Column(name = "num_of_emp", nullable=false)
 	private int NumEmp;
 
+	private Set<User> users;
+	
 	public int getId() {
 		return this.id;
 	}
@@ -77,6 +87,15 @@ public class Department implements Serializable {
 
 	public void setNumEmp(int numEmp) {
 		NumEmp = numEmp;
+	}
+
+	@OneToMany(mappedBy="WorkingDept")
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 }

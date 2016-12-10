@@ -7,10 +7,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import com.huaDevelopers.data.Entities.Role;
-import com.huaDevelopers.data.Entities.Service;
+import com.huaDevelopers.data.Entities.Services;
 
+@Repository
 public class ServiceDAOimpl implements ServiceDAO{
 	
 	private static final Logger logger = LoggerFactory.getLogger(ServiceDAOimpl.class);
@@ -22,40 +24,40 @@ public class ServiceDAOimpl implements ServiceDAO{
 	}
 
 	@Override
-	public void addService(Service s) {
+	public void addService(Services s) {
 		Session session = this.sessionFactory.getCurrentSession();
 		session.persist(s);
 		logger.info("Service successfully inserted in database!!!" + s.toString());	
 	}
 
 	@Override
-	public void updateService(Service s) {
+	public void updateService(Services s) {
 		Session session = this.sessionFactory.getCurrentSession();
 		session.update(s);
 		logger.info("Service successfully updated in database!!!" + s.toString());		
 	}
 
 	@Override
-	public Service getServiceByID(int id) {
+	public Services getServiceByID(int id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Service s = session.load(Service.class, new Integer(id));
+		Services s = session.load(Services.class, new Integer(id));
 		logger.info("Service successfully selected from db" + s.toString());
 		return s;
 	
 	}
 
 	@Override
-	public List<Service> listAllServices() {
+	public List<Services> listAllServices() {
 		Session session = this.sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		List<Service> SList = session.createQuery("from Service").getResultList();
+		List<Services> SList = session.createQuery("from Service").getResultList();
 		return SList;
 	}
 
 	@Override
 	public void removeService(int id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Service s = session.load(Service.class, new Integer(id));
+		Services s = session.load(Services.class, new Integer(id));
 		if (s != null) {
 			session.delete(s);
 			logger.info("Service has successfully deleted from db" + s.toString());

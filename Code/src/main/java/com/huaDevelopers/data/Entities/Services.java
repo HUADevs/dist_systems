@@ -11,24 +11,35 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
-@Table (name="Service")
-public class Service implements Serializable {
+@Table(name = "Service")
+public class Services implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8177252569658564507L;
 
-	@Column (name="name")
-	private String ServiceName;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column (name="id")
+	@Column(name = "id")
 	private int ServiceId;
-	
+
+	@NotEmpty
+	@Column(name = "name", nullable=false)
+	private String ServiceName;
+
 	private Set<Role> roles;
+
+	public int getServiceId() {
+		return ServiceId;
+	}
+
+	public void setServiceId(int serviceId) {
+		ServiceId = serviceId;
+	}
 
 	public String getServiceName() {
 		return this.ServiceName;
@@ -38,21 +49,13 @@ public class Service implements Serializable {
 		this.ServiceName = ServiceName;
 	}
 
-	public int getServiceId() {
-		return ServiceId;
-	}
-
-	public void setServiceId(int serviceId) {
-		ServiceId = serviceId;
-	}
-	
 	@ManyToMany(mappedBy = "services")
-    public Set<Role> getRoles() {
-        return roles;
-    }
+	public Set<Role> getRoles() {
+		return roles;
+	}
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 
 }

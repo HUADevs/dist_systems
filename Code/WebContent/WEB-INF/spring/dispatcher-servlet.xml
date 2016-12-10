@@ -45,7 +45,7 @@
 				<value>com.huaDevelopers.data.Entities.Customer</value>
 				<value>com.huaDevelopers.data.Entities.User</value>
 				<value>com.huaDevelopers.data.Entities.Vehicle</value>
-				<value>com.huaDevelopers.data.Entities.Service</value>
+				<value>com.huaDevelopers.data.Entities.Services</value>
 				<value>com.huaDevelopers.data.Entities.Role</value>
 				<value>com.huaDevelopers.data.Entities.DamageForm</value>
 				<value>com.huaDevelopers.data.Entities.History</value>
@@ -125,11 +125,6 @@
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
 	</bean>
-
-
-
-
-
 
 
 	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>

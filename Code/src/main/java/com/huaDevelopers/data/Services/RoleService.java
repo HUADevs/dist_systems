@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.huaDevelopers.data.Entities.Role;
-import com.huaDevelopers.data.Entities.Service;
+import com.huaDevelopers.data.Entities.Services;
 
 public interface RoleService {
 
@@ -18,7 +18,7 @@ public interface RoleService {
 
 	public void removeRole(int id);
 
-	public Set<Service> listServices();
+	public Set<Services> listServices();
 
 	public void setServices();
 }

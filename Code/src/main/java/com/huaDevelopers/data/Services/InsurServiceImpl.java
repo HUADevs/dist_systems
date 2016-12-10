@@ -2,11 +2,13 @@ package com.huaDevelopers.data.Services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.huaDevelopers.dao.InsuranceDAO;
 import com.huaDevelopers.data.Entities.Insurance;
 
+@Service
 public class InsurServiceImpl implements InsuranceService {
 
 	private InsuranceDAO insurDAO;

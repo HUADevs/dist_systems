@@ -2,11 +2,13 @@ package com.huaDevelopers.data.Services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.huaDevelopers.dao.IncDAO;
 import com.huaDevelopers.data.Entities.History;
 
+@Service
 public class IncServiceImpl implements IncService{
 
 	private IncDAO incDAO;

@@ -7,7 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "DamageForm")
@@ -23,19 +27,23 @@ public class DamageForm implements Serializable {
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "license_plate")
+	@NotEmpty
+	@Column(name = "license_plate", length=7, unique=true, nullable=false)
 	private String LicensePlate;
 
-	@Column(name = "description")
+	@NotEmpty
+	@Column(name = "description", nullable=false)
 	private String DamageDescription;
 
-	@Column(name = "photo")
+	@NotEmpty
+	@Column(name = "photo", nullable=false)
 	private byte[] DamagePhotoShoots;
 
-	@Column(name = "cost")
+	@NotEmpty
+	@Column(name = "cost", nullable=false)
 	private float DamageCost;
 
-	@Column(name = "approval")
+	@Column(name = "approval", nullable=true)
 	private Boolean approval;
 
 	public DamageForm() {
@@ -50,6 +58,8 @@ public class DamageForm implements Serializable {
 		this.id = id;
 	}
 
+	@ManyToOne
+	@JoinColumn(name="license_plate", nullable=false)
 	public String getLicensePlate() {
 		return LicensePlate;
 	}

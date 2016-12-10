@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 
 import com.huaDevelopers.dao.RoleDao;
 import com.huaDevelopers.data.Entities.Role;
-import com.huaDevelopers.data.Entities.Service;
+import com.huaDevelopers.data.Entities.Services;
 
+@Service
 public class RoleServiceImpl implements RoleService {
 
 	private RoleDao roleDAO;
@@ -55,7 +57,7 @@ public class RoleServiceImpl implements RoleService {
 
 	@Transactional
 	@Override
-	public Set<Service> listServices() {
+	public Set<Services> listServices() {
 		return this.roleDAO.listServices();
 	}
 

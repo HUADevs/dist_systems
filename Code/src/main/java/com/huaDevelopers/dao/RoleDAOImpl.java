@@ -7,10 +7,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import com.huaDevelopers.data.Entities.Role;
-import com.huaDevelopers.data.Entities.Service;
+import com.huaDevelopers.data.Entities.Services;
 
+@Repository
 public class RoleDAOImpl implements RoleDao {
 
 	private static final Logger logger = LoggerFactory.getLogger(RoleDAOImpl.class);
@@ -65,7 +67,7 @@ public class RoleDAOImpl implements RoleDao {
 	}
 
 	@Override
-	public Set<Service> listServices() {
+	public Set<Services> listServices() {
 		// TODO Auto-generated method stub
 		return null;
 	}
