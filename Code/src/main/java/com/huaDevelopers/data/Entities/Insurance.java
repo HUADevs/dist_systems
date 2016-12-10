@@ -25,7 +25,7 @@ public class Insurance implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "insurance_id")
 	private int id;
 
 	@NotEmpty
@@ -54,26 +54,37 @@ public class Insurance implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	/*@OneToOne
-	@JoinColumn(name="license_plate")*/
+	
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	@OneToOne
+	@JoinColumn(name="license_plate", nullable=false)
 	public Vehicle getLicensePlate() {
-		return LicensePlate;
+		return this.LicensePlate;
 	}
 
 	public void setLicensePlate(Vehicle licensePlate) {
-		LicensePlate = licensePlate;
+		this.LicensePlate = licensePlate;
 	}
 
 	public Date getInsuranceDate() {
-		return InsuranceDate;
+		return this.InsuranceDate;
 	}
 
 	public void setInsuranceDate(Date insuranceDate) {
-		InsuranceDate = insuranceDate;
+		this.InsuranceDate = insuranceDate;
 	}
 
 	public float getPrice() {
-		return price;
+		return this.price;
 	}
 
 	public void setPrice(float price) {

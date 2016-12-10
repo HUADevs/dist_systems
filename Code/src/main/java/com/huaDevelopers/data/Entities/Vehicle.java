@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,7 +27,12 @@ public class Vehicle implements Serializable {
 	private static final long serialVersionUID = -1797310249072710177L;
 
 	@Id
-	@Column(name = "license_plate")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "vehicle_id")
+	private int id;
+	
+	@NotEmpty
+	@Column(name = "license_plate",length = 7, nullable = false)
 	private String LicensePlate;
 
 	@NotEmpty
@@ -53,7 +58,7 @@ public class Vehicle implements Serializable {
 	@OneToMany(mappedBy = "LicensePlate")
 	private Set<DamageForm> dmgForms;
 
-	//@OneToOne(mappedBy = "LicensePlate")
+	@OneToOne
 	private Insurance insurance;
 
 	public Vehicle() {
