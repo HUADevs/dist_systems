@@ -11,7 +11,7 @@ public class VehicleServiceImpl implements VehicleDAO{
 
 	private VehicleDAO vDAO;
 	
-	public void setServDAO(VehicleDAO vDAO) {
+	public void setVDAO(VehicleDAO vDAO) {
 		this.vDAO = vDAO;
 	}
 	
