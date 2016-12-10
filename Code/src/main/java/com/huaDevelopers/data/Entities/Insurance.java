@@ -14,6 +14,11 @@ import javax.persistence.Table;
 @Table(name = "Insurance")
 public class Insurance implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1118564151849532911L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column (name="id")

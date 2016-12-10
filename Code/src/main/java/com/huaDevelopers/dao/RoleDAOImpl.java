@@ -13,7 +13,7 @@ import com.huaDevelopers.data.Entities.Service;
 
 public class RoleDAOImpl implements RoleDao {
 
-	private static final Logger logger = LoggerFactory.getLogger(CustDAOImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(RoleDAOImpl.class);
 
 	private SessionFactory sessionFactory;
 

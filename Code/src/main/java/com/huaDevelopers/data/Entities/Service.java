@@ -15,6 +15,11 @@ import javax.persistence.Table;
 @Table (name="Service")
 public class Service implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8177252569658564507L;
+
 	@Column (name="name")
 	private String ServiceName;
 	
