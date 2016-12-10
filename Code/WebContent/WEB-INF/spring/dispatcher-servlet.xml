@@ -44,6 +44,15 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>com.huaDevelopers.data.Entities.Customer</value>
+				<value>com.huaDevelopers.data.Entities.User</value>
+				<value>com.huaDevelopers.data.Entities.Vehicle</value>
+				<value>com.huaDevelopers.data.Entities.Service</value>
+				<value>com.huaDevelopers.data.Entities.Role</value>
+				<value>com.huaDevelopers.data.Entities.DamageForm</value>
+				<value>com.huaDevelopers.data.Entities.History</value>
+				<value>com.huaDevelopers.data.Entities.Insurance</value>
+				<value>com.huaDevelopers.data.Entities.Right</value>
+				<value>com.huaDevelopers.data.Entities.Department</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -60,6 +69,27 @@
 	</bean>
 	<bean id="customerService" class="com.huaDevelopers.data.Services.CustomerServiceImpl">
 		<property name="custDAO" ref="custDAO" />
+	</bean>
+	
+	<bean id="usrDAO" class="com.huaDevelopers.dao.UserDAOimpl">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean>
+	<bean id="UserService" class="com.huaDevelopers.data.Services.UserServiceImpl">
+		<property name="usrDAO" ref="usrDAO" />
+	</bean>
+	
+	<bean id="serviceDAO" class="com.huaDevelopers.dao.ServiceDAOimpl">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean>
+	<bean id="ServEntityService" class="com.huaDevelopers.data.Services.ServEntityServiceImpl">
+		<property name="servDAO" ref="serviceDAO" />
+	</bean>
+	
+	<bean id="vDAO" class="com.huaDevelopers.dao.VehicleDAOimpl">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean>
+	<bean id="vService" class="com.huaDevelopers.data.Services.VehicleServiceImpl">
+		<property name="vDAO" ref="vDAO" />
 	</bean>
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
