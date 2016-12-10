@@ -1,7 +1,6 @@
 package com.huaDevelopers.data.Entities;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +12,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Role")
 public class Role implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2277203042640497446L;
 
 	@Column(name="name")
 	private String RoleName;

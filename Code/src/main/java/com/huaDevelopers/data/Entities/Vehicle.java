@@ -12,6 +12,11 @@ import javax.persistence.Table;
 @Table (name="Vehicle")
 public class Vehicle implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1797310249072710177L;
+
 	@Column (name="person_id")
 	private String CustomerPersonID;
 	

@@ -5,6 +5,10 @@ import java.util.Date;
 
 public class Insurance implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1118564151849532911L;
 	private String LicensePlate;
 	private Date InsuranceDate;
 	private float price;

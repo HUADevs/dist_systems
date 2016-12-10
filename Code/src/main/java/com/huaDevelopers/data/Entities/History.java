@@ -2,13 +2,43 @@ package com.huaDevelopers.data.Entities;
 
 import java.io.Serializable;
 
-public class History implements Serializable{
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "History")
+public class History implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3510918284566998522L;
+
+	@Id
+	@Column(name = "incedent_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int incId;
+
+	@Column(name = "personal_id")
 	private String PersonalId;
+
+	@Column(name = "incedent")
 	private String incident;
-	
+
 	public History() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public int getIncId() {
+		return incId;
+	}
+
+	public void setIncId(int incId) {
+		this.incId = incId;
 	}
 
 	public String getPersonalId() {
@@ -27,5 +57,4 @@ public class History implements Serializable{
 		this.incident = incident;
 	}
 
-	
 }
