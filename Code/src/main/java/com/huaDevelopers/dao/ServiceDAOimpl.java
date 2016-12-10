@@ -1,12 +1,14 @@
 package com.huaDevelopers.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.huaDevelopers.data.Entities.Role;
 import com.huaDevelopers.data.Entities.Service;
 
 public class ServiceDAOimpl implements ServiceDAO{
@@ -58,6 +60,18 @@ public class ServiceDAOimpl implements ServiceDAO{
 			session.delete(s);
 			logger.info("Service has successfully deleted from db" + s.toString());
 		} else logger.info("Something went completely wrong");		
+	}
+
+	@Override
+	public Set<Role> getRoles() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setRoles() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

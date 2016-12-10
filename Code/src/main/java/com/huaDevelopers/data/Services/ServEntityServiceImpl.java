@@ -1,10 +1,12 @@
 package com.huaDevelopers.data.Services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.transaction.annotation.Transactional;
 
 import com.huaDevelopers.dao.ServiceDAO;
+import com.huaDevelopers.data.Entities.Role;
 import com.huaDevelopers.data.Entities.Service;
 
 public class ServEntityServiceImpl implements ServEntityService{
@@ -44,6 +46,16 @@ public class ServEntityServiceImpl implements ServEntityService{
 	@Transactional
 	public void removeService(int id) {
 		this.servDAO.removeService(id);
+	}
+
+	@Override
+	public Set<Role> getRoles() {
+		return this.servDAO.getRoles();
+	}
+
+	@Override
+	public void setRoles() {
+		this.servDAO.setRoles();
 	}
 	
 }

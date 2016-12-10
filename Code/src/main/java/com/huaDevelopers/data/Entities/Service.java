@@ -1,12 +1,14 @@
 package com.huaDevelopers.data.Entities;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +22,8 @@ public class Service implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column (name="id")
 	private int ServiceId;
+	
+	private Set<Role> roles;
 
 	public String getServiceName() {
 		return this.ServiceName;
@@ -36,5 +40,14 @@ public class Service implements Serializable {
 	public void setServiceId(int serviceId) {
 		ServiceId = serviceId;
 	}
+	
+	@ManyToMany(mappedBy = "services")
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
 }

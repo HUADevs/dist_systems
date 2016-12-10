@@ -3,13 +3,38 @@ package com.huaDevelopers.data.Entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Insurance")
 public class Insurance implements Serializable {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column (name="id")
+	private int id;
+	
+	@Column(name = "license_plate")
 	private String LicensePlate;
+	
+	@Column(name = "date_start")
 	private Date InsuranceDate;
+	
+	@Column(name = "price")
 	private float price;
+	
+	@Column(name = "discount")
 	private float discount;
+
+	@Column(name = "type")
 	private String Type;
+
+	@Column(name = "new_driver")
 	private Boolean NewDriver;
 
 	public Insurance() {
@@ -64,5 +89,4 @@ public class Insurance implements Serializable {
 		NewDriver = newDriver;
 	}
 
-	
 }

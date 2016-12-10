@@ -1,11 +1,13 @@
 package com.huaDevelopers.data.Services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.transaction.annotation.Transactional;
 
 import com.huaDevelopers.dao.RoleDao;
 import com.huaDevelopers.data.Entities.Role;
+import com.huaDevelopers.data.Entities.Service;
 
 public class RoleServiceImpl implements RoleService {
 
@@ -49,6 +51,17 @@ public class RoleServiceImpl implements RoleService {
 	public void removeRole(int id) {
 		this.roleDAO.removeRole(id);
 
+	}
+
+	@Transactional
+	@Override
+	public Set<Service> listServices() {
+		return this.roleDAO.listServices();
+	}
+
+	@Override
+	public void setServices() {
+		this.roleDAO.setServices();
 	}
 
 }
