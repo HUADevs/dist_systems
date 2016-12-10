@@ -29,7 +29,7 @@ public class DamageForm implements Serializable {
 
 	@NotEmpty
 	@Column(name = "license_plate", length=7, unique=true, nullable=false)
-	private String LicensePlate;
+	private Vehicle LicensePlate;
 
 	@NotEmpty
 	@Column(name = "description", nullable=false)
@@ -60,11 +60,11 @@ public class DamageForm implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name="license_plate", nullable=false)
-	public String getLicensePlate() {
+	public Vehicle getLicensePlate() {
 		return LicensePlate;
 	}
 
-	public void setLicensePlate(String licensePlate) {
+	public void setLicensePlate(Vehicle licensePlate) {
 		LicensePlate = licensePlate;
 	}
 

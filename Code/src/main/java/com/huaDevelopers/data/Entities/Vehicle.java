@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -30,7 +32,7 @@ public class Vehicle implements Serializable {
 
 	@NotEmpty
 	@Column(name = "person_id", length = 8, nullable = false)
-	private String CustomerPersonID;
+	private Customer CustomerPersonID;
 
 	@NotEmpty
 	@Column(name = "release_date", nullable = false)
@@ -51,7 +53,7 @@ public class Vehicle implements Serializable {
 	@OneToMany(mappedBy = "LicensePlate")
 	private Set<DamageForm> dmgForms;
 
-	@OneToOne(mappedBy = "LicensePlate")
+	//@OneToOne(mappedBy = "LicensePlate")
 	private Insurance insurance;
 
 	public Vehicle() {
@@ -60,11 +62,11 @@ public class Vehicle implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "person_id", nullable = false)
-	public String getCustomerPersonID() {
+	public Customer getCustomerPersonID() {
 		return CustomerPersonID;
 	}
 
-	public void setCustomerPersonID(String customerPersonID) {
+	public void setCustomerPersonID(Customer customerPersonID) {
 		CustomerPersonID = customerPersonID;
 	}
 

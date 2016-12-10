@@ -29,7 +29,7 @@ public class History implements Serializable {
 
 	@NotEmpty
 	@Column(name = "personal_id", length = 8, nullable = false)
-	private String PersonalId;
+	private Customer PersonalId;
 
 	@Column(name = "incedent", nullable = true)
 	private String incident;
@@ -48,11 +48,11 @@ public class History implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name="personal_id", nullable=false)
-	public String getPersonalId() {
+	public Customer getPersonalId() {
 		return PersonalId;
 	}
 
-	public void setPersonalId(String personalId) {
+	public void setPersonalId(Customer personalId) {
 		PersonalId = personalId;
 	}
 
