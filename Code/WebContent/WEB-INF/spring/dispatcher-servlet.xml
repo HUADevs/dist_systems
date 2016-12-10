@@ -112,6 +112,13 @@
 		<property name="deptDAO" ref="deptDAO" />
 	</bean>
 
+	<bean id="roleDAO" class="com.huaDevelopers.dao.RoleDAOImpl">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean>
+	<bean id="roleService" class="com.huaDevelopers.data.Services.RoleServiceImpl">
+		<property name="roleDAO" ref="roleDAO" />
+	</bean>
+
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<bean id="transactionManager"
