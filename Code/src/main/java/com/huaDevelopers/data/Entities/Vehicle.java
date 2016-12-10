@@ -16,8 +16,8 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table (name="Vehicle")
-public class Vehicle implements Serializable{
+@Table(name = "Vehicle")
+public class Vehicle implements Serializable {
 
 	/**
 	 * 
@@ -25,39 +25,41 @@ public class Vehicle implements Serializable{
 	private static final long serialVersionUID = -1797310249072710177L;
 
 	@Id
-	@Column (name="license_plate")
+	@Column(name = "license_plate")
 	private String LicensePlate;
-	
+
 	@NotEmpty
-	@Column (name="person_id", length=8, nullable=false)
+	@Column(name = "person_id", length = 8, nullable = false)
 	private String CustomerPersonID;
-	
+
 	@NotEmpty
-	@Column (name="release_date", nullable=false)
+	@Column(name = "release_date", nullable = false)
 	private Date ReleaseDate;
-	
+
 	@NotEmpty
-	@Column (name="cubic", nullable=false)
+	@Column(name = "cubic", nullable = false)
 	private int cubic;
-	
+
 	@NotEmpty
-	@Column (name="type", nullable=false)
+	@Column(name = "type", nullable = false)
 	private String Type;
-	
+
 	@NotEmpty
-	@Column (name="color", nullable=false)
+	@Column(name = "color", nullable = false)
 	private String color;
-	
+
+	@OneToMany(mappedBy = "LicensePlate")
 	private Set<DamageForm> dmgForms;
-	
+
+	@OneToOne(mappedBy = "LicensePlate")
 	private Insurance insurance;
-	
+
 	public Vehicle() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@ManyToOne
-	@JoinColumn(name="person_id", nullable=false)
+	@JoinColumn(name = "person_id", nullable = false)
 	public String getCustomerPersonID() {
 		return CustomerPersonID;
 	}
@@ -106,7 +108,6 @@ public class Vehicle implements Serializable{
 		this.color = color;
 	}
 
-	@OneToMany(mappedBy="LicensePlate")
 	public Set<DamageForm> getDmgForms() {
 		return dmgForms;
 	}
@@ -115,7 +116,6 @@ public class Vehicle implements Serializable{
 		this.dmgForms = dmgForms;
 	}
 
-	@OneToOne(mappedBy="LicensePlate")
 	public Insurance getInsurance() {
 		return insurance;
 	}
@@ -124,5 +124,4 @@ public class Vehicle implements Serializable{
 		this.insurance = insurance;
 	}
 
-	
 }

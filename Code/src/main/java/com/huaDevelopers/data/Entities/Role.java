@@ -24,20 +24,23 @@ public class Role implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 2277203042640497446L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int RoleId;
 
 	@NotEmpty
-	@Column(name = "name", nullable=false)
+	@Column(name = "name", nullable = false)
 	private String RoleName;
 
+	@ManyToMany
+	@JoinTable(name = "Right", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "service_id"))
 	private Set<Services> services;
 
+	@OneToMany(mappedBy = "AssignedRole")
 	private Set<User> users;
-	
+
 	public int getRoleId() {
 		return RoleId;
 	}
@@ -54,10 +57,6 @@ public class Role implements Serializable {
 		this.RoleName = RoleName;
 	}
 
-	@ManyToMany
-	@JoinTable(name = "Right", 
-		joinColumns = @JoinColumn(name = "role_id"),
-		inverseJoinColumns = @JoinColumn(name = "service_id"))
 	public Set<Services> getServices() {
 		return services;
 	}
@@ -66,7 +65,6 @@ public class Role implements Serializable {
 		this.services = services;
 	}
 
-	@OneToMany(mappedBy="AssignedRole")
 	public Set<User> getUsers() {
 		return users;
 	}

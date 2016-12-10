@@ -23,40 +23,29 @@ public class Customer implements Serializable {
 	 */
 	private static final long serialVersionUID = 3044422907846972065L;
 
-	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@NotEmpty
-	@Column(name = "first_name", nullable=false)
 	private String FirstName;
 
-	@NotEmpty
-	@Column(name = "last_name", nullable=false)
 	private String LastName;
 
-	@NotEmpty
-	@Column(name = "personal_id", length=8, unique=true, nullable=false)
 	private String PersonalId;
 
-	@NotEmpty
-	@Column(name = "tax_reg_number", unique=true, nullable=false)
 	private int TRN; // TAX REGISTRATION NUMBER
 
-	@NotEmpty
-	@Column(name = "license_date", nullable=false)
 	private Date LicenseAqquired;
-	
+
 	private Set<History> history;
-	
+
 	private Set<Vehicle> vehicles;
 
 	public Customer() {
 		// TODO Auto-generated constructor stub
 	}
 
-	
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getId() {
 		return id;
 	}
@@ -65,6 +54,8 @@ public class Customer implements Serializable {
 		this.id = id;
 	}
 
+	@NotEmpty
+	@Column(name = "first_name", nullable = false)
 	public String getFirstName() {
 		return FirstName;
 	}
@@ -73,6 +64,8 @@ public class Customer implements Serializable {
 		FirstName = firstName;
 	}
 
+	@NotEmpty
+	@Column(name = "last_name", nullable = false)
 	public String getLastName() {
 		return LastName;
 	}
@@ -81,6 +74,8 @@ public class Customer implements Serializable {
 		LastName = lastName;
 	}
 
+	@NotEmpty
+	@Column(name = "personal_id", length = 8, unique = true, nullable = false)
 	public String getPersonalId() {
 		return PersonalId;
 	}
@@ -89,6 +84,8 @@ public class Customer implements Serializable {
 		PersonalId = personalId;
 	}
 
+	@NotEmpty
+	@Column(name = "tax_reg_number", unique = true, nullable = false)
 	public int getTRN() {
 		return TRN;
 	}
@@ -97,6 +94,8 @@ public class Customer implements Serializable {
 		TRN = tRN;
 	}
 
+	@NotEmpty
+	@Column(name = "license_date", nullable = false)
 	public Date getLicenseAqquired() {
 		return LicenseAqquired;
 	}
@@ -105,26 +104,22 @@ public class Customer implements Serializable {
 		LicenseAqquired = licenseAqquired;
 	}
 
-	@OneToMany(mappedBy="PersonalId")
+	@OneToMany(mappedBy = "PersonalId")
 	public Set<History> getHistory() {
 		return history;
 	}
-
 
 	public void setHistory(Set<History> history) {
 		this.history = history;
 	}
 
-	@OneToMany(mappedBy="CustomerPersonID")
+	@OneToMany(mappedBy = "CustomerPersonID")
 	public Set<Vehicle> getVehicles() {
 		return vehicles;
 	}
 
-
 	public void setVehicles(Set<Vehicle> vehicles) {
 		this.vehicles = vehicles;
 	}
-	
-	
 
 }

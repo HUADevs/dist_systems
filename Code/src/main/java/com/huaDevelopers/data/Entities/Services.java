@@ -28,9 +28,10 @@ public class Services implements Serializable {
 	private int ServiceId;
 
 	@NotEmpty
-	@Column(name = "name", nullable=false)
+	@Column(name = "name", nullable = false)
 	private String ServiceName;
 
+	@ManyToMany(mappedBy = "services")
 	private Set<Role> roles;
 
 	public int getServiceId() {
@@ -49,7 +50,6 @@ public class Services implements Serializable {
 		this.ServiceName = ServiceName;
 	}
 
-	@ManyToMany(mappedBy = "services")
 	public Set<Role> getRoles() {
 		return roles;
 	}

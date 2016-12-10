@@ -47,6 +47,7 @@ public class Department implements Serializable {
 	@Column(name = "num_of_emp", nullable=false)
 	private int NumEmp;
 
+	@OneToMany(mappedBy="WorkingDept")
 	private Set<User> users;
 	
 	public int getId() {
@@ -89,7 +90,6 @@ public class Department implements Serializable {
 		NumEmp = numEmp;
 	}
 
-	@OneToMany(mappedBy="WorkingDept")
 	public Set<User> getUsers() {
 		return users;
 	}
