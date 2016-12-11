@@ -1,17 +1,21 @@
 package com.huaDevelopers.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import com.huaDevelopers.data.Entities.Role;
+import com.huaDevelopers.data.Entities.Services;
 
+@Repository
 public class RoleDAOImpl implements RoleDao {
 
-	private static final Logger logger = LoggerFactory.getLogger(CustDAOImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(RoleDAOImpl.class);
 
 	private SessionFactory sessionFactory;
 
@@ -60,6 +64,18 @@ public class RoleDAOImpl implements RoleDao {
 			logger.info("Role has successfully deleted from db" + role.toString());
 		} else logger.info("Something went completely wrong");
 
+	}
+
+	@Override
+	public Set<Services> listServices() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setServices() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

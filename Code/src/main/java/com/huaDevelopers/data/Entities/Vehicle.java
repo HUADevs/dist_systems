@@ -2,44 +2,76 @@ package com.huaDevelopers.data.Entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Entity
-@Table (name="Vehicle")
-public class Vehicle implements Serializable{
+import org.hibernate.validator.constraints.NotEmpty;
 
-	@Column (name="person_id")
-	private String CustomerPersonID;
-	
+@Entity
+@Table(name = "Vehicle")
+public class Vehicle implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1797310249072710177L;
+
 	@Id
-	@Column (name="license_plate")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "vehicle_id")
+	private int id;
+	
+	@NotEmpty
+	@Column(name = "license_plate",length = 7, nullable = false)
 	private String LicensePlate;
-	
-	@Column (name="release_date")
+
+	@NotEmpty
+	@Column(name = "person_id", length = 8, nullable = false)
+	private Customer CustomerPersonID;
+
+	@NotEmpty
+	@Column(name = "release_date", nullable = false)
 	private Date ReleaseDate;
-	
-	@Column (name="cubic")
+
+	@NotEmpty
+	@Column(name = "cubic", nullable = false)
 	private int cubic;
-	
-	@Column (name="type")
+
+	@NotEmpty
+	@Column(name = "type", nullable = false)
 	private String Type;
-	
-	@Column (name="color")
+
+	@NotEmpty
+	@Column(name = "color", nullable = false)
 	private String color;
-	
+
+	@OneToMany(mappedBy = "LicensePlate")
+	private Set<DamageForm> dmgForms;
+
+	@OneToOne
+	private Insurance insurance;
+
 	public Vehicle() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public String getCustomerPersonID() {
+	@ManyToOne
+	@JoinColumn(name = "person_id", nullable = false)
+	public Customer getCustomerPersonID() {
 		return CustomerPersonID;
 	}
 
-	public void setCustomerPersonID(String customerPersonID) {
+	public void setCustomerPersonID(Customer customerPersonID) {
 		CustomerPersonID = customerPersonID;
 	}
 
@@ -83,5 +115,20 @@ public class Vehicle implements Serializable{
 		this.color = color;
 	}
 
-	
+	public Set<DamageForm> getDmgForms() {
+		return dmgForms;
+	}
+
+	public void setDmgForms(Set<DamageForm> dmgForms) {
+		this.dmgForms = dmgForms;
+	}
+
+	public Insurance getInsurance() {
+		return insurance;
+	}
+
+	public void setInsurance(Insurance insurance) {
+		this.insurance = insurance;
+	}
+
 }

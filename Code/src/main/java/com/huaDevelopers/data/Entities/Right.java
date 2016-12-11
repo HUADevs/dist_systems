@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class Right implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2439852265201138223L;
 	private int ServiceId;
 	private int RoleId;
 	private int RightId;

@@ -6,9 +6,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import com.huaDevelopers.data.Entities.User;
 
+@Repository
 public class UserDAOimpl implements UserDAO{
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserDAOimpl.class);

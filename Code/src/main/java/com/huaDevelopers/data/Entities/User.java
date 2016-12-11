@@ -7,39 +7,53 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="User")
 public class User implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4377313444247498605L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int Userid;
 	
-	@Column(name="first_name")	
+	@NotEmpty
+	@Column(name="first_name", nullable=false)	
 	private String FirstName;
 	
-	@Column(name="last_name")
+	@NotEmpty
+	@Column(name="last_name", nullable=false)
 	private String LastName;
 
-	@Column(name="email")
+	@NotEmpty
+	@Column(name="email", nullable=false)
 	private String EmailAdress;
 	
-	@Column(name="phone")
+	@Column(name="phone", nullable=true)
 	private int Telephone;
 	
-	@Column(name="role")
+	@Column(name="role", nullable=true)
 	private Role AssignedRole;
 	
-	@Column(name="department")
+	@Column(name="department", nullable=true)
 	private Department WorkingDept;
 	
-	@Column(name="username")
+	@NotEmpty
+	@Column(name="username", nullable=false)
 	private String UserName;
 	
-	@Column(name="password")
+	@NotEmpty
+	@Column(name="password", nullable=false)
 	private String Password;
 
 	public int getUserid() {
@@ -74,6 +88,8 @@ public class User implements Serializable {
 		this.Telephone = Telephone;
 	}
 
+	@ManyToOne
+	@JoinColumn(name="role_id", nullable=false)
 	public Role getAssignedRole() {
 		return this.AssignedRole;
 	}
@@ -82,6 +98,8 @@ public class User implements Serializable {
 		this.AssignedRole = AssignedRole;
 	}
 
+	@ManyToOne
+	@JoinColumn(name="department", nullable=true)
 	public Department getWorkingDept() {
 		return this.WorkingDept;
 	}

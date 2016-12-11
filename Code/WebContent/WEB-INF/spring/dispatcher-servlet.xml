@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
@@ -46,7 +45,7 @@
 				<value>com.huaDevelopers.data.Entities.Customer</value>
 				<value>com.huaDevelopers.data.Entities.User</value>
 				<value>com.huaDevelopers.data.Entities.Vehicle</value>
-				<value>com.huaDevelopers.data.Entities.Service</value>
+				<value>com.huaDevelopers.data.Entities.Services</value>
 				<value>com.huaDevelopers.data.Entities.Role</value>
 				<value>com.huaDevelopers.data.Entities.DamageForm</value>
 				<value>com.huaDevelopers.data.Entities.History</value>
@@ -70,26 +69,54 @@
 	<bean id="customerService" class="com.huaDevelopers.data.Services.CustomerServiceImpl">
 		<property name="custDAO" ref="custDAO" />
 	</bean>
-	
+
 	<bean id="usrDAO" class="com.huaDevelopers.dao.UserDAOimpl">
 		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
 	</bean>
 	<bean id="UserService" class="com.huaDevelopers.data.Services.UserServiceImpl">
 		<property name="usrDAO" ref="usrDAO" />
 	</bean>
-	
+
 	<bean id="serviceDAO" class="com.huaDevelopers.dao.ServiceDAOimpl">
 		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
 	</bean>
 	<bean id="ServEntityService" class="com.huaDevelopers.data.Services.ServEntityServiceImpl">
 		<property name="servDAO" ref="serviceDAO" />
 	</bean>
-	
+
 	<bean id="vDAO" class="com.huaDevelopers.dao.VehicleDAOimpl">
 		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
 	</bean>
 	<bean id="vService" class="com.huaDevelopers.data.Services.VehicleServiceImpl">
 		<property name="vDAO" ref="vDAO" />
+	</bean>
+
+	<bean id="formDAO" class="com.huaDevelopers.dao.DFormDAOImpl">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean>
+	<bean id="formService" class="com.huaDevelopers.data.Services.DFormServiceImpl">
+		<property name="formDAO" ref="formDAO" />
+	</bean>
+
+	<bean id="incDAO" class="com.huaDevelopers.dao.IncDAOImpl">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean>
+	<bean id="incService" class="com.huaDevelopers.data.Services.IncServiceImpl">
+		<property name="incDAO" ref="incDAO" />
+	</bean>
+
+	<bean id="deptDAO" class="com.huaDevelopers.dao.DeptDAOImpl">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean>
+	<bean id="deptService" class="com.huaDevelopers.data.Services.DeptServiceImpl">
+		<property name="deptDAO" ref="deptDAO" />
+	</bean>
+
+	<bean id="roleDAO" class="com.huaDevelopers.dao.RoleDAOImpl">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean>
+	<bean id="roleService" class="com.huaDevelopers.data.Services.RoleServiceImpl">
+		<property name="roleDAO" ref="roleDAO" />
 	</bean>
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
@@ -98,11 +125,6 @@
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
 	</bean>
-
-
-
-
-
 
 
 	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>

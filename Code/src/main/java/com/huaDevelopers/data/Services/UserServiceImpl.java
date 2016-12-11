@@ -2,11 +2,13 @@ package com.huaDevelopers.data.Services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.huaDevelopers.dao.UserDAO;
 import com.huaDevelopers.data.Entities.User;
 
+@Service
 public class UserServiceImpl implements UserService{
 	
 	private UserDAO usrDAO;

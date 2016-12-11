@@ -1,19 +1,24 @@
 package com.huaDevelopers.dao;
 
 import java.util.List;
+import java.util.Set;
 
-import com.huaDevelopers.data.Entities.Service;
-import com.huaDevelopers.data.Entities.User;
+import com.huaDevelopers.data.Entities.Role;
+import com.huaDevelopers.data.Entities.Services;
 
 public interface ServiceDAO {
 
-	public void addService (Service s);
+	public void addService (Services s);
 
-	public void updateService (Service s);
+	public void updateService (Services s);
 
-	public Service getServiceByID(int id);
+	public Services getServiceByID(int id);
 	
-	public List<Service> listAllServices();
+	public List<Services> listAllServices();
 
 	public void removeService(int id);
+	
+	public Set<Role> getRoles();
+	
+	public void setRoles();
 }

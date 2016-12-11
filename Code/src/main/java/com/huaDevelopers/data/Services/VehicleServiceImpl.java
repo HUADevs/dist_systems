@@ -2,11 +2,13 @@ package com.huaDevelopers.data.Services;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.huaDevelopers.dao.VehicleDAO;
 import com.huaDevelopers.data.Entities.Vehicle;
 
+@Service
 public class VehicleServiceImpl implements VehicleDAO{
 
 	private VehicleDAO vDAO;
