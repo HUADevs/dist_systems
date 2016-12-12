@@ -49,7 +49,7 @@ public class Role implements Serializable {
 		RoleId = roleId;
 	}
 
-	String getRoleName() {
+	public String getRoleName() {
 		return this.RoleName;
 	}
 

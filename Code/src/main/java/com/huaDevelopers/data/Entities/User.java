@@ -27,20 +27,20 @@ public class User implements Serializable {
 	@Column(name="id")
 	private int Userid;
 	
-	@NotEmpty
+	@NotEmpty(message="This field is required")
 	@Column(name="first_name", nullable=false)	
 	private String FirstName;
 	
-	@NotEmpty
+	@NotEmpty(message="This field is required")
 	@Column(name="last_name", nullable=false)
 	private String LastName;
 
-	@NotEmpty
+	@NotEmpty(message="This field is required")
 	@Column(name="email", nullable=false)
 	private String EmailAdress;
 	
 	@Column(name="phone", nullable=true)
-	private int Telephone;
+	private String Telephone;
 	
 	@Column(name="role", nullable=true)
 	private Role AssignedRole;
@@ -48,11 +48,11 @@ public class User implements Serializable {
 	@Column(name="department", nullable=true)
 	private Department WorkingDept;
 	
-	@NotEmpty
+	@NotEmpty(message="This field is required")
 	@Column(name="username", nullable=false)
 	private String UserName;
 	
-	@NotEmpty
+	@NotEmpty(message="This field is required")
 	@Column(name="password", nullable=false)
 	private String Password;
 
@@ -62,6 +62,34 @@ public class User implements Serializable {
 
 	public void setUserid(int userid) {
 		Userid = userid;
+	}
+
+	public String getFirstName() {
+		return FirstName;
+	}
+
+	public void setFirstName(String firstName) {
+		FirstName = firstName;
+	}
+
+	public String getLastName() {
+		return LastName;
+	}
+
+	public void setLastName(String lastName) {
+		LastName = lastName;
+	}
+
+	public String getTelephone() {
+		return Telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		Telephone = telephone;
+	}
+
+	public String getEmailAdress() {
+		return EmailAdress;
 	}
 
 	public String getName() {
@@ -78,14 +106,6 @@ public class User implements Serializable {
 
 	public void setEmailAdress(String EmailAdress) {
 		this.EmailAdress = EmailAdress;
-	}
-
-	public int getPhoneNumber() {
-		return this.Telephone;
-	}
-
-	public void setPhoneNumber(int Telephone) {
-		this.Telephone = Telephone;
 	}
 
 	@ManyToOne
