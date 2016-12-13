@@ -8,18 +8,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.huaDevelopers.data.Entities.Customer;
 import com.huaDevelopers.data.Entities.Services;
 import com.huaDevelopers.data.Services.ServEntityService;
 
 @Controller
-@RequestMapping("/cms/admin/services")
+@RequestMapping("/admin/service")
 public class ServicesController {
 
 	private ServEntityService s_service;
 	
 	@Autowired
-	@Qualifier(value = "s_service")
+	@Qualifier(value = "ServEntityService")
 	public void setServEntityService (ServEntityService s_service){
 		this.s_service=s_service;
 	}
@@ -27,7 +26,7 @@ public class ServicesController {
 	@RequestMapping(value="/add" , method = RequestMethod.GET)
 	public String addService(Model model) {
 		model.addAttribute("service", new Services());
-		return "addService";
+		return "add_service";
 	}
 	
 	@RequestMapping(value="/add" , method= RequestMethod.POST)
