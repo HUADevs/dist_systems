@@ -19,6 +19,7 @@
 
 </head>
 <body>
+	<jsp:include page="../views/fragments/admin-header.jsp"></jsp:include>
 
 	<div class="container">
 
@@ -27,7 +28,8 @@
 			<tbody>
 				<tr>
 					<th>ID</th>
-					<th>Name</th>
+					<th>First Name</th>
+					<th>Last Name</th>
 					<th>Username</th>
 					<th>Role</th>
 					<th>Edit</th>
@@ -36,14 +38,11 @@
 				<c:forEach items="${users}" var="user">
 					<tr>
 						<td>${user.Userid}</td>
-						<td><a
-							href="<spring:url 
-							value="/user/${user.UserName}"/>">${user.FirstName}${user.LastName}</a></td>
+						<td>${user.FirstName}</td>
+						<td>${user.LastName}</td>
 						<td>${user.UserName}</td>
-						<td>${user.AssignedRole}</td>
-						<td><a
-							href="<spring:url 
-							value="/user/${user.UserName}/edit"/>">editIcon</a></td>
+						<td>${user.AssignedRole.RoleName}</td>
+						<td>editIcon</td>
 						<td>${user.UserName}</td>
 					</tr>
 				</c:forEach>

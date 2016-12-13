@@ -44,7 +44,7 @@
 				</div>
 				<div class="form-group">
 					<label for="user-LastName">Last Name</label>
-					<form:errors path="LastName" />
+					<form:errors path="LastName" style="color:red"/>
 					<form:input id="user-LastName" cssClass="form-control"
 						path="LastName" />
 				</div>

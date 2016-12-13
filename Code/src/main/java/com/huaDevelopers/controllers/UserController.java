@@ -1,12 +1,10 @@
 package com.huaDevelopers.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -26,29 +24,30 @@ import com.huaDevelopers.data.Services.UserService;
 @RequestMapping("/admin/user")
 public class UserController {
 
+	@Autowired
 	private UserService userService;
 
+	@Autowired
 	private RoleService roleService;
 
+	@Autowired
 	private DepartmentService deptService;
 
-	@Autowired
-	@Qualifier(value = "UserService")
+	
+	/*@Qualifier(value = "UserService")
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
 
-	@Autowired
 	@Qualifier(value = "roleService")
 	public void setRoleService(RoleService roleService) {
 		this.roleService = roleService;
 	}
 
-	@Autowired
 	@Qualifier(value = "deptService")
 	public void setDeptService(DepartmentService deptService) {
 		this.deptService = deptService;
-	}
+	}*/
 
 	@RequestMapping(value = "/{UserName}")
 	public String findUser(Model model, @PathVariable("UserName") String UserName) {
@@ -56,7 +55,7 @@ public class UserController {
 		return "user";
 	}
 
-	@RequestMapping(value = "/find")
+	@RequestMapping(value = "/find", method = RequestMethod.GET)
 	public String find(Model model) {
 		model.addAttribute("users", this.userService.listAllUser());
 		return "users";
@@ -73,10 +72,10 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String saveUser(@Valid @ModelAttribute("user") User user) {
-		/*if (errors.hasErrors()) {
+	public String saveUser(@Valid @ModelAttribute("user") User user, Errors errors) {
+		if (errors.hasErrors()) {
 			return "user_add";
-		}*/
+		}
 		if(user.getUserid() == 0){
 			//new person, add it
 			user.setAssignedRole(this.roleService.getRoleByID(user.getAssignedRole().getRoleId()));

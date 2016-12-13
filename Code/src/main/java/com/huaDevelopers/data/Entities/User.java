@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -20,7 +19,7 @@ public class User implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4377313444247498605L;
+	private static final long serialVersionUID = -8711080328736274624L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +27,7 @@ public class User implements Serializable {
 	private int Userid;
 	
 	@NotEmpty(message="This field is required")
-	@Column(name="first_name", nullable=false)	
+	@Column(name="first_name", nullable=false)
 	private String FirstName;
 	
 	@NotEmpty(message="This field is required")
@@ -42,7 +41,7 @@ public class User implements Serializable {
 	@Column(name="phone", nullable=true)
 	private String Telephone;
 	
-	@Column(name="role", nullable=true)
+	@Column(name="role_id", nullable=true)
 	private Role AssignedRole;
 	
 	@Column(name="department", nullable=true)
@@ -92,12 +91,7 @@ public class User implements Serializable {
 		return EmailAdress;
 	}
 
-	public void setEmailAdress(String emailAdress) {
-		EmailAdress = emailAdress;
-	}
-
 	@ManyToOne
-	@JoinColumn(name="role_id", nullable=false)
 	public Role getAssignedRole() {
 		return this.AssignedRole;
 	}
@@ -107,7 +101,6 @@ public class User implements Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name="department", nullable=true)
 	public Department getWorkingDept() {
 		return this.WorkingDept;
 	}

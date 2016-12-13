@@ -20,7 +20,7 @@ public class Department implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1274403189847335127L;
+	private static final long serialVersionUID = 1005970238302103520L;
 
 	public Department() {
 		// TODO Auto-generated constructor stub
