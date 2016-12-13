@@ -65,31 +65,29 @@ public class UserController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addUser(Model model) {
 		List<Role> roles = roleService.listAllRoles();
-		List<String> roleNames = new ArrayList<>();
-		for (Role r : roles) {
-			roleNames.add(r.getRoleName());
-		}
 		List<Department> departments = deptService.getAllDepts();
-		List<String> deptNames = new ArrayList<>();
-		deptNames.add("");
-		for (Department d : departments) {
-			deptNames.add(d.getDepName());
-		}
-		model.addAttribute("roles", roleNames);
-		model.addAttribute("departments", deptNames);
+		model.addAttribute("roles", roles);
+		model.addAttribute("departments", departments);
 		model.addAttribute("user", new User());
 		return "user_add";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String saveUser(@Valid @ModelAttribute("user") User user, Errors errors) {
-		if (errors.hasErrors()) {
+	public String saveUser(@Valid @ModelAttribute("user") User user) {
+		/*if (errors.hasErrors()) {
 			return "user_add";
+		}*/
+		if(user.getUserid() == 0){
+			//new person, add it
+			user.setAssignedRole(this.roleService.getRoleByID(user.getAssignedRole().getRoleId()));
+			user.setWorkingDept(this.deptService.getDeptByID(user.getWorkingDept().getId()));
+			this.userService.addUser(user);
+		}else{
+			//existing person, call update
+			this.userService.updateUser(user);
 		}
-		this.userService.addUser(user);
 
-		return "test";
-
+		return "redirect:/users";
 	}
 
 	public void DeleteUser() {
@@ -97,6 +95,7 @@ public class UserController {
 		throw new UnsupportedOperationException();
 	}
 
+	@RequestMapping(value = "/{UserName}/edit")
 	public void UpdateUserInfo() {
 		// TODO - implement UserController.UpdateUserInfo
 		throw new UnsupportedOperationException();

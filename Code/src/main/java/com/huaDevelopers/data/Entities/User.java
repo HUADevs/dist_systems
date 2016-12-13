@@ -92,20 +92,8 @@ public class User implements Serializable {
 		return EmailAdress;
 	}
 
-	public String getName() {
-		return this.FirstName + " " + this.LastName;
-	}
-
-	public void setName(String FirstName, String LastName) {
-		this.FirstName = FirstName;
-	}
-
-	public String getEmailAddress() {
-		return this.EmailAdress;
-	}
-
-	public void setEmailAdress(String EmailAdress) {
-		this.EmailAdress = EmailAdress;
+	public void setEmailAdress(String emailAdress) {
+		EmailAdress = emailAdress;
 	}
 
 	@ManyToOne

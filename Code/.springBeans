@@ -9,6 +9,7 @@
 	<configs>
 		<config>WebContent/WEB-INF/spring/dispatcher-servlet.xml</config>
 		<config>WebContent/WEB-INF/spring/applicationContext.xml</config>
+		<config>WebContent/WEB-INF/spring/appconfig-security.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

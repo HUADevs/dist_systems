@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Project Manager</title>
+<title>Manage Users</title>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -30,6 +30,8 @@
 					<th>Name</th>
 					<th>Username</th>
 					<th>Role</th>
+					<th>Edit</th>
+					<th>Delete</th>
 				</tr>
 				<c:forEach items="${users}" var="user">
 					<tr>
@@ -39,6 +41,10 @@
 							value="/user/${user.UserName}"/>">${user.FirstName}${user.LastName}</a></td>
 						<td>${user.UserName}</td>
 						<td>${user.AssignedRole}</td>
+						<td><a
+							href="<spring:url 
+							value="/user/${user.UserName}/edit"/>">editIcon</a></td>
+						<td>${user.UserName}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

@@ -104,5 +104,20 @@
   		<artifactId>hibernate-validator</artifactId>
   		<version>5.3.3.Final</version>
   	</dependency>
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-web</artifactId>
+  		<version>4.3.4.RELEASE</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework.security</groupId>
+  		<artifactId>spring-security-web</artifactId>
+  		<version>4.2.0.RELEASE</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework.security</groupId>
+  		<artifactId>spring-security-config</artifactId>
+  		<version>4.2.0.RELEASE</version>
+  	</dependency>
   </dependencies>
 </project>

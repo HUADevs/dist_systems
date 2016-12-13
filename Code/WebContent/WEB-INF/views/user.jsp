@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Project Manager</title>
+<title>Manage Users</title>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<spring:url value="/resources/css/home.css"/>" type="text/css"/>
@@ -21,38 +21,19 @@
 		<div class="row">
 			
 				<div class="form-group">
-					<label for="project-name">Name</label>
-					<span>${project.name}</span>
+					<label for="user-name">Name</label>
+					<span>${user.FirstName}</span>
+					<span>${user.LastName}</span>
 				</div>
 
 				<div class="form-group">
-					<label for="project_type">Type</label>
-					<span>${project.type }</span>
+					<label for="user_EmailAdress">Type</label>
+					<span>${user.EmailAdress }</span>
 				</div>
 							
 				<div class="form-group">
-					<label for="sponsor">Sponsor</label>
-					<span>${project.sponsor}</span>
-				</div>
-			
-				<div class="form-group">
-					<label for="funds">Authorized Funds</label>
-					<span>${project.authorizedFunds}</span>
-				</div>
-			
-				<div class="form-group">
-					<label for="hours">Authorized Hours</label>
-					<span>${project.authorizedHours}</span>
-				</div>
-			
-				<div class="form-group">
-					<label for="project-name">Description</label>
-					<span>${project.description}</span>
-				</div>
-				
-				<div class="form-group">
-					<label for="special">Special</label>
-					<span>${project.special == true ? 'Yes':'No'}</span>
+					<label for="user_username">Username</label>
+					<span>${user.UserName}</span>
 				</div>
 			
 		</div>

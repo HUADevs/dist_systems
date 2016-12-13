@@ -6,12 +6,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.huaDevelopers.dao.UserDAO;
+import com.huaDevelopers.data.Entities.Department;
+import com.huaDevelopers.data.Entities.Role;
 import com.huaDevelopers.data.Entities.User;
 
 @Service
 public class UserServiceImpl implements UserService{
 	
 	private UserDAO usrDAO;
+	
+//	@Autowired
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	public void setUsrDAO(UserDAO usrDAO) {
 		this.usrDAO = usrDAO;
@@ -20,6 +25,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	@Transactional
 	public void addUser(User usr) {
+//		usr.setPassword(bCryptPasswordEncoder.encode(usr.getPassword()));
 		this.usrDAO.addUser(usr);
 	}
 
