@@ -26,7 +26,7 @@ public class CustomerController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addCustomer(Model model) {
 	    model.addAttribute("customer", new Customer()); 
-		return "template";
+		return "home";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
