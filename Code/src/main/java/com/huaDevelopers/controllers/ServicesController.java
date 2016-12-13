@@ -1,9 +1,12 @@
 package com.huaDevelopers.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,10 +33,13 @@ public class ServicesController {
 	}
 	
 	@RequestMapping(value="/add" , method= RequestMethod.POST)
-	public String saveService(@ModelAttribute("service") Services serv){
-		
-		return "";	
+	public String saveService(@Valid @ModelAttribute("service") Services serv, Errors error){
+		if (error.hasErrors()){
+			return "add_service";	
+		}
+		return "add_service";
 	}
+	
 	public void RemoveService() {
 		// TODO - implement ServicesController.RemoveService
 		throw new UnsupportedOperationException();
