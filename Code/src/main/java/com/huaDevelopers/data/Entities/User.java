@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -35,8 +36,9 @@ public class User implements Serializable {
 	@Column(name="last_name", nullable=false)
 	private String lastName;
 
+	@Email
 	@NotEmpty(message="This field is required")
-	@Column(name="email", nullable=false)
+	@Column(name="email", nullable=false,unique=true)
 	private String emailAdress;
 	
 	@Column(name="phone", nullable=true)
@@ -51,7 +53,7 @@ public class User implements Serializable {
 	private Department workingDept;
 	
 	@NotEmpty(message="This field is required")
-	@Column(name="username", nullable=false)
+	@Column(name="username", nullable=false,unique=true)
 	private String userName;
 	
 	@NotEmpty(message="This field is required")
