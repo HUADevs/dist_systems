@@ -12,7 +12,7 @@ import com.huaDevelopers.data.Entities.User;
 
 @Repository
 public class UserDAOimpl implements UserDAO{
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(UserDAOimpl.class);
 
 	private SessionFactory sessionFactory;

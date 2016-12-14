@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Project Manager</title>
+<title>Manage Users</title>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -19,6 +19,7 @@
 
 </head>
 <body>
+	<jsp:include page="../views/fragments/admin-header.jsp"></jsp:include>
 
 	<div class="container">
 
@@ -27,18 +28,24 @@
 			<tbody>
 				<tr>
 					<th>ID</th>
-					<th>Name</th>
+					<th>First Name</th>
+					<th>Last Name</th>
 					<th>Username</th>
 					<th>Role</th>
+					<th>Department</th>
+					<th>Edit</th>
+					<th>Delete</th>
 				</tr>
 				<c:forEach items="${users}" var="user">
 					<tr>
-						<td>${user.Userid}</td>
-						<td><a
-							href="<spring:url 
-							value="/user/${user.UserName}"/>">${user.FirstName}${user.LastName}</a></td>
-						<td>${user.UserName}</td>
-						<td>${user.AssignedRole}</td>
+						<td>${user.userId}</td>
+						<td>${user.firstName}</td>
+						<td>${user.lastName}</td>
+						<td>${user.userName}</td>
+						<td>${user.assignedRole.roleName}</td>
+						<td>${user.workingDept.depName}</td>
+						<td>editIcon</td>
+						<td>deleteIcon</td>
 					</tr>
 				</c:forEach>
 			</tbody>

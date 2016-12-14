@@ -30,28 +30,28 @@ public class Customer implements Serializable {
 
 	@NotEmpty
 	@Column(name = "first_name", nullable = false)
-	private String FirstName;
+	private String firstName;
 
 	@NotEmpty
 	@Column(name = "last_name", nullable = false)
-	private String LastName;
+	private String lastName;
 
 	@NotEmpty
 	@Column(name = "personal_id", length = 8, unique = true, nullable = false)
-	private String PersonalId;
+	private String personalId;
 
 	@NotEmpty
 	@Column(name = "tax_reg_number", unique = true, nullable = false)
-	private int TRN; // TAX REGISTRATION NUMBER
+	private int trn; // TAX REGISTRATION NUMBER
 
 	@NotEmpty
 	@Column(name = "license_date", nullable = false)
-	private LocalDateTime LicenseAqquired;
+	private LocalDateTime licenseAqquired;
 
-	@OneToMany(mappedBy = "PersonalId")
+	@OneToMany(mappedBy = "personalId")
 	private Set<History> history;
 
-	@OneToMany(mappedBy = "CustomerPersonID")
+	@OneToMany(mappedBy = "customerPersonID")
 	private Set<Vehicle> vehicles;
 
 	public Customer() {
@@ -67,43 +67,43 @@ public class Customer implements Serializable {
 	}
 
 	public String getFirstName() {
-		return FirstName;
+		return firstName;
 	}
 
 	public void setFirstName(String firstName) {
-		FirstName = firstName;
+		this.firstName = firstName;
 	}
 
 	public String getLastName() {
-		return LastName;
+		return lastName;
 	}
 
 	public void setLastName(String lastName) {
-		LastName = lastName;
+		this.lastName = lastName;
 	}
 
 	public String getPersonalId() {
-		return PersonalId;
+		return personalId;
 	}
 
 	public void setPersonalId(String personalId) {
-		PersonalId = personalId;
+		this.personalId = personalId;
 	}
 
-	public int getTRN() {
-		return TRN;
+	public int getTrn() {
+		return trn;
 	}
 
-	public void setTRN(int tRN) {
-		TRN = tRN;
+	public void setTrn(int trn) {
+		this.trn = trn;
 	}
 
 	public LocalDateTime getLicenseAqquired() {
-		return LicenseAqquired;
-	}
+		return licenseAqquired;
+}
 
 	public void setLicenseAqquired(LocalDateTime licenseAqquired) {
-		LicenseAqquired = licenseAqquired;
+		this.licenseAqquired = licenseAqquired;
 	}
 
 	public Set<History> getHistory() {

@@ -71,7 +71,7 @@
 	<bean id="usrDAO" class="com.huaDevelopers.dao.UserDAOimpl">
 		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
 	</bean>
-	<bean id="UserService" class="com.huaDevelopers.data.Services.UserServiceImpl">
+	<bean id="userService" class="com.huaDevelopers.data.Services.UserServiceImpl">
 		<property name="usrDAO" ref="usrDAO" />
 	</bean>
 

@@ -30,18 +30,19 @@ public class Vehicle implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "vehicle_id")
 	private int id;
-	
-	@NotEmpty
-	@Column(name = "license_plate",length = 7, nullable = false)
-	private String LicensePlate;
 
 	@NotEmpty
-	@Column(name = "person_id", length = 8, nullable = false)
-	private Customer CustomerPersonID;
+	@Column(name = "license_plate", length = 7, nullable = false)
+	private String licensePlate;
+
+	@NotEmpty
+	@ManyToOne
+	@JoinColumn(name = "person_id", nullable = false)
+	private Customer customerPersonID;
 
 	@NotEmpty
 	@Column(name = "release_date", nullable = false)
-	private Date ReleaseDate;
+	private Date releaseDate;
 
 	@NotEmpty
 	@Column(name = "cubic", nullable = false)
@@ -49,13 +50,13 @@ public class Vehicle implements Serializable {
 
 	@NotEmpty
 	@Column(name = "type", nullable = false)
-	private String Type;
+	private String type;
 
 	@NotEmpty
 	@Column(name = "color", nullable = false)
 	private String color;
 
-	@OneToMany(mappedBy = "LicensePlate")
+	@OneToMany(mappedBy = "licensePlate")
 	private Set<DamageForm> dmgForms;
 
 	@OneToOne
@@ -65,30 +66,36 @@ public class Vehicle implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "person_id", nullable = false)
-	public Customer getCustomerPersonID() {
-		return CustomerPersonID;
+	public int getId() {
+		return id;
 	}
 
-	public void setCustomerPersonID(Customer customerPersonID) {
-		CustomerPersonID = customerPersonID;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getLicensePlate() {
-		return LicensePlate;
+		return licensePlate;
 	}
 
 	public void setLicensePlate(String licensePlate) {
-		LicensePlate = licensePlate;
+		this.licensePlate = licensePlate;
+	}
+
+	public Customer getCustomerPersonID() {
+		return customerPersonID;
+	}
+
+	public void setCustomerPersonID(Customer customerPersonID) {
+		this.customerPersonID = customerPersonID;
 	}
 
 	public Date getReleaseDate() {
-		return ReleaseDate;
+		return releaseDate;
 	}
 
 	public void setReleaseDate(Date releaseDate) {
-		ReleaseDate = releaseDate;
+		this.releaseDate = releaseDate;
 	}
 
 	public int getCubic() {
@@ -100,11 +107,11 @@ public class Vehicle implements Serializable {
 	}
 
 	public String getType() {
-		return Type;
+		return type;
 	}
 
 	public void setType(String type) {
-		Type = type;
+		this.type = type;
 	}
 
 	public String getColor() {

@@ -104,5 +104,20 @@
   		<artifactId>hibernate-validator</artifactId>
   		<version>5.3.3.Final</version>
   	</dependency>
+  	<dependency>
+  		<groupId>org.springframework.security</groupId>
+  		<artifactId>spring-security-web</artifactId>
+  		<version>4.2.0.RELEASE</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.springframework.security</groupId>
+  		<artifactId>spring-security-config</artifactId>
+  		<version>4.2.0.RELEASE</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.fasterxml.jackson.core</groupId>
+  		<artifactId>jackson-databind</artifactId>
+  		<version>2.8.5</version>
+  	</dependency>
   </dependencies>
 </project>
