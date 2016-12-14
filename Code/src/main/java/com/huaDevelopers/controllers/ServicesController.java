@@ -45,19 +45,20 @@ public class ServicesController {
 	
 	@RequestMapping(value="/add" , method = RequestMethod.GET)
 	public String addService(Model model) {
-		//List<Role> roles = this.r_service.listAllRoles();
+		List<Role> roles = this.r_service.listAllRoles();
+		model.addAttribute("rolesatr" , roles);
 		model.addAttribute("service", new Services());
-		model.addAttribute("roles" , this.r_service.listAllRoles());
+	
 		return "add_service";
 	}
 	
 	@RequestMapping(value="/add" , method= RequestMethod.POST)
-	public String saveService(@Valid @ModelAttribute("service") Services serv,@ModelAttribute("roles") List<Role> roles, Errors error){
+	public String saveService(@ModelAttribute("service") Services serv, Errors error){
 		if (error.hasErrors()){
 			return "add_service";	
 		}
 		
-		for(Role r:roles){
+		for(Role r:serv.getRoles()){
 			System.out.println(r.getRoleName());
 		}
 		

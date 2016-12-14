@@ -35,8 +35,8 @@
 				</div>
 				
 				<div class="form-group">
-					<label for="roles">Roles</label> 
-					<form:checkboxes id="roles" path="roles" items="${roles}" itemLabel="RoleName"/>
+					<label for="service-roles">Select Roles that have rights</label> 
+					<form:checkboxes id="service-roles" path="roles" items="${rolesatr}"/>
 				</div>
 				
 				
