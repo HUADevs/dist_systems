@@ -1,7 +1,7 @@
 package com.huaDevelopers.data.Entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -29,36 +29,35 @@ public class Customer implements Serializable {
 	private int id;
 
 	@NotEmpty
-	@Column(name = "first_name", nullable=false)
+	@Column(name = "first_name", nullable = false)
 	private String FirstName;
 
 	@NotEmpty
-	@Column(name = "last_name", nullable=false)
+	@Column(name = "last_name", nullable = false)
 	private String LastName;
 
 	@NotEmpty
-	@Column(name = "personal_id", length=8, unique=true, nullable=false)
+	@Column(name = "personal_id", length = 8, unique = true, nullable = false)
 	private String PersonalId;
 
 	@NotEmpty
-	@Column(name = "tax_reg_number", unique=true, nullable=false)
+	@Column(name = "tax_reg_number", unique = true, nullable = false)
 	private int TRN; // TAX REGISTRATION NUMBER
 
 	@NotEmpty
-	@Column(name = "license_date", nullable=false)
-	private Date LicenseAqquired;
-	
-	@OneToMany(mappedBy="PersonalId")
+	@Column(name = "license_date", nullable = false)
+	private LocalDateTime LicenseAqquired;
+
+	@OneToMany(mappedBy = "PersonalId")
 	private Set<History> history;
-	
-	@OneToMany(mappedBy="CustomerPersonID")
+
+	@OneToMany(mappedBy = "CustomerPersonID")
 	private Set<Vehicle> vehicles;
 
 	public Customer() {
 		// TODO Auto-generated constructor stub
 	}
 
-	
 	public int getId() {
 		return id;
 	}
@@ -99,18 +98,17 @@ public class Customer implements Serializable {
 		TRN = tRN;
 	}
 
-	public Date getLicenseAqquired() {
+	public LocalDateTime getLicenseAqquired() {
 		return LicenseAqquired;
 	}
 
-	public void setLicenseAqquired(Date licenseAqquired) {
+	public void setLicenseAqquired(LocalDateTime licenseAqquired) {
 		LicenseAqquired = licenseAqquired;
 	}
 
 	public Set<History> getHistory() {
 		return history;
 	}
-
 
 	public void setHistory(Set<History> history) {
 		this.history = history;
@@ -120,11 +118,8 @@ public class Customer implements Serializable {
 		return vehicles;
 	}
 
-
 	public void setVehicles(Set<Vehicle> vehicles) {
 		this.vehicles = vehicles;
 	}
-	
-	
 
 }
