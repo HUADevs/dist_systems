@@ -29,14 +29,14 @@
 
 				<div class="form-group">
 					<label for="service-ServiceName">Service Name</label>
-					<form:errors path="ServiceName"/>
+					<form:errors path="serviceName"/>
 					<form:input id="service-ServiceName" cssClass="form-control"
-						path="ServiceName" />
+						path="serviceName" />
 				</div>
 				
 				<div class="form-group">
 					<label for="service-roles">Select Roles that have rights</label> 
-					<form:checkboxes id="service-roles" path="roles" items="${rolesatr}"/>
+					<form:checkboxes id="service-roles" path="roles" items="${rolesatr}" itemValue="roleName" itemLabel="roleName"/>
 				</div>
 				
 				
