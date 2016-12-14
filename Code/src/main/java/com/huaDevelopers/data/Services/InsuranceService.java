@@ -2,7 +2,9 @@ package com.huaDevelopers.data.Services;
 
 import java.util.List;
 
+import com.huaDevelopers.data.Entities.Customer;
 import com.huaDevelopers.data.Entities.Insurance;
+import com.huaDevelopers.data.Entities.Vehicle;
 
 public interface InsuranceService {
 
@@ -17,5 +19,7 @@ public interface InsuranceService {
 	public List<Insurance> listAllInsurances();
 
 	public void removeInsurance(int id);
+
+	public float countInsCost(Vehicle vehicle, Customer cust);
 
 }

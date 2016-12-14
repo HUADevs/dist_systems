@@ -48,11 +48,12 @@ public class DFormDAOImpl implements DamFormDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	//no security
+	// no security
 	public List<DamageForm> listDamageFormsPerVehicle(String plate) {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<DamageForm> Formlist = session.createQuery("from DamageForm where license_plate=" + plate).getResultList();
-		return Formlist;		
+		List<DamageForm> Formlist = session.createQuery("from DamageForm where license_plate='" + plate + "'")
+				.getResultList();
+		return Formlist;
 	}
 
 	@Override
@@ -60,7 +61,8 @@ public class DFormDAOImpl implements DamFormDAO {
 		Session session = this.sessionFactory.getCurrentSession();
 		DamageForm df = session.load(DamageForm.class, new Integer(id));
 		logger.info("Damage Form has obtained from db" + df.toString());
-		return df;	}
+		return df;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override

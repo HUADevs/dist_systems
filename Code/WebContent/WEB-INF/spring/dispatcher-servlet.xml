@@ -117,6 +117,13 @@
 		<property name="roleDAO" ref="roleDAO" />
 	</bean>
 
+	<bean id="insurDAO" class="com.huaDevelopers.dao.InsurDAOImpl">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean>
+	<bean id="insuranceService" class="com.huaDevelopers.data.Services.InsurServiceImpl">
+		<property name="insurDAO" ref="insurDAO" />
+	</bean>
+
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<bean id="transactionManager"
