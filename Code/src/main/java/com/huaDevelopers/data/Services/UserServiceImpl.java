@@ -13,6 +13,9 @@ public class UserServiceImpl implements UserService{
 	
 	private UserDAO usrDAO;
 	
+//	@Autowired
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	public void setUsrDAO(UserDAO usrDAO) {
 		this.usrDAO = usrDAO;
 	}
@@ -20,6 +23,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	@Transactional
 	public void addUser(User usr) {
+//		usr.setPassword(bCryptPasswordEncoder.encode(usr.getPassword()));
 		this.usrDAO.addUser(usr);
 	}
 

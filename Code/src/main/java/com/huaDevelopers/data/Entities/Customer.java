@@ -29,36 +29,35 @@ public class Customer implements Serializable {
 	private int id;
 
 	@NotEmpty
-	@Column(name = "first_name", nullable=false)
-	private String FirstName;
+	@Column(name = "first_name", nullable = false)
+	private String firstName;
 
 	@NotEmpty
-	@Column(name = "last_name", nullable=false)
-	private String LastName;
+	@Column(name = "last_name", nullable = false)
+	private String lastName;
 
 	@NotEmpty
-	@Column(name = "personal_id", length=8, unique=true, nullable=false)
-	private String PersonalId;
+	@Column(name = "personal_id", length = 8, unique = true, nullable = false)
+	private String personalId;
 
 	@NotEmpty
-	@Column(name = "tax_reg_number", unique=true, nullable=false)
-	private int TRN; // TAX REGISTRATION NUMBER
+	@Column(name = "tax_reg_number", unique = true, nullable = false)
+	private int trn; // TAX REGISTRATION NUMBER
 
 	@NotEmpty
-	@Column(name = "license_date", nullable=false)
-	private Date LicenseAqquired;
-	
-	@OneToMany(mappedBy="PersonalId")
+	@Column(name = "license_date", nullable = false)
+	private Date licenseAqquired;
+
+	@OneToMany(mappedBy = "personalId")
 	private Set<History> history;
-	
-	@OneToMany(mappedBy="CustomerPersonID")
+
+	@OneToMany(mappedBy = "customerPersonID")
 	private Set<Vehicle> vehicles;
 
 	public Customer() {
 		// TODO Auto-generated constructor stub
 	}
 
-	
 	public int getId() {
 		return id;
 	}
@@ -68,49 +67,48 @@ public class Customer implements Serializable {
 	}
 
 	public String getFirstName() {
-		return FirstName;
+		return firstName;
 	}
 
 	public void setFirstName(String firstName) {
-		FirstName = firstName;
+		this.firstName = firstName;
 	}
 
 	public String getLastName() {
-		return LastName;
+		return lastName;
 	}
 
 	public void setLastName(String lastName) {
-		LastName = lastName;
+		this.lastName = lastName;
 	}
 
 	public String getPersonalId() {
-		return PersonalId;
+		return personalId;
 	}
 
 	public void setPersonalId(String personalId) {
-		PersonalId = personalId;
+		this.personalId = personalId;
 	}
 
-	public int getTRN() {
-		return TRN;
+	public int getTrn() {
+		return trn;
 	}
 
-	public void setTRN(int tRN) {
-		TRN = tRN;
+	public void setTrn(int trn) {
+		this.trn = trn;
 	}
 
 	public Date getLicenseAqquired() {
-		return LicenseAqquired;
+		return licenseAqquired;
 	}
 
 	public void setLicenseAqquired(Date licenseAqquired) {
-		LicenseAqquired = licenseAqquired;
+		this.licenseAqquired = licenseAqquired;
 	}
 
 	public Set<History> getHistory() {
 		return history;
 	}
-
 
 	public void setHistory(Set<History> history) {
 		this.history = history;
@@ -120,11 +118,8 @@ public class Customer implements Serializable {
 		return vehicles;
 	}
 
-
 	public void setVehicles(Set<Vehicle> vehicles) {
 		this.vehicles = vehicles;
 	}
-	
-	
 
 }

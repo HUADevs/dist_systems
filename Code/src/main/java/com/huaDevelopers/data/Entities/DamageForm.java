@@ -28,20 +28,21 @@ public class DamageForm implements Serializable {
 	private int id;
 
 	@NotEmpty
-	@Column(name = "license_plate", length=7, unique=true, nullable=false)
-	private Vehicle LicensePlate;
+	@ManyToOne
+	@JoinColumn(name = "license_plate", unique=true, nullable=false)
+	private Vehicle licensePlate;
 
 	@NotEmpty
 	@Column(name = "description", nullable=false)
-	private String DamageDescription;
+	private String damageDescription;
 
 	@NotEmpty
 	@Column(name = "photo", nullable=false)
-	private byte[] DamagePhotoShoots;
+	private byte[] damagePhotoShoots;
 
 	@NotEmpty
 	@Column(name = "cost", nullable=false)
-	private float DamageCost;
+	private float damageCost;
 
 	@Column(name = "approval", nullable=true)
 	private Boolean approval;
@@ -58,38 +59,36 @@ public class DamageForm implements Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne
-	@JoinColumn(name="license_plate", nullable=false)
 	public Vehicle getLicensePlate() {
-		return LicensePlate;
+		return licensePlate;
 	}
 
 	public void setLicensePlate(Vehicle licensePlate) {
-		LicensePlate = licensePlate;
+		this.licensePlate = licensePlate;
 	}
 
 	public String getDamageDescription() {
-		return DamageDescription;
+		return damageDescription;
 	}
 
 	public void setDamageDescription(String damageDescription) {
-		DamageDescription = damageDescription;
+		this.damageDescription = damageDescription;
 	}
 
 	public byte[] getDamagePhotoShoots() {
-		return DamagePhotoShoots;
+		return damagePhotoShoots;
 	}
 
 	public void setDamagePhotoShoots(byte[] damagePhotoShoots) {
-		DamagePhotoShoots = damagePhotoShoots;
+		this.damagePhotoShoots = damagePhotoShoots;
 	}
 
 	public float getDamageCost() {
-		return DamageCost;
+		return damageCost;
 	}
 
 	public void setDamageCost(float damageCost) {
-		DamageCost = damageCost;
+		this.damageCost = damageCost;
 	}
 
 	public Boolean getApproval() {

@@ -1,17 +1,14 @@
 package com.huaDevelopers.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,35 +23,14 @@ import com.huaDevelopers.data.Services.UserService;
 @RequestMapping("/admin/user")
 public class UserController {
 
+	@Autowired
 	private UserService userService;
 
+	@Autowired
 	private RoleService roleService;
 
+	@Autowired
 	private DepartmentService deptService;
-
-	@Autowired
-	@Qualifier(value = "UserService")
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
-
-	@Autowired
-	@Qualifier(value = "roleService")
-	public void setRoleService(RoleService roleService) {
-		this.roleService = roleService;
-	}
-
-	@Autowired
-	@Qualifier(value = "deptService")
-	public void setDeptService(DepartmentService deptService) {
-		this.deptService = deptService;
-	}
-
-	@RequestMapping(value = "/{UserName}")
-	public String findUser(Model model, @PathVariable("UserName") String UserName) {
-		model.addAttribute("user", this.userService.getUserByUsername(UserName));
-		return "user";
-	}
 
 	@RequestMapping(value = "/find")
 	public String find(Model model) {
@@ -65,18 +41,9 @@ public class UserController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addUser(Model model) {
 		List<Role> roles = roleService.listAllRoles();
-		List<String> roleNames = new ArrayList<>();
-		for (Role r : roles) {
-			roleNames.add(r.getRoleName());
-		}
 		List<Department> departments = deptService.getAllDepts();
-		List<String> deptNames = new ArrayList<>();
-		deptNames.add("");
-		for (Department d : departments) {
-			deptNames.add(d.getDepName());
-		}
-		model.addAttribute("roles", roleNames);
-		model.addAttribute("departments", deptNames);
+		model.addAttribute("roles", roles);
+		model.addAttribute("departments", departments);
 		model.addAttribute("user", new User());
 		return "user_add";
 	}
@@ -86,10 +53,17 @@ public class UserController {
 		if (errors.hasErrors()) {
 			return "user_add";
 		}
-		this.userService.addUser(user);
+		if(user.getUserId() == 0){
+			//new person, add it
+			user.setAssignedRole(this.roleService.getRoleByID(user.getAssignedRole().getRoleId()));
+			user.setWorkingDept(this.deptService.getDeptByID(user.getWorkingDept().getId()));
+			this.userService.addUser(user);
+		}else{
+			//existing person, call update
+			this.userService.updateUser(user);
+		}
 
-		return "test";
-
+		return "redirect:/admin/user/find";
 	}
 
 	public void DeleteUser() {
@@ -97,6 +71,7 @@ public class UserController {
 		throw new UnsupportedOperationException();
 	}
 
+	@RequestMapping(value = "/{UserName}/edit")
 	public void UpdateUserInfo() {
 		// TODO - implement UserController.UpdateUserInfo
 		throw new UnsupportedOperationException();
