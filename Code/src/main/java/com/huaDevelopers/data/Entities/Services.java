@@ -25,29 +25,29 @@ public class Services implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int ServiceId;
+	private int serviceId;
 
 	@NotEmpty
 	@Column(name = "name", nullable = false)
-	private String ServiceName;
+	private String serviceName;
 
 	@ManyToMany(mappedBy = "services")
 	private Set<Role> roles;
 
 	public int getServiceId() {
-		return ServiceId;
+		return serviceId;
 	}
 
 	public void setServiceId(int serviceId) {
-		ServiceId = serviceId;
+		this.serviceId = serviceId;
 	}
 
 	public String getServiceName() {
-		return this.ServiceName;
+		return serviceName;
 	}
 
-	public void setServiceName(String ServiceName) {
-		this.ServiceName = ServiceName;
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
 	}
 
 	public Set<Role> getRoles() {

@@ -37,55 +37,55 @@
 				cssClass="col-md-8 col-md-offset-2">
 
 				<div class="form-group">
-					<label for="user-FirstName">First Name</label>
-					<form:errors path="FirstName" />
-					<form:input id="user-FirstName" cssClass="form-control"
-						path="FirstName" />
+					<label for="user-firstName">First Name</label>
+					<form:errors path="firstName" />
+					<form:input id="user-firstName" cssClass="form-control"
+						path="firstName" />
 				</div>
 				<div class="form-group">
-					<label for="user-LastName">Last Name</label>
-					<form:errors path="LastName" style="color:red"/>
-					<form:input id="user-LastName" cssClass="form-control"
-						path="LastName" />
+					<label for="user-lastName">Last Name</label>
+					<form:errors path="lastName" style="color:red"/>
+					<form:input id="user-lastName" cssClass="form-control"
+						path="lastName" />
 				</div>
 				<div class="form-group">
-					<label for="user-EmailAdress">Email</label>
-					<form:errors path="EmailAdress" />
-					<form:input id="user-EmailAdress" cssClass="form-control"
-						path="EmailAdress" />
+					<label for="user-emailAdress">Email</label>
+					<form:errors path="emailAdress" />
+					<form:input id="user-emailAdress" cssClass="form-control"
+						path="emailAdress" />
 				</div>
 				<div class="form-group">
-					<label for="user-Telephone">Phone</label>
-					<form:input id="user-Telephone" cssClass="form-control"
-						path="Telephone" />
+					<label for="user-telephone">Phone</label>
+					<form:input id="user-telephone" cssClass="form-control"
+						path="telephone" />
 				</div>
 				<div class="form-group">
 					<label for="user-roles">Role</label>
-					<form:select path="AssignedRole" cssClass="form-control">
+					<form:select path="assignedRole" cssClass="form-control">
 						<form:option value="NONE" label="--- Select ---" />
-						<form:options items="${roles}" itemValue="RoleId"
-							itemLabel="RoleName" />
+						<form:options items="${roles}" itemValue="roleId"
+							itemLabel="roleName" />
 					</form:select>
 				</div>
 				<div class="form-group">
-					<label for="user-roles">Working Department</label>
-					<form:select path="WorkingDept" cssClass="form-control">
+					<label for="user-departments">Working Department</label>
+					<form:select path="workingDept" cssClass="form-control">
 						<form:option value="NONE" label="--- Select ---" />
 						<form:options items="${departments}" itemValue="id"
-							itemLabel="DepName" />
+							itemLabel="depName" />
 					</form:select>
 				</div>
 				<div class="form-group">
-					<label for="user-UserName">Username</label>
-					<form:errors path="UserName" />
-					<form:input id="user-UserName" cssClass="form-control"
-						path="UserName" />
+					<label for="user-userName">Username</label>
+					<form:errors path="userName" />
+					<form:input id="user-userName" cssClass="form-control"
+						path="userName" />
 				</div>
 				<div class="form-group">
-					<label for="user-Password">Password</label>
-					<form:errors path="Password" />
-					<form:input id="user-Password" cssClass="form-control"
-						path="Password" />
+					<label for="user-password">Password</label>
+					<form:errors path="password" />
+					<form:input id="user-password" cssClass="form-control"
+						path="password" />
 				</div>
 				<button type="submit" class="btn btn-default">Submit</button>
 			</form:form>

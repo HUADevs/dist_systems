@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -24,104 +25,109 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	private int Userid;
+	private int userId;
 	
 	@NotEmpty(message="This field is required")
 	@Column(name="first_name", nullable=false)
-	private String FirstName;
+	private String firstName;
 	
 	@NotEmpty(message="This field is required")
 	@Column(name="last_name", nullable=false)
-	private String LastName;
+	private String lastName;
 
 	@NotEmpty(message="This field is required")
 	@Column(name="email", nullable=false)
-	private String EmailAdress;
+	private String emailAdress;
 	
 	@Column(name="phone", nullable=true)
-	private String Telephone;
+	private String telephone;
 	
-	@Column(name="role_id", nullable=true)
-	private Role AssignedRole;
+	@ManyToOne
+	@JoinColumn(name="role_id", nullable=true)
+	private Role assignedRole;
 	
-	@Column(name="department", nullable=true)
-	private Department WorkingDept;
+	@ManyToOne
+	@JoinColumn(name="department_id", nullable=true)
+	private Department workingDept;
 	
 	@NotEmpty(message="This field is required")
 	@Column(name="username", nullable=false)
-	private String UserName;
+	private String userName;
 	
 	@NotEmpty(message="This field is required")
 	@Column(name="password", nullable=false)
-	private String Password;
+	private String password;
 
-	public int getUserid() {
-		return Userid;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setUserid(int userid) {
-		Userid = userid;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getFirstName() {
-		return FirstName;
+		return firstName;
 	}
 
 	public void setFirstName(String firstName) {
-		FirstName = firstName;
+		this.firstName = firstName;
 	}
 
 	public String getLastName() {
-		return LastName;
+		return lastName;
 	}
 
 	public void setLastName(String lastName) {
-		LastName = lastName;
-	}
-
-	public String getTelephone() {
-		return Telephone;
-	}
-
-	public void setTelephone(String telephone) {
-		Telephone = telephone;
+		this.lastName = lastName;
 	}
 
 	public String getEmailAdress() {
-		return EmailAdress;
+		return emailAdress;
 	}
 
-	@ManyToOne
+	public void setEmailAdress(String emailAdress) {
+		this.emailAdress = emailAdress;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
 	public Role getAssignedRole() {
-		return this.AssignedRole;
+		return assignedRole;
 	}
 
-	public void setAssignedRole(Role AssignedRole) {
-		this.AssignedRole = AssignedRole;
+	public void setAssignedRole(Role assignedRole) {
+		this.assignedRole = assignedRole;
 	}
 
-	@ManyToOne
 	public Department getWorkingDept() {
-		return this.WorkingDept;
+		return workingDept;
 	}
 
-	public void setWorkingDept(Department WorkingDept) {
-		this.WorkingDept = WorkingDept;
+	public void setWorkingDept(Department workingDept) {
+		this.workingDept = workingDept;
 	}
 
 	public String getUserName() {
-		return this.UserName;
+		return userName;
 	}
 
-	public void setUserName(String UserName) {
-		this.UserName = UserName;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getPassword() {
-		return this.Password;
+		return password;
 	}
 
-	public void setPassword(String Password) {
-		this.Password = Password;
+	public void setPassword(String password) {
+		this.password = password;
 	}
+	
 }

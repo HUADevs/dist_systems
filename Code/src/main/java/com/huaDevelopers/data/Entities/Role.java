@@ -27,34 +27,34 @@ public class Role implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int RoleId;
+	@Column(name = "role_id")
+	private int roleId;
 
 	@NotEmpty
 	@Column(name = "name", nullable = false)
-	private String RoleName;
+	private String roleName;
 
 	@ManyToMany
 	@JoinTable(name = "Right", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "service_id"))
 	private Set<Services> services;
 
-	@OneToMany(mappedBy = "AssignedRole")
+	@OneToMany(mappedBy = "assignedRole")
 	private Set<User> users;
 
 	public int getRoleId() {
-		return RoleId;
+		return roleId;
 	}
 
 	public void setRoleId(int roleId) {
-		RoleId = roleId;
+		this.roleId = roleId;
 	}
 
 	public String getRoleName() {
-		return this.RoleName;
+		return roleName;
 	}
 
-	public void setRoleName(String RoleName) {
-		this.RoleName = RoleName;
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 
 	public Set<Services> getServices() {

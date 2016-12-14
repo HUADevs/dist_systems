@@ -28,30 +28,30 @@ public class Department implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "department_id")
 	private int id;
 
 	@NotEmpty
 	@Column(name = "name", unique=true, nullable=false)
-	private String DepName;
+	private String depName;
 
 	@NotEmpty
 	@Column(name = "region", nullable=false)
-	private String Location;
+	private String location;
 
 	@NotEmpty
 	@Column(name = "address", nullable=false)
-	private String Address;
+	private String address;
 
 	@NotEmpty
 	@Column(name = "num_of_emp", nullable=false)
-	private int NumEmp;
+	private int numEmp;
 
-	@OneToMany(mappedBy="WorkingDept")
+	@OneToMany(mappedBy="workingDept")
 	private Set<User> users;
-	
+
 	public int getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(int id) {
@@ -59,35 +59,35 @@ public class Department implements Serializable {
 	}
 
 	public String getDepName() {
-		return DepName;
+		return depName;
 	}
 
 	public void setDepName(String depName) {
-		DepName = depName;
+		this.depName = depName;
 	}
 
 	public String getLocation() {
-		return Location;
+		return location;
 	}
 
 	public void setLocation(String location) {
-		Location = location;
+		this.location = location;
 	}
 
 	public String getAddress() {
-		return Address;
+		return address;
 	}
 
 	public void setAddress(String address) {
-		Address = address;
+		this.address = address;
 	}
 
 	public int getNumEmp() {
-		return NumEmp;
+		return numEmp;
 	}
 
 	public void setNumEmp(int numEmp) {
-		NumEmp = numEmp;
+		this.numEmp = numEmp;
 	}
 
 	public Set<User> getUsers() {

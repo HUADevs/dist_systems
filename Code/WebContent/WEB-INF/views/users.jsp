@@ -32,18 +32,20 @@
 					<th>Last Name</th>
 					<th>Username</th>
 					<th>Role</th>
+					<th>Department</th>
 					<th>Edit</th>
 					<th>Delete</th>
 				</tr>
 				<c:forEach items="${users}" var="user">
 					<tr>
-						<td>${user.Userid}</td>
-						<td>${user.FirstName}</td>
-						<td>${user.LastName}</td>
-						<td>${user.UserName}</td>
-						<td>${user.AssignedRole.RoleName}</td>
+						<td>${user.userId}</td>
+						<td>${user.firstName}</td>
+						<td>${user.lastName}</td>
+						<td>${user.userName}</td>
+						<td>${user.assignedRole.roleName}</td>
+						<td>${user.workingDept.depName}</td>
 						<td>editIcon</td>
-						<td>${user.UserName}</td>
+						<td>deleteIcon</td>
 					</tr>
 				</c:forEach>
 			</tbody>

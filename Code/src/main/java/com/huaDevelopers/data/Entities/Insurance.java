@@ -29,12 +29,13 @@ public class Insurance implements Serializable {
 	private int id;
 
 	@NotEmpty
-	@Column(name = "license_plate", length = 7, unique = true, nullable = false)
-	private Vehicle LicensePlate;
+	@OneToOne
+	@JoinColumn(name = "license_plate", nullable = false)
+	private Vehicle licensePlate;
 
 	@NotEmpty
 	@Column(name = "date_start", nullable = false)
-	private Date InsuranceDate;
+	private Date insuranceDate;
 
 	@NotEmpty
 	@Column(name = "price", nullable = false)
@@ -45,46 +46,41 @@ public class Insurance implements Serializable {
 
 	@NotEmpty
 	@Column(name = "type", nullable = false)
-	private String Type;
+	private String type;
 
 	@Column(name = "new_driver", nullable = true)
-	private Boolean NewDriver;
+	private Boolean newDriver;
 
 	public Insurance() {
 		// TODO Auto-generated constructor stub
 	}
 
-	
 	public int getId() {
 		return id;
 	}
-
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-
-	@OneToOne
-	@JoinColumn(name="license_plate", nullable=false)
 	public Vehicle getLicensePlate() {
-		return this.LicensePlate;
+		return licensePlate;
 	}
 
 	public void setLicensePlate(Vehicle licensePlate) {
-		this.LicensePlate = licensePlate;
+		this.licensePlate = licensePlate;
 	}
 
 	public Date getInsuranceDate() {
-		return this.InsuranceDate;
+		return insuranceDate;
 	}
 
 	public void setInsuranceDate(Date insuranceDate) {
-		this.InsuranceDate = insuranceDate;
+		this.insuranceDate = insuranceDate;
 	}
 
 	public float getPrice() {
-		return this.price;
+		return price;
 	}
 
 	public void setPrice(float price) {
@@ -100,19 +96,19 @@ public class Insurance implements Serializable {
 	}
 
 	public String getType() {
-		return Type;
+		return type;
 	}
 
 	public void setType(String type) {
-		Type = type;
+		this.type = type;
 	}
 
 	public Boolean getNewDriver() {
-		return NewDriver;
+		return newDriver;
 	}
 
 	public void setNewDriver(Boolean newDriver) {
-		NewDriver = newDriver;
+		this.newDriver = newDriver;
 	}
 
 }
