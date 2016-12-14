@@ -34,6 +34,11 @@
 						path="ServiceName" />
 				</div>
 				
+				<div class="form-group">
+					<label for="roles">Roles</label> 
+					<form:checkboxes id="roles" path="roles" items="${roles}" itemLabel="RoleName"/>
+				</div>
+				
 				
 				<button type="submit" class="btn btn-default">Submit</button>
 			</form:form>
