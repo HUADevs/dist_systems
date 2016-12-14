@@ -38,7 +38,7 @@
 
 				<div class="form-group">
 					<label for="user-firstName">First Name</label>
-					<form:errors path="firstName" />
+					<form:errors path="firstName" style="color:red"/>
 					<form:input id="user-firstName" cssClass="form-control"
 						path="firstName" />
 				</div>
@@ -50,17 +50,19 @@
 				</div>
 				<div class="form-group">
 					<label for="user-emailAdress">Email</label>
-					<form:errors path="emailAdress" />
+					<form:errors path="emailAdress" style="color:red"/>
 					<form:input id="user-emailAdress" cssClass="form-control"
 						path="emailAdress" />
 				</div>
 				<div class="form-group">
 					<label for="user-telephone">Phone</label>
+					<form:errors path="telephone" style="color:red"/>
 					<form:input id="user-telephone" cssClass="form-control"
 						path="telephone" />
 				</div>
 				<div class="form-group">
 					<label for="user-roles">Role</label>
+					<form:errors path="assignedRole" style="color:red"/>
 					<form:select path="assignedRole" cssClass="form-control">
 						<form:option value="NONE" label="--- Select ---" />
 						<form:options items="${roles}" itemValue="roleId"
@@ -69,6 +71,7 @@
 				</div>
 				<div class="form-group">
 					<label for="user-departments">Working Department</label>
+					<form:errors path="workingDept" style="color:red"/>
 					<form:select path="workingDept" cssClass="form-control">
 						<form:option value="NONE" label="--- Select ---" />
 						<form:options items="${departments}" itemValue="id"

@@ -55,8 +55,8 @@ public class UserController {
 		}
 		if(user.getUserId() == 0){
 			//new person, add it
-			/*user.setAssignedRole(this.roleService.getRoleByID(user.getAssignedRole().getRoleId()));
-			user.setWorkingDept(this.deptService.getDeptByID(user.getWorkingDept().getId()));*/
+			user.setAssignedRole(this.roleService.getRoleByID(user.getAssignedRole().getRoleId()));
+			user.setWorkingDept(this.deptService.getDeptByID(user.getWorkingDept().getId()));
 			this.userService.addUser(user);
 		}else{
 			//existing person, call update
