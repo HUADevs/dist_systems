@@ -62,18 +62,16 @@
 				</div>
 				<div class="form-group">
 					<label for="user-roles">Role</label>
-					<form:errors path="assignedRole" style="color:red"/>
-					<form:select path="assignedRole" cssClass="form-control">
-						<form:option value="NONE" label="--- Select ---" />
+					<form:errors path="assignedRole.roleId" style="color:red"/>
+					<form:select path="assignedRole.roleId" cssClass="form-control">
 						<form:options items="${roles}" itemValue="roleId"
 							itemLabel="roleName" />
 					</form:select>
 				</div>
 				<div class="form-group">
 					<label for="user-departments">Working Department</label>
-					<form:errors path="workingDept" style="color:red"/>
-					<form:select path="workingDept" cssClass="form-control">
-						<form:option value="NONE" label="--- Select ---" />
+					<form:errors path="workingDept.id" style="color:red"/>
+					<form:select path="workingDept.id" cssClass="form-control">
 						<form:options items="${departments}" itemValue="id"
 							itemLabel="depName" />
 					</form:select>
@@ -90,7 +88,7 @@
 					<form:input id="user-password" cssClass="form-control"
 						path="password" />
 				</div>
-				<button type="submit" class="btn btn-default">Submit</button>
+				<button type="submit" class="btn btn-primary">Submit</button>
 			</form:form>
 
 		</div>

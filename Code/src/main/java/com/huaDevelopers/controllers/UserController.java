@@ -49,14 +49,16 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String saveUser(@Valid @ModelAttribute("user") User user, Errors errors) {
+	public String saveUser(Model model,@Valid @ModelAttribute("user") User user, Errors errors) {
 		if (errors.hasErrors()) {
+			List<Role> roles = roleService.listAllRoles();
+			List<Department> departments = deptService.getAllDepts();
+			model.addAttribute("roles", roles);
+			model.addAttribute("departments", departments);
 			return "user_add";
 		}
 		if(user.getUserId() == 0){
 			//new person, add it
-			user.setAssignedRole(this.roleService.getRoleByID(user.getAssignedRole().getRoleId()));
-			user.setWorkingDept(this.deptService.getDeptByID(user.getWorkingDept().getId()));
 			this.userService.addUser(user);
 		}else{
 			//existing person, call update
