@@ -35,7 +35,7 @@ public class Role implements Serializable {
 	private String roleName;
 
 	@ManyToMany
-	@JoinTable(name = "Right", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "service_id"))
+	@JoinTable(name = "Rights", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "service_id"))
 	private Set<Services> services;
 
 	@OneToMany(mappedBy = "assignedRole")

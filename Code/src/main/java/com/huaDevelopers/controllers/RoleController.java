@@ -81,14 +81,9 @@ public class RoleController {
 		if (error.hasErrors()){
 			List<Services> allservices = this.s_service.listAllServices();
 			model.addAttribute("allservices" , allservices);
-			System.out.println("error");
 			return "role_add";	
 		}
-		
-		for(Services s:role.getServices()){
-			System.out.println(s.getServiceName());
-		}
-		System.out.println("test");
+		this.r_service.addRole(role);
 		return "redirect:/admin/role/add";
 	}
 }
