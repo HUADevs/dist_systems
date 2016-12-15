@@ -16,6 +16,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -86,4 +87,39 @@ public class RoleController {
 		this.r_service.addRole(role);
 		return "redirect:/admin/role/add";
 	}
+	
+	@RequestMapping(value="/view", method= RequestMethod.GET)
+	public String viewAllRoles(Model model){
+		List<Role> roles = this.r_service.listAllRoles();
+		model.addAttribute("roles", roles);
+		return "role_all";
+	}
+	
+	 @RequestMapping(value = { "/edit-role-{roleId}" }, method = RequestMethod.GET)
+	    public String editRole(@PathVariable int roleId, Model model) {
+	        Role role = this.r_service.getRoleByID(roleId);
+	        model.addAttribute("role", role);
+	        return "role_add";
+	    }
+	 
+	 @RequestMapping(value = { "/edit-user-{ssoId}" }, method = RequestMethod.POST)
+	    public String updateUser(@Valid @ModelAttribute("role") Role role, BindingResult result,
+	            Model model, @PathVariable String ssoId) {
+	 
+	        if (result.hasErrors()) {
+	            return "role_add";
+	        }
+	        
+	        this.r_service.updateRole(role);
+	        
+	        return "redirect:/admin/role/view";
+	    }
+	
+	@RequestMapping(value={"/delete-role-{roleId}"}, method= RequestMethod.GET)
+	public String deleteRole(@PathVariable int roleId){
+		this.r_service.removeRole(roleId);
+		return "redirect:/admin/role/view";
+	}
+	
+	
 }
