@@ -50,7 +50,7 @@ public class ServiceDAOimpl implements ServiceDAO{
 	public List<Services> listAllServices() {
 		Session session = this.sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		List<Services> SList = session.createQuery("from Service").getResultList();
+		List<Services> SList = session.createQuery("from Services").getResultList();
 		return SList;
 	}
 
@@ -71,9 +71,8 @@ public class ServiceDAOimpl implements ServiceDAO{
 	}
 
 	@Override
-	public void setRoles() {
-		// TODO Auto-generated method stub
-		
+	public void setRoles(Set<Role> roles) {
+		//todo
 	}
 
 }

@@ -56,8 +56,8 @@ public class ServEntityServiceImpl implements ServEntityService{
 	}
 
 	@Override
-	public void setRoles() {
-		this.servDAO.setRoles();
+	public void setRoles(Set<Role> roles) {
+		this.servDAO.setRoles(roles);
 	}
 	
 }
