@@ -44,8 +44,8 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	@Transactional
-	public User getUserByEmail(String email) {
-		return this.usrDAO.getUserByEmail(email);
+	public User getUserById(int id) {
+		return this.usrDAO.getUserById(id);
 	}
 
 	@Override
@@ -56,8 +56,8 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	@Transactional
-	public void removeUser(String username) {
-		this.usrDAO.removeUser(username);
+	public void removeUser(int userId) {
+		this.usrDAO.removeUser(userId);
 	}
 
 }

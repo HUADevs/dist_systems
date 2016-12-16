@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,38 +32,47 @@
 		<div class="row">
 			<h1 class="text-center">Add User</h1>
 		</div>
+		<c:if test="${validationErrors != null}">
+			<div class="errors">
+				<ul>
+					<c:forEach items="${validationErrors}" var="error">
+						<li><c:out value="${error.message}" /></li>
+					</c:forEach>
+				</ul>
+			</div>
+		</c:if>
 		<div class="row">
 			<spring:url value="/admin/user/add" var="formUrl" />
 			<form:form modelAttribute="user" action="${formUrl }" method="post"
 				cssClass="col-md-8 col-md-offset-2">
-
+				<div>${msg}</div>
 				<div class="form-group">
 					<label for="user-firstName">First Name</label>
-					<form:errors path="firstName" style="color:red"/>
+					<form:errors path="firstName" style="color:red" />
 					<form:input id="user-firstName" cssClass="form-control"
 						path="firstName" />
 				</div>
 				<div class="form-group">
 					<label for="user-lastName">Last Name</label>
-					<form:errors path="lastName" style="color:red"/>
+					<form:errors path="lastName" style="color:red" />
 					<form:input id="user-lastName" cssClass="form-control"
 						path="lastName" />
 				</div>
 				<div class="form-group">
 					<label for="user-emailAdress">Email</label>
-					<form:errors path="emailAdress" style="color:red"/>
+					<form:errors path="emailAdress" style="color:red" />
 					<form:input id="user-emailAdress" cssClass="form-control"
 						path="emailAdress" />
 				</div>
 				<div class="form-group">
 					<label for="user-telephone">Phone</label>
-					<form:errors path="telephone" style="color:red"/>
+					<form:errors path="telephone" style="color:red" />
 					<form:input id="user-telephone" cssClass="form-control"
 						path="telephone" />
 				</div>
 				<div class="form-group">
 					<label for="user-roles">Role</label>
-					<form:errors path="assignedRole.roleId" style="color:red"/>
+					<form:errors path="assignedRole.roleId" style="color:red" />
 					<form:select path="assignedRole.roleId" cssClass="form-control">
 						<form:options items="${roles}" itemValue="roleId"
 							itemLabel="roleName" />
@@ -70,7 +80,7 @@
 				</div>
 				<div class="form-group">
 					<label for="user-departments">Working Department</label>
-					<form:errors path="workingDept.id" style="color:red"/>
+					<form:errors path="workingDept.id" style="color:red" />
 					<form:select path="workingDept.id" cssClass="form-control">
 						<form:options items="${departments}" itemValue="id"
 							itemLabel="depName" />
@@ -78,13 +88,13 @@
 				</div>
 				<div class="form-group">
 					<label for="user-userName">Username</label>
-					<form:errors path="userName" />
+					<form:errors path="userName" style="color:red" />
 					<form:input id="user-userName" cssClass="form-control"
 						path="userName" />
 				</div>
 				<div class="form-group">
 					<label for="user-password">Password</label>
-					<form:errors path="password" />
+					<form:errors path="password" style="color:red" />
 					<form:input id="user-password" cssClass="form-control"
 						path="password" />
 				</div>
