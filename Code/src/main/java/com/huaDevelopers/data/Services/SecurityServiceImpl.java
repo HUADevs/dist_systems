@@ -9,6 +9,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import com.huaDevelopers.data.Services.Interfaces.SecurityService;
+
 public class SecurityServiceImpl implements SecurityService {
 
 	@Autowired

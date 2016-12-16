@@ -2,15 +2,18 @@ package com.huaDevelopers.data.Services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.huaDevelopers.dao.DamFormDAO;
+import com.huaDevelopers.dao.Interfaces.DamFormDAO;
 import com.huaDevelopers.data.Entities.DamageForm;
+import com.huaDevelopers.data.Services.Interfaces.DamFormService;
 
 @Service
 public class DFormServiceImpl implements DamFormService {
 
+	@Autowired
 	private DamFormDAO formDAO;
 
 	public void setFormDAO(DamFormDAO formDAO) {

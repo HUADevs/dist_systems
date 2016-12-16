@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.huaDevelopers.dao.UserDAO;
+import com.huaDevelopers.dao.Interfaces.UserDAO;
 import com.huaDevelopers.data.Entities.User;
+import com.huaDevelopers.data.Services.Interfaces.UserService;
 
 @Service
 public class UserServiceImpl implements UserService{

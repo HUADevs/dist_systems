@@ -4,12 +4,11 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +18,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.huaDevelopers.data.Entities.Department;
 import com.huaDevelopers.data.Entities.Role;
 import com.huaDevelopers.data.Entities.User;
-import com.huaDevelopers.data.Services.DepartmentService;
-import com.huaDevelopers.data.Services.RoleService;
-import com.huaDevelopers.data.Services.UserService;
-import com.huaDevelopers.data.Validators.UserValidator;
+import com.huaDevelopers.data.Services.Interfaces.DepartmentService;
+import com.huaDevelopers.data.Services.Interfaces.RoleService;
+import com.huaDevelopers.data.Services.Interfaces.UserService;
 
 @Controller
 @RequestMapping("/admin/user")
@@ -63,25 +61,20 @@ public class UserController {
 			model.addAttribute("departments", departments);
 			return "user_add";
 		}
-		if (user.getUserId() == 0) {
-			// new person, add it
+
+		try {
 			user.setAssignedRole(this.roleService.getRoleByID(user.getAssignedRole().getRoleId()));
 			if (user.getWorkingDept() != null)
 				user.setWorkingDept(this.deptService.getDeptByID(user.getWorkingDept().getId()));
 			this.userService.addUser(user);
-		} else {
-			// existing person
-			model.addAttribute("msg", "User Already exists");
+		} catch (ConstraintViolationException e) {
+			System.out.println(e.getConstraintName());
+			model.addAttribute("validationErrors", e.getConstraintName());
+			return "user_add";
 		}
 
 		return "redirect:/admin/user/find";
 	}
-
-	/*
-	 * @ExceptionHandler public String handleUniqueContraintExc(){
-	 * 
-	 * }
-	 */
 
 	// delete a user by his id
 	@RequestMapping(value = "/{userId}/delete")
@@ -121,9 +114,9 @@ public class UserController {
 		return "redirect:/admin/user/find";
 	}
 
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.addValidators(new UserValidator());
-	}
+	/*
+	 * @InitBinder public void initBinder(WebDataBinder binder) {
+	 * binder.addValidators(new UserValidator()); }
+	 */
 
 }

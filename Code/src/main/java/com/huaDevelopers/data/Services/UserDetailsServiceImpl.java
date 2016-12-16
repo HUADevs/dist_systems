@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.huaDevelopers.dao.UserDAO;
+import com.huaDevelopers.dao.Interfaces.UserDAO;
 import com.huaDevelopers.data.Entities.User;
 
 public class UserDetailsServiceImpl implements UserDetailsService {

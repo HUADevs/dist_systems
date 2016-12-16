@@ -2,15 +2,18 @@ package com.huaDevelopers.data.Services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.huaDevelopers.dao.CustomerDAO;
+import com.huaDevelopers.dao.Interfaces.CustomerDAO;
 import com.huaDevelopers.data.Entities.Customer;
+import com.huaDevelopers.data.Services.Interfaces.CustomerService;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
+	@Autowired
 	private CustomerDAO custDAO;
 	
 	public void setCustDAO(CustomerDAO custDAO) {
@@ -32,8 +35,8 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	@Transactional
-	public Customer getCustomerByID(int id) {
-		return this.custDAO.getCustomerByID(id);
+	public Customer getCustomerByID(String personalId) {
+		return this.custDAO.getCustomerByID(personalId);
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -29,8 +30,9 @@ public class Insurance implements Serializable {
 	private int id;
 
 	@NotEmpty
+    @MapsId
 	@OneToOne
-	@JoinColumn(name = "license_plate", nullable = false)
+	@JoinColumn(name = "vehicle_id")
 	private Vehicle licensePlate;
 
 	@NotEmpty

@@ -3,54 +3,24 @@ package com.huaDevelopers.data.Services;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.huaDevelopers.dao.CustomerDAO;
-import com.huaDevelopers.dao.IncDAO;
-import com.huaDevelopers.dao.InsuranceDAO;
-import com.huaDevelopers.dao.VehicleDAO;
+import com.huaDevelopers.dao.Interfaces.InsuranceDAO;
 import com.huaDevelopers.data.Entities.Customer;
-import com.huaDevelopers.data.Entities.History;
 import com.huaDevelopers.data.Entities.Insurance;
 import com.huaDevelopers.data.Entities.Vehicle;
+import com.huaDevelopers.data.Services.Interfaces.InsuranceService;
 
 @Service
 public class InsurServiceImpl implements InsuranceService {
 
+	@Autowired
 	private InsuranceDAO insurDAO;
-
-	private CustomerDAO custDAO;
-
-	private VehicleDAO vDAO;
-
-	private IncDAO incDAO;
-
-	private SessionFactory externalFactory;
-
-	public void setExternalFactory(SessionFactory externalFactory) {
-		this.externalFactory = externalFactory;
-	}
 
 	public void setInsurDAO(InsuranceDAO insurDAO) {
 		this.insurDAO = insurDAO;
-	}
-
-	public void setCustDAO(CustomerDAO custDAO) {
-		this.custDAO = custDAO;
-	}
-
-	public void setvDAO(VehicleDAO vDAO) {
-		this.vDAO = vDAO;
-	}
-
-	public void setIncDAO(IncDAO incDAO) {
-		this.incDAO = incDAO;
 	}
 
 	@Override
@@ -91,7 +61,7 @@ public class InsurServiceImpl implements InsuranceService {
 
 	@Override
 	@Transactional
-	public float countInsCost(Vehicle vehicle, Customer cust) {
+	public float countInsurCost(Vehicle vehicle, Customer cust) {
 		float cost = 0;
 		int cubic = vehicle.getCubic();
 		if (cubic <= 1000)
@@ -102,14 +72,14 @@ public class InsurServiceImpl implements InsuranceService {
 			cost = 350;
 		else
 			cost = 450;
-		float discount = countIncDiscount(cust);
+		float discount = countInsurDiscount(cust);
 		if (discount != 0)
 			return cost * discount;
 		return cost;
 	}
 
 	@Transactional
-	public float countIncDiscount(Customer cust) {
+	public float countInsurDiscount(Customer cust) {
 		float discount = 0;
 		int exp = howManyYears(cust);
 		for (int i = exp; i >= 0; i -= 10) {
@@ -128,41 +98,4 @@ public class InsurServiceImpl implements InsuranceService {
 		return yearNow - initialYear;
 	}
 
-	@SuppressWarnings("unchecked")
-	public Vehicle searchNationalDB(String personalID, String licensePlate) {
-		externalFactory = new Configuration().configure().buildSessionFactory();
-		Session session = externalFactory.openSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			Customer newCustomer = (Customer) session
-					.createQuery("FROM Citizens where personal_id='" + personalID + "'").getSingleResult();
-			Vehicle car = (Vehicle) session.createQuery(
-					"FROM Vehicles where person_id='" + personalID + "'  AND license_plate='" + licensePlate + "'")
-					.getSingleResult();
-			List<History> incs = session.createQuery("FROM HistoryInc where person_id='" + personalID + "'")
-					.getResultList();
-			this.custDAO.addCustomer(newCustomer);
-			this.vDAO.addVehicle(car);
-			List<History> ourIncs = this.incDAO.listAllIncsPerCustomer(personalID);
-			if (ourIncs.isEmpty()) {
-				for (History incedent : incs) {
-					this.incDAO.addIncedent(incedent);
-				}
-			} else {
-				for (History incedent : incs) {
-					this.incDAO.updateIncedent(incedent);
-				}
-			}
-			tx.commit();
-			return car;
-		} catch (HibernateException e) {
-			if (tx != null)
-				tx.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return null;
-	}
 }

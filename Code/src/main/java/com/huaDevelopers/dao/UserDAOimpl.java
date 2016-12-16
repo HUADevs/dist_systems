@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.huaDevelopers.dao.Interfaces.UserDAO;
 import com.huaDevelopers.data.Entities.User;
 
 @Repository
@@ -38,7 +39,7 @@ public class UserDAOimpl implements UserDAO{
 	@Override
 	public User getUserByUsername(String username) {
 		Session session = this.sessionFactory.getCurrentSession();
-		User usr = session.load(User.class, new String(username));
+		User usr = (User)session.createQuery("from User where username='"+username+"'").getSingleResult();
 		logger.info("User successfully selected from db" + usr.toString());
 		return usr;
 	}

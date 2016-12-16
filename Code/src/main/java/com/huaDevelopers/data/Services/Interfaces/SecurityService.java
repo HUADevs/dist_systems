@@ -1,4 +1,4 @@
-package com.huaDevelopers.data.Services;
+package com.huaDevelopers.data.Services.Interfaces;
 
 public interface SecurityService {
 

@@ -1,10 +1,10 @@
-package com.huaDevelopers.data.Services;
+package com.huaDevelopers.dao.Interfaces;
 
 import java.util.List;
 
 import com.huaDevelopers.data.Entities.DamageForm;
 
-public interface DamFormService {
+public interface DamFormDAO {
 
 	public void addDamageForm(DamageForm dForm);
 
