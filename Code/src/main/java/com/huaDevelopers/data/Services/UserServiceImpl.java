@@ -11,22 +11,22 @@ import com.huaDevelopers.data.Entities.User;
 import com.huaDevelopers.data.Services.Interfaces.UserService;
 
 @Service
-public class UserServiceImpl implements UserService{
-	
+public class UserServiceImpl implements UserService {
+
 	@Autowired
 	private UserDAO usrDAO;
-	
-//	@Autowired
-//    private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
+	// @Autowired
+	// private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 	public void setUsrDAO(UserDAO usrDAO) {
 		this.usrDAO = usrDAO;
 	}
-	
+
 	@Override
 	@Transactional
 	public void addUser(User usr) {
-//		usr.setPassword(bCryptPasswordEncoder.encode(usr.getPassword()));
+		// usr.setPassword(bCryptPasswordEncoder.encode(usr.getPassword()));
 		this.usrDAO.addUser(usr);
 	}
 
@@ -40,6 +40,12 @@ public class UserServiceImpl implements UserService{
 	@Transactional
 	public User getUserByUsername(String username) {
 		return this.usrDAO.getUserByUsername(username);
+	}
+
+	@Override
+	@Transactional
+	public User getUserByEmail(String email) {
+		return this.usrDAO.getUserByEmail(email);
 	}
 
 	@Override
