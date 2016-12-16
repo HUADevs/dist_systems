@@ -99,7 +99,9 @@ public class RoleController {
 	    public String editRole(@PathVariable("roleId") int roleId, Model model) {
 	       	List<Services> listservices = this.s_service.listAllServices();
 	       	model.addAttribute("listservices", listservices);
-	        model.addAttribute("role", 	this.r_service.getRoleByID(roleId));
+	       	Role role = new Role();
+	       	role.setRoleId(roleId);
+	        model.addAttribute("role",role);
 	        return "role_edit";
 	    }
 	 
@@ -110,7 +112,7 @@ public class RoleController {
 	        if (result.hasErrors()) {
 	            return "role_edit";
 	        }
-	        
+	     
 	        this.r_service.updateRole(role);
 	        
 	        return "redirect:/admin/role/view";
