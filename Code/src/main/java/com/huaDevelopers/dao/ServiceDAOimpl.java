@@ -72,9 +72,8 @@ public class ServiceDAOimpl implements ServiceDAO{
 	}
 
 	@Override
-	public void setRoles() {
-		// TODO Auto-generated method stub
-		
+	public void setRoles(Set<Role> roles) {
+		//todo
 	}
 
 }

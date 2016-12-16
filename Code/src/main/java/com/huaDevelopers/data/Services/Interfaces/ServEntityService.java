@@ -20,6 +20,6 @@ public interface ServEntityService {
 
 	public Set<Role> getRoles();
 
-	public void setRoles();
+	public void setRoles(Set<Role> roles);
 
 }
