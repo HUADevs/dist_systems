@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.huaDevelopers.data.Entities.Customer;
-import com.huaDevelopers.data.Services.CustomerService;
+import com.huaDevelopers.data.Services.Interfaces.CustomerService;
 
 @Controller
 @RequestMapping("/cms/customer")

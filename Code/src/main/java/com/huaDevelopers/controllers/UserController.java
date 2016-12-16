@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.huaDevelopers.data.Entities.Department;
 import com.huaDevelopers.data.Entities.Role;
 import com.huaDevelopers.data.Entities.User;
-import com.huaDevelopers.data.Services.DepartmentService;
-import com.huaDevelopers.data.Services.RoleService;
-import com.huaDevelopers.data.Services.UserService;
+import com.huaDevelopers.data.Services.Interfaces.DepartmentService;
+import com.huaDevelopers.data.Services.Interfaces.RoleService;
+import com.huaDevelopers.data.Services.Interfaces.UserService;
 
 @Controller
 @RequestMapping("/admin/user")

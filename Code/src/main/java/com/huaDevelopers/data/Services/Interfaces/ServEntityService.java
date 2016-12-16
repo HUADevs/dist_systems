@@ -1,4 +1,4 @@
-package com.huaDevelopers.data.Services;
+package com.huaDevelopers.data.Services.Interfaces;
 
 import java.util.List;
 import java.util.Set;

@@ -4,18 +4,19 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.huaDevelopers.dao.RoleDao;
+import com.huaDevelopers.dao.Interfaces.RoleDao;
 import com.huaDevelopers.data.Entities.Role;
 import com.huaDevelopers.data.Entities.Services;
+import com.huaDevelopers.data.Services.Interfaces.RoleService;
 
 @Service
 public class RoleServiceImpl implements RoleService {
 
+	@Autowired
 	private RoleDao roleDAO;
-	
-	
 	
 	public void setRoleDAO(RoleDao roleDAO) {
 		this.roleDAO = roleDAO;

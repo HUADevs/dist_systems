@@ -1,7 +1,7 @@
 package com.huaDevelopers.data.Entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -42,7 +43,7 @@ public class Vehicle implements Serializable {
 
 	@NotEmpty
 	@Column(name = "release_date", nullable = false)
-	private Date releaseDate;
+	private LocalDateTime releaseDate;
 
 	@NotEmpty
 	@Column(name = "cubic", nullable = false)
@@ -60,6 +61,7 @@ public class Vehicle implements Serializable {
 	private Set<DamageForm> dmgForms;
 
 	@OneToOne
+	@PrimaryKeyJoinColumn
 	private Insurance insurance;
 
 	public Vehicle() {
@@ -90,11 +92,11 @@ public class Vehicle implements Serializable {
 		this.customerPersonID = customerPersonID;
 	}
 
-	public Date getReleaseDate() {
+	public LocalDateTime getReleaseDate() {
 		return releaseDate;
 	}
 
-	public void setReleaseDate(Date releaseDate) {
+	public void setReleaseDate(LocalDateTime releaseDate) {
 		this.releaseDate = releaseDate;
 	}
 
@@ -136,6 +138,13 @@ public class Vehicle implements Serializable {
 
 	public void setInsurance(Insurance insurance) {
 		this.insurance = insurance;
+	}
+
+	@Override
+	public String toString() {
+		return "Vehicle [id=" + id + ", licensePlate=" + licensePlate + ", customerPersonID=" + customerPersonID
+				+ ", releaseDate=" + releaseDate + ", cubic=" + cubic + ", type=" + type + ", color=" + color
+				+ ", dmgForms=" + dmgForms + ", insurance=" + insurance + "]";
 	}
 
 }

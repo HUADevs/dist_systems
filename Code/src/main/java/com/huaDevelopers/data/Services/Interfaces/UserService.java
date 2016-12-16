@@ -1,11 +1,11 @@
-package com.huaDevelopers.dao;
+package com.huaDevelopers.data.Services.Interfaces;
 
 import java.util.List;
 
 import com.huaDevelopers.data.Entities.User;
 
-public interface UserDAO {
-
+public interface UserService {
+	
 	public void addUser (User usr);
 
 	public void updateUser (User usr);
@@ -17,5 +17,4 @@ public interface UserDAO {
 	public List<User> listAllUser();
 
 	public void removeUser(String username);
-
 }

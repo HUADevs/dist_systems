@@ -1,7 +1,7 @@
 package com.huaDevelopers.data.Entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -46,7 +46,7 @@ public class Customer implements Serializable {
 
 	@NotEmpty
 	@Column(name = "license_date", nullable = false)
-	private Date licenseAqquired;
+	private LocalDateTime licenseAqquired;
 
 	@OneToMany(mappedBy = "personalId")
 	private Set<History> history;
@@ -98,11 +98,11 @@ public class Customer implements Serializable {
 		this.trn = trn;
 	}
 
-	public Date getLicenseAqquired() {
+	public LocalDateTime getLicenseAqquired() {
 		return licenseAqquired;
-	}
+}
 
-	public void setLicenseAqquired(Date licenseAqquired) {
+	public void setLicenseAqquired(LocalDateTime licenseAqquired) {
 		this.licenseAqquired = licenseAqquired;
 	}
 

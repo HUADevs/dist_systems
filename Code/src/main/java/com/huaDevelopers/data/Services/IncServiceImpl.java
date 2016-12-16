@@ -2,15 +2,18 @@ package com.huaDevelopers.data.Services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.huaDevelopers.dao.IncDAO;
+import com.huaDevelopers.dao.Interfaces.IncDAO;
 import com.huaDevelopers.data.Entities.History;
+import com.huaDevelopers.data.Services.Interfaces.IncService;
 
 @Service
 public class IncServiceImpl implements IncService{
 
+	@Autowired
 	private IncDAO incDAO;
 
 	public void setIncDAO(IncDAO incDAO) {

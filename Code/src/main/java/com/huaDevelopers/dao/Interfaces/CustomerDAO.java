@@ -1,4 +1,4 @@
-package com.huaDevelopers.dao;
+package com.huaDevelopers.dao.Interfaces;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public interface CustomerDAO {
 
 	public void updateCustomer(Customer cust);
 
-	public Customer getCustomerByID(int id);
+	public Customer getCustomerByID(String id);
 
 	public List<Customer> listAllCustomers();
 

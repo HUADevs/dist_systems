@@ -1,8 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-	<import resource="appconfig-security.xml"/>
+	<import resource="appconfig-security.xml" />
 
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>WEB-INF/database.properties</value>
+		</property>
+	</bean>
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<!-- Hibernate 5 SessionFactory Bean definition -->
+	<bean id="hibernate5AnnotatedSessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>com.huaDevelopers.data.Entities.Customer</value>
+				<value>com.huaDevelopers.data.Entities.User</value>
+				<value>com.huaDevelopers.data.Entities.Vehicle</value>
+				<value>com.huaDevelopers.data.Entities.Services</value>
+				<value>com.huaDevelopers.data.Entities.Role</value>
+				<value>com.huaDevelopers.data.Entities.DamageForm</value>
+				<value>com.huaDevelopers.data.Entities.History</value>
+				<value>com.huaDevelopers.data.Entities.Insurance</value>
+				<value>com.huaDevelopers.data.Entities.Department</value>
+				<value>com.huaDevelopers.data.Entities.External.ExternalCitizen
+				</value>
+				<value>com.huaDevelopers.data.Entities.External.ExternalVehicle
+				</value>
+				<value>com.huaDevelopers.data.Entities.External.ExternalHistory
+				</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="custDAO" class="com.huaDevelopers.dao.CustDAOImpl">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean>
+	<bean id="customerService" class="com.huaDevelopers.data.Services.CustomerServiceImpl">
+		<property name="custDAO" ref="custDAO" />
+	</bean>
+
+	<bean id="usrDAO" class="com.huaDevelopers.dao.UserDAOimpl">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean>
+	<bean id="userService" class="com.huaDevelopers.data.Services.UserServiceImpl">
+		<property name="usrDAO" ref="usrDAO" />
+	</bean>
+
+	<bean id="servDAO" class="com.huaDevelopers.dao.ServiceDAOimpl">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean>
+	<bean id="ServEntityService" class="com.huaDevelopers.data.Services.ServEntityServiceImpl">
+		<property name="servDAO" ref="servDAO" />
+	</bean>
+
+	<bean id="veDAO" class="com.huaDevelopers.dao.VehicleDAOimpl">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean>
+	<bean id="vService" class="com.huaDevelopers.data.Services.VehicleServiceImpl">
+		<property name="veDAO" ref="veDAO" />
+	</bean>
+
+	<bean id="formDAO" class="com.huaDevelopers.dao.DFormDAOImpl">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean>
+	<bean id="formService" class="com.huaDevelopers.data.Services.DFormServiceImpl">
+		<property name="formDAO" ref="formDAO" />
+	</bean>
+
+	<bean id="incDAO" class="com.huaDevelopers.dao.IncDAOImpl">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean>
+	<bean id="incService" class="com.huaDevelopers.data.Services.IncServiceImpl">
+		<property name="incDAO" ref="incDAO" />
+	</bean>
+
+	<bean id="deptDAO" class="com.huaDevelopers.dao.DeptDAOImpl">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean>
+	<bean id="deptService" class="com.huaDevelopers.data.Services.DeptServiceImpl">
+		<property name="deptDAO" ref="deptDAO" />
+	</bean>
+
+	<bean id="roleDAO" class="com.huaDevelopers.dao.RoleDAOImpl">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean>
+	<bean id="roleService" class="com.huaDevelopers.data.Services.RoleServiceImpl">
+		<property name="roleDAO" ref="roleDAO" />
+	</bean>
+
+	<bean id="insurDAO" class="com.huaDevelopers.dao.InsurDAOImpl">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean>
+	<bean id="insuranceService" class="com.huaDevelopers.data.Services.InsurServiceImpl">
+		<property name="insurDAO" ref="insurDAO" />
+	</bean>
+
+	<bean id="externalDAO" class="com.huaDevelopers.dao.ExternalDAOImpl">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean>
+	<bean id="externalService" class="com.huaDevelopers.data.Services.ExternalServiceImpl">
+		<property name="externalDAO" ref="externalDAO" />
+	</bean>
+
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean>
+
+
+	<!-- register all beans except controllers -->
+	<context:component-scan base-package="com.huaDevelopers">
+		<context:exclude-filter expression="org.springframework.stereotype.Controller"
+			type="annotation" />
+	</context:component-scan>
 </beans>
