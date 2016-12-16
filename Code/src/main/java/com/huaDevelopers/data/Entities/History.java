@@ -23,7 +23,7 @@ public class History implements Serializable {
 	private static final long serialVersionUID = 3510918284566998522L;
 
 	@Id
-	@Column(name = "incedent_id")
+	@Column(name = "incident_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int incId;
 

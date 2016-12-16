@@ -1,4 +1,4 @@
-package com.huaDevelopers.dao;
+package com.huaDevelopers.dao.Interfaces;
 
 import java.util.List;
 

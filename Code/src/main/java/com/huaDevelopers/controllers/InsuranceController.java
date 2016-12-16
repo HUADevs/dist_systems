@@ -8,36 +8,43 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.huaDevelopers.data.Entities.Customer;
 import com.huaDevelopers.data.Entities.Insurance;
 import com.huaDevelopers.data.Entities.Vehicle;
-import com.huaDevelopers.data.Services.InsuranceService;
+import com.huaDevelopers.data.Services.Interfaces.CustomerService;
+import com.huaDevelopers.data.Services.Interfaces.ExternalService;
+import com.huaDevelopers.data.Services.Interfaces.InsuranceService;
+import com.huaDevelopers.data.Services.Interfaces.VehicleService;
 
 @Controller
 @RequestMapping("/cms/insurance")
 public class InsuranceController {
 
+	@Autowired
 	private InsuranceService insuranceService;
 
 	@Autowired
-	@Qualifier(value = "insuranceService")
-	public void setInsuranceService(InsuranceService insuranceService) {
-		this.insuranceService = insuranceService;
-	}
+	private VehicleService vService;
+	
+	@Autowired
+	private ExternalService externalService;
+	
+	@Autowired
+	private CustomerService customerService;
 
-	@RequestMapping(value="/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/findVehicle", method = RequestMethod.GET)
 	public String addCustomer(Model model) {
-		model.addAttribute("customer", new Customer());
 		model.addAttribute("vehicle", new Vehicle());
 		return "cust_add";
 	}
-	
-	@RequestMapping(value="/add", method = RequestMethod.POST)
-	public String saveCustomer(Model model) {
+
+	@RequestMapping(value = "/findVehicle", method = RequestMethod.POST)
+	public String saveCustomer(Model model, @ModelAttribute("vehicle") Vehicle vehicle) {
 		
-		return "cust_add";
+		Vehicle v = this.externalService.searchNationalDB(vehicle.getLicensePlate());
+		model.addAttribute("vehicle", v);
+		return "insur_add";
 	}
-	
+
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String addInsurance(Model model) {
 		model.addAttribute("insurance", new Insurance());

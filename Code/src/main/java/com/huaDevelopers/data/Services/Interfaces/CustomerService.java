@@ -1,4 +1,4 @@
-package com.huaDevelopers.data.Services;
+package com.huaDevelopers.data.Services.Interfaces;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public interface CustomerService {
 
 	public void updateCustomer(Customer cust);
 
-	public Customer getCustomerByID(int id);
+	public Customer getCustomerByID(String personalId);
 
 	public List<Customer> listAllCustomers();
 

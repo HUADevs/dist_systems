@@ -2,15 +2,18 @@ package com.huaDevelopers.data.Services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.huaDevelopers.dao.DepartmentDAO;
+import com.huaDevelopers.dao.Interfaces.DepartmentDAO;
 import com.huaDevelopers.data.Entities.Department;
+import com.huaDevelopers.data.Services.Interfaces.DepartmentService;
 
 @Service
 public class DeptServiceImpl implements DepartmentService{
 
+	@Autowired
 	private DepartmentDAO deptDAO;
 	
 

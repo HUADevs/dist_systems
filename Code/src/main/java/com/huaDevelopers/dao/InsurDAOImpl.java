@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.huaDevelopers.dao.Interfaces.InsuranceDAO;
 import com.huaDevelopers.data.Entities.Insurance;
 
 @Repository
@@ -39,7 +40,7 @@ public class InsurDAOImpl implements InsuranceDAO {
 	@Override
 	public Insurance getInsuranceByLicensePlate(String licensePlate) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Insurance insurance = session.load(Insurance.class, licensePlate);
+		Insurance insurance = (Insurance)session.createQuery("from Insurance where vehicle_id='"+licensePlate+"'").getSingleResult();
 		logger.info("Insurance successfully selected from db" + insurance.toString());
 		return insurance;
 	}
