@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>All Roles</title>
+<title>All Services</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -23,27 +23,27 @@
 		<div class="panel panel-default">
 			<!-- Default panel contents -->
 			<div class="panel-heading">
-				<span class="lead">List of Roles</span>
+				<span class="lead">List of Services</span>
 			</div>
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>Role ID</th>
-						<th>Role Name</th>
+						<th>Service ID</th>
+						<th>Service Name</th>
 						<th width="100"></th>
 						<th width="100"></th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${roles}" var="role">
+					<c:forEach items="${services}" var="serv">
 						<tr>
-							<td>${role.roleId}</td>
-							<td>${role.roleName}</td>
+							<td>${serv.serviceId}</td>
+							<td>${serv.serviceName}</td>
 							<td><a
-								href="<c:url value='/admin/role/edit/${role.roleId}' />"
+								href="<c:url value='/admin/service/edit/${serv.serviceId}' />"
 								class="btn btn-success">edit</a></td>
 							<td><a
-								href="<c:url value='/admin/role/delete/${role.roleId}' />"
+								href="<c:url value='/admin/service/delete/${serv.serviceId}' />"
 								class="btn btn-danger">delete</a></td>
 						</tr>
 					</c:forEach>

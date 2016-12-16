@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Edit Role</title>
+<title>Add new Service</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -20,26 +20,20 @@
 	<jsp:include page="../views/fragments/admin-header.jsp"></jsp:include>
 <div class="container">
 		<div class="row">
-			<h1 class="text-center">Edit Role</h1>
+			<h1 class="text-center">Edit Service</h1>
 		</div>
 		<div class="row">
-			<spring:url value="/admin/role/edit/${role.roleId}" var="formUrl" />
-			<form:form modelAttribute="role" action="${formUrl }" method="post"
+			<spring:url value="/admin/service/edit/${service.serviceId}" var="formUrl" />
+			<form:form modelAttribute="service" action="${formUrl }" method="post"
 				cssClass="col-md-8 col-md-offset-2">
 
 				<div class="form-group">
-					<label for="role-roleName">Role Name</label>
-					<form:errors path="roleName"/>
-					<form:input id="role-roleName" cssClass="form-control"
-						path="roleName" />
+					<label for="service-ServiceName">Service Name</label>
+					<form:errors path="serviceName"/>
+					<form:input id="service-ServiceName" cssClass="form-control"
+						path="serviceName" />
 				</div>
-				
-				<div class="form-group">
-					<label for="role-services">Select supported Services</label> 
-					<form:checkboxes id="role-services" path="services" items="${listservices}" itemValue="serviceName" itemLabel="serviceName"/>
-				</div>
-				
-				
+	
 				<button type="submit" class="btn btn-default">Submit</button>
 			</form:form>
 

@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.huaDevelopers.data.Entities.Role;
 import com.huaDevelopers.data.Entities.Services;
-import com.huaDevelopers.data.Services.RoleService;
-import com.huaDevelopers.data.Services.ServEntityService;
+import com.huaDevelopers.data.Services.Interfaces.RoleService;
+import com.huaDevelopers.data.Services.Interfaces.ServEntityService;
 
 @Controller
 @RequestMapping("/admin/role")
@@ -95,19 +95,20 @@ public class RoleController {
 		return "role_all";
 	}
 	
-	 @RequestMapping(value = { "/edit-role-{roleId}" }, method = RequestMethod.GET)
-	    public String editRole(@PathVariable int roleId, Model model) {
-	        Role role = this.r_service.getRoleByID(roleId);
-	        model.addAttribute("role", role);
-	        return "role_add";
+	 @RequestMapping(value = { "/edit/{roleId}" }, method = RequestMethod.GET)
+	    public String editRole(@PathVariable("roleId") int roleId, Model model) {
+	       	List<Services> listservices = this.s_service.listAllServices();
+	       	model.addAttribute("listservices", listservices);
+	        model.addAttribute("role", 	this.r_service.getRoleByID(roleId));
+	        return "role_edit";
 	    }
 	 
-	 @RequestMapping(value = { "/edit-user-{ssoId}" }, method = RequestMethod.POST)
+	 @RequestMapping(value = { "/edit/{roleId}" }, method = RequestMethod.POST)
 	    public String updateUser(@Valid @ModelAttribute("role") Role role, BindingResult result,
-	            Model model, @PathVariable String ssoId) {
+	            Model model, @PathVariable("roleId") int roleId) {
 	 
 	        if (result.hasErrors()) {
-	            return "role_add";
+	            return "role_edit";
 	        }
 	        
 	        this.r_service.updateRole(role);
@@ -115,7 +116,7 @@ public class RoleController {
 	        return "redirect:/admin/role/view";
 	    }
 	
-	@RequestMapping(value={"/delete-role-{roleId}"}, method= RequestMethod.GET)
+	@RequestMapping(value={"/delete/{roleId}"}, method= RequestMethod.GET)
 	public String deleteRole(@PathVariable int roleId){
 		this.r_service.removeRole(roleId);
 		return "redirect:/admin/role/view";
