@@ -2,6 +2,7 @@ package com.huaDevelopers.data.Services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +12,7 @@ import com.huaDevelopers.data.Entities.User;
 @Service
 public class UserServiceImpl implements UserService{
 	
+	@Autowired
 	private UserDAO usrDAO;
 	
 //	@Autowired
@@ -41,8 +43,8 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	@Transactional
-	public User getUserByEmail(String email) {
-		return this.usrDAO.getUserByEmail(email);
+	public User getUserById(int id) {
+		return this.usrDAO.getUserById(id);
 	}
 
 	@Override
@@ -53,8 +55,8 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	@Transactional
-	public void removeUser(String username) {
-		this.usrDAO.removeUser(username);
+	public void removeUser(int userId) {
+		this.usrDAO.removeUser(userId);
 	}
 
 }

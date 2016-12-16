@@ -28,8 +28,7 @@
 			<tbody>
 				<tr>
 					<th>ID</th>
-					<th>First Name</th>
-					<th>Last Name</th>
+					<th>Name</th>
 					<th>Username</th>
 					<th>Role</th>
 					<th>Department</th>
@@ -39,13 +38,16 @@
 				<c:forEach items="${users}" var="user">
 					<tr>
 						<td>${user.userId}</td>
-						<td>${user.firstName}</td>
-						<td>${user.lastName}</td>
+						<td>${user.firstName} ${user.lastName }</td>
 						<td>${user.userName}</td>
 						<td>${user.assignedRole.roleName}</td>
 						<td>${user.workingDept.depName}</td>
-						<td>editIcon</td>
-						<td>deleteIcon</td>
+						<td><a
+							href="<spring:url 
+							value="/admin/user/${user.userId}/edit"/>">editIcon</a></td>
+						<td><a
+							href="<spring:url 
+							value="/admin/user/${user.userId}/delete"/>">deleteIcon</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

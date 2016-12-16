@@ -29,18 +29,18 @@
 
 	<div class="container">
 		<div class="row">
-			<h1 class="text-center">Add User</h1>
+			<h1 class="text-center">Edit User</h1>
 		</div>
 		<div class="row">
-			<spring:url value="/admin/user/add" var="formUrl" />
+			<spring:url value="/admin/user/${userId}/edit" var="formUrl" />
 			<form:form modelAttribute="user" action="${formUrl }" method="post"
 				cssClass="col-md-8 col-md-offset-2">
-				<div>${msg}</div>
+
 				<div class="form-group">
 					<label for="user-firstName">First Name</label>
 					<form:errors path="firstName" style="color:red"/>
 					<form:input id="user-firstName" cssClass="form-control"
-						path="firstName" />
+						path="firstName"/>
 				</div>
 				<div class="form-group">
 					<label for="user-lastName">Last Name</label>

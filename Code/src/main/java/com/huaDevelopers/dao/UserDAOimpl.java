@@ -44,9 +44,9 @@ public class UserDAOimpl implements UserDAO{
 	}
 
 	@Override
-	public User getUserByEmail(String email) {
+	public User getUserById(int id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		User usr = session.load(User.class, new String(email));
+		User usr = session.load(User.class, new Integer(id));
 		logger.info("User successfully selected from db" + usr.toString());
 		return usr;
 	}
@@ -60,9 +60,9 @@ public class UserDAOimpl implements UserDAO{
 	}
 
 	@Override
-	public void removeUser(String username) {
+	public void removeUser(int userId) {
 		Session session = this.sessionFactory.getCurrentSession();
-		User usr = session.load(User.class, new String(username));
+		User usr = session.load(User.class,new Integer(userId));
 		if (usr != null) {
 			session.delete(usr);
 			logger.info("User has successfully deleted from db" + usr.toString());

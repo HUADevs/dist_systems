@@ -3,8 +3,9 @@ package com.huaDevelopers.data.Services;
 import java.util.List;
 import java.util.Set;
 
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.huaDevelopers.dao.RoleDao;
 import com.huaDevelopers.data.Entities.Role;
@@ -13,6 +14,7 @@ import com.huaDevelopers.data.Entities.Services;
 @Service
 public class RoleServiceImpl implements RoleService {
 
+	@Autowired
 	private RoleDao roleDAO;
 	
 	
