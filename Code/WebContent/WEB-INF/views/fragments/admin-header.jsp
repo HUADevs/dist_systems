@@ -41,7 +41,7 @@
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><i class="glyphicon glyphicon-off"></i><span></span>
+				<li><a href="<spring:url value="/login?logout"></spring:url>"><i class="glyphicon glyphicon-off"></i><span></span>
 						Logout</a></li>
 			</ul>
 		</div>
