@@ -45,7 +45,7 @@ public class User implements Serializable {
 	private String telephone;
 	
 	@ManyToOne
-	@JoinColumn(name="role_id", nullable=false)
+	@JoinColumn(name="role_id")
 	private Role assignedRole;
 	
 	@ManyToOne
