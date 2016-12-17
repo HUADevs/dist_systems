@@ -12,9 +12,12 @@ public interface UserDAO {
 
 	public User getUserByUsername(String username);
 
+	public User getUserByEmail(String email);
+
 	public User getUserById(int id);
 
 	public List<User> listAllUser();
 
 	public void removeUser(int userId);
+
 }
