@@ -1,7 +1,7 @@
 package com.huaDevelopers.data.Entities;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -40,13 +40,11 @@ public class Customer implements Serializable {
 	@Column(name = "personal_id", length = 8, unique = true, nullable = false)
 	private String personalId;
 
-	@NotEmpty
 	@Column(name = "tax_reg_number", unique = true, nullable = false)
 	private int trn; // TAX REGISTRATION NUMBER
 
-	@NotEmpty
 	@Column(name = "license_date", nullable = false)
-	private LocalDateTime licenseAqquired;
+	private LocalDate licenseAqquired;
 
 	@OneToMany(mappedBy = "personalId")
 	private Set<History> history;
@@ -98,11 +96,11 @@ public class Customer implements Serializable {
 		this.trn = trn;
 	}
 
-	public LocalDateTime getLicenseAqquired() {
+	public LocalDate getLicenseAqquired() {
 		return licenseAqquired;
 }
 
-	public void setLicenseAqquired(LocalDateTime licenseAqquired) {
+	public void setLicenseAqquired(LocalDate licenseAqquired) {
 		this.licenseAqquired = licenseAqquired;
 	}
 
@@ -120,6 +118,10 @@ public class Customer implements Serializable {
 
 	public void setVehicles(Set<Vehicle> vehicles) {
 		this.vehicles = vehicles;
+	}
+	
+	public static boolean isEqual(Object obj1, Object obj2) {
+	    return obj1 == obj2 || (obj1 != null && obj1.equals(obj2));
 	}
 
 }

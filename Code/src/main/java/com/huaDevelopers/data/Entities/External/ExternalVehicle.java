@@ -1,7 +1,7 @@
 package com.huaDevelopers.data.Entities.External;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +28,7 @@ public class ExternalVehicle implements Serializable {
 	private ExternalCitizen citizenPersonID;
 
 	@Column(name = "release_date", nullable = false)
-	private LocalDateTime releaseDate;
+	private LocalDate releaseDate;
 
 	@Column(name = "cubic", nullable = false)
 	private int cubic;
@@ -51,7 +51,7 @@ public class ExternalVehicle implements Serializable {
 		return citizenPersonID;
 	}
 
-	public LocalDateTime getReleaseDate() {
+	public LocalDate getReleaseDate() {
 		return releaseDate;
 	}
 

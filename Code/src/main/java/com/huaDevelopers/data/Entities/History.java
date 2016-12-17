@@ -11,8 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 @Entity
 @Table(name = "History")
 public class History implements Serializable {
@@ -27,12 +25,12 @@ public class History implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int incId;
 
-	@NotEmpty
+	
 	@ManyToOne
-	@JoinColumn(name = "personal_id", nullable = false)
+	@JoinColumn(name = "personal_id", nullable = false, referencedColumnName = "personal_id")
 	private Customer personalId;
 
-	@Column(name = "incedent", nullable = true)
+	@Column(name = "incident", nullable = true)
 	private String incident;
 
 	public History() {

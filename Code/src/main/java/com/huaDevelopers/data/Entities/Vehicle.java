@@ -1,7 +1,7 @@
 package com.huaDevelopers.data.Entities;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -36,16 +36,13 @@ public class Vehicle implements Serializable {
 	@Column(name = "license_plate", length = 7, nullable = false)
 	private String licensePlate;
 
-	@NotEmpty
 	@ManyToOne
-	@JoinColumn(name = "person_id", nullable = false)
+	@JoinColumn(name = "person_id", nullable = false, referencedColumnName = "personal_id")
 	private Customer customerPersonID;
 
-	@NotEmpty
 	@Column(name = "release_date", nullable = false)
-	private LocalDateTime releaseDate;
+	private LocalDate releaseDate;
 
-	@NotEmpty
 	@Column(name = "cubic", nullable = false)
 	private int cubic;
 
@@ -92,11 +89,11 @@ public class Vehicle implements Serializable {
 		this.customerPersonID = customerPersonID;
 	}
 
-	public LocalDateTime getReleaseDate() {
+	public LocalDate getReleaseDate() {
 		return releaseDate;
 	}
 
-	public void setReleaseDate(LocalDateTime releaseDate) {
+	public void setReleaseDate(LocalDate releaseDate) {
 		this.releaseDate = releaseDate;
 	}
 

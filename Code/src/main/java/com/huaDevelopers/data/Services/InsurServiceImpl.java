@@ -1,6 +1,6 @@
 package com.huaDevelopers.data.Services;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,9 +91,9 @@ public class InsurServiceImpl implements InsuranceService {
 
 	@Transactional
 	public int howManyYears(Customer cust) {
-		LocalDateTime initialDate = cust.getLicenseAqquired();
+		LocalDate initialDate = cust.getLicenseAqquired();
 		int initialYear = initialDate.getYear();
-		LocalDateTime now = LocalDateTime.now();
+		LocalDate now = LocalDate.now();
 		int yearNow = now.getYear();
 		return yearNow - initialYear;
 	}

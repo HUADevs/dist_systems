@@ -1,20 +1,30 @@
 package com.huaDevelopers.data.Services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.huaDevelopers.dao.Interfaces.CustomerDAO;
+import com.huaDevelopers.dao.Interfaces.ExternalDAO;
 import com.huaDevelopers.dao.Interfaces.IncDAO;
 import com.huaDevelopers.data.Entities.History;
+import com.huaDevelopers.data.Entities.External.ExternalHistory;
 import com.huaDevelopers.data.Services.Interfaces.IncService;
 
 @Service
-public class IncServiceImpl implements IncService{
+public class IncServiceImpl implements IncService {
 
 	@Autowired
 	private IncDAO incDAO;
+
+	@Autowired
+	private ExternalDAO externalDAO;
+
+	@Autowired
+	private CustomerDAO custDAO;
 
 	public void setIncDAO(IncDAO incDAO) {
 		this.incDAO = incDAO;
@@ -22,26 +32,26 @@ public class IncServiceImpl implements IncService{
 
 	@Override
 	@Transactional
-	public void addIncedent(History hr) {
-		this.incDAO.addIncedent(hr);		
+	public void addIncident(History hr) {
+		this.incDAO.addIncident(hr);
 	}
 
 	@Override
 	@Transactional
-	public void updateIncedent(History hr) {
-		this.incDAO.updateIncedent(hr);		
+	public void updateIncident(History hr) {
+		this.incDAO.updateIncident(hr);
 	}
 
 	@Override
 	@Transactional
-	public History getIncedentByID(int id) {
-		return this.incDAO.getIncedentByID(id);
+	public History getIncidentByID(int id) {
+		return this.incDAO.getIncidentByID(id);
 	}
 
 	@Override
 	@Transactional
-	public List<History> listAllIncedents() {
-		return this.incDAO.listAllIncedents();
+	public List<History> listAllIncidents() {
+		return this.incDAO.listAllIncidents();
 	}
 
 	@Override
@@ -52,8 +62,24 @@ public class IncServiceImpl implements IncService{
 
 	@Override
 	@Transactional
-	public void removeIncedent(int id) {
-		this.incDAO.removeIncedent(id);		
+	public void removeIncident(int id) {
+		this.incDAO.removeIncident(id);
+	}
+
+	@Override
+	@Transactional
+	public void refreshCustomerIncidents(String personalId) {
+		List<History> custHistory = this.incDAO.listAllIncsPerCustomer(personalId);
+		for (History incident : custHistory) {
+			this.incDAO.removeIncident(incident.getIncId());
+		}
+		List<ExternalHistory> ext = this.externalDAO.getHistoryList(personalId);
+		Transformers bumblebee = new Transformers();
+		List<History> hList = ext.stream().map(bumblebee.externalHistToMyHist).collect(Collectors.<History>toList());
+		for (History incident : hList) {
+			incident.setPersonalId(this.custDAO.getCustomerByID(incident.getPersonalId().getPersonalId()));
+			this.incDAO.addIncident(incident);
+		}
 	}
 
 }

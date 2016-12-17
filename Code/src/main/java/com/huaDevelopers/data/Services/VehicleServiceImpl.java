@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.huaDevelopers.dao.Interfaces.CustomerDAO;
 import com.huaDevelopers.dao.Interfaces.VehicleDAO;
+import com.huaDevelopers.data.Entities.Customer;
 import com.huaDevelopers.data.Entities.Vehicle;
+import com.huaDevelopers.data.Services.Interfaces.IncService;
 import com.huaDevelopers.data.Services.Interfaces.VehicleService;
 
 @Service
@@ -19,6 +22,12 @@ public class VehicleServiceImpl implements VehicleService {
 	public void setVeDAO(VehicleDAO veDAO) {
 		this.veDAO = veDAO;
 	}
+
+	@Autowired
+	private CustomerDAO custDAO;
+
+	@Autowired
+	private IncService incService;
 
 	@Override
 	@Transactional
@@ -54,6 +63,15 @@ public class VehicleServiceImpl implements VehicleService {
 	@Transactional
 	public void removeVehicle(String lp) {
 		this.veDAO.removeVehicle(lp);
+	}
+
+	@Override
+	@Transactional
+	public Vehicle insertVehicle(Vehicle vehicle, Customer cust) {
+		this.incService.refreshCustomerIncidents(cust.getPersonalId());
+		vehicle.setCustomerPersonID(this.custDAO.getCustomerByID(vehicle.getCustomerPersonID().getPersonalId()));
+		this.veDAO.addVehicle(vehicle);
+		return vehicle;
 	}
 
 }
