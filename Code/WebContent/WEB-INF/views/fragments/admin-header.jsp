@@ -22,7 +22,7 @@
 						Users <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href='<spring:url value="/admin/user/add"></spring:url>'>Add New</a></li>
-						<li><a href='<spring:url value="/admin/user/find"></spring:url>'>View All</a></li>
+						<li><a href='<spring:url value="/admin/user/view"></spring:url>'>View All</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"

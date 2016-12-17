@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Manage Users</title>
+<title>Edit User</title>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -32,7 +32,7 @@
 			<h1 class="text-center">Edit User</h1>
 		</div>
 		<div class="row">
-			<spring:url value="/admin/user/${userId}/edit" var="formUrl" />
+			<spring:url value="/admin/user/edit/${userId}" var="formUrl" />
 			<form:form modelAttribute="user" action="${formUrl }" method="post"
 				cssClass="col-md-8 col-md-offset-2">
 
