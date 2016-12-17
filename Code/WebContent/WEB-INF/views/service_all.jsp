@@ -41,10 +41,10 @@
 							<td>${serv.serviceName}</td>
 							<td><a
 								href="<c:url value='/admin/service/edit/${serv.serviceId}' />"
-								class="btn btn-success">edit</a></td>
+								class="btn btn-success"><span><i class="glyphicon glyphicon-pencil"></i></span> Edit</a></td>
 							<td><a
 								href="<c:url value='/admin/service/delete/${serv.serviceId}' />"
-								class="btn btn-danger">delete</a></td>
+								class="btn btn-danger"><span><i class="glyphicon glyphicon-trash"></i></span> Delete</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

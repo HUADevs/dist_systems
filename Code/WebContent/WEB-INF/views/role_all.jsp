@@ -40,11 +40,11 @@
 							<td>${role.roleId}</td>
 							<td>${role.roleName}</td>
 							<td><a
-								href="<c:url value='/admin/role/edit/${role.roleId}' />"
-								class="btn btn-success">edit</a></td>
+								href="<c:url value='/admin/role/edit/${role.roleId}/${role.roleName}' />"
+								class="btn btn-success"><span><i class="glyphicon glyphicon-pencil"></i></span> Edit</a></td>
 							<td><a
 								href="<c:url value='/admin/role/delete/${role.roleId}' />"
-								class="btn btn-danger">delete</a></td>
+								class="btn btn-danger"><span><i class="glyphicon glyphicon-trash"></i></span> Delete</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
