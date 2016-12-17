@@ -1,7 +1,5 @@
 package com.huaDevelopers.controllers;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.huaDevelopers.data.Entities.Department;
-import com.huaDevelopers.data.Entities.Role;
 import com.huaDevelopers.data.Entities.User;
 import com.huaDevelopers.data.Services.Interfaces.DepartmentService;
 import com.huaDevelopers.data.Services.Interfaces.RoleService;
@@ -32,51 +30,99 @@ public class UserController {
 	@Autowired
 	private DepartmentService deptService;
 
-	@RequestMapping(value = "/find")
+	@RequestMapping(value = "/view")
 	public String find(Model model) {
 		model.addAttribute("users", this.userService.listAllUser());
-		return "users";
+		return "user_all";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addUser(Model model) {
-		List<Role> roles = roleService.listAllRoles();
-		List<Department> departments = deptService.getAllDepts();
-		model.addAttribute("roles", roles);
-		model.addAttribute("departments", departments);
+		model.addAttribute("roles", this.roleService.listAllRoles());
+		model.addAttribute("departments", this.deptService.getAllDepts());
 		model.addAttribute("user", new User());
 		return "user_add";
 	}
 
+	// Form to add new user
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String saveUser(Model model,@Valid @ModelAttribute("user") User user, Errors errors) {
-		if (errors.hasErrors()) {
-			List<Role> roles = roleService.listAllRoles();
-			List<Department> departments = deptService.getAllDepts();
-			model.addAttribute("roles", roles);
-			model.addAttribute("departments", departments);
-			return "user_add";
+	public String saveUser(Model model, @Valid @ModelAttribute("user") User user, Errors errors) {
+		if (!user.getEmailAdress().isEmpty()) {
+			if (this.userService.getUserByEmail(user.getEmailAdress()) != null) {
+				errors.rejectValue("emailAdress", "user.emailAdress", "This email is already in use.");
+				model.addAttribute("roles", this.roleService.listAllRoles());
+				model.addAttribute("departments", this.deptService.getAllDepts());
+				return "user_add";
+			} 
 		}
-		if(user.getUserId() == 0){
-			//new person, add it
+		if (!user.getUserName().isEmpty()) {
+			if (this.userService.getUserByUsername(user.getUserName()) != null) {
+				errors.rejectValue("userName", "user.userName", "This username is already in use.");
+				model.addAttribute("roles", this.roleService.listAllRoles());
+				model.addAttribute("departments", this.deptService.getAllDepts());
+				return "user_add";
+			} 
+		}
+		if (errors.hasErrors()) {
+			model.addAttribute("roles", this.roleService.listAllRoles());
+			model.addAttribute("departments", this.deptService.getAllDepts());
+			return "user_add";
+		} else {
+
+			user.setAssignedRole(this.roleService.getRoleByID(user.getAssignedRole().getRoleId()));
+			if (user.getWorkingDept() != null)
+				user.setWorkingDept(this.deptService.getDeptByID(user.getWorkingDept().getId()));
 			this.userService.addUser(user);
-		}else{
-			//existing person, call update
+		}
+
+		return "redirect:/admin/user/view";
+	}
+
+	// form to edit user by his id
+	@RequestMapping(value = "/edit/{userId}")
+	public String UpdateUserInfo(@PathVariable("userId") int userId, Model model) {
+		model.addAttribute("roles", this.roleService.listAllRoles());
+		model.addAttribute("departments", this.deptService.getAllDepts());
+		model.addAttribute("user", this.userService.getUserById(userId));
+		return "user_edit";
+	}
+
+	@RequestMapping(value = "/edit/{userId}", method = RequestMethod.POST)
+	public String saveEditedUser(Model model, @PathVariable("userId") int userId,
+			@Valid @ModelAttribute("user") User user, Errors errors) {
+		if (this.userService.getUserByEmail(user.getEmailAdress()) != null
+				&& !(this.userService.getUserById(user.getUserId()).getEmailAdress().equals(user.getEmailAdress()))) {
+			errors.rejectValue("emailAdress", "user.emailAdress", "This email is already in use.");
+			model.addAttribute("roles", this.roleService.listAllRoles());
+			model.addAttribute("departments", this.deptService.getAllDepts());
+			return "user_edit";
+		}
+		if (this.userService.getUserByUsername(user.getUserName()) != null
+				&& !(this.userService.getUserById(user.getUserId()).getUserName().equals(user.getUserName()))) {
+			errors.rejectValue("userName", "user.userName", "This username is already in use.");
+			model.addAttribute("roles", this.roleService.listAllRoles());
+			model.addAttribute("departments", this.deptService.getAllDepts());
+			return "user_edit";
+		}
+		if (errors.hasErrors()) {
+			model.addAttribute("roles", this.roleService.listAllRoles());
+			model.addAttribute("departments", this.deptService.getAllDepts());
+			return "user_edit";
+		} else {
+			// set existing role and department from the database
+			user.setAssignedRole(this.roleService.getRoleByID(user.getAssignedRole().getRoleId()));
+			if (user.getWorkingDept() != null)
+				user.setWorkingDept(this.deptService.getDeptByID(user.getWorkingDept().getId()));
 			this.userService.updateUser(user);
 		}
-
-		return "redirect:/admin/user/find";
+		return "redirect:/admin/user/view";
 	}
 
-	public void DeleteUser() {
-		// TODO - implement UserController.DeleteUser
-		throw new UnsupportedOperationException();
-	}
-
-	@RequestMapping(value = "/{UserName}/edit")
-	public void UpdateUserInfo() {
-		// TODO - implement UserController.UpdateUserInfo
-		throw new UnsupportedOperationException();
+	// delete a user by his id
+	@RequestMapping(value = "/delete/{userId}")
+	public String DeleteUser(@PathVariable("userId") int userId, Model model, RedirectAttributes redirectAttributes) {
+		this.userService.removeUser(userId);
+		return "redirect:/admin/user/view";
 	}
 
 }

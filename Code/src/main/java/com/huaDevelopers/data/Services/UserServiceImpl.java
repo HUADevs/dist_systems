@@ -3,6 +3,7 @@ package com.huaDevelopers.data.Services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,22 +12,22 @@ import com.huaDevelopers.data.Entities.User;
 import com.huaDevelopers.data.Services.Interfaces.UserService;
 
 @Service
-public class UserServiceImpl implements UserService{
-	
+public class UserServiceImpl implements UserService {
+
 	@Autowired
 	private UserDAO usrDAO;
-	
-//	@Autowired
-//    private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 	public void setUsrDAO(UserDAO usrDAO) {
 		this.usrDAO = usrDAO;
 	}
-	
+
 	@Override
 	@Transactional
 	public void addUser(User usr) {
-//		usr.setPassword(bCryptPasswordEncoder.encode(usr.getPassword()));
+		usr.setPassword(bCryptPasswordEncoder.encode(usr.getPassword()));
 		this.usrDAO.addUser(usr);
 	}
 
@@ -50,14 +51,20 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	@Transactional
+	public User getUserById(int id) {
+		return this.usrDAO.getUserById(id);
+	}
+
+	@Override
+	@Transactional
 	public List<User> listAllUser() {
 		return this.usrDAO.listAllUser();
 	}
 
 	@Override
 	@Transactional
-	public void removeUser(String username) {
-		this.usrDAO.removeUser(username);
+	public void removeUser(int userId) {
+		this.usrDAO.removeUser(userId);
 	}
 
 }

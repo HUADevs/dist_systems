@@ -21,27 +21,27 @@
 					aria-expanded="false"><i class="glyphicon glyphicon-user"></i><span></span>
 						Users <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Add New</a></li>
-						<li><a href="#">View All</a></li>
+						<li><a href='<spring:url value="/admin/user/add"></spring:url>'>Add New</a></li>
+						<li><a href='<spring:url value="/admin/user/view"></spring:url>'>View All</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false">Roles <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Add New</a></li>
-						<li><a href="#">View All</a></li>
+						<li><a href="<spring:url value="/admin/role/add"></spring:url>">Add New</a></li>
+						<li><a href="<spring:url value="/admin/role/view"></spring:url>">View All</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false"><i class="glyphicon glyphicon-cog"></i><span></span>
 						Services <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Add New</a></li>
-						<li><a href="#">View All</a></li>
+						<li><a href="<spring:url value="/admin/service/add"></spring:url>">Add New</a></li>
+						<li><a href="<spring:url value="/admin/service/view"></spring:url>">View All</a></li>
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><i class="glyphicon glyphicon-off"></i><span></span>
+				<li><a href="<spring:url value="/login?logout"></spring:url>"><i class="glyphicon glyphicon-off"></i><span></span>
 						Logout</a></li>
 			</ul>
 		</div>

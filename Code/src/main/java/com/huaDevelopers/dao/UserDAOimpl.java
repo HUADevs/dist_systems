@@ -12,7 +12,7 @@ import com.huaDevelopers.dao.Interfaces.UserDAO;
 import com.huaDevelopers.data.Entities.User;
 
 @Repository
-public class UserDAOimpl implements UserDAO{
+public class UserDAOimpl implements UserDAO {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserDAOimpl.class);
 
@@ -26,28 +26,46 @@ public class UserDAOimpl implements UserDAO{
 	public void addUser(User usr) {
 		Session session = this.sessionFactory.getCurrentSession();
 		session.persist(usr);
-		logger.info("User successfully inserted in database!!!" + usr.toString());		
+		logger.info("User successfully inserted in database!!!" + usr.toString());
 	}
 
 	@Override
 	public void updateUser(User usr) {
 		Session session = this.sessionFactory.getCurrentSession();
 		session.update(usr);
-		logger.info("User successfully updated in database!!!" + usr.toString());		
+		logger.info("User successfully updated in database!!!" + usr.toString());
 	}
 
 	@Override
-	public User getUserByUsername(String username) {
+	public User getUserByUsername(String userName) {
 		Session session = this.sessionFactory.getCurrentSession();
-		User usr = (User)session.createQuery("from User where username='"+username+"'").getSingleResult();
+		User usr;
+		try {
+			usr = (User) session.createQuery("from User where username='" + userName + "'").getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
 		logger.info("User successfully selected from db" + usr.toString());
 		return usr;
 	}
 
 	@Override
-	public User getUserByEmail(String email) {
+	public User getUserByEmail(String emailAdress) {
 		Session session = this.sessionFactory.getCurrentSession();
-		User usr = (User)session.createQuery("from User where email='"+email+"'").getSingleResult();
+		User usr;
+		try {
+			usr = (User) session.createQuery("from User where email='" + emailAdress + "'").getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
+		logger.info("User successfully selected  by email from db" + usr.toString());
+		return usr;
+	}
+
+	@Override
+	public User getUserById(int id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		User usr = session.load(User.class, new Integer(id));
 		logger.info("User successfully selected from db" + usr.toString());
 		return usr;
 	}
@@ -61,13 +79,14 @@ public class UserDAOimpl implements UserDAO{
 	}
 
 	@Override
-	public void removeUser(String username) {
+	public void removeUser(int userId) {
 		Session session = this.sessionFactory.getCurrentSession();
-		User usr = (User)session.createQuery("from User where username='"+username+"'").getSingleResult();
+		User usr = session.load(User.class, new Integer(userId));
 		if (usr != null) {
 			session.delete(usr);
 			logger.info("User has successfully deleted from db" + usr.toString());
-		} else logger.info("Something went completely wrong");		
+		} else
+			logger.info("Something went completely wrong");
 	}
 
 }
