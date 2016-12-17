@@ -2,16 +2,21 @@ package com.huaDevelopers.controllers;
 
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+
+	@Autowired
+	ServletContext context;
 
 	private static final Logger logger = LoggerFactory.getLogger(CustomAuthenticationSuccessHandler.class);
 
@@ -22,11 +27,11 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 		logger.info("Hit the AuthSuccessHandler");
 		String auths = authentication.getAuthorities().toString();
 		if (auths.contains("Admin")) {
-			response.sendRedirect(response.encodeURL("/admin"));
+			response.sendRedirect(response.encodeURL(context.getContextPath()+"/admin"));
 		} else if (auths.contains("User")) {
-			response.sendRedirect("/");
+			response.sendRedirect(context.getContextPath());
 		} else {
-			response.sendRedirect("/cms");
+			response.sendRedirect(context.getContextPath()+"/cms");
 		}
 
 	}
