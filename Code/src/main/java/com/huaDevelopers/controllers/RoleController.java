@@ -95,11 +95,14 @@ public class RoleController {
 		return "role_all";
 	}
 	
-	 @RequestMapping(value = { "/edit/{roleId}" }, method = RequestMethod.GET)
-	    public String editRole(@PathVariable("roleId") int roleId, Model model) {
+	 @RequestMapping(value = { "/edit/{roleId}/{roleName}" }, method = RequestMethod.GET)
+	    public String editRole(@PathVariable("roleId") int roleId,@PathVariable("roleName") String roleName, Model model) {
 	       	List<Services> listservices = this.s_service.listAllServices();
 	       	model.addAttribute("listservices", listservices);
-	        model.addAttribute("role", 	this.r_service.getRoleByID(roleId));
+	       	Role role = new Role();
+	       	role.setRoleId(roleId);
+	       	role.setRoleName(roleName);
+	        model.addAttribute("role",role);
 	        return "role_edit";
 	    }
 	 
@@ -110,7 +113,7 @@ public class RoleController {
 	        if (result.hasErrors()) {
 	            return "role_edit";
 	        }
-	        
+	     
 	        this.r_service.updateRole(role);
 	        
 	        return "redirect:/admin/role/view";
