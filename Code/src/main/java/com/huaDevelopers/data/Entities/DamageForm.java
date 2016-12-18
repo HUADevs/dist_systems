@@ -27,7 +27,6 @@ public class DamageForm implements Serializable {
 	@Column(name = "id")
 	private int id;
 
-	@NotEmpty
 	@ManyToOne
 	@JoinColumn(name = "license_plate", unique=true, nullable=false)
 	private Vehicle licensePlate;
@@ -36,11 +35,9 @@ public class DamageForm implements Serializable {
 	@Column(name = "description", nullable=false)
 	private String damageDescription;
 
-	@NotEmpty
 	@Column(name = "photo", nullable=false)
 	private byte[] damagePhotoShoots;
 
-	@NotEmpty
 	@Column(name = "cost", nullable=false)
 	private float damageCost;
 

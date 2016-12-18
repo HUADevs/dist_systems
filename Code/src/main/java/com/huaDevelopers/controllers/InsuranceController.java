@@ -1,10 +1,11 @@
 package com.huaDevelopers.controllers;
 
-import java.util.List;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,11 +39,14 @@ public class InsuranceController {
 	@RequestMapping(value = "/findVehicle", method = RequestMethod.GET)
 	public String addCustomer(Model model) {
 		model.addAttribute("vehicle", new Vehicle());
-		return "cust_add";
+		return "vehicle_add";
 	}
 
 	@RequestMapping(value = "/findVehicle", method = RequestMethod.POST)
-	public String saveCustomer(Model model, @ModelAttribute("vehicle") Vehicle vehicle) {
+	public String saveCustomer(Model model, @Valid @ModelAttribute("vehicle") Vehicle vehicle, Errors errors) {
+		if (errors.hasErrors()) {
+			return "vehicle_add";
+		}
 		Transformers megatron = new Transformers();
 		vehicle = megatron.externalVToMyV.apply(this.externalService.getVehicle(vehicle.getLicensePlate()));
 		Customer cust = this.customerService.getCustomerByID(vehicle.getCustomerPersonID().getPersonalId());
@@ -66,14 +70,12 @@ public class InsuranceController {
 		return "insur_add";
 	}
 
-	/*
-	 * @RequestMapping(value = "/review", method = RequestMethod.POST) public
-	 * String saveInsurance(@ModelAttribute("insurance") Insurance insur) { if
-	 * (insur.getId() == 0) { this.insuranceService.addInsurance(insur); } else
-	 * { return "template"; }
-	 * 
-	 * return "test";
-	 * 
-	 * }
-	 */
+	@RequestMapping(value = "/review", method = RequestMethod.POST)
+	public String saveInsurance(@ModelAttribute("insurance") Insurance insur) {
+		this.insuranceService.addInsurance(insur);
+
+		return "test";
+
+	}
+
 }

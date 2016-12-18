@@ -32,7 +32,7 @@ public class Vehicle implements Serializable {
 	@Column(name = "vehicle_id")
 	private int id;
 
-	@NotEmpty
+	@NotEmpty(message="***You must provide a license plate***")
 	@Column(name = "license_plate", length = 7, nullable = false)
 	private String licensePlate;
 
