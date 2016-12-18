@@ -29,7 +29,7 @@
 
 				<div class="form-group">
 					<label for="service-ServiceName">Service Name</label>
-					<form:errors path="serviceName"/>
+					<form:errors path="serviceName" style="color:red"/>
 					<form:input id="service-ServiceName" cssClass="form-control"
 						path="serviceName" />
 				</div>
