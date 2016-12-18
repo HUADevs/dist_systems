@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Add new Service</title>
+<title>Edit Service</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -29,7 +29,7 @@
 
 				<div class="form-group">
 					<label for="service-ServiceName">Service Name</label>
-					<form:errors path="serviceName"/>
+					<form:errors path="serviceName" style="color:red"/>
 					<form:input id="service-ServiceName" cssClass="form-control"
 						path="serviceName" />
 				</div>

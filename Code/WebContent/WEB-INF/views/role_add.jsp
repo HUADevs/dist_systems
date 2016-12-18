@@ -29,14 +29,14 @@
 
 				<div class="form-group">
 					<label for="role-roleName">Role Name</label>
-					<form:errors path="roleName"/>
+					<form:errors path="roleName" style="color:red"/>
 					<form:input id="role-roleName" cssClass="form-control"
 						path="roleName" />
 				</div>
 				
 				<div class="form-group">
-					<label for="role-services">Select supported Services</label> 
-					<form:checkboxes id="role-services" path="services" items="${allservices}" itemValue="serviceName" itemLabel="serviceName"/>
+					<label for="role-services">Select supported Services</label> <br/>
+					<form:checkboxes id="role-services" path="services" items="${allservices}" itemValue="serviceName" itemLabel="serviceName" delimiter="<br/>"/>
 				</div>
 				
 				

@@ -27,11 +27,11 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 		logger.info("Hit the AuthSuccessHandler");
 		String auths = authentication.getAuthorities().toString();
 		if (auths.contains("Admin")) {
-			response.sendRedirect(response.encodeURL(context.getContextPath()+"/admin"));
+			response.sendRedirect(response.encodeURL(context.getContextPath()+"/admin/home"));
 		} else if (auths.contains("User")) {
 			response.sendRedirect(context.getContextPath());
 		} else {
-			response.sendRedirect(context.getContextPath()+"/cms");
+			response.sendRedirect(context.getContextPath()+"/cms/home");
 		}
 
 	}

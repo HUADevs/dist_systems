@@ -11,7 +11,7 @@ import com.huaDevelopers.data.Entities.External.ExternalVehicle;
 
 public class Transformers {
 
-	Function<ExternalVehicle, Vehicle> externalVToMyV = new Function<ExternalVehicle, Vehicle>() {
+	public Function<ExternalVehicle, Vehicle> externalVToMyV = new Function<ExternalVehicle, Vehicle>() {
 
 		public Vehicle apply(ExternalVehicle ext) {
 			Vehicle vehicle = new Vehicle();
@@ -26,7 +26,7 @@ public class Transformers {
 		}
 	};
 	
-	Function<ExternalCitizen, Customer> externalCitToMyCust = new Function<ExternalCitizen, Customer>() {
+	public Function<ExternalCitizen, Customer> externalCitToMyCust = new Function<ExternalCitizen, Customer>() {
 
 		public Customer apply(ExternalCitizen ext) {
 			Customer cust = new Customer();
@@ -40,7 +40,7 @@ public class Transformers {
 		}
 	};
 
-	Function<ExternalHistory, History> externalHistToMyHist = new Function<ExternalHistory, History>() {
+	public Function<ExternalHistory, History> externalHistToMyHist = new Function<ExternalHistory, History>() {
 
 		public History apply(ExternalHistory ext) {
 			History hist = new History();

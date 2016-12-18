@@ -24,7 +24,7 @@ public class ExternalServiceImpl implements ExternalService {
 
 	@Autowired
 	private ExternalDAO externalDAO;
-	
+
 	@Autowired
 	private CustomerDAO custDAO;
 
@@ -53,47 +53,40 @@ public class ExternalServiceImpl implements ExternalService {
 	@Override
 	@Transactional
 	public Vehicle searchNationalDB(String lp) {
-		System.out.println("blsgsgse");
 		Transformers optimusPrime = new Transformers();
-		System.out.println("pass trans");
 
 		ExternalVehicle extV = this.externalDAO.getVehicle(lp);
-		System.out.println("vehicle " + extV.getLicensePlate());
-
 		ExternalCitizen extCit = extV.getCitizenPersonID();
-		System.out.println("citizen " + extCit.getPersonalId());
 
 		List<ExternalHistory> extHistList = this.externalDAO.getHistoryList(extCit.getPersonalId());
-		System.out.println("pass first test");
+
 		Vehicle vehicle = optimusPrime.externalVToMyV.apply(extV);
-		System.out.println("pass second test with vehicle:"+vehicle.getLicensePlate());
-		
 		Customer cust = optimusPrime.externalCitToMyCust.apply(extCit);
-		System.out.println("pass third test with customer:"+cust.getPersonalId());
-		
+
 		List<History> hList = extHistList.stream().map(optimusPrime.externalHistToMyHist)
 				.collect(Collectors.<History> toList());
-		System.out.println("pass fourth test with history:"+hList.size());
-
-		System.out.println("pass fifth test with vehicle inserted");
-		
-		if (!cust.getPersonalId().equals(this.custDAO.getCustomerByID(cust.getPersonalId()))) {
+		System.out.println(hList.size());
+		Customer myCust = this.custDAO.getCustomerByID(cust.getPersonalId());
+		if (!Customer.isEqual(myCust, cust)) {
 			this.custDAO.addCustomer(cust);
 		} else
 			this.custDAO.updateCustomer(cust);
-		
+		vehicle.setCustomerPersonID(this.custDAO.getCustomerByID(vehicle.getCustomerPersonID().getPersonalId()));
 		this.veDAO.addVehicle(vehicle);
-
-		if (hList.isEmpty()) {
-			for (History incedent : hList) {
-				this.incDAO.addIncedent(incedent);
-			}
-		} else {
-			for (History incedent : hList) {
-				this.incDAO.updateIncedent(incedent);
+		List<History> myList = this.incDAO.listAllIncsPerCustomer(cust.getPersonalId());
+		if (myList.isEmpty()) {
+			for (History incident : hList) {
+				incident.setPersonalId(this.custDAO.getCustomerByID(incident.getPersonalId().getPersonalId()));
+				this.incDAO.addIncident(incident);
 			}
 		}
 		return vehicle;
+	}
+
+	@Override
+	@Transactional
+	public ExternalVehicle getVehicle(String lp) {
+		return this.externalDAO.getVehicle(lp);
 	}
 
 }

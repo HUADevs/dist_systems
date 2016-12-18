@@ -1,7 +1,7 @@
 package com.huaDevelopers.data.Entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,17 +29,14 @@ public class Insurance implements Serializable {
 	@Column(name = "insurance_id")
 	private int id;
 
-	@NotEmpty
-    @MapsId
+	@MapsId
 	@OneToOne
 	@JoinColumn(name = "vehicle_id")
 	private Vehicle licensePlate;
 
-	@NotEmpty
 	@Column(name = "date_start", nullable = false)
-	private Date insuranceDate;
+	private LocalDate insuranceDate;
 
-	@NotEmpty
 	@Column(name = "price", nullable = false)
 	private float price;
 
@@ -73,11 +70,11 @@ public class Insurance implements Serializable {
 		this.licensePlate = licensePlate;
 	}
 
-	public Date getInsuranceDate() {
+	public LocalDate getInsuranceDate() {
 		return insuranceDate;
 	}
 
-	public void setInsuranceDate(Date insuranceDate) {
+	public void setInsuranceDate(LocalDate insuranceDate) {
 		this.insuranceDate = insuranceDate;
 	}
 

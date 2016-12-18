@@ -35,9 +35,6 @@ public class ExternalDAOImpl implements ExternalDAO {
 
 	@Override
 	public ExternalVehicle getVehicle(String lp) {
-		System.out.println("IN");
-		logger.info("logger in");
-
 		Session session = this.sessionFactory.getCurrentSession();
 		ExternalVehicle car = (ExternalVehicle) session.createQuery("FROM ExternalVehicle where license_plate='" + lp + "'")
 				.getSingleResult();

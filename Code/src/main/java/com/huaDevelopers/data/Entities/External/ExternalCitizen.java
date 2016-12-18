@@ -1,7 +1,7 @@
 package com.huaDevelopers.data.Entities.External;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -33,7 +33,7 @@ public class ExternalCitizen implements Serializable {
 	private int trn; // TAX REGISTRATION NUMBER
 
 	@Column(name = "license_date", nullable = false)
-	private LocalDateTime licenseAqquired;
+	private LocalDate licenseAqquired;
 
 	@OneToMany(mappedBy = "personalId")
 	private Set<ExternalHistory> history;
@@ -61,7 +61,7 @@ public class ExternalCitizen implements Serializable {
 		return trn;
 	}
 
-	public LocalDateTime getLicenseAqquired() {
+	public LocalDate getLicenseAqquired() {
 		return licenseAqquired;
 	}
 

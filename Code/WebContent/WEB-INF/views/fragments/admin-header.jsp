@@ -8,14 +8,14 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#"><span class=""></span><i
+			<a class="navbar-brand" href="<spring:url value="/admin/home"/>"><span class=""></span><i
 				class="glyphicon glyphicon-leaf"></i><span></span> Spring Admin Page </a>
 		</div>
 
 		<div class="collapse navbar-collapse" id="cmsNavbar">
 			<ul class="nav navbar-nav navbar-left">
-				<li><a href="#"><i class="glyphicon glyphicon-dashboard"></i><span></span>
-						Dashboard <span class="sr-only">(current)</span></a></li>
+				<li><a href="<spring:url value="/admin/home"/>"><i class="glyphicon glyphicon-home"></i><span></span>
+						Home <span class="sr-only">(current)</span></a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false"><i class="glyphicon glyphicon-user"></i><span></span>
