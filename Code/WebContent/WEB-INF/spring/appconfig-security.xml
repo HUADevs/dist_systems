@@ -7,7 +7,7 @@
 	<security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider
 			user-service-ref="userDetailsServiceImpl">
-			<security:password-encoder ref="encoder"></security:password-encoder>
+			<!-- <security:password-encoder ref="encoder"></security:password-encoder> -->
 		</security:authentication-provider>
 	</security:authentication-manager>
 

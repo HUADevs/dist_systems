@@ -43,8 +43,7 @@ public class Department implements Serializable {
 	@Column(name = "address", nullable=false)
 	private String address;
 
-	@NotEmpty
-	@Column(name = "num_of_emp", nullable=false)
+	@Column(name = "num_of_emp")
 	private int numEmp;
 
 	@OneToMany(mappedBy="workingDept")
