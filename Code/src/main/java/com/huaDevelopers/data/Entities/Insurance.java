@@ -6,14 +6,14 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -26,13 +26,13 @@ public class Insurance implements Serializable {
 	private static final long serialVersionUID = 1118564151849532911L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "insurance_id")
+	@GeneratedValue(generator = "gen")
+	@GenericGenerator(name = "gen", strategy = "foreign", parameters = @Parameter(name = "property", value = "licensePlate"))
 	private int id;
 
-	@MapsId
 	@OneToOne
-	@JoinColumn(name = "vehicle_id")
+    @PrimaryKeyJoinColumn
 	private Vehicle licensePlate;
 
 	@Column(name = "date_start", nullable = false)
@@ -44,7 +44,7 @@ public class Insurance implements Serializable {
 	@Column(name = "discount", nullable = true)
 	private double discount;
 
-	@NotEmpty(message="***You must choose a type***")
+	@NotEmpty(message = "***You must choose a type***")
 	@Column(name = "type", nullable = false)
 	private String type;
 

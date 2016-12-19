@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +17,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "Vehicle")
@@ -32,7 +33,7 @@ public class Vehicle implements Serializable {
 	@Column(name = "vehicle_id")
 	private int id;
 
-	@NotEmpty(message="***You must provide a valid license plate***")
+	@NotBlank(message = "***You must provide a valid license plate***")
 	@Column(name = "license_plate", length = 7, nullable = false)
 	private String licensePlate;
 
@@ -55,7 +56,7 @@ public class Vehicle implements Serializable {
 	@OneToMany(mappedBy = "licensePlate")
 	private Set<DamageForm> dmgForms;
 
-	@OneToOne
+	@OneToOne(mappedBy="licensePlate", cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
 	private Insurance insurance;
 
