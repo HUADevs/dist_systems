@@ -10,17 +10,10 @@
 <title>Add Insurance</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="<spring:url value="/resources/css/bootstrap-select.min.css"/>"
-	type="text/css" />
-<link href="/resources/css/common.css" rel="stylesheet">
-
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script
-	src="<spring:url value="/resources/js/bootstrap-select.min.js"/>"></script>
 </head>
 <body>
 	<jsp:include page="../views/fragments/cms-header.jsp"></jsp:include>
@@ -40,6 +33,8 @@
 						${customer.firstName} ${customer.lastName }</li>
 					<li class="list-group-item list-group-item-success"><strong>Personal
 							Id:</strong> ${customer.personalId }</li>
+					<li class="list-group-item list-group-item-success"><strong>Date
+							of Birth:</strong> ${customer.birthdayDate }</li>
 					<li class="list-group-item list-group-item-success"><strong>Tax
 							Registration Number:</strong> ${customer.trn }</li>
 					<li class="list-group-item list-group-item-success"><strong>License
@@ -67,7 +62,39 @@
 				<h2 class="text-center">
 					<strong>Choose Type of Insurance</strong>
 				</h2>
-				<form:form>
+				<spring:url value="/cms/insurance/${id}/review" var="formUrl" />
+				<form:form modelAttribute="insurance" action="${formUrl}"
+					method="post" cssClass="col-md-8 col-md-offset-2">
+					<label class="custom-control custom-radio"> <input
+						id="radio2" name="radio" type="radio" class="custom-control-input">
+						<span class="custom-control-indicator"></span> <span
+						class="custom-control-description">Or toggle this other
+							custom radio</span>
+					</label>
+					<div class="form-group custom-control custom-radio">
+						<form:radiobuttons cssClass="custom-control-input" path="type"
+							items="${typeOptions}" />
+					</div>
+					<div class="form-group">
+						<label for="duration">Duration of Contract (In Years)</label>
+						<form:radiobuttons id="duration" path="duration"
+							items="${durationOptions}" />
+					</div>
+					<c:choose>
+						<c:when test="${insurance.newDriver }">
+							<div class="form-group">
+								<label for="newDriver">Driver under 23</label>
+								<form:checkbox id="newDriver" path="newDriver" checked="checked" />
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div class="form-group">
+								<label for="newDriver">Driver under 23</label>
+								<form:checkbox id="newDriver" value="checkValue"
+									path="newDriver" />
+							</div>
+						</c:otherwise>
+					</c:choose>
 					<button type="submit" class="btn btn-primary btn-lg center-block">Add</button>
 				</form:form>
 			</section>

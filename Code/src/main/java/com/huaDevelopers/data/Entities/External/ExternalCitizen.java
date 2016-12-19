@@ -29,6 +29,9 @@ public class ExternalCitizen implements Serializable {
 	@Column(name = "personal_id", length = 8)
 	private String personalId;
 
+	@Column(name = "birthday_date", nullable = false)
+	private LocalDate birthdayDate;
+
 	@Column(name = "tax_reg_number", unique = true, nullable = false)
 	private int trn; // TAX REGISTRATION NUMBER
 
@@ -55,6 +58,10 @@ public class ExternalCitizen implements Serializable {
 
 	public String getPersonalId() {
 		return personalId;
+	}
+
+	public LocalDate getBirthdayDate() {
+		return birthdayDate;
 	}
 
 	public int getTrn() {

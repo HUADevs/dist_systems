@@ -61,31 +61,43 @@ public class InsurServiceImpl implements InsuranceService {
 
 	@Override
 	@Transactional
-	public float countInsurCost(Vehicle vehicle, Customer cust) {
-		float cost = 0;
+	public double countInsurCost(Vehicle vehicle, Customer cust, String type, int duration) {
+		double cost = 0;
 		int cubic = vehicle.getCubic();
+		System.out.println(newDriver(cust));
+		if (newDriver(cust))
+			cost += 100;
+		if (type.equals("Intermediate"))
+			cost += 50;
+		if (type.equals("Premium"))
+			cost += 100;
 		if (cubic <= 1000)
-			cost = 250;
+			cost += 250;
 		else if (cubic <= 1400)
-			cost = 300;
+			cost += 300;
 		else if (cubic <= 1800)
-			cost = 350;
+			cost += 350;
 		else
-			cost = 450;
-		float discount = countInsurDiscount(cust);
+			cost += 450;
+		double discount = countInsurDiscount(cust, duration);
+		if (duration == 2)
+			cost *= 2;
 		if (discount != 0)
-			return cost * discount;
+			return cost - cost * discount;
 		return cost;
 	}
 
+	@Override
 	@Transactional
-	public float countInsurDiscount(Customer cust) {
-		float discount = 0;
+	public double countInsurDiscount(Customer cust, int duration) {
+		double discount = 0;
 		int exp = howManyYears(cust);
-		for (int i = exp; i >= 0; i -= 10) {
-			if (exp >= 10)
-				discount = discount + 10 / 100;
+		while (exp >= 10) {
+			discount = discount + (double) 10 / 100;
+			exp -= 10;
 		}
+		if (duration == 2)
+			discount = discount + (double) 20 / 100;
 		return discount;
 	}
 
@@ -98,4 +110,17 @@ public class InsurServiceImpl implements InsuranceService {
 		return yearNow - initialYear;
 	}
 
+	@Override
+	@Transactional
+	public boolean newDriver(Customer cust) {
+		LocalDate birthday = cust.getBirthdayDate();
+		int year = birthday.getYear();
+		int day = birthday.getDayOfYear();
+		LocalDate now = LocalDate.now();
+		int yearNow = now.getYear();
+		int dayNow = now.getDayOfYear();
+		if ((yearNow - year < 23) && (dayNow > day))
+			return true;
+		return false;
+	}
 }

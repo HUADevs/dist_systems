@@ -38,14 +38,17 @@ public class Insurance implements Serializable {
 	private LocalDate insuranceDate;
 
 	@Column(name = "price", nullable = false)
-	private float price;
+	private double price;
 
 	@Column(name = "discount", nullable = true)
-	private float discount;
+	private double discount;
 
-	@NotEmpty
+	@NotEmpty(message="***You must choose a type***")
 	@Column(name = "type", nullable = false)
 	private String type;
+
+	@Column(name = "duration", nullable = false)
+	private int duration;
 
 	@Column(name = "new_driver", nullable = true)
 	private Boolean newDriver;
@@ -78,19 +81,19 @@ public class Insurance implements Serializable {
 		this.insuranceDate = insuranceDate;
 	}
 
-	public float getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(float price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
-	public float getDiscount() {
+	public double getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(float discount) {
+	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
 
@@ -100,6 +103,14 @@ public class Insurance implements Serializable {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
 	}
 
 	public Boolean getNewDriver() {
