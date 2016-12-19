@@ -83,7 +83,10 @@ public class InsuranceController {
 
 	@RequestMapping(value = "/{id}/review", method = RequestMethod.POST)
 	public String reviewInsurance(@PathVariable("id") int id, Model model,
-			@ModelAttribute("insurance") Insurance insur) {
+			@Valid @ModelAttribute("insurance") Insurance insur,Errors errors) {
+		if(errors.hasErrors()){
+			return "insur_add";
+		}
 		int duration = insur.getDuration();
 		String type = insur.getType();
 		Vehicle vehicle = this.vService.getVehicleByPID(id);

@@ -35,6 +35,7 @@ public class Transformers {
 			cust.setPersonalId(ext.getPersonalId());
 			cust.setTrn(ext.getTrn());
 			cust.setLicenseAqquired(ext.getLicenseAqquired());
+			cust.setBirthdayDate(ext.getBirthdayDate());
 			
 			return cust;
 		}
