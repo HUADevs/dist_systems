@@ -90,8 +90,8 @@ public class InsuranceController {
 	}
 
 	@RequestMapping(value = "/{id}/review", method = RequestMethod.POST)
-	public String reviewInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("insurance") Insurance insur,
-			Errors errors) {
+	public String reviewInsurance(@PathVariable("id") Long id, Model model,
+			@ModelAttribute("insurance") Insurance insur, Errors errors) {
 		int duration = insur.getDuration();
 		String type = insur.getType();
 		boolean flag = insur.getNewDriver();
@@ -144,11 +144,11 @@ public class InsuranceController {
 		return "redirect:/cms/insurance/view";
 	}
 
-	/*
-	 * @ModelAttribute("insurance") public Insurance getInsurance() {
-	 * System.out.println("Adding a new insurance to the model"); return new
-	 * Insurance(); }
-	 */
+	@ModelAttribute("insurance")
+	public Insurance getInsurance() {
+		System.out.println("Adding a new insurance to the model");
+		return new Insurance();
+	}
 
 	@ModelAttribute("typeOptions")
 	public List<String> getTypes() {
