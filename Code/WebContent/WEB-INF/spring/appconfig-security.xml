@@ -7,7 +7,7 @@
 	<security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider
 			user-service-ref="userDetailsServiceImpl">
-			<security:password-encoder ref="encoder"></security:password-encoder>
+			<!-- <security:password-encoder ref="encoder"></security:password-encoder> -->
 		</security:authentication-provider>
 	</security:authentication-manager>
 
@@ -15,7 +15,7 @@
 		<security:intercept-url pattern="/admin/**"
 			access="hasAuthority('Admin')" />
 		<security:intercept-url pattern="/cms/**"
-			access="hasAuthority('Employee')" />
+			access="hasAnyAuthority('Employee','Sales Manager')" />
 		<security:intercept-url pattern="/" access="permitAll" />
 		<security:form-login login-page="/login"
 			authentication-success-handler-ref="customAuthenticationSuccessHandler"

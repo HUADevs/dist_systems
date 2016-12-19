@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -48,6 +49,7 @@ public class Insurance implements Serializable {
 	@Column(name = "type", nullable = false)
 	private String type;
 
+	@NotNull(message="***You must choose the duration*** ")
 	@Column(name = "duration", nullable = false)
 	private int duration;
 

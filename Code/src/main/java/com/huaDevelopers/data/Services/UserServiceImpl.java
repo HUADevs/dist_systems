@@ -3,6 +3,7 @@ package com.huaDevelopers.data.Services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDAO usrDAO;
 
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	/*
+	 * @Autowired private BCryptPasswordEncoder bCryptPasswordEncoder;
+	 */
 
 	public void setUsrDAO(UserDAO usrDAO) {
 		this.usrDAO = usrDAO;
@@ -28,7 +30,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public void addUser(User usr) {
-		usr.setPassword(bCryptPasswordEncoder.encode(usr.getPassword()));
+		/* usr.setPassword(bCryptPasswordEncoder.encode(usr.getPassword())); */
 		this.usrDAO.addUser(usr);
 	}
 

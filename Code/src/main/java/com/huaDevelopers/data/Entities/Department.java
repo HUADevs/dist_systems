@@ -32,21 +32,21 @@ public class Department implements Serializable {
 	private int id;
 
 	@NotEmpty
-	@Column(name = "name", unique=true, nullable=false)
+	@Column(name = "name", unique = true, nullable = false)
 	private String depName;
 
 	@NotEmpty
-	@Column(name = "region", nullable=false)
+	@Column(name = "region", nullable = false)
 	private String location;
 
 	@NotEmpty
-	@Column(name = "address", nullable=false)
+	@Column(name = "address", nullable = false)
 	private String address;
 
-	@Column(name = "num_of_emp", nullable=false)
+	@Column(name = "num_of_emp", nullable = false)
 	private int numEmp;
 
-	@OneToMany(mappedBy="workingDept")
+	@OneToMany(mappedBy = "workingDept")
 	private Set<User> users;
 
 	public int getId() {
