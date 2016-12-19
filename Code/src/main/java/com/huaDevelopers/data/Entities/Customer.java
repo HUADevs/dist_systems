@@ -40,6 +40,9 @@ public class Customer implements Serializable {
 	@Column(name = "personal_id", length = 8, unique = true, nullable = false)
 	private String personalId;
 
+	@Column(name = "birthday_date", nullable = false)
+	private LocalDate birthdayDate;
+
 	@Column(name = "tax_reg_number", unique = true, nullable = false)
 	private int trn; // TAX REGISTRATION NUMBER
 
@@ -88,6 +91,14 @@ public class Customer implements Serializable {
 		this.personalId = personalId;
 	}
 
+	public LocalDate getBirthdayDate() {
+		return birthdayDate;
+	}
+
+	public void setBirthdayDate(LocalDate birthdayDate) {
+		this.birthdayDate = birthdayDate;
+	}
+
 	public int getTrn() {
 		return trn;
 	}
@@ -98,7 +109,7 @@ public class Customer implements Serializable {
 
 	public LocalDate getLicenseAqquired() {
 		return licenseAqquired;
-}
+	}
 
 	public void setLicenseAqquired(LocalDate licenseAqquired) {
 		this.licenseAqquired = licenseAqquired;
@@ -119,9 +130,9 @@ public class Customer implements Serializable {
 	public void setVehicles(Set<Vehicle> vehicles) {
 		this.vehicles = vehicles;
 	}
-	
+
 	public static boolean isEqual(Object obj1, Object obj2) {
-	    return obj1 == obj2 || (obj1 != null && obj1.equals(obj2));
+		return obj1 == obj2 || (obj1 != null && obj1.equals(obj2));
 	}
 
 }

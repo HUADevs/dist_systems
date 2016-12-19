@@ -2,6 +2,8 @@ package com.huaDevelopers.dao;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -36,8 +38,13 @@ public class ExternalDAOImpl implements ExternalDAO {
 	@Override
 	public ExternalVehicle getVehicle(String lp) {
 		Session session = this.sessionFactory.getCurrentSession();
-		ExternalVehicle car = (ExternalVehicle) session.createQuery("FROM ExternalVehicle where license_plate='" + lp + "'")
-				.getSingleResult();
+		ExternalVehicle car;
+		try {
+			car = (ExternalVehicle) session.createQuery("FROM ExternalVehicle where license_plate='" + lp + "'")
+					.getSingleResult();
+		} catch (NoResultException ex) {
+			return null;
+		}
 		logger.info("Extract vehicle from nationalDB with success " + car.toString());
 		return car;
 	}

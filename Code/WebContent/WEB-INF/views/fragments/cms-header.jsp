@@ -8,7 +8,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#"><i class="glyphicon glyphicon-cars"></i><span></span>CMS </a>
+			<a class="navbar-brand" href="#"><span></span>CMS </a>
 		</div>
 
 		<div class="collapse navbar-collapse" id="cmsNavbar">
@@ -19,7 +19,7 @@
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false"><i class="glyphicon glyphicon-briefcase"></i><span></span> Insurances <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Create Insurance</a></li>
+						<li><a href="<spring:url value="/cms/insurance/findVehicle"></spring:url>">Create Insurance</a></li>
 						<li><a href="#">Edit Insurance</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"

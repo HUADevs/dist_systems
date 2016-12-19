@@ -20,6 +20,10 @@ public interface InsuranceService {
 
 	public void removeInsurance(int id);
 
-	public float countInsurCost(Vehicle vehicle, Customer cust);
+	public double countInsurCost(Vehicle vehicle, Customer cust, String type, int duration);
+	
+	public double countInsurDiscount(Customer cust, int duration);
+		
+	public boolean newDriver(Customer cust);
 
 }

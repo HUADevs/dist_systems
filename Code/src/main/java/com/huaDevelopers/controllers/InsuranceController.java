@@ -1,5 +1,10 @@
 package com.huaDevelopers.controllers;
 
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,20 +49,22 @@ public class InsuranceController {
 
 	@RequestMapping(value = "/findVehicle", method = RequestMethod.POST)
 	public String saveCustomer(Model model, @Valid @ModelAttribute("vehicle") Vehicle vehicle, Errors errors) {
-		if (errors.hasErrors()) {
+		if (errors.hasErrors() || vehicle.equals(null)) {
+			System.out.println(errors);
 			return "vehicle_add";
+		} else {
+			Transformers megatron = new Transformers();
+			vehicle = megatron.externalVToMyV.apply(this.externalService.getVehicle(vehicle.getLicensePlate()));
+			Customer cust = this.customerService.getCustomerByID(vehicle.getCustomerPersonID().getPersonalId());
+			if (!Customer.isEqual(cust, null)) {
+				vehicle = this.vService.insertVehicle(vehicle, cust);
+			} else
+				vehicle = this.externalService.searchNationalDB(vehicle.getLicensePlate());
+			int id = vehicle.getId();
+			model.addAttribute("id", id);
+			model.addAttribute("vehicle", vehicle);
+			return "redirect:/cms/insurance/{id}/create";
 		}
-		Transformers megatron = new Transformers();
-		vehicle = megatron.externalVToMyV.apply(this.externalService.getVehicle(vehicle.getLicensePlate()));
-		Customer cust = this.customerService.getCustomerByID(vehicle.getCustomerPersonID().getPersonalId());
-		if (!Customer.isEqual(cust, null)) {
-			vehicle = this.vService.insertVehicle(vehicle, cust);
-		} else
-			vehicle = this.externalService.searchNationalDB(vehicle.getLicensePlate());
-		int id = vehicle.getId();
-		model.addAttribute("id", id);
-		model.addAttribute("vehicle", vehicle);
-		return "redirect:/cms/insurance/{id}/create";
 	}
 
 	@RequestMapping(value = "/{id}/create", method = RequestMethod.GET)
@@ -65,17 +72,39 @@ public class InsuranceController {
 		vehicle = this.vService.getVehicleByPID(id);
 		Customer cust = this.customerService.getCustomerByID(vehicle.getCustomerPersonID().getPersonalId());
 		model.addAttribute("customer", cust);
+		id = vehicle.getId();
+		model.addAttribute("id", id);
 		model.addAttribute("vehicle", vehicle);
-		model.addAttribute("insurance", new Insurance());
+		Insurance insurance = new Insurance();
+		insurance.setNewDriver(this.insuranceService.newDriver(cust));
+		model.addAttribute("insurance", insurance);
 		return "insur_add";
 	}
 
-	@RequestMapping(value = "/review", method = RequestMethod.POST)
-	public String saveInsurance(@ModelAttribute("insurance") Insurance insur) {
-		this.insuranceService.addInsurance(insur);
-
-		return "test";
+	@RequestMapping(value = "/{id}/review", method = RequestMethod.POST)
+	public String reviewInsurance(@PathVariable("id") int id, Model model,
+			@ModelAttribute("insurance") Insurance insur) {
+		int duration = insur.getDuration();
+		String type = insur.getType();
+		Vehicle vehicle = this.vService.getVehicleByPID(id);
+		Customer cust = vehicle.getCustomerPersonID();
+		insur.setInsuranceDate(LocalDate.now());
+		insur.setPrice(this.insuranceService.countInsurCost(vehicle, cust, type, duration));
+		insur.setDiscount(this.insuranceService.countInsurDiscount(cust, duration));
+		model.addAttribute("customer", cust);
+		model.addAttribute("vehicle", vehicle);
+		model.addAttribute("insurance", insur);
+		return "insur_review";
 
 	}
 
+	@ModelAttribute("typeOptions")
+	public List<String> getTypes() {
+		return new LinkedList<>(Arrays.asList(new String[] { "Basic", "Intermediate", "Premium" }));
+	}
+
+	@ModelAttribute("durationOptions")
+	public List<Integer> getYears() {
+		return new LinkedList<>(Arrays.asList(new Integer[] { 1, 2 }));
+	}
 }

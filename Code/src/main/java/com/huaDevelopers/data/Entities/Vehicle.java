@@ -32,7 +32,7 @@ public class Vehicle implements Serializable {
 	@Column(name = "vehicle_id")
 	private int id;
 
-	@NotEmpty(message="***You must provide a license plate***")
+	@NotEmpty(message="***You must provide a valid license plate***")
 	@Column(name = "license_plate", length = 7, nullable = false)
 	private String licensePlate;
 
@@ -46,11 +46,9 @@ public class Vehicle implements Serializable {
 	@Column(name = "cubic", nullable = false)
 	private int cubic;
 
-	@NotEmpty
 	@Column(name = "type", nullable = false)
 	private String type;
 
-	@NotEmpty
 	@Column(name = "color", nullable = false)
 	private String color;
 
