@@ -61,11 +61,10 @@ public class InsurServiceImpl implements InsuranceService {
 
 	@Override
 	@Transactional
-	public double countInsurCost(Vehicle vehicle, Customer cust, String type, int duration) {
+	public double countInsurCost(Vehicle vehicle, Customer cust, String type, int duration, boolean flag) {
 		double cost = 0;
 		int cubic = vehicle.getCubic();
-		System.out.println(newDriver(cust));
-		if (newDriver(cust))
+		if (newDriver(cust) || flag)
 			cost += 100;
 		if (type.equals("Intermediate"))
 			cost += 50;

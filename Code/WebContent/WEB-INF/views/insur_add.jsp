@@ -23,7 +23,7 @@
 		<div class="row">
 			<h1 class="text-center">Create New Insurance</h1>
 		</div>
-		<div class="jumbotron">
+		<div class="jumbotron container-fluid">
 			<section>
 				<h2 class="text-center">
 					<strong>Customer Details</strong>
@@ -65,12 +65,6 @@
 				<spring:url value="/cms/insurance/${id}/review" var="formUrl" />
 				<form:form modelAttribute="insurance" action="${formUrl}"
 					method="post" cssClass="col-md-8 col-md-offset-2">
-					<label class="custom-control custom-radio"> <input
-						id="radio2" name="radio" type="radio" class="custom-control-input">
-						<span class="custom-control-indicator"></span> <span
-						class="custom-control-description">Or toggle this other
-							custom radio</span>
-					</label>
 					<div class="form-group custom-control custom-radio">
 						<form:radiobuttons cssClass="custom-control-input" path="type"
 							items="${typeOptions}" />

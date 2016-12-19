@@ -25,6 +25,7 @@ public class InsurDAOImpl implements InsuranceDAO {
 	@Override
 	public void addInsurance(Insurance insurance) {
 		Session session = this.sessionFactory.getCurrentSession();
+		System.out.println(insurance.getId()+"trava malli");
 		session.persist(insurance);
 		logger.info("Insurance successfully inserted in database!!!" + insurance.toString());
 
@@ -40,7 +41,8 @@ public class InsurDAOImpl implements InsuranceDAO {
 	@Override
 	public Insurance getInsuranceByLicensePlate(String licensePlate) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Insurance insurance = (Insurance)session.createQuery("from Insurance where vehicle_id='"+licensePlate+"'").getSingleResult();
+		Insurance insurance = (Insurance) session.createQuery("from Insurance where vehicle_id='" + licensePlate + "'")
+				.getSingleResult();
 		logger.info("Insurance successfully selected from db" + insurance.toString());
 		return insurance;
 	}
@@ -68,7 +70,7 @@ public class InsurDAOImpl implements InsuranceDAO {
 	@Override
 	public Insurance getInsuranceByID(int id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Insurance insurance= session.load(Insurance.class, new Integer(id));
+		Insurance insurance = session.load(Insurance.class, new Integer(id));
 		logger.info("Insurance successfully selected from db" + insurance.toString());
 		return insurance;
 	}

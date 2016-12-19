@@ -67,4 +67,7 @@ public class ExternalVehicle implements Serializable {
 		return color;
 	}
 
+	public static boolean isEqual(Object obj1, Object obj2) {
+		return obj1 == obj2 || (obj1 != null && obj1.equals(obj2));
+	}
 }

@@ -95,8 +95,10 @@ hr {
 					<a href="<c:url value='/cms/insurance/${insurance.id}/delete' />"
 						class="btn btn-danger btn-lg">Cancel</a> <a
 						href="<c:url value='/cms/insurance/${insurance.id}/edit' />"
-						class="btn btn-warning btn-lg">Edit</a>
-					<button type="submit" class="btn btn-success btn-lg pull-right">Save</button>
+						class="btn btn-warning btn-lg">Edit</a> <a
+						href="<c:url value='/cms/insurance/${insurance.id}/save' />"
+						class="btn btn-success btn-lg">Save</a>
+					
 				</div>
 			</div>
 		</div>
