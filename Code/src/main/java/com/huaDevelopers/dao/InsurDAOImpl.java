@@ -25,7 +25,6 @@ public class InsurDAOImpl implements InsuranceDAO {
 	@Override
 	public void addInsurance(Insurance insurance) {
 		Session session = this.sessionFactory.getCurrentSession();
-		System.out.println(insurance.getId()+"trava malli");
 		session.persist(insurance);
 		logger.info("Insurance successfully inserted in database!!!" + insurance.toString());
 

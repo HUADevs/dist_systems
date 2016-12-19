@@ -14,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -31,7 +30,7 @@ public class Vehicle implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "vehicle_id")
-	private int id;
+	private Long id;
 
 	@NotBlank(message = "***You must provide a valid license plate***")
 	@Column(name = "license_plate", length = 7, nullable = false)
@@ -57,18 +56,17 @@ public class Vehicle implements Serializable {
 	private Set<DamageForm> dmgForms;
 
 	@OneToOne(mappedBy="licensePlate", cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
 	private Insurance insurance;
 
 	public Vehicle() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

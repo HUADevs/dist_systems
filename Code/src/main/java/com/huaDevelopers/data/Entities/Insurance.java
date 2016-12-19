@@ -26,13 +26,14 @@ public class Insurance implements Serializable {
 	private static final long serialVersionUID = 1118564151849532911L;
 
 	@Id
-	@Column(name = "insurance_id")
-	@GeneratedValue(generator = "gen")
-	@GenericGenerator(name = "gen", strategy = "foreign", parameters = @Parameter(name = "property", value = "licensePlate"))
-	private int id;
-
+    @Column(name="vehicle_id")
+    @GeneratedValue(generator="gen")
+    @GenericGenerator(name="gen", strategy="foreign",parameters=@Parameter(name="property", value="licensePlate"))
+    private Long id;
+	
+	
 	@OneToOne
-    @PrimaryKeyJoinColumn
+	@PrimaryKeyJoinColumn
 	private Vehicle licensePlate;
 
 	@Column(name = "date_start", nullable = false)
@@ -59,11 +60,11 @@ public class Insurance implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

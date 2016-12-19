@@ -11,7 +11,7 @@ public interface VehicleDAO {
 
 	public void updateVehicle(Vehicle v);
 	
-	public Vehicle getVehicleByPID(int id);
+	public Vehicle getVehicleByPID(Long id);
 	
 	public Vehicle getVehicleByLP(String lp);
 	

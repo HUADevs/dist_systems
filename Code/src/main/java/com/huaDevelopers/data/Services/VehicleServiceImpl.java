@@ -43,7 +43,7 @@ public class VehicleServiceImpl implements VehicleService {
 
 	@Override
 	@Transactional
-	public Vehicle getVehicleByPID(int id) {
+	public Vehicle getVehicleByPID(Long id) {
 		return this.veDAO.getVehicleByPID(id);
 	}
 

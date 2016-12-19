@@ -68,7 +68,7 @@ public class InsuranceController {
 				vehicle = this.vService.insertVehicle(vehicle, cust);
 			} else
 				vehicle = this.externalService.searchNationalDB(vehicle.getLicensePlate());
-			int id = vehicle.getId();
+			Long id = vehicle.getId();
 			model.addAttribute("id", id);
 			model.addAttribute("vehicle", vehicle);
 			return "redirect:/cms/insurance/{id}/create";
@@ -76,7 +76,7 @@ public class InsuranceController {
 	}
 
 	@RequestMapping(value = "/{id}/create", method = RequestMethod.GET)
-	public String addInsurance(@PathVariable("id") int id, Model model, @ModelAttribute("vehicle") Vehicle vehicle) {
+	public String addInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("vehicle") Vehicle vehicle) {
 		vehicle = this.vService.getVehicleByPID(id);
 		Customer cust = this.customerService.getCustomerByID(vehicle.getCustomerPersonID().getPersonalId());
 		model.addAttribute("customer", cust);
@@ -90,9 +90,8 @@ public class InsuranceController {
 	}
 
 	@RequestMapping(value = "/{id}/review", method = RequestMethod.POST)
-	public String reviewInsurance(@PathVariable("id") int id, Model model, @ModelAttribute("insurance") Insurance insur,
-			Errors errors) {
-		System.out.println("First id " + insur.getId());
+	public String reviewInsurance(@PathVariable("id") Long id, Model model,
+			@ModelAttribute("insurance") Insurance insur, Errors errors) {
 		int duration = insur.getDuration();
 		String type = insur.getType();
 		boolean flag = insur.getNewDriver();
@@ -111,9 +110,8 @@ public class InsuranceController {
 	}
 
 	@RequestMapping(value = "/{id}/save", method = RequestMethod.GET)
-	public String saveInsurance(@PathVariable("id") int id, Model model, @ModelAttribute("insurance") Insurance insur,
+	public String saveInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("insurance") Insurance insur,
 			SessionStatus status) {
-		System.out.println("id " + insur.getId());
 		System.out.println("offer  " + insur.getDiscount());
 		System.out.println("Price " + insur.getPrice());
 		System.out.println("Type " + insur.getType());
@@ -146,11 +144,11 @@ public class InsuranceController {
 		return "redirect:/cms/insurance/view";
 	}
 
-	/*
-	 * @ModelAttribute("insurance") public Insurance getInsurance() {
-	 * System.out.println("Adding a new insurance to the model"); return new
-	 * Insurance(); }
-	 */
+	@ModelAttribute("insurance")
+	public Insurance getInsurance() {
+		System.out.println("Adding a new insurance to the model");
+		return new Insurance();
+	}
 
 	@ModelAttribute("typeOptions")
 	public List<String> getTypes() {
