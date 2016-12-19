@@ -23,7 +23,7 @@
 		<div class="row">
 			<h1 class="text-center">Create New Insurance</h1>
 		</div>
-		<div class="jumbotron">
+		<div class="jumbotron container-fluid">
 			<section>
 				<h2 class="text-center">
 					<strong>Customer Details</strong>
