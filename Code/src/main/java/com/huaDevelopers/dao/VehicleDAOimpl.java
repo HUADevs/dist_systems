@@ -38,9 +38,9 @@ public class VehicleDAOimpl implements VehicleDAO {
 	}
 
 	@Override
-	public Vehicle getVehicleByPID(int id) {
+	public Vehicle getVehicleByPID(Long id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Vehicle v = session.load(Vehicle.class, new Integer(id));
+		Vehicle v = session.load(Vehicle.class, id);
 		logger.info("Vehicle successfully selected from db" + v.toString());
 		return v;
 	}
@@ -67,7 +67,7 @@ public class VehicleDAOimpl implements VehicleDAO {
 	@Override
 	public void removeVehicle(String lp) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Vehicle v = (Vehicle)session.createQuery("FROM Vehicle where license_plate='" + lp + "'").getSingleResult();
+		Vehicle v = (Vehicle) session.createQuery("FROM Vehicle where license_plate='" + lp + "'").getSingleResult();
 		if (v != null) {
 			session.delete(v);
 			logger.info("Vehicle has successfully deleted from db" + v.toString());
