@@ -124,7 +124,7 @@
 						<a class="btn btn-secondary"
 							href="<spring:url value="/cms/insurance/findVehicle"/>"
 							role="button">Add »</a> <a class="btn btn-secondary"
-							href="<spring:url value="/cms/insurance/edit"/>" role="button">Edit
+							href="<spring:url value="/cms/insurance/view"/>" role="button">Edit
 							»</a>
 					</p>
 				</div>

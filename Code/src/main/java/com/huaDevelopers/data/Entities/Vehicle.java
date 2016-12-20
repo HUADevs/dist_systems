@@ -55,7 +55,7 @@ public class Vehicle implements Serializable {
 	@OneToMany(mappedBy = "licensePlate")
 	private Set<DamageForm> dmgForms;
 
-	@OneToOne(mappedBy="licensePlate", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "licensePlate", cascade = CascadeType.ALL)
 	private Insurance insurance;
 
 	public Vehicle() {
