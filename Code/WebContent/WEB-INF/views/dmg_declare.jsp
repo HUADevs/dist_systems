@@ -22,10 +22,10 @@
 	<div class="container">
 		<div class="row">
 			<h1 class="text-center">Declare Damage</h1>
-			<h6 class="text-center">for Vehicle: ${dform.licensePlate.licensePlate }</h6>
+			<h6 class="text-center">for Vehicle: ${lp}</h6>
 		</div>
 	<div class="row">
-		<spring:url value="/cms/damage/declare" var="formUrl" />
+		<spring:url value="/cms/damage/declare/${lp}" var="formUrl" />
 		<form:form modelAttribute="dform" action="${formUrl }" method="post"
 			cssClass="col-md-8 col-md-offset-2">
 			<div>${msg}</div>
@@ -41,6 +41,13 @@
 				<form:input id="dform-cost" cssClass="form-control"
 					path="damageCost" />
 			</div>
+			<div class="form-group">
+				<label for="dform-photo">Photo</label>
+				<form:errors path="damagePhotoShoots" style="color:red" />
+				<form:input type="file" id="dform-cost" cssClass="form-control"
+					path="damagePhotoShoots" />
+			</div>
+			
 			
 			
 			<button type="submit" class="btn btn-primary">Submit</button>
