@@ -1,5 +1,7 @@
 package com.huaDevelopers.controllers;
 
+import java.time.LocalDate;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,7 @@ public class DamageController {
 	
 	@RequestMapping(value="/declare/{lp}", method=RequestMethod.POST)
 	public String saveDamage(@Valid @ModelAttribute("dform") DamageForm dform,Errors errors, @PathVariable("lp") String lp) {
+		dform.setDateAdded(LocalDate.now());
 		if(errors.hasErrors()){
 			return "dmg_declare";
 		}

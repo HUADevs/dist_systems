@@ -1,6 +1,7 @@
 package com.huaDevelopers.data.Entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -52,6 +53,9 @@ public class DamageForm implements Serializable {
 
 	@Column(name = "approval", nullable=true)
 	private Boolean approval;
+	
+	@Column(name = "date", nullable=false)
+	private LocalDate dateAdded;
 
 	public DamageForm() {
 		// TODO Auto-generated constructor stub
@@ -103,6 +107,14 @@ public class DamageForm implements Serializable {
 
 	public void setApproval(Boolean approval) {
 		this.approval = approval;
+	}
+
+	public LocalDate getDateAdded() {
+		return dateAdded;
+	}
+
+	public void setDateAdded(LocalDate dateAdded) {
+		this.dateAdded = dateAdded;
 	}
 
 }
