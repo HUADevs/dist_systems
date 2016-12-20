@@ -39,8 +39,8 @@
 					aria-expanded="false"><i class="glyphicon glyphicon-list-alt"></i><span></span>
 						Damages <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Declare Damage</a></li>
-						<li><a href="#">Edit Damage Declaration</a></li>
+						<li><a href="<spring:url value="/cms/insurance/view"></spring:url>">Declare Damage</a>
+						<li><a href="#">Damage History</a></li>
 						<sec:authorize
 							access="hasAnyAuthority('Sales Manager', 'Manager')">
 							<li role="separator" class="divider"></li>

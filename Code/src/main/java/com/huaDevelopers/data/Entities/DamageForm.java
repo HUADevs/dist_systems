@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -32,12 +34,15 @@ public class DamageForm implements Serializable {
 	private Vehicle licensePlate;
 
 	@NotEmpty
-	@Column(name = "description", nullable=false)
+	@Column(name = "description", length=100 ,nullable=false)
 	private String damageDescription;
 
 	@Column(name = "photo", nullable=false)
 	private byte[] damagePhotoShoots;
+	
 
+	@DecimalMax(value = "99999.999", message = "The decimal value can not be more than 99999.999 ")
+    @DecimalMin(value = "1.00", message = "The decimal value can not be less than 1.00 digit ")
 	@Column(name = "cost", nullable=false)
 	private float damageCost;
 
