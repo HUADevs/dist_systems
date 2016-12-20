@@ -91,7 +91,7 @@
 							</div>
 						</c:otherwise>
 					</c:choose>
-					<button type="submit" class="btn btn-primary btn-lg center-block">Change</button>
+					<button type="submit" class="btn btn-warning btn-lg center-block">Change</button>
 				</form:form>
 			</section>
 		</div>

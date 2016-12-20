@@ -2,6 +2,8 @@ package com.huaDevelopers.dao;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -40,8 +42,13 @@ public class InsurDAOImpl implements InsuranceDAO {
 	@Override
 	public Insurance getInsuranceByLicensePlate(String licensePlate) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Insurance insurance = (Insurance) session.createQuery("from Insurance where vehicle_id='" + licensePlate + "'")
-				.getSingleResult();
+		Insurance insurance;
+		try {
+			insurance = (Insurance) session.createQuery("from Insurance where vehicle_id='" + licensePlate + "'")
+					.getSingleResult();
+		} catch (NoResultException ex) {
+			return null;
+		}
 		logger.info("Insurance successfully selected from db" + insurance.toString());
 		return insurance;
 	}
@@ -69,7 +76,12 @@ public class InsurDAOImpl implements InsuranceDAO {
 	@Override
 	public Insurance getInsuranceByID(Long id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Insurance insurance = session.load(Insurance.class, id);
+		Insurance insurance;
+		try {
+		insurance = (Insurance)session.createQuery("from Insurance where vehicle_id="+id).getSingleResult();
+		} catch (NoResultException ex) {
+			return null;
+		}
 		logger.info("Insurance successfully selected from db" + insurance.toString());
 		return insurance;
 	}

@@ -30,12 +30,11 @@ public class Insurance implements Serializable {
 	private static final long serialVersionUID = 1118564151849532911L;
 
 	@Id
-    @Column(name="vehicle_id")
-    @GeneratedValue(generator="gen")
-    @GenericGenerator(name="gen", strategy="foreign",parameters=@Parameter(name="property", value="licensePlate"))
-    private Long id;
-	
-	
+	@Column(name = "vehicle_id")
+	@GeneratedValue(generator = "gen")
+	@GenericGenerator(name = "gen", strategy = "foreign", parameters = @Parameter(name = "property", value = "licensePlate"))
+	private Long id;
+
 	@OneToOne
 	@PrimaryKeyJoinColumn
 	private Vehicle licensePlate;
@@ -53,7 +52,10 @@ public class Insurance implements Serializable {
 	@Column(name = "type", nullable = false)
 	private String type;
 
-	@NotNull @NumberFormat(style = Style.NUMBER) @Min(1) @Max(2)
+	@NotNull
+	@NumberFormat(style = Style.NUMBER)
+	@Min(1)
+	@Max(2)
 	@Column(name = "duration", nullable = false)
 	private int duration;
 
@@ -128,4 +130,7 @@ public class Insurance implements Serializable {
 		this.newDriver = newDriver;
 	}
 
+	public static boolean isEqual(Object obj1, Object obj2) {
+		return obj1 == obj2 || (obj1 != null && obj1.equals(obj2));
+	}
 }

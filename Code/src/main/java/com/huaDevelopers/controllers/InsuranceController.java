@@ -64,14 +64,11 @@ public class InsuranceController {
 		}
 
 		vehicle = megatron.externalVToMyV.apply(this.externalService.getVehicle(vehicle.getLicensePlate()));
-		if (vehicle.getLicensePlate()
-				.equals(this.vService.getVehicleByLP(vehicle.getLicensePlate()).getLicensePlate())) {
+		if (!Vehicle.isEqual(this.vService.getVehicleByLP(vehicle.getLicensePlate()), null)) {
 			errors.rejectValue("licensePlate", "vehicle.licensePlate",
 					"***Attention***This license plate is insuranced***");
 			return "vehicle_add";
 		} else {
-			// vehicle =
-			// megatron.externalVToMyV.apply(this.externalService.getVehicle(vehicle.getLicensePlate()));
 			Customer cust = this.customerService.getCustomerByID(vehicle.getCustomerPersonID().getPersonalId());
 			if (!Customer.isEqual(cust, null)) {
 				vehicle = this.vService.insertVehicle(vehicle, cust);
@@ -101,7 +98,7 @@ public class InsuranceController {
 	@RequestMapping(value = "/{id}/review", method = RequestMethod.POST)
 	public String reviewInsurance(@PathVariable("id") Long id, Model model,
 			@Valid @ModelAttribute("insurance") Insurance insur, Errors errors) {
-		if(errors.hasErrors()){
+		if (errors.hasErrors()) {
 			System.out.println("errors");
 			return "insur_add";
 		}
@@ -125,7 +122,8 @@ public class InsuranceController {
 	@RequestMapping(value = "/{id}/save", method = RequestMethod.GET)
 	public String saveInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("insurance") Insurance insur,
 			SessionStatus status) {
-		if (!(insur.getId() == null))
+		// System.out.println(this.insuranceService.getInsuranceByID(id).getDuration());
+		if (!Insurance.isEqual(this.insuranceService.getInsuranceByID(insur.getId()), null))
 			this.insuranceService.updateInsurance(insur);
 		else
 			this.insuranceService.addInsurance(insur);
@@ -161,14 +159,16 @@ public class InsuranceController {
 	}
 
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
-	public String editInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("vehicle") Vehicle vehicle) {
+	public String editInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("vehicle") Vehicle vehicle) { 
 		vehicle = this.vService.getVehicleByPID(id);
 		Customer cust = this.customerService.getCustomerByID(vehicle.getCustomerPersonID().getPersonalId());
 		model.addAttribute("customer", cust);
+		boolean flag = this.insuranceService.newDriver(cust);
 		id = vehicle.getId();
 		model.addAttribute("id", id);
 		model.addAttribute("vehicle", vehicle);
-		Insurance insurance = vehicle.getInsurance();
+		Insurance insurance = new Insurance();
+		insurance.setNewDriver(flag);
 		model.addAttribute("insurance", insurance);
 		return "insur_edit";
 	}

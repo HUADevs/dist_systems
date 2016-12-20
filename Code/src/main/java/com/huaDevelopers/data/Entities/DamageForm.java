@@ -1,12 +1,11 @@
 package com.huaDevelopers.data.Entities;
 
 import java.io.Serializable;
+import java.sql.Blob;
 import java.time.LocalDate;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,15 +40,15 @@ public class DamageForm implements Serializable {
 	@Column(name = "description", length=100 ,nullable=false)
 	private String damageDescription;
 
-	@Lob @Basic(fetch = FetchType.LAZY)
+	@Lob
 	@Column(name = "photo", nullable=false)
-	private byte[] damagePhotoShoots;
+	private Blob damagePhotoShoots;
 	
 
 	@DecimalMax(value = "99999.999", message = "The decimal value can not be more than 99999.999 ")
     @DecimalMin(value = "1.00", message = "The decimal value can not be less than 1.00 digit ")
 	@Column(name = "cost", nullable=false)
-	private float damageCost;
+	private double damageCost;
 
 	@Column(name = "approval", nullable=true)
 	private Boolean approval;
@@ -85,19 +84,19 @@ public class DamageForm implements Serializable {
 		this.damageDescription = damageDescription;
 	}
 
-	public byte[] getDamagePhotoShoots() {
+	public Blob getDamagePhotoShoots() {
 		return damagePhotoShoots;
 	}
 
-	public void setDamagePhotoShoots(byte[] damagePhotoShoots) {
+	public void setDamagePhotoShoots(Blob damagePhotoShoots) {
 		this.damagePhotoShoots = damagePhotoShoots;
 	}
 
-	public float getDamageCost() {
+	public double getDamageCost() {
 		return damageCost;
 	}
 
-	public void setDamageCost(float damageCost) {
+	public void setDamageCost(double damageCost) {
 		this.damageCost = damageCost;
 	}
 

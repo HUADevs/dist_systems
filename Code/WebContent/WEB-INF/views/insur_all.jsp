@@ -25,18 +25,16 @@
 				cssClass="col-md-8 col-md-offset-2">
 				<div>${msg}</div>
 				<div class="form-group">
-					<div class="col-xs-12">
-						<label for="ins-search">Search a specific insurance</label>
-					</div>
 					<form:errors path="licensePlate" style="color:red" />
-					<div class="col-xs-10">
+					<div class="input-group col-xs-10">
 						<form:input id="ins-search" cssClass="form-control"
-							path="licensePlate" />
-					</div>
-					<div class="col-xs-2">
-						<button type="submit" class="btn btn-primary">
-							<span><i class="glyphicon glyphicon-search"></i></span>
-						</button>
+							placeholder="Search a specific insurance" path="licensePlate" />
+
+						<div class="input-group-btn">
+							<button type="submit" class="btn btn-primary">
+								<span><i class="glyphicon glyphicon-search"></i></span>
+							</button>
+						</div>
 					</div>
 				</div>
 			</form:form>
