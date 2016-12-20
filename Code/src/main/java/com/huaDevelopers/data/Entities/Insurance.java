@@ -10,11 +10,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
 
 @Entity
 @Table(name = "Insurance")
@@ -49,7 +53,7 @@ public class Insurance implements Serializable {
 	@Column(name = "type", nullable = false)
 	private String type;
 
-	@NotNull(message="***You must choose the duration*** ")
+	@NotNull @NumberFormat(style = Style.NUMBER) @Min(1) @Max(2)
 	@Column(name = "duration", nullable = false)
 	private int duration;
 

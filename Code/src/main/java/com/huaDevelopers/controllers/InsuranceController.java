@@ -91,7 +91,11 @@ public class InsuranceController {
 
 	@RequestMapping(value = "/{id}/review", method = RequestMethod.POST)
 	public String reviewInsurance(@PathVariable("id") Long id, Model model,
-			@ModelAttribute("insurance") Insurance insur, Errors errors) {
+			@Valid @ModelAttribute("insurance") Insurance insur, Errors errors) {
+		if(errors.hasErrors()){
+			System.out.println("errors");
+			return "insur_add";
+		}
 		int duration = insur.getDuration();
 		String type = insur.getType();
 		boolean flag = insur.getNewDriver();

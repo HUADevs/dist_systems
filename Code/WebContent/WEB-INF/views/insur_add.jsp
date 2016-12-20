@@ -66,7 +66,7 @@
 				<form:form modelAttribute="insurance" action="${formUrl}"
 					method="post" cssClass="col-md-8 col-md-offset-2">
 					<div class="form-group custom-control custom-radio">
-						<form:errors path="type" style="color:red" />
+						<form:errors path="type" style="color:red" /><br>
 						<form:radiobuttons cssClass="custom-control-input" path="type"
 							items="${typeOptions}" />
 					</div>
