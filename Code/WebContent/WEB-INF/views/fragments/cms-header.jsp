@@ -32,13 +32,14 @@
 						<li><a
 							href="<spring:url value="/cms/insurance/findVehicle"></spring:url>">Create
 								Insurance</a></li>
-						<li><a href="<spring:url value="/cms/insurance/view"></spring:url>">View all Insurances</a></li>
+						<li><a href="<spring:url value="/cms/insurance/view"></spring:url>">Edit Insurance</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false"><i class="glyphicon glyphicon-list-alt"></i><span></span>
 						Damages <span class="caret"></span></a>
 					<ul class="dropdown-menu">
+						<li><a href="<spring:url value="/cms/insurance/view"></spring:url>">Declare Damage</a>
 						<li><a href="#">Damage History</a></li>
 						<sec:authorize
 							access="hasAnyAuthority('Sales Manager', 'Manager')">
