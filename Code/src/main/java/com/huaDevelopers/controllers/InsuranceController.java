@@ -54,7 +54,6 @@ public class InsuranceController {
 
 	@RequestMapping(value = "/findVehicle", method = RequestMethod.POST)
 	public String saveCustomer(Model model, @Valid @ModelAttribute("vehicle") Vehicle vehicle, Errors errors) {
-		List<Vehicle> allVehicles = this.vService.listAllVehicles();
 		Transformers megatron = new Transformers();
 		if (errors.hasErrors()) {
 			System.out.println(errors);
@@ -62,13 +61,17 @@ public class InsuranceController {
 		} else if (ExternalVehicle.isEqual(this.externalService.getVehicle(vehicle.getLicensePlate()), null)) {
 			errors.rejectValue("licensePlate", "vehicle.licensePlate", "***This license plate does not exist***");
 			return "vehicle_add";
-		} else if (allVehicles
-				.contains(megatron.externalVToMyV.apply(this.externalService.getVehicle(vehicle.getLicensePlate())))) {
+		}
+
+		vehicle = megatron.externalVToMyV.apply(this.externalService.getVehicle(vehicle.getLicensePlate()));
+		if (vehicle.getLicensePlate()
+				.equals(this.vService.getVehicleByLP(vehicle.getLicensePlate()).getLicensePlate())) {
 			errors.rejectValue("licensePlate", "vehicle.licensePlate",
 					"***Attention***This license plate is insuranced***");
 			return "vehicle_add";
 		} else {
-			vehicle = megatron.externalVToMyV.apply(this.externalService.getVehicle(vehicle.getLicensePlate()));
+			// vehicle =
+			// megatron.externalVToMyV.apply(this.externalService.getVehicle(vehicle.getLicensePlate()));
 			Customer cust = this.customerService.getCustomerByID(vehicle.getCustomerPersonID().getPersonalId());
 			if (!Customer.isEqual(cust, null)) {
 				vehicle = this.vService.insertVehicle(vehicle, cust);
@@ -118,12 +121,15 @@ public class InsuranceController {
 	@RequestMapping(value = "/{id}/save", method = RequestMethod.GET)
 	public String saveInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("insurance") Insurance insur,
 			SessionStatus status) {
-		this.insuranceService.addInsurance(insur);
+		if (!(insur.getId() == null))
+			this.insuranceService.updateInsurance(insur);
+		else
+			this.insuranceService.addInsurance(insur);
 		model.addAttribute("insurance", insur);
 		status.setComplete();
 		return "insur_success";
 	}
-	
+
 	public String success() {
 		return "insur_success";
 	}
@@ -135,11 +141,11 @@ public class InsuranceController {
 		model.addAttribute("insurances", this.insuranceService.listAllInsurances());
 		return "insur_all";
 	}
-	
-	@RequestMapping(value="/view", method = RequestMethod.POST)
-	public String viewSearchedInsurance(Model model, @Valid @ModelAttribute("search") Vehicle veh, Errors errors){
+
+	@RequestMapping(value = "/view", method = RequestMethod.POST)
+	public String viewSearchedInsurance(Model model, @Valid @ModelAttribute("search") Vehicle veh, Errors errors) {
 		Vehicle searched = vService.getVehicleByLP(veh.getLicensePlate());
-		if(searched==null){
+		if (searched == null) {
 			model.addAttribute("msg", "The insurance you searched does not exist");
 			model.addAttribute("insurances", this.insuranceService.listAllInsurances());
 			return "insur_all";
@@ -150,10 +156,16 @@ public class InsuranceController {
 		return "insur_all";
 	}
 
-	@RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
-	public String editInsurance(@PathVariable("id") Long id, Model model,
-			@ModelAttribute("insurance") Insurance insurance) {
-		this.insuranceService.updateInsurance(insurance);
+	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
+	public String editInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("vehicle") Vehicle vehicle) {
+		vehicle = this.vService.getVehicleByPID(id);
+		Customer cust = this.customerService.getCustomerByID(vehicle.getCustomerPersonID().getPersonalId());
+		model.addAttribute("customer", cust);
+		id = vehicle.getId();
+		model.addAttribute("id", id);
+		model.addAttribute("vehicle", vehicle);
+		Insurance insurance = vehicle.getInsurance();
+		model.addAttribute("insurance", insurance);
 		return "insur_edit";
 	}
 
