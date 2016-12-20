@@ -17,8 +17,10 @@ public interface VehicleService {
 
 	public List<Vehicle> listAllVehicles();
 
-	public void removeVehicle(String lp);
-	
+	public void removeVehicle(Long id);
+
 	public Vehicle insertVehicle(Vehicle vehicle, Customer cust);
+
+	public List<Vehicle> listAllVehiclesPerCustomer(String personalId);
 
 }

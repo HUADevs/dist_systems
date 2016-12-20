@@ -61,8 +61,8 @@ public class VehicleServiceImpl implements VehicleService {
 
 	@Override
 	@Transactional
-	public void removeVehicle(String lp) {
-		this.veDAO.removeVehicle(lp);
+	public void removeVehicle(Long id) {
+		this.veDAO.removeVehicle(id);
 	}
 
 	@Override
@@ -72,6 +72,12 @@ public class VehicleServiceImpl implements VehicleService {
 		vehicle.setCustomerPersonID(this.custDAO.getCustomerByID(vehicle.getCustomerPersonID().getPersonalId()));
 		this.veDAO.addVehicle(vehicle);
 		return vehicle;
+	}
+
+	@Override
+	@Transactional
+	public List<Vehicle> listAllVehiclesPerCustomer(String personalId) {
+		return this.veDAO.listAllVehiclesPerCustomer(personalId);
 	}
 
 }

@@ -32,7 +32,7 @@
 						<li><a
 							href="<spring:url value="/cms/insurance/findVehicle"></spring:url>">Create
 								Insurance</a></li>
-						<li><a href="#">Edit Insurance</a></li>
+						<li><a href="<spring:url value="/cms/insurance/view"></spring:url>">Edit Insurance</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"

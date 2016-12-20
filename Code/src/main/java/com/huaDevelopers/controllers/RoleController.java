@@ -85,7 +85,7 @@ public class RoleController {
 			return "role_add";	
 		}
 		this.r_service.addRole(role);
-		return "redirect:/admin/role/add";
+		return "redirect:/admin/role/view";
 	}
 	
 	@RequestMapping(value="/view", method= RequestMethod.GET)

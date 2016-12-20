@@ -97,7 +97,7 @@ hr {
 						href="<c:url value='/cms/insurance/${insurance.id}/edit' />"
 						class="btn btn-warning btn-lg">Edit</a> <a
 						href="<c:url value='/cms/insurance/${insurance.id}/save' />"
-						class="btn btn-success btn-lg">Save</a>
+						class="btn btn-success btn-lg pull-right">Save</a>
 					
 				</div>
 			</div>

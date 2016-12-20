@@ -17,5 +17,7 @@ public interface VehicleDAO {
 	
 	public List<Vehicle> listAllVehicles();
 
-	public void removeVehicle(String lp);
+	public void removeVehicle(Long id);
+	
+	public List<Vehicle> listAllVehiclesPerCustomer(String personalId);
 }
