@@ -84,13 +84,6 @@
 		<property name="veDAO" ref="veDAO" />
 	</bean>
 
-	<bean id="formDAO" class="com.huaDevelopers.dao.DFormDAOImpl">
-		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
-	</bean>
-	<bean id="formService" class="com.huaDevelopers.data.Services.DFormServiceImpl">
-		<property name="formDAO" ref="formDAO" />
-	</bean>
-
 	<bean id="incDAO" class="com.huaDevelopers.dao.IncDAOImpl">
 		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
 	</bean>
@@ -124,6 +117,13 @@
 	</bean>
 	<bean id="externalService" class="com.huaDevelopers.data.Services.ExternalServiceImpl">
 		<property name="externalDAO" ref="externalDAO" />
+	</bean>
+	
+	<bean id="formDAO" class="com.huaDevelopers.dao.DFormDAOImpl">
+		<property name="sessionFactory" ref="hibernate5AnnotatedSessionFactory" />
+	</bean>
+	<bean id="dmgService" class="com.huaDevelopers.data.Services.DFormServiceImpl">
+		<property name="formDAO" ref="formDAO" />
 	</bean>
 
 

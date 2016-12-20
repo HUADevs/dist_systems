@@ -32,7 +32,7 @@ public class DamageForm implements Serializable {
 	private Vehicle licensePlate;
 
 	@NotEmpty
-	@Column(name = "description", nullable=false)
+	@Column(name = "description", length=100 ,nullable=false)
 	private String damageDescription;
 
 	@Column(name = "photo", nullable=false)

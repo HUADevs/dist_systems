@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,23 @@
 </head>
 <body>
 	<jsp:include page="../views/fragments/cms-header.jsp"></jsp:include>
-
+	<div class="container">
+		<div class="row">
+		<spring:url value="/cms/insurance/view" var="formUrl" />
+		<form:form modelAttribute="search" action="${formUrl }" method="post"
+			cssClass="col-md-8 col-md-offset-2">
+			<div>${msg}</div>
+			<div class="form-group">
+				<label for="ins-search">Search a specific insurance</label>
+				<form:errors path="licensePlate" style="color:red"/>
+				<form:input id="ins-search" cssClass="form-control"
+					path="licensePlate" />
+				<button type="submit" class="btn btn-submit"><span><i class="glyphicon glyphicon-search"></i></span></button>
+			</div>
+			</form:form>
+		</div>
+		
+		</div>
 	<div class="container">
 		<div class="row">
 			<div class="panel panel-info">
@@ -61,6 +78,11 @@
 							value="/cms/insurance/${insurance.id}/delete"/>"
 									class="btn btn-danger"><span><i
 											class="glyphicon glyphicon-trash"></i></span> Delete</a></td>
+						<td><a
+									href="<spring:url
+							value="/cms/damage/declare/${insurance.licensePlate.licensePlate}"/>"
+								class="btn btn-danger"><span><i
+										class="glyphicon glyphicon-list-alt"></i></span> Declare Damage</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

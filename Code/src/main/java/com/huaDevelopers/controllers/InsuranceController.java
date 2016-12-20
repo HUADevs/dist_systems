@@ -1,6 +1,7 @@
 package com.huaDevelopers.controllers;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -121,9 +122,25 @@ public class InsuranceController {
 		return "insur_save";
 	}
 
-	@RequestMapping(value = "/view")
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public String viewAllInsurance(Model model) {
+		Vehicle veh = new Vehicle();
+		model.addAttribute("search", veh);
 		model.addAttribute("insurances", this.insuranceService.listAllInsurances());
+		return "insur_all";
+	}
+	
+	@RequestMapping(value="/view", method = RequestMethod.POST)
+	public String viewSearchedInsurance(Model model, @Valid @ModelAttribute("search") Vehicle veh, Errors errors){
+		Vehicle searched = vService.getVehicleByLP(veh.getLicensePlate());
+		if(searched==null){
+			model.addAttribute("msg", "The insurance you searched does not exist");
+			model.addAttribute("insurances", this.insuranceService.listAllInsurances());
+			return "insur_all";
+		}
+		List<Insurance> search_results = new ArrayList<Insurance>();
+		search_results.add(this.insuranceService.getInsuranceByID(searched.getId()));
+		model.addAttribute("insurances", search_results);
 		return "insur_all";
 	}
 
