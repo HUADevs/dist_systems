@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.huaDevelopers.data.Entities.Customer;
 import com.huaDevelopers.data.Entities.DamageForm;
+import com.huaDevelopers.data.Entities.Insurance;
 import com.huaDevelopers.data.Entities.Vehicle;
 import com.huaDevelopers.data.Services.Interfaces.DamFormService;
 import com.huaDevelopers.data.Services.Interfaces.VehicleService;
@@ -44,7 +46,7 @@ public class DamageController {
 			errors.rejectValue("damagePhotoShoots", "DamageForm.damagePhotoShoots", "A file must be selected");
 			return "dmg_declare";
 		}
-		if(!file.getContentType().equals("image/png") || !file.getContentType().equals("image/jpeg") || !file.equals("image/jpg")){
+		if(!file.getContentType().equals("image/png") && !file.getContentType().equals("image/jpeg") && !file.equals("image/jpg")){
 			errors.rejectValue("damagePhotoShoots", "DamageForm.damagePhotoShoots", "jpg/png file types are only supported");
 		}
 		if(errors.hasErrors()){
@@ -61,7 +63,13 @@ public class DamageController {
 		Vehicle veh = this.vService.getVehicleByLP(lp);
 		dform.setLicensePlate(this.vService.getVehicleByPID(veh.getId()));
 		this.dmgService.addDamageForm(dform);
-		return "dmg_declare";
+		return "redirect:/cms/damage/view";
+	}
+	
+	@RequestMapping(value = "/view")
+	public String find(Model model) {
+		model.addAttribute("dmg_forms", this.dmgService.listAllDamageForms());
+		return "dmg_all";
 	}
 
 }

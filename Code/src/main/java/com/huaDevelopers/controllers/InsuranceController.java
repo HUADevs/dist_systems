@@ -64,8 +64,7 @@ public class InsuranceController {
 		}
 
 		vehicle = megatron.externalVToMyV.apply(this.externalService.getVehicle(vehicle.getLicensePlate()));
-		if (vehicle.getLicensePlate()
-				.equals(this.vService.getVehicleByLP(vehicle.getLicensePlate()).getLicensePlate())) {
+		if (!Vehicle.isEqual(this.vService.getVehicleByLP(vehicle.getLicensePlate()),null)) {
 			errors.rejectValue("licensePlate", "vehicle.licensePlate",
 					"***Attention***This license plate is insuranced***");
 			return "vehicle_add";
@@ -125,9 +124,9 @@ public class InsuranceController {
 	@RequestMapping(value = "/{id}/save", method = RequestMethod.GET)
 	public String saveInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("insurance") Insurance insur,
 			SessionStatus status) {
-		if (!(insur.getId() == null))
+		/*if (!(insur.getId() == null))
 			this.insuranceService.updateInsurance(insur);
-		else
+		else*/
 			this.insuranceService.addInsurance(insur);
 		model.addAttribute("insurance", insur);
 		status.setComplete();

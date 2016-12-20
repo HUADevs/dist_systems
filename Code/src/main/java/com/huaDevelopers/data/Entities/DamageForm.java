@@ -41,7 +41,7 @@ public class DamageForm implements Serializable {
 	@Column(name = "description", length=100 ,nullable=false)
 	private String damageDescription;
 
-	@Lob @Basic(fetch = FetchType.LAZY)
+	@Lob
 	@Column(name = "photo", nullable=false)
 	private byte[] damagePhotoShoots;
 	

@@ -140,5 +140,9 @@ public class Vehicle implements Serializable {
 				+ ", releaseDate=" + releaseDate + ", cubic=" + cubic + ", type=" + type + ", color=" + color
 				+ ", dmgForms=" + dmgForms + ", insurance=" + insurance + "]";
 	}
+	
+	public static boolean isEqual(Object obj1, Object obj2) {
+		return obj1 == obj2 || (obj1 != null && obj1.equals(obj2));
+	}
 
 }
