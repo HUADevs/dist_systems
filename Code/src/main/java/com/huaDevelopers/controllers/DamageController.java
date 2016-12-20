@@ -1,10 +1,13 @@
 package com.huaDevelopers.controllers;
 
+import java.time.LocalDate;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,9 +36,13 @@ public class DamageController {
 	}
 	
 	@RequestMapping(value="/declare/{lp}", method=RequestMethod.POST)
-	public String saveDamage(@Valid @ModelAttribute("dform") DamageForm dform, @PathVariable("lp") String lp) {
+	public String saveDamage(@Valid @ModelAttribute("dform") DamageForm dform,Errors errors, @PathVariable("lp") String lp) {
+		dform.setDateAdded(LocalDate.now());
+		if(errors.hasErrors()){
+			return "dmg_declare";
+		}
 		Vehicle veh = this.vService.getVehicleByLP(lp);
-		dform.setLicensePlate(veh);
+		dform.setLicensePlate(this.vService.getVehicleByPID(veh.getId()));
 		this.dmgService.addDamageForm(dform);
 		return "dmg_declare";
 	}

@@ -40,7 +40,7 @@
 		<h2 class="text-center">Available Insurance Packages</h2>
 		<br>
 		<div class="row">
-			<div class="col-md-3 col-md-offset-1">
+			<div class="col-md-4">
 				<div class="panel panel-primary panel-table">
 					<div class="panel-heading">
 						<div class="tr">
@@ -50,28 +50,21 @@
 					<div class="panel-body">
 						<div class="tr">
 							<section>
-								<h4>
-									<1000cc: <strong>250<i
-										class="glyphicon glyphicon-euro"></i></strong>
-								</h4>
-								<h4>
-									1000-1400cc: <strong>300<i
-										class="glyphicon glyphicon-euro"></i></strong>
-								</h4>
-								<h4>
-									1400-1800cc: <strong>350<i
-										class="glyphicon glyphicon-euro"></i></strong>
-								</h4>
-								<h4>
-									>1800cc: <strong>450<i
-										class="glyphicon glyphicon-euro"></i></strong>
-								</h4>
+							<h4></h4>
+								<ul>
+									<li>Automobile Liability</li>
+									<li>Coverage by an uninsured vehicle</li>
+									<li>Legal protection</li>
+									<li>24/7 Health Line</li>
+									<li>Accident care</li>
+								</ul>
+								<br><br><br><br>
 							</section>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-4">
 				<div class="panel panel-primary panel-table">
 					<div class="panel-heading">
 						<div class="tr">
@@ -81,28 +74,19 @@
 					<div class="panel-body">
 						<div class="tr">
 							<section>
-								<h4>
-									<1000cc: <strong>300<i
-										class="glyphicon glyphicon-euro"></i></strong>
-								</h4>
-								<h4>
-									1000-1400cc: <strong>350<i
-										class="glyphicon glyphicon-euro"></i></strong>
-								</h4>
-								<h4>
-									1400-1800cc: <strong>400<i
-										class="glyphicon glyphicon-euro"></i></strong>
-								</h4>
-								<h4>
-									>1800cc: <strong>500<i
-										class="glyphicon glyphicon-euro"></i></strong>
-								</h4>
+								<h4 class="text-center">Basic Package</h4>
+								<h4 class="text-center">+</h4>
+								<ul>
+									<li>Full Roadside Assistance</li>
+									<li>Fire</li>
+								</ul>
+								<br><br><br><br>
 							</section>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-4">
 				<div class="panel panel-primary panel-table">
 					<div class="panel-heading">
 						<div class="tr">
@@ -112,22 +96,16 @@
 					<div class="panel-body">
 						<div class="tr">
 							<section>
-								<h4>
-									<1000cc: <strong>350<i
-										class="glyphicon glyphicon-euro"></i></strong>
-								</h4>
-								<h4>
-									1000-1400cc: <strong>400<i
-										class="glyphicon glyphicon-euro"></i></strong>
-								</h4>
-								<h4>
-									1400-1800cc: <strong>450<i
-										class="glyphicon glyphicon-euro"></i></strong>
-								</h4>
-								<h4>
-									>1800cc: <strong>550<i
-										class="glyphicon glyphicon-euro"></i></strong>
-								</h4>
+								<h4 class="text-center">Intermediate Package</h4>
+								<h4 class="text-center">+</h4>
+								<ul>
+									<li>Natural phenomena</li>
+									<li>Terrorist actions</li>
+									<li>Total theft</li>
+									<li>Partial theft</li>
+									<li>Crystal breakage</li>
+									<li>Personal driver accident</li>
+								</ul>
 							</section>
 						</div>
 					</div>

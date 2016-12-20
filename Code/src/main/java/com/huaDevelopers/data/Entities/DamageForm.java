@@ -1,13 +1,17 @@
 package com.huaDevelopers.data.Entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
@@ -30,13 +34,14 @@ public class DamageForm implements Serializable {
 	private int id;
 
 	@ManyToOne
-	@JoinColumn(name = "license_plate", unique=true, nullable=false)
+	@JoinColumn(name = "vehicle_id", nullable=false)
 	private Vehicle licensePlate;
 
 	@NotEmpty
 	@Column(name = "description", length=100 ,nullable=false)
 	private String damageDescription;
 
+	@Lob @Basic(fetch = FetchType.LAZY)
 	@Column(name = "photo", nullable=false)
 	private byte[] damagePhotoShoots;
 	
@@ -48,6 +53,9 @@ public class DamageForm implements Serializable {
 
 	@Column(name = "approval", nullable=true)
 	private Boolean approval;
+	
+	@Column(name = "date", nullable=false)
+	private LocalDate dateAdded;
 
 	public DamageForm() {
 		// TODO Auto-generated constructor stub
@@ -99,6 +107,14 @@ public class DamageForm implements Serializable {
 
 	public void setApproval(Boolean approval) {
 		this.approval = approval;
+	}
+
+	public LocalDate getDateAdded() {
+		return dateAdded;
+	}
+
+	public void setDateAdded(LocalDate dateAdded) {
+		this.dateAdded = dateAdded;
 	}
 
 }
