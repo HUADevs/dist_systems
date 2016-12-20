@@ -61,8 +61,10 @@ public class InsuranceController {
 		} else if (ExternalVehicle.isEqual(this.externalService.getVehicle(vehicle.getLicensePlate()), null)) {
 			errors.rejectValue("licensePlate", "vehicle.licensePlate", "***This license plate does not exist***");
 			return "vehicle_add";
-		} else if (allVehicles.contains(megatron.externalVToMyV.apply(this.externalService.getVehicle(vehicle.getLicensePlate())))) {
-			errors.rejectValue("licensePlate", "vehicle.licensePlate", "***Attention***This license plate is insuranced***");
+		} else if (allVehicles
+				.contains(megatron.externalVToMyV.apply(this.externalService.getVehicle(vehicle.getLicensePlate())))) {
+			errors.rejectValue("licensePlate", "vehicle.licensePlate",
+					"***Attention***This license plate is insuranced***");
 			return "vehicle_add";
 		} else {
 			vehicle = megatron.externalVToMyV.apply(this.externalService.getVehicle(vehicle.getLicensePlate()));
@@ -118,7 +120,11 @@ public class InsuranceController {
 		this.insuranceService.addInsurance(insur);
 		model.addAttribute("insurance", insur);
 		status.setComplete();
-		return "insur_save";
+		return "insur_success";
+	}
+	
+	public String success() {
+		return "insur_success";
 	}
 
 	@RequestMapping(value = "/view")
@@ -128,7 +134,8 @@ public class InsuranceController {
 	}
 
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
-	public String editInsurance(@PathVariable("id") Long id, @ModelAttribute("insurance") Insurance insurance) {
+	public String editInsurance(@PathVariable("id") Long id, Model model,
+			@ModelAttribute("insurance") Insurance insurance) {
 		this.insuranceService.updateInsurance(insurance);
 		return "insur_edit";
 	}
