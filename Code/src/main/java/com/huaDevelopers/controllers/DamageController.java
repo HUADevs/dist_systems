@@ -1,8 +1,11 @@
 package com.huaDevelopers.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,15 +27,16 @@ public class DamageController {
 
 	@RequestMapping(value="/declare/{lp}", method=RequestMethod.GET)
 	public String declareDamage(Model model, @PathVariable("lp") String lp) {
-		Vehicle veh = vService.getVehicleByLP(lp);
-		DamageForm dform = new DamageForm();
-		dform.setLicensePlate(veh);
-		model.addAttribute("dform",dform);
+		model.addAttribute("lp", lp);
+		model.addAttribute("dform",new DamageForm());
 		return "dmg_declare";
 	}
 	
-	@RequestMapping(value="/declare", method=RequestMethod.POST)
-	public String saveDamage() {
+	@RequestMapping(value="/declare/{lp}", method=RequestMethod.POST)
+	public String saveDamage(@Valid @ModelAttribute("dform") DamageForm dform, @PathVariable("lp") String lp) {
+		Vehicle veh = this.vService.getVehicleByLP(lp);
+		dform.setLicensePlate(veh);
+		this.dmgService.addDamageForm(dform);
 		return "dmg_declare";
 	}
 

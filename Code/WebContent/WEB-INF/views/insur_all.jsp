@@ -20,21 +20,29 @@
 	<jsp:include page="../views/fragments/cms-header.jsp"></jsp:include>
 	<div class="container">
 		<div class="row">
-		<spring:url value="/cms/insurance/view" var="formUrl" />
-		<form:form modelAttribute="search" action="${formUrl }" method="post"
-			cssClass="col-md-8 col-md-offset-2">
-			<div>${msg}</div>
-			<div class="form-group">
-				<label for="ins-search">Search a specific insurance</label>
-				<form:errors path="licensePlate" style="color:red"/>
-				<form:input id="ins-search" cssClass="form-control"
-					path="licensePlate" />
-				<button type="submit" class="btn btn-submit"><span><i class="glyphicon glyphicon-search"></i></span></button>
-			</div>
+			<spring:url value="/cms/insurance/view" var="formUrl" />
+			<form:form modelAttribute="search" action="${formUrl }" method="post"
+				cssClass="col-md-8 col-md-offset-2">
+				<div>${msg}</div>
+				<div class="form-group">
+					<div class="col-xs-12">
+						<label for="ins-search">Search a specific insurance</label>
+					</div>
+					<form:errors path="licensePlate" style="color:red" />
+					<div class="col-xs-10">
+						<form:input id="ins-search" cssClass="form-control"
+							path="licensePlate" />
+					</div>
+					<div class="col-xs-2">
+						<button type="submit" class="btn btn-primary">
+							<span><i class="glyphicon glyphicon-search"></i></span>
+						</button>
+					</div>
+				</div>
 			</form:form>
 		</div>
-		
-		</div>
+		<br />
+	</div>
 	<div class="container">
 		<div class="row">
 			<div class="panel panel-info">
@@ -78,11 +86,11 @@
 							value="/cms/insurance/${insurance.id}/delete"/>"
 									class="btn btn-danger"><span><i
 											class="glyphicon glyphicon-trash"></i></span> Delete</a></td>
-						<td><a
+								<td><a
 									href="<spring:url
 							value="/cms/damage/declare/${insurance.licensePlate.licensePlate}"/>"
-								class="btn btn-danger"><span><i
-										class="glyphicon glyphicon-list-alt"></i></span> Declare Damage</a></td>
+									class="btn btn-warning"><span><i
+											class="glyphicon glyphicon-list-alt"></i></span> Declare Damage</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
