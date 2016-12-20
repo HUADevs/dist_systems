@@ -2,12 +2,15 @@ package com.huaDevelopers.data.Entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
@@ -30,13 +33,14 @@ public class DamageForm implements Serializable {
 	private int id;
 
 	@ManyToOne
-	@JoinColumn(name = "license_plate", unique=true, nullable=false)
+	@JoinColumn(name = "vehicle_id", nullable=false)
 	private Vehicle licensePlate;
 
 	@NotEmpty
 	@Column(name = "description", length=100 ,nullable=false)
 	private String damageDescription;
 
+	@Lob @Basic(fetch = FetchType.LAZY)
 	@Column(name = "photo", nullable=false)
 	private byte[] damagePhotoShoots;
 	

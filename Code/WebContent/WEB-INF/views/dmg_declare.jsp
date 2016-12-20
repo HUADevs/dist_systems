@@ -27,7 +27,7 @@
 	<div class="row">
 		<spring:url value="/cms/damage/declare/${lp}" var="formUrl" />
 		<form:form modelAttribute="dform" action="${formUrl }" method="post"
-			cssClass="col-md-8 col-md-offset-2">
+			cssClass="col-md-8 col-md-offset-2" enctype="multipart/form-data">
 			<div>${msg}</div>
 			<div class="form-group">
 				<label for="dform-description">Description</label>
