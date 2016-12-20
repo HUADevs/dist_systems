@@ -9,13 +9,13 @@ public interface InsuranceDAO {
 
 	public void updateInsurance(Insurance insurance);
 
-	public Insurance getInsuranceByID(int id);
+	public Insurance getInsuranceByID(Long id);
 	
 	public Insurance getInsuranceByLicensePlate(String licensePlate);
 
 	public List<Insurance> listAllInsurances();
 
-	public void removeInsurance(int id);
+	public void removeInsurance(Long id);
 	
 
 }

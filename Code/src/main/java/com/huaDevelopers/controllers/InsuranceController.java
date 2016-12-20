@@ -1,6 +1,7 @@
 package com.huaDevelopers.controllers;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -53,15 +54,18 @@ public class InsuranceController {
 
 	@RequestMapping(value = "/findVehicle", method = RequestMethod.POST)
 	public String saveCustomer(Model model, @Valid @ModelAttribute("vehicle") Vehicle vehicle, Errors errors) {
+		List<Vehicle> allVehicles = this.vService.listAllVehicles();
+		Transformers megatron = new Transformers();
 		if (errors.hasErrors()) {
 			System.out.println(errors);
 			return "vehicle_add";
 		} else if (ExternalVehicle.isEqual(this.externalService.getVehicle(vehicle.getLicensePlate()), null)) {
-			System.out.println(errors);
 			errors.rejectValue("licensePlate", "vehicle.licensePlate", "***This license plate does not exist***");
 			return "vehicle_add";
+		} else if (allVehicles.contains(megatron.externalVToMyV.apply(this.externalService.getVehicle(vehicle.getLicensePlate())))) {
+			errors.rejectValue("licensePlate", "vehicle.licensePlate", "***Attention***This license plate is insuranced***");
+			return "vehicle_add";
 		} else {
-			Transformers megatron = new Transformers();
 			vehicle = megatron.externalVToMyV.apply(this.externalService.getVehicle(vehicle.getLicensePlate()));
 			Customer cust = this.customerService.getCustomerByID(vehicle.getCustomerPersonID().getPersonalId());
 			if (!Customer.isEqual(cust, null)) {
@@ -116,41 +120,52 @@ public class InsuranceController {
 	@RequestMapping(value = "/{id}/save", method = RequestMethod.GET)
 	public String saveInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("insurance") Insurance insur,
 			SessionStatus status) {
-		System.out.println("offer  " + insur.getDiscount());
-		System.out.println("Price " + insur.getPrice());
-		System.out.println("Type " + insur.getType());
-		System.out.println("Duration " + insur.getDuration());
-		System.out.println("Start " + insur.getInsuranceDate());
-		System.out.println("Veh " + insur.getLicensePlate().getLicensePlate());
-		System.out.println("New " + insur.getNewDriver());
-
 		this.insuranceService.addInsurance(insur);
 		model.addAttribute("insurance", insur);
 		status.setComplete();
 		return "insur_save";
 	}
 
-	@RequestMapping(value = "/view")
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public String viewAllInsurance(Model model) {
+		Vehicle veh = new Vehicle();
+		model.addAttribute("search", veh);
 		model.addAttribute("insurances", this.insuranceService.listAllInsurances());
+		return "insur_all";
+	}
+	
+	@RequestMapping(value="/view", method = RequestMethod.POST)
+	public String viewSearchedInsurance(Model model, @Valid @ModelAttribute("search") Vehicle veh, Errors errors){
+		Vehicle searched = vService.getVehicleByLP(veh.getLicensePlate());
+		if(searched==null){
+			model.addAttribute("msg", "The insurance you searched does not exist");
+			model.addAttribute("insurances", this.insuranceService.listAllInsurances());
+			return "insur_all";
+		}
+		List<Insurance> search_results = new ArrayList<Insurance>();
+		search_results.add(this.insuranceService.getInsuranceByID(searched.getId()));
+		model.addAttribute("insurances", search_results);
 		return "insur_all";
 	}
 
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.POST)
-	public String editInsurance(@PathVariable("id") int id, @ModelAttribute("insurance") Insurance insurance) {
+	public String editInsurance(@PathVariable("id") Long id, @ModelAttribute("insurance") Insurance insurance) {
 		this.insuranceService.updateInsurance(insurance);
 		return "insur_edit";
 	}
 
 	@RequestMapping(value = "/{id}/delete")
-	public String deleteInsurance(@PathVariable("id") int id) {
-		this.insuranceService.removeInsurance(id);
+	public String deleteInsurance(@PathVariable("id") Long id) {
+		Customer cust = this.vService.getVehicleByPID(id).getCustomerPersonID();
+		this.vService.removeVehicle(id);
+		List<Vehicle> vList = this.vService.listAllVehiclesPerCustomer(cust.getPersonalId());
+		if (vList.isEmpty())
+			this.customerService.removeCustomer(cust.getId());
 		return "redirect:/cms/insurance/view";
 	}
 
 	@ModelAttribute("insurance")
 	public Insurance getInsurance() {
-		System.out.println("Adding a new insurance to the model");
 		return new Insurance();
 	}
 

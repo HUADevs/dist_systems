@@ -55,9 +55,9 @@ public class InsurDAOImpl implements InsuranceDAO {
 	}
 
 	@Override
-	public void removeInsurance(int id) {
+	public void removeInsurance(Long id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Insurance insurance = session.load(Insurance.class, new Integer(id));
+		Insurance insurance = session.load(Insurance.class, id);
 		if (insurance != null) {
 			session.delete(insurance);
 			logger.info("Insurance has successfully deleted from db" + insurance.toString());
@@ -67,9 +67,9 @@ public class InsurDAOImpl implements InsuranceDAO {
 	}
 
 	@Override
-	public Insurance getInsuranceByID(int id) {
+	public Insurance getInsuranceByID(Long id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Insurance insurance = session.load(Insurance.class, new Integer(id));
+		Insurance insurance = session.load(Insurance.class, id);
 		logger.info("Insurance successfully selected from db" + insurance.toString());
 		return insurance;
 	}

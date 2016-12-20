@@ -122,7 +122,7 @@
 					<p>Add a new insurance. Edit and delete existing insurances.</p>
 					<p>
 						<a class="btn btn-secondary"
-							href="<spring:url value="cms/insurance/findVehicle"/>"
+							href="<spring:url value="/cms/insurance/findVehicle"/>"
 							role="button">Add »</a> <a class="btn btn-secondary"
 							href="<spring:url value="/cms/insurance/edit"/>" role="button">Edit
 							»</a>

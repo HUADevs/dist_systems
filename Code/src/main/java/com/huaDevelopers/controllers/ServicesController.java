@@ -46,7 +46,7 @@ public class ServicesController {
 			return "service_add";	
 		}
 		this.s_service.addService(serv);
-		return "redirect:/admin/service/add";
+		return "redirect:/admin/service/view";
 	}
 	
 	@RequestMapping(value="/view", method= RequestMethod.GET)

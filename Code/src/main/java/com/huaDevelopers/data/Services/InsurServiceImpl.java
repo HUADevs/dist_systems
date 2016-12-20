@@ -37,7 +37,7 @@ public class InsurServiceImpl implements InsuranceService {
 
 	@Transactional
 	@Override
-	public Insurance getInsuranceByID(int id) {
+	public Insurance getInsuranceByID(Long id) {
 		return this.insurDAO.getInsuranceByID(id);
 	}
 
@@ -55,7 +55,7 @@ public class InsurServiceImpl implements InsuranceService {
 
 	@Transactional
 	@Override
-	public void removeInsurance(int id) {
+	public void removeInsurance(Long id) {
 		this.insurDAO.removeInsurance(id);
 	}
 
