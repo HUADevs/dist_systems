@@ -44,7 +44,7 @@
 						<c:forEach items="${dmg_forms}" var="dmg">
 							<c:choose>
 								<c:when test="${dmg.damageCost > 2000 and empty dmg.approval}">
-									<sec:authorize access="hasAnyAuthority('CEO')">
+									<sec:authorize access="hasAnyAuthority('Damage Approval more than 2000')">
 										<tr>
 											<td>${dmg.id}</td>
 											<td>${dmg.licensePlate.licensePlate}</td>
@@ -63,7 +63,7 @@
 								</c:when>
 								<c:when test="${dmg.damageCost > 300 and empty dmg.approval}">
 									<sec:authorize
-										access="hasAnyAuthority('Sales Manager')">
+										access="hasAnyAuthority('Damage Approval 300-2000')">
 										<tr>
 											<td>${dmg.id}</td>
 											<td>${dmg.licensePlate.licensePlate}</td>
