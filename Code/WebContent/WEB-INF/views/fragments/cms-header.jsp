@@ -4,10 +4,10 @@
 	uri="http://www.springframework.org/security/tags"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <c:set var="role" value="Employee" />
-<sec:authorize access="hasAuthority('Sales Manager')">
+<sec:authorize access="hasAuthority('Damage Approval 300-2000')">
 	<c:set var="role" value="Sales Manager" />
 </sec:authorize>
-<sec:authorize access="hasAuthority('CEO')">
+<sec:authorize access="hasAuthority('Damage Approval more than 2000')">
 	<c:set var="role" value="CEO" />
 </sec:authorize>
 <c:if test="${pageContext.request.userPrincipal.name != null}">
@@ -67,7 +67,7 @@
 						<li><a
 							href="<spring:url value="/cms/damage/view"></spring:url>">Damage
 								History</a></li>
-						<sec:authorize access="hasAnyAuthority('Sales Manager', 'CEO')">
+						<sec:authorize access="hasAnyAuthority('Damage Approval 300-2000', 'Damage Approval more than 2000')">
 							<li role="separator" class="divider"></li>
 							<li><a href="<spring:url value="/cms/damage/view/specific"/>">Damage Approval <span id=badge
 									class="badge">0</span>

@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.huaDevelopers.dao.Interfaces.UserDAO;
 import com.huaDevelopers.data.Entities.Role;
+import com.huaDevelopers.data.Entities.Services;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -29,7 +30,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		if (user != null) {
 			List<GrantedAuthority> authorities = buildUserAuthority(user.getAssignedRole());
 			return buildUserForAuthentication(user, authorities);
-		}else{
+		} else {
 			throw new UsernameNotFoundException("User not found");
 		}
 	}
@@ -44,12 +45,20 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	private List<GrantedAuthority> buildUserAuthority(Role role) {
 
 		Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
-		List<Role> userRoles = new ArrayList<Role>();
-		userRoles.add(role);
-
-		// Build user's authorities
-		for (Role userRole : userRoles) {
-			setAuths.add(new SimpleGrantedAuthority(userRole.getRoleName()));
+		/*
+		 * List<Role> userRoles = new ArrayList<Role>(); userRoles.add(role);
+		 * 
+		 * // Build user's authorities for (Role userRole : userRoles) {
+		 * setAuths.add(new SimpleGrantedAuthority(userRole.getRoleName())); }
+		 * 
+		 * List<GrantedAuthority> Result = new
+		 * ArrayList<GrantedAuthority>(setAuths);
+		 */ 
+		if (role.getRoleName().equals("Admin")) {
+			setAuths.add(new SimpleGrantedAuthority("Admin"));
+		}
+		for (Services userService : role.getServices()) {
+			setAuths.add(new SimpleGrantedAuthority(userService.getServiceName()));
 		}
 
 		List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
