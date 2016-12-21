@@ -56,4 +56,10 @@ public class DFormServiceImpl implements DamFormService {
 		return this.formDAO.listAllDamageForms();
 	}
 
+	@Override
+	@Transactional
+	public Long getFormCount(String role) {
+		return this.formDAO.getFormCount(role);
+	}
+
 }

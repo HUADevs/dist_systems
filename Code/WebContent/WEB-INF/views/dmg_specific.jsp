@@ -43,20 +43,13 @@
 					<tbody>
 						<c:forEach items="${dmg_forms}" var="dmg">
 							<c:choose>
-								<c:when test="${dmg.damageCost > 2000 && dmg.approval == null}">
+								<c:when test="${dmg.damageCost > 2000 and empty dmg.approval}">
 									<sec:authorize access="hasAnyAuthority('CEO')">
 										<tr>
 											<td>${dmg.id}</td>
 											<td>${dmg.licensePlate.licensePlate}</td>
 											<td>${dmg.damageCost}<i class="glyphicon glyphicon-euro"></i></td>
-											<td><span><c:choose>
-														<c:when test="${dmg.approval == true}">
-															<i class="glyphicon glyphicon-ok" style="color: green"></i>
-														</c:when>
-														<c:otherwise>
-															<i class="glyphicon glyphicon-remove" style="color: red"></i>
-														</c:otherwise>
-													</c:choose></span></td>
+											<td><span></span></td>
 											<td>${dmg.dateAdded}</td>
 											<td><c:if test="${dmg.approval == null}">
 													<a
@@ -68,21 +61,14 @@
 										</tr>
 									</sec:authorize>
 								</c:when>
-								<c:when test="${dmg.damageCost > 300 && dmg.approval == null}">
+								<c:when test="${dmg.damageCost > 300 and empty dmg.approval}">
 									<sec:authorize
 										access="hasAnyAuthority('Sales Manager')">
 										<tr>
 											<td>${dmg.id}</td>
 											<td>${dmg.licensePlate.licensePlate}</td>
 											<td>${dmg.damageCost}<i class="glyphicon glyphicon-euro"></i></td>
-											<td><span><c:choose>
-														<c:when test="${dmg.approval == true}">
-															<i class="glyphicon glyphicon-ok" style="color: green"></i>
-														</c:when>
-														<c:otherwise>
-															<i class="glyphicon glyphicon-remove" style="color: red"></i>
-														</c:otherwise>
-													</c:choose></span></td>
+											<td><span></span></td>
 											<td>${dmg.dateAdded}</td>
 											<td><c:if test="${dmg.approval == null}">
 													<a
@@ -95,27 +81,6 @@
 									</sec:authorize>
 								</c:when>
 								<c:otherwise>
-									<tr>
-										<td>${dmg.id}</td>
-										<td>${dmg.licensePlate.licensePlate}</td>
-										<td>${dmg.damageCost}<i class="glyphicon glyphicon-euro"></i></td>
-										<td><span><c:choose>
-													<c:when test="${dmg.approval == true}">
-														<i class="glyphicon glyphicon-ok" style="color: green"></i>
-													</c:when>
-													<c:otherwise>
-														<i class="glyphicon glyphicon-remove" style="color: red"></i>
-													</c:otherwise>
-												</c:choose></span></td>
-										<td>${dmg.dateAdded}</td>
-										<td><c:if test="${dmg.approval == null}">
-												<a
-													href="<spring:url
-							value="/cms/damage/${dmg.id}/review"/>"
-													class="btn btn-success"><span><i
-														class="glyphicon glyphicon-pencil"></i></span> Review</a>
-											</c:if></td>
-									</tr>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>

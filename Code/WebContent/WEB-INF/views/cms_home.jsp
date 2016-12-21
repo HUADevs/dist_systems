@@ -133,9 +133,9 @@
 					<p>Declare a new Damage Incident Form. Edit existing forms.</p>
 					<p>
 						<a class="btn btn-secondary"
-							href="<spring:url value="/admin/role/add"/>" role="button">Add
+							href="<spring:url value="/cms/insurance/view"/>" role="button">Add
 							»</a> <a class="btn btn-secondary"
-							href="<spring:url value="/admin/role/view"/>" role="button">Edit
+							href="<spring:url value="cms/damage/view"/>" role="button">Edit
 							»</a>
 					</p>
 				</div>
@@ -145,7 +145,7 @@
 						<p>Approve or deny a damage form.</p>
 						<p>
 							<a class="btn btn-secondary"
-								href="<spring:url value="/cms/damageApproval/add"/>"
+								href="<spring:url value="/cms/damage/view/specific"/>"
 								role="button">Check »</a>
 						</p>
 					</div>

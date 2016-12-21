@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-
+/*Link the class,fields with the database table,columns.Declare constraints and relations with other entities*/
 @Entity
 @Table(name="User")
 public class User implements Serializable {
