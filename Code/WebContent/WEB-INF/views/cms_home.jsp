@@ -139,7 +139,7 @@
 							»</a>
 					</p>
 				</div>
-				<sec:authorize access="hasAnyAuthority('Sales Manager', 'Manager')">
+				<sec:authorize access="hasAnyAuthority('Sales Manager', 'CEO')">
 					<div class="col-md-4">
 						<h2>Approve Damage Forms</h2>
 						<p>Approve or deny a damage form.</p>

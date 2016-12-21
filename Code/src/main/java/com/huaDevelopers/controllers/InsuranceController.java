@@ -110,15 +110,17 @@ public class InsuranceController {
 	@RequestMapping(value = "/{id}/review", method = RequestMethod.POST)
 	public String reviewInsurance(@PathVariable("id") Long id, Model model,
 			@Valid @ModelAttribute("insurance") Insurance insur, Errors errors) {
+		Vehicle vehicle = this.vService.getVehicleByPID(id);
+		Customer cust = vehicle.getCustomerPersonID();
 		if (errors.hasErrors()) {
-			System.out.println("errors");
+			System.out.println(errors);
+			model.addAttribute("customer", cust);
+			model.addAttribute("vehicle", vehicle);
 			return "insur_add";
 		}
 		int duration = insur.getDuration();
 		String type = insur.getType();
 		boolean flag = insur.getNewDriver();
-		Vehicle vehicle = this.vService.getVehicleByPID(id);
-		Customer cust = vehicle.getCustomerPersonID();
 		insur.setInsuranceDate(LocalDate.now());
 		insur.setPrice(this.insuranceService.countInsurCost(vehicle, cust, type, duration, flag));
 		insur.setDiscount(this.insuranceService.countInsurDiscount(cust, duration));
@@ -167,7 +169,7 @@ public class InsuranceController {
 	}
 
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
-	public String editInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("vehicle") Vehicle vehicle) {
+	public String editInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("vehicle") Vehicle vehicle) {	
 		vehicle = this.vService.getVehicleByPID(id);
 		Customer cust = this.customerService.getCustomerByID(vehicle.getCustomerPersonID().getPersonalId());
 		model.addAttribute("customer", cust);
