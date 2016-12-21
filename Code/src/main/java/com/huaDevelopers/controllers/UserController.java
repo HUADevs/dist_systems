@@ -16,11 +16,12 @@ import com.huaDevelopers.data.Entities.User;
 import com.huaDevelopers.data.Services.Interfaces.DepartmentService;
 import com.huaDevelopers.data.Services.Interfaces.RoleService;
 import com.huaDevelopers.data.Services.Interfaces.UserService;
-
+/*Controller that handles all admin/user url requests*/
 @Controller
 @RequestMapping("/admin/user")
 public class UserController {
 
+	/*Services needed to load, insert or update User entities to the database*/
 	@Autowired
 	private UserService userService;
 
@@ -30,12 +31,14 @@ public class UserController {
 	@Autowired
 	private DepartmentService deptService;
 
+	/*Adds the list of all users to the model*/
 	@RequestMapping(value = "/view")
 	public String find(Model model) {
 		model.addAttribute("users", this.userService.listAllUser());
 		return "user_all";
 	}
 
+	/*Preparing the form to add a user*/
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addUser(Model model) {
 		/*add roles and departments to the model in order to populate the dropdown lists in the add User form*/
@@ -72,18 +75,17 @@ public class UserController {
 			model.addAttribute("departments", this.deptService.getAllDepts());
 			return "user_add";
 		} else {/*if there are no errors add the user to the database*/
-
 			/*set existing role and department to the user*/
 			user.setAssignedRole(this.roleService.getRoleByID(user.getAssignedRole().getRoleId()));
 			if (user.getWorkingDept() != null)
 				user.setWorkingDept(this.deptService.getDeptByID(user.getWorkingDept().getId()));
 			this.userService.addUser(user);
 		}
-
+		/*Redirect to list of users after successful addition of user*/
 		return "redirect:/admin/user/view";
 	}
 
-	/*Populate fields of user for editing*/
+	/*Populate fields  and dropdown lists of user form for editing a user*/
 	@RequestMapping(value = "/edit/{userId}")
 	public String UpdateUserInfo(@PathVariable("userId") int userId, Model model) {
 		model.addAttribute("roles", this.roleService.listAllRoles());
@@ -125,7 +127,7 @@ public class UserController {
 		return "redirect:/admin/user/view";
 	}
 
-	// delete a user by his id
+	/* delete a user by his id*/
 	@RequestMapping(value = "/delete/{userId}")
 	public String DeleteUser(@PathVariable("userId") int userId, Model model, RedirectAttributes redirectAttributes) {
 		this.userService.removeUser(userId);
