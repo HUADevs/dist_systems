@@ -40,11 +40,11 @@
 						Damages <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="<spring:url value="/cms/insurance/view"></spring:url>">Declare Damage</a>
-						<li><a href="#">Damage History</a></li>
+						<li><a href="<spring:url value="/cms/damage/view"></spring:url>">Damage History</a></li>
 						<sec:authorize
-							access="hasAnyAuthority('Sales Manager', 'Manager')">
+							access="hasAnyAuthority('Sales Manager', 'CEO')">
 							<li role="separator" class="divider"></li>
-							<li><a href="#">Damage Approval <span class="badge">0</span></a></li>
+							<li><a href="/cms/damage/view">Damage Approval <span class="badge">0</span></a></li>
 						</sec:authorize>
 					</ul></li>
 			</ul>

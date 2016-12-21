@@ -1,7 +1,6 @@
 package com.huaDevelopers.data.Entities;
 
 import java.io.Serializable;
-import java.sql.Blob;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -13,10 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "DamageForm")
@@ -33,28 +33,33 @@ public class DamageForm implements Serializable {
 	private int id;
 
 	@ManyToOne
-	@JoinColumn(name = "vehicle_id", nullable=false)
+	@JoinColumn(name = "vehicle_id", nullable = false)
 	private Vehicle licensePlate;
 
-	@NotEmpty
-	@Column(name = "description", length=100 ,nullable=false)
+	@NotBlank(message = "**You must provide a description of the damage**")
+	@Column(name = "description", length = 100, nullable = false)
 	private String damageDescription;
 
 	@Lob
-	@Column(name = "photo", nullable=false)
-	private Blob damagePhotoShoots;
-	
+	@Column(name = "photo", nullable = false)
+	private byte[] damagePhotoShoots;
 
 	@DecimalMax(value = "99999.999", message = "The decimal value can not be more than 99999.999 ")
-    @DecimalMin(value = "1.00", message = "The decimal value can not be less than 1.00 digit ")
-	@Column(name = "cost", nullable=false)
+	@DecimalMin(value = "1.00", message = "The decimal value can not be less than 1.00 ")
+	@Column(name = "cost", nullable = false)
 	private double damageCost;
 
-	@Column(name = "approval", nullable=true)
+	@Column(name = "approval", nullable = true)
 	private Boolean approval;
-	
-	@Column(name = "date", nullable=false)
+
+	@Column(name = "date", nullable = false)
 	private LocalDate dateAdded;
+
+	@Transient
+	private int ceoCounter;
+	
+	@Transient
+	private int salesCounter;
 
 	public DamageForm() {
 		// TODO Auto-generated constructor stub
@@ -84,11 +89,11 @@ public class DamageForm implements Serializable {
 		this.damageDescription = damageDescription;
 	}
 
-	public Blob getDamagePhotoShoots() {
+	public byte[] getDamagePhotoShoots() {
 		return damagePhotoShoots;
 	}
 
-	public void setDamagePhotoShoots(Blob damagePhotoShoots) {
+	public void setDamagePhotoShoots(byte[] damagePhotoShoots) {
 		this.damagePhotoShoots = damagePhotoShoots;
 	}
 
@@ -114,6 +119,22 @@ public class DamageForm implements Serializable {
 
 	public void setDateAdded(LocalDate dateAdded) {
 		this.dateAdded = dateAdded;
+	}
+
+	public int getCounter() {
+		return ceoCounter;
+	}
+
+	public void setCounter(int ceoCounter) {
+		this.ceoCounter = ceoCounter;
+	}
+
+	public int getSalesCounter() {
+		return salesCounter;
+	}
+
+	public void setSalesCounter(int salesCounter) {
+		this.salesCounter = salesCounter;
 	}
 
 }

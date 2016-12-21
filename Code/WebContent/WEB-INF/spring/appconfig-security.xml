@@ -15,7 +15,7 @@
 		<security:intercept-url pattern="/admin/**"
 			access="hasAuthority('Admin')" />
 		<security:intercept-url pattern="/cms/**"
-			access="hasAnyAuthority('Employee','Sales Manager')" />
+			access="hasAnyAuthority('Employee','Sales Manager','CEO')" />
 		<security:intercept-url pattern="/" access="permitAll" />
 		<security:form-login login-page="/login"
 			authentication-success-handler-ref="customAuthenticationSuccessHandler"
