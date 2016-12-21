@@ -79,8 +79,7 @@
 					<c:choose>
 						<c:when test="${insurance.newDriver}">
 							<div class="form-group">
-								<label for="newDriver">Driver under 23</label>
-								<form:checkbox id="newDriver" path="newDriver" checked="checked" />
+								<span>Driver under 23 is detected</span>	
 							</div>
 						</c:when>
 						<c:otherwise>
