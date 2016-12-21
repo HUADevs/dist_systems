@@ -55,6 +55,9 @@
 									</p>
 									<hr>
 									<p>Description: ${damage.damageDescription}</p>
+									<hr>
+									<label for="photo">Photo of the Incident</label>
+									<img id="photo" class="img-responsive" alt="damage-photo" src="/Car-insurance/cms/damage/${damage.id}/imageDisplay">
 								</section>
 							</div>
 						</div>

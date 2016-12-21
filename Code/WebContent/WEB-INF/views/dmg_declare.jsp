@@ -44,7 +44,7 @@
 			<div class="form-group">
 				<label for="dform-photo">Photo</label>
 				<form:errors path="damagePhotoShoots" style="color:red" />
-				<input type="file" name="file" id="dform-photo" class="form-control" />
+				<input type="file" name="file" id="dform-photo" />
 			</div>
 			
 			

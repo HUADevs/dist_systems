@@ -65,9 +65,9 @@
 				<spring:url value="/cms/insurance/${id}/review" var="formUrl" />
 				<form:form modelAttribute="insurance" action="${formUrl}"
 					method="post" cssClass="col-md-8 col-md-offset-2">
-					<div class="form-group custom-control custom-radio">
+					<div class="form-group">
 						<form:errors path="type" style="color:red" /><br>
-						<form:radiobuttons cssClass="custom-control-input" path="type"
+						<form:radiobuttons cssClass="" path="type"
 							items="${typeOptions}" />
 					</div>
 					<div class="form-group">

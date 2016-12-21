@@ -3,6 +3,9 @@ package com.huaDevelopers.controllers;
 import java.io.IOException;
 import java.time.LocalDate;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,7 +77,7 @@ public class DamageController {
 		model.addAttribute("dmg_forms", this.dmgService.listAllDamageForms());
 		return "dmg_all";
 	}
-	
+
 	@RequestMapping(value = "/view/specific")
 	public String findSpecific(Model model) {
 		model.addAttribute("dmg_forms", this.dmgService.listAllDamageForms());
@@ -91,18 +94,20 @@ public class DamageController {
 		return "dmg_approval";
 	}
 
+	@RequestMapping(value = "/{id}/imageDisplay", method = RequestMethod.GET)
+	public void showImage(@PathVariable("id") int id, HttpServletResponse response, HttpServletRequest request)
+			throws ServletException, IOException {
+		DamageForm dform = this.dmgService.getFormById(id);
+		response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+		response.getOutputStream().write(dform.getDamagePhotoShoots());
+		response.getOutputStream().close();
+	}
+
 	@RequestMapping(value = "/{id}/approve", method = RequestMethod.GET)
 	public String approve(@PathVariable("id") int id) {
 		DamageForm dform = this.dmgService.getFormById(id);
 		dform.setApproval(true);
 		this.dmgService.updateDamageForm(dform);
-		if (dform.getDamageCost() > 2000) {
-			int ceoCounter = dform.getCounter();
-			dform.setCounter(--ceoCounter);
-		} else if (dform.getDamageCost() > 300) {
-			int salesCounter = dform.getCounter();
-			dform.setCounter(--salesCounter);
-		}
 		return "redirect:/cms/damage/view";
 	}
 
@@ -111,18 +116,11 @@ public class DamageController {
 		DamageForm dform = this.dmgService.getFormById(id);
 		dform.setApproval(false);
 		this.dmgService.updateDamageForm(dform);
-		if (dform.getDamageCost() > 2000) {
-			int ceoCounter = dform.getCounter();
-			dform.setCounter(--ceoCounter);
-		} else if (dform.getDamageCost() > 300) {
-			int salesCounter = dform.getCounter();
-			dform.setCounter(--salesCounter);
-		}
 		return "redirect:/cms/damage/view";
 	}
-	
-	@RequestMapping(value="/formCount/{role}")	
-	public @ResponseBody Long getFormCount(@PathVariable("role") String role){
+
+	@RequestMapping(value = "/formCount/{role}")
+	public @ResponseBody Long getFormCount(@PathVariable("role") String role) {
 		return this.dmgService.getFormCount(role);
 	}
 }
