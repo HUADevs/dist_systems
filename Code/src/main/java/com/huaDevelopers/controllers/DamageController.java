@@ -111,13 +111,6 @@ public class DamageController {
 		DamageForm dform = this.dmgService.getFormById(id);
 		dform.setApproval(false);
 		this.dmgService.updateDamageForm(dform);
-		if (dform.getDamageCost() > 2000) {
-			int ceoCounter = dform.getCounter();
-			dform.setCounter(--ceoCounter);
-		} else if (dform.getDamageCost() > 300) {
-			int salesCounter = dform.getCounter();
-			dform.setCounter(--salesCounter);
-		}
 		return "redirect:/cms/damage/view";
 	}
 	
