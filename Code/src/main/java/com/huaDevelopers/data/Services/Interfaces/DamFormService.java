@@ -18,4 +18,6 @@ public interface DamFormService {
 
 	public List<DamageForm> listAllDamageForms();
 	
+	public Long getFormCount(String role);
+	
 }

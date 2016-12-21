@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.huaDevelopers.data.Entities.DamageForm;
@@ -73,6 +74,12 @@ public class DamageController {
 		model.addAttribute("dmg_forms", this.dmgService.listAllDamageForms());
 		return "dmg_all";
 	}
+	
+	@RequestMapping(value = "/view/specific")
+	public String findSpecific(Model model) {
+		model.addAttribute("dmg_forms", this.dmgService.listAllDamageForms());
+		return "dmg_specific";
+	}
 
 	@RequestMapping(value = "/{id}/review", method = RequestMethod.GET)
 	public String review(@PathVariable("id") int id, Model model, @ModelAttribute("dform") DamageForm dform) {
@@ -112,5 +119,10 @@ public class DamageController {
 			dform.setCounter(--salesCounter);
 		}
 		return "redirect:/cms/damage/view";
+	}
+	
+	@RequestMapping(value="/formCount/{role}")	
+	public @ResponseBody Long getFormCount(@PathVariable("role") String role){
+		return this.dmgService.getFormCount(role);
 	}
 }

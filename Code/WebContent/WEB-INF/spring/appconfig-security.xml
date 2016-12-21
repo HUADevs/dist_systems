@@ -7,7 +7,6 @@
 	<security:authentication-manager alias="authenticationManager">
 		<security:authentication-provider
 			user-service-ref="userDetailsServiceImpl">
-			<!-- <security:password-encoder ref="encoder"></security:password-encoder> -->
 		</security:authentication-provider>
 	</security:authentication-manager>
 
@@ -16,7 +15,7 @@
 			access="hasAuthority('Admin')" />
 		<security:intercept-url pattern="/cms/**"
 			access="hasAnyAuthority('Employee','Sales Manager','CEO')" />
-		<security:intercept-url pattern="/" access="permitAll" />
+		<!-- <security:intercept-url pattern="/" access="permitAll" /> -->
 		<security:form-login login-page="/login"
 			authentication-success-handler-ref="customAuthenticationSuccessHandler"
 			default-target-url="/welcome" authentication-failure-url="/login?error"
@@ -26,15 +25,8 @@
 			session-fixation-protection="migrateSession" />
 	</security:http>
 
-
-
 	<beans:bean id="userDetailsServiceImpl"
 		class="com.huaDevelopers.data.Services.UserDetailsServiceImpl"></beans:bean>
-
-	<beans:bean id="encoder"
-		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-		<beans:constructor-arg name="strength" value="11" />
-	</beans:bean>
 
 	<beans:bean id="customAuthenticationSuccessHandler"
 		class="com.huaDevelopers.controllers.CustomAuthenticationSuccessHandler" />

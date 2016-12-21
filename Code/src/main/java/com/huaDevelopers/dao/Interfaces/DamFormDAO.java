@@ -17,5 +17,7 @@ public interface DamFormDAO {
 	public DamageForm getFormById(int id);
 
 	public List<DamageForm> listAllDamageForms();
+	
+	public Long getFormCount(String role);
 
 }

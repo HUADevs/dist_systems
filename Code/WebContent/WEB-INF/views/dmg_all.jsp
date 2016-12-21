@@ -53,8 +53,10 @@
 														<c:when test="${dmg.approval == true}">
 															<i class="glyphicon glyphicon-ok" style="color: green"></i>
 														</c:when>
-														<c:otherwise>
+														<c:when test="${dmg.approval == false}">
 															<i class="glyphicon glyphicon-remove" style="color: red"></i>
+														</c:when>
+														<c:otherwise>
 														</c:otherwise>
 													</c:choose></span></td>
 											<td>${dmg.dateAdded}</td>
@@ -78,8 +80,10 @@
 														<c:when test="${dmg.approval == true}">
 															<i class="glyphicon glyphicon-ok" style="color: green"></i>
 														</c:when>
-														<c:otherwise>
+														<c:when test="${dmg.approval == false}">
 															<i class="glyphicon glyphicon-remove" style="color: red"></i>
+														</c:when>
+														<c:otherwise>
 														</c:otherwise>
 													</c:choose></span></td>
 											<td>${dmg.dateAdded}</td>
@@ -102,8 +106,10 @@
 													<c:when test="${dmg.approval == true}">
 														<i class="glyphicon glyphicon-ok" style="color: green"></i>
 													</c:when>
-													<c:otherwise>
+													<c:when test="${dmg.approval == false}">
 														<i class="glyphicon glyphicon-remove" style="color: red"></i>
+													</c:when>
+													<c:otherwise>
 													</c:otherwise>
 												</c:choose></span></td>
 										<td>${dmg.dateAdded}</td>

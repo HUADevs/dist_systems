@@ -73,4 +73,19 @@ public class DFormDAOImpl implements DamFormDAO {
 		return Formlist;
 	}
 
+	@Override
+	public Long getFormCount(String role) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Long counter;
+		if(role.equals("Sales Manager")){
+			counter = (Long)session.createQuery("select count(*) from DamageForm where cost>=300 and cost<2000 and approval=NULL").getSingleResult();
+		}else if(role.equals("CEO")){
+			counter = (Long)session.createQuery("select count(*) from DamageForm where cost>=2000 and approval=NULL").getSingleResult();
+		}else{
+			counter = (Long)session.createQuery("select count(*) from DamageForm where cost<300 and approval=NULL").getSingleResult();
+		}
+		return counter;
+	}
+	
+
 }

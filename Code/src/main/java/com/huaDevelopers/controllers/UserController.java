@@ -16,11 +16,12 @@ import com.huaDevelopers.data.Entities.User;
 import com.huaDevelopers.data.Services.Interfaces.DepartmentService;
 import com.huaDevelopers.data.Services.Interfaces.RoleService;
 import com.huaDevelopers.data.Services.Interfaces.UserService;
-
+/*Controller that handles all admin/user url requests*/
 @Controller
 @RequestMapping("/admin/user")
 public class UserController {
 
+	/*Services needed to load, insert or update User entities to the database*/
 	@Autowired
 	private UserService userService;
 
@@ -30,23 +31,27 @@ public class UserController {
 	@Autowired
 	private DepartmentService deptService;
 
+	/*Adds the list of all users to the model*/
 	@RequestMapping(value = "/view")
 	public String find(Model model) {
 		model.addAttribute("users", this.userService.listAllUser());
 		return "user_all";
 	}
 
+	/*Preparing the form to add a user*/
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addUser(Model model) {
+		/*add roles and departments to the model in order to populate the dropdown lists in the add User form*/
 		model.addAttribute("roles", this.roleService.listAllRoles());
 		model.addAttribute("departments", this.deptService.getAllDepts());
 		model.addAttribute("user", new User());
 		return "user_add";
 	}
 
-	// Form to add new user
+	/*Form to add new user*/
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String saveUser(Model model, @Valid @ModelAttribute("user") User user, Errors errors) {
+		/*Email validation*/
 		if (!user.getEmailAdress().isEmpty()) {
 			if (this.userService.getUserByEmail(user.getEmailAdress()) != null) {
 				errors.rejectValue("emailAdress", "user.emailAdress", "This email is already in use.");
@@ -55,6 +60,7 @@ public class UserController {
 				return "user_add";
 			} 
 		}
+		/*username validation*/
 		if (!user.getUserName().isEmpty()) {
 			if (this.userService.getUserByUsername(user.getUserName()) != null) {
 				errors.rejectValue("userName", "user.userName", "This username is already in use.");
@@ -63,22 +69,23 @@ public class UserController {
 				return "user_add";
 			} 
 		}
+		/*Validation for the rest of the fields*/
 		if (errors.hasErrors()) {
 			model.addAttribute("roles", this.roleService.listAllRoles());
 			model.addAttribute("departments", this.deptService.getAllDepts());
 			return "user_add";
-		} else {
-
+		} else {/*if there are no errors add the user to the database*/
+			/*set existing role and department to the user*/
 			user.setAssignedRole(this.roleService.getRoleByID(user.getAssignedRole().getRoleId()));
 			if (user.getWorkingDept() != null)
 				user.setWorkingDept(this.deptService.getDeptByID(user.getWorkingDept().getId()));
 			this.userService.addUser(user);
 		}
-
+		/*Redirect to list of users after successful addition of user*/
 		return "redirect:/admin/user/view";
 	}
 
-	// form to edit user by his id
+	/*Populate fields  and dropdown lists of user form for editing a user*/
 	@RequestMapping(value = "/edit/{userId}")
 	public String UpdateUserInfo(@PathVariable("userId") int userId, Model model) {
 		model.addAttribute("roles", this.roleService.listAllRoles());
@@ -87,9 +94,11 @@ public class UserController {
 		return "user_edit";
 	}
 
+	/*form to edit user by his id*/
 	@RequestMapping(value = "/edit/{userId}", method = RequestMethod.POST)
 	public String saveEditedUser(Model model, @PathVariable("userId") int userId,
 			@Valid @ModelAttribute("user") User user, Errors errors) {
+		/*validation of fields*/
 		if (this.userService.getUserByEmail(user.getEmailAdress()) != null
 				&& !(this.userService.getUserById(user.getUserId()).getEmailAdress().equals(user.getEmailAdress()))) {
 			errors.rejectValue("emailAdress", "user.emailAdress", "This email is already in use.");
@@ -109,7 +118,7 @@ public class UserController {
 			model.addAttribute("departments", this.deptService.getAllDepts());
 			return "user_edit";
 		} else {
-			// set existing role and department from the database
+			/*set existing role and department from the database*/
 			user.setAssignedRole(this.roleService.getRoleByID(user.getAssignedRole().getRoleId()));
 			if (user.getWorkingDept() != null)
 				user.setWorkingDept(this.deptService.getDeptByID(user.getWorkingDept().getId()));
@@ -118,7 +127,7 @@ public class UserController {
 		return "redirect:/admin/user/view";
 	}
 
-	// delete a user by his id
+	/* delete a user by his id*/
 	@RequestMapping(value = "/delete/{userId}")
 	public String DeleteUser(@PathVariable("userId") int userId, Model model, RedirectAttributes redirectAttributes) {
 		this.userService.removeUser(userId);

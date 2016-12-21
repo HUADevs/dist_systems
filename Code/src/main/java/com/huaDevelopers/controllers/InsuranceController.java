@@ -64,21 +64,33 @@ public class InsuranceController {
 		}
 
 		vehicle = megatron.externalVToMyV.apply(this.externalService.getVehicle(vehicle.getLicensePlate()));
-		if (!Vehicle.isEqual(this.vService.getVehicleByLP(vehicle.getLicensePlate()), null)) {
+		Vehicle checkvehicle = this.vService.getVehicleByLP(vehicle.getLicensePlate());
+		int flag = 0; //check if vehicle exists and has an insurance
+		if (!Vehicle.isEqual(checkvehicle, null)) {
+			flag = 1; 
+			Insurance check = checkvehicle.getInsurance();
+			if (!Insurance.isEqual(check, null)) {
+				flag = 2;
+			}
+		}
+		if (flag == 2) { //if there is insurance employee cannot create another for this vehicle
 			errors.rejectValue("licensePlate", "vehicle.licensePlate",
 					"***Attention***This license plate is insuranced***");
 			return "vehicle_add";
-		} else {
-			Customer cust = this.customerService.getCustomerByID(vehicle.getCustomerPersonID().getPersonalId());
-			if (!Customer.isEqual(cust, null)) {
-				vehicle = this.vService.insertVehicle(vehicle, cust);
-			} else
-				vehicle = this.externalService.searchNationalDB(vehicle.getLicensePlate());
-			Long id = vehicle.getId();
-			model.addAttribute("id", id);
-			model.addAttribute("vehicle", vehicle);
-			return "redirect:/cms/insurance/{id}/create";
 		}
+		if (flag == 1) { //if there is vehicle but no insurance (by error), vehicle is removed
+			this.vService.removeVehicle(checkvehicle.getId());
+		}
+		Customer cust = this.customerService.getCustomerByID(vehicle.getCustomerPersonID().getPersonalId());
+		if (!Customer.isEqual(cust, null)) {
+			vehicle = this.vService.insertVehicle(vehicle, cust);
+		} else
+			vehicle = this.externalService.searchNationalDB(vehicle.getLicensePlate());
+		Long id = vehicle.getId();
+		model.addAttribute("id", id);
+		model.addAttribute("vehicle", vehicle);
+		return "redirect:/cms/insurance/{id}/create";
+
 	}
 
 	@RequestMapping(value = "/{id}/create", method = RequestMethod.GET)
