@@ -21,6 +21,8 @@
 			access="hasAuthority('Declare Damage')" />
 			<security:intercept-url pattern="/cms/damage/damage/*/review"
 			access="hasAnyAuthority('Damage Approval less than 300','Damage Approval 300-2000','Damage Approval more than 2000')" />
+			<security:intercept-url pattern="/cms/**"
+			access="hasAnyAuthority('Add Insurance','Edit Insurance','Declare Damage','Damage Approval less than 300','Damage Approval 300-2000','Damage Approval more than 2000')" />
 		<!-- <security:intercept-url pattern="/" access="permitAll" /> -->
 		<security:form-login login-page="/login"
 			authentication-success-handler-ref="customAuthenticationSuccessHandler"
