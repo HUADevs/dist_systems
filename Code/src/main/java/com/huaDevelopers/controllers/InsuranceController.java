@@ -122,6 +122,7 @@ public class InsuranceController {
 	@RequestMapping(value = "/{id}/save", method = RequestMethod.GET)
 	public String saveInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("insurance") Insurance insur,
 			SessionStatus status) {
+
 		if (!Insurance.isEqual(this.insuranceService.getInsuranceByID(insur.getId()), null))
 			this.insuranceService.updateInsurance(insur);
 		else
@@ -131,10 +132,6 @@ public class InsuranceController {
 		return "insur_success";
 	}
 
-/*	public String success() {
-		return "insur_success";
-	}
-*/
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public String viewAllInsurance(Model model) {
 		Vehicle veh = new Vehicle();
@@ -158,7 +155,7 @@ public class InsuranceController {
 	}
 
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
-	public String editInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("vehicle") Vehicle vehicle) { 
+	public String editInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("vehicle") Vehicle vehicle) {
 		vehicle = this.vService.getVehicleByPID(id);
 		Customer cust = this.customerService.getCustomerByID(vehicle.getCustomerPersonID().getPersonalId());
 		model.addAttribute("customer", cust);

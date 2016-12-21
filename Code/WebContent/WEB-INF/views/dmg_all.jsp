@@ -69,8 +69,7 @@
 									</sec:authorize>
 								</c:when>
 								<c:when test="${dmg.damageCost > 300 && dmg.approval == null}">
-									<sec:authorize
-										access="hasAnyAuthority('Sales Manager','CEO')">
+									<sec:authorize access="hasAnyAuthority('Sales Manager','CEO')">
 										<tr>
 											<td>${dmg.id}</td>
 											<td>${dmg.licensePlate.licensePlate}</td>
@@ -118,6 +117,7 @@
 									</tr>
 								</c:otherwise>
 							</c:choose>
+
 						</c:forEach>
 					</tbody>
 					</tbody>

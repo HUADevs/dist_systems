@@ -65,16 +65,7 @@ public class DamageController {
 		Vehicle veh = this.vService.getVehicleByLP(lp);
 		dform.setLicensePlate(this.vService.getVehicleByPID(veh.getId()));
 		this.dmgService.addDamageForm(dform);
-		int ceoCounter = 0;
-		if (dform.getDamageCost() > 2000 && ceoCounter != 0){
-			ceoCounter = dform.getCounter();
-			dform.setCounter(++ceoCounter);
-		}
-		else if (dform.getDamageCost() > 300) {
-			int salesCounter = dform.getCounter();
-			dform.setCounter(++salesCounter);
-		}
-		return "dmg_declare";
+		return "redirect:/cms/damage/view";
 	}
 
 	@RequestMapping(value = "/view")
@@ -98,11 +89,10 @@ public class DamageController {
 		DamageForm dform = this.dmgService.getFormById(id);
 		dform.setApproval(true);
 		this.dmgService.updateDamageForm(dform);
-		if (dform.getDamageCost() > 2000){
+		if (dform.getDamageCost() > 2000) {
 			int ceoCounter = dform.getCounter();
 			dform.setCounter(--ceoCounter);
-		}
-		else if (dform.getDamageCost() > 300) {
+		} else if (dform.getDamageCost() > 300) {
 			int salesCounter = dform.getCounter();
 			dform.setCounter(--salesCounter);
 		}
@@ -114,11 +104,10 @@ public class DamageController {
 		DamageForm dform = this.dmgService.getFormById(id);
 		dform.setApproval(false);
 		this.dmgService.updateDamageForm(dform);
-		if (dform.getDamageCost() > 2000){
+		if (dform.getDamageCost() > 2000) {
 			int ceoCounter = dform.getCounter();
 			dform.setCounter(--ceoCounter);
-		}
-		else if (dform.getDamageCost() > 300) {
+		} else if (dform.getDamageCost() > 300) {
 			int salesCounter = dform.getCounter();
 			dform.setCounter(--salesCounter);
 		}
