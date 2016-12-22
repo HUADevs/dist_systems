@@ -66,6 +66,8 @@ public class IncServiceImpl implements IncService {
 		this.incDAO.removeIncident(id);
 	}
 
+	// if an existing customer decides to insur a new vehicle we automatically
+	// update the history for that vehicle from the national db
 	@Override
 	@Transactional
 	public void refreshCustomerIncidents(String personalId) {

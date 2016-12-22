@@ -36,6 +36,7 @@ public class DamageController {
 	@Autowired
 	private VehicleService vService;
 
+	// submit the form for the declaration of the damage
 	@RequestMapping(value = "/declare/{lp}", method = RequestMethod.GET)
 	public String declareDamage(Model model, @PathVariable("lp") String lp) {
 		model.addAttribute("lp", lp);
@@ -43,6 +44,7 @@ public class DamageController {
 		return "dmg_declare";
 	}
 
+	// save form into db for possible retrieval from approval purposes
 	@RequestMapping(value = "/declare/{lp}", method = RequestMethod.POST)
 	public String saveDamage(@Valid @ModelAttribute("dform") DamageForm dform, Errors errors,
 			@PathVariable("lp") String lp, @RequestParam("file") MultipartFile file) {
@@ -84,6 +86,8 @@ public class DamageController {
 		return "dmg_specific";
 	}
 
+	// get the preview of the damage form thus for Sales Manager or CEO to
+	// review and either approve or not
 	@RequestMapping(value = "/{id}/review", method = RequestMethod.GET)
 	public String review(@PathVariable("id") int id, Model model, @ModelAttribute("dform") DamageForm dform) {
 		dform = this.dmgService.getFormById(id);
@@ -94,6 +98,7 @@ public class DamageController {
 		return "dmg_approval";
 	}
 
+	// helper method - managing the view of the image to the reviewer
 	@RequestMapping(value = "/{id}/imageDisplay", method = RequestMethod.GET)
 	public void showImage(@PathVariable("id") int id, HttpServletResponse response, HttpServletRequest request)
 			throws ServletException, IOException {
@@ -103,6 +108,8 @@ public class DamageController {
 		response.getOutputStream().close();
 	}
 
+	// make the approval of the form and update status of approval in the
+	// database
 	@RequestMapping(value = "/{id}/approve", method = RequestMethod.GET)
 	public String approve(@PathVariable("id") int id) {
 		DamageForm dform = this.dmgService.getFormById(id);
@@ -111,6 +118,7 @@ public class DamageController {
 		return "redirect:/cms/damage/view";
 	}
 
+	// same logic as above but for denial
 	@RequestMapping(value = "/{id}/deny", method = RequestMethod.GET)
 	public String deny(@PathVariable("id") int id) {
 		DamageForm dform = this.dmgService.getFormById(id);
@@ -119,6 +127,8 @@ public class DamageController {
 		return "redirect:/cms/damage/view";
 	}
 
+	// counter function for showing in UI badge the remainder of the approvals
+	// for each user role
 	@RequestMapping(value = "/formCount/{role}")
 	public @ResponseBody Long getFormCount(@PathVariable("role") String role) {
 		return this.dmgService.getFormCount(role);

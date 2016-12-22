@@ -40,6 +40,7 @@ public class DamageForm implements Serializable {
 	@Column(name = "description", length = 100, nullable = false)
 	private String damageDescription;
 
+	//Lob annotation and byte array for saving and retrieving image objects from database
 	@Lob
 	@Column(name = "photo", nullable = false)
 	private byte[] damagePhotoShoots;

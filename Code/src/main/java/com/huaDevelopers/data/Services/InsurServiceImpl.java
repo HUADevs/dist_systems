@@ -59,6 +59,7 @@ public class InsurServiceImpl implements InsuranceService {
 		this.insurDAO.removeInsurance(id);
 	}
 
+	// count the final cost with extra costs and discounts
 	@Override
 	@Transactional
 	public double countInsurCost(Vehicle vehicle, Customer cust, String type, int duration, boolean flag) {
@@ -86,6 +87,7 @@ public class InsurServiceImpl implements InsuranceService {
 		return cost;
 	}
 
+	// counts the specific discount
 	@Override
 	@Transactional
 	public double countInsurDiscount(Customer cust, int duration) {
@@ -100,6 +102,8 @@ public class InsurServiceImpl implements InsuranceService {
 		return discount;
 	}
 
+	// counts how many years you are driver to ensure if you are qualified for
+	// the ten year discount
 	@Transactional
 	public int howManyYears(Customer cust) {
 		LocalDate initialDate = cust.getLicenseAqquired();
@@ -109,6 +113,7 @@ public class InsurServiceImpl implements InsuranceService {
 		return yearNow - initialYear;
 	}
 
+	//checks if the driver is under 23 and make sure that will take the extra new Driver fee
 	@Override
 	@Transactional
 	public boolean newDriver(Customer cust) {

@@ -46,14 +46,19 @@ public class InsuranceController {
 	@Autowired
 	private CustomerService customerService;
 
+	// returns the search form to find vehicle and customer from the national
+	// database
 	@RequestMapping(value = "/findVehicle", method = RequestMethod.GET)
 	public String addCustomer(Model model) {
 		model.addAttribute("vehicle", new Vehicle());
 		return "vehicle_add";
 	}
 
+	// makes the query to the external database for vehicle customer and history
+	// and place it in the internal one
 	@RequestMapping(value = "/findVehicle", method = RequestMethod.POST)
 	public String saveCustomer(Model model, @Valid @ModelAttribute("vehicle") Vehicle vehicle, Errors errors) {
+		// check Transformers class for thorough documentation
 		Transformers megatron = new Transformers();
 		if (errors.hasErrors()) {
 			System.out.println(errors);
@@ -65,20 +70,22 @@ public class InsuranceController {
 
 		vehicle = megatron.externalVToMyV.apply(this.externalService.getVehicle(vehicle.getLicensePlate()));
 		Vehicle checkvehicle = this.vService.getVehicleByLP(vehicle.getLicensePlate());
-		int flag = 0; //check if vehicle exists and has an insurance
+		int flag = 0; // check if vehicle exists and has an insurance
 		if (!Vehicle.isEqual(checkvehicle, null)) {
-			flag = 1; 
+			flag = 1;
 			Insurance check = checkvehicle.getInsurance();
 			if (!Insurance.isEqual(check, null)) {
 				flag = 2;
 			}
 		}
-		if (flag == 2) { //if there is insurance employee cannot create another for this vehicle
+		if (flag == 2) { // if there is insurance employee cannot create another
+							// for this vehicle
 			errors.rejectValue("licensePlate", "vehicle.licensePlate",
 					"***Attention***This license plate is insuranced***");
 			return "vehicle_add";
 		}
-		if (flag == 1) { //if there is vehicle but no insurance (by error), vehicle is removed
+		if (flag == 1) { // if there is vehicle but no insurance (by error),
+							// vehicle is removed
 			this.vService.removeVehicle(checkvehicle.getId());
 		}
 		Customer cust = this.customerService.getCustomerByID(vehicle.getCustomerPersonID().getPersonalId());
@@ -93,6 +100,7 @@ public class InsuranceController {
 
 	}
 
+	// provide the form for adding a new insurance
 	@RequestMapping(value = "/{id}/create", method = RequestMethod.GET)
 	public String addInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("vehicle") Vehicle vehicle) {
 		vehicle = this.vService.getVehicleByPID(id);
@@ -107,6 +115,7 @@ public class InsuranceController {
 		return "insur_add";
 	}
 
+	// send the insurance form for review (either edit, cancel, or save)
 	@RequestMapping(value = "/{id}/review", method = RequestMethod.POST)
 	public String reviewInsurance(@PathVariable("id") Long id, Model model,
 			@Valid @ModelAttribute("insurance") Insurance insur, Errors errors) {
@@ -133,6 +142,7 @@ public class InsuranceController {
 
 	}
 
+	// returns success page message in case of saving the new insurance
 	@RequestMapping(value = "/{id}/save", method = RequestMethod.GET)
 	public String saveInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("insurance") Insurance insur,
 			SessionStatus status) {
@@ -146,6 +156,7 @@ public class InsuranceController {
 		return "insur_success";
 	}
 
+	// view table with all insurances
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public String viewAllInsurance(Model model) {
 		Vehicle veh = new Vehicle();
@@ -154,6 +165,8 @@ public class InsuranceController {
 		return "insur_all";
 	}
 
+	// view table with only one insurance - the one that provided in the search
+	// bar
 	@RequestMapping(value = "/view", method = RequestMethod.POST)
 	public String viewSearchedInsurance(Model model, @Valid @ModelAttribute("search") Vehicle veh, Errors errors) {
 		Vehicle searched = vService.getVehicleByLP(veh.getLicensePlate());
@@ -168,8 +181,9 @@ public class InsuranceController {
 		return "insur_all";
 	}
 
+	// edit insurance's type, or duration
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
-	public String editInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("vehicle") Vehicle vehicle) {	
+	public String editInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("vehicle") Vehicle vehicle) {
 		vehicle = this.vService.getVehicleByPID(id);
 		Customer cust = this.customerService.getCustomerByID(vehicle.getCustomerPersonID().getPersonalId());
 		model.addAttribute("customer", cust);
@@ -183,6 +197,8 @@ public class InsuranceController {
 		return "insur_edit";
 	}
 
+	// delete insurance as well as the vehicle and the customer, provided that
+	// he hasn't any other vehicle insured, from database
 	@RequestMapping(value = "/{id}/delete")
 	public String deleteInsurance(@PathVariable("id") Long id) {
 		Customer cust = this.vService.getVehicleByPID(id).getCustomerPersonID();
@@ -193,6 +209,11 @@ public class InsuranceController {
 		return "redirect:/cms/insurance/view";
 	}
 
+	/*
+	 * global for the scope of InsuranceController model attributes passed only
+	 * once in the ORM due to sessionAttributes tag and once the insurance has
+	 * been saved session is going to be flushed
+	 */
 	@ModelAttribute("insurance")
 	public Insurance getInsurance() {
 		return new Insurance();
