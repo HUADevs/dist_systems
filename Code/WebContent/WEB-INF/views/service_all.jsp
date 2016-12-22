@@ -58,9 +58,9 @@
 									<td></td>
 								</c:when>
 								<c:otherwise>
-									<td><a href="#" class="btn btn-warning"><span><i
+									<td><a href="#" class="btn btn-warning" onclick="alert(' Please contact the IT Company to use this service')"><span><i
 												class="glyphicon glyphicon-ok-circle"
-												onclick="alert(' Please contact the IT Company to use this service')"></i></span>
+												></i></span>
 											Not Available</a></td>
 									<td><a
 										href="<c:url value='/admin/service/edit/${serv.serviceId}'/>"
