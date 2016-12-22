@@ -137,11 +137,11 @@
 						<a class="btn btn-secondary"
 							href="<spring:url value="/cms/insurance/view"/>" role="button">Add
 							»</a> <a class="btn btn-secondary"
-							href="<spring:url value="cms/damage/view"/>" role="button">Edit
+							href="<spring:url value="/cms/damage/view"/>" role="button">Edit
 							»</a>
 					</p>
 				</div>
-				<sec:authorize access="hasAnyAuthority('Sales Manager', 'CEO')">
+				<sec:authorize access="hasAnyAuthority('Damage Approval more than 2000', 'Damage Approval 300-2000')">
 					<div class="col-md-4">
 						<h2>Approve Damage Forms</h2>
 						<p>Approve or deny a damage form.</p>
