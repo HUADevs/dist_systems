@@ -88,7 +88,7 @@ public class DamageController {
 
 	// get the preview of the damage form thus for Sales Manager or CEO to
 	// review and either approve or not
-	@RequestMapping(value = "/{id}/review", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id:\\d+}/review", method = RequestMethod.GET)
 	public String review(@PathVariable("id") int id, Model model, @ModelAttribute("dform") DamageForm dform) {
 		dform = this.dmgService.getFormById(id);
 		Vehicle dmgCar = dform.getLicensePlate();
@@ -99,7 +99,7 @@ public class DamageController {
 	}
 
 	// helper method - managing the view of the image to the reviewer
-	@RequestMapping(value = "/{id}/imageDisplay", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id:\\d+}/imageDisplay", method = RequestMethod.GET)
 	public void showImage(@PathVariable("id") int id, HttpServletResponse response, HttpServletRequest request)
 			throws ServletException, IOException {
 		DamageForm dform = this.dmgService.getFormById(id);
@@ -110,7 +110,7 @@ public class DamageController {
 
 	// make the approval of the form and update status of approval in the
 	// database
-	@RequestMapping(value = "/{id}/approve", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id:\\d+}/approve", method = RequestMethod.GET)
 	public String approve(@PathVariable("id") int id) {
 		DamageForm dform = this.dmgService.getFormById(id);
 		dform.setApproval(true);
@@ -119,7 +119,7 @@ public class DamageController {
 	}
 
 	// same logic as above but for denial
-	@RequestMapping(value = "/{id}/deny", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id:\\d+}/deny", method = RequestMethod.GET)
 	public String deny(@PathVariable("id") int id) {
 		DamageForm dform = this.dmgService.getFormById(id);
 		dform.setApproval(false);

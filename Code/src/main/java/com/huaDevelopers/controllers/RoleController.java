@@ -103,7 +103,7 @@ public class RoleController {
 	}
 
 	// edits a selected role 
-	@RequestMapping(value = { "/edit/{roleId}/{roleName}" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/edit/{roleId:\\d+}/{roleName}" }, method = RequestMethod.GET)
 	public String editRole(@PathVariable("roleId") int roleId, @PathVariable("roleName") String roleName, Model model) {
 		List<Services> listservices = this.s_service.listAllServices();
 		model.addAttribute("listservices", listservices);
@@ -115,7 +115,7 @@ public class RoleController {
 	}
 
 	// saves the edited role to db
-	@RequestMapping(value = { "/edit/{roleId}" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/edit/{roleId:\\d+}" }, method = RequestMethod.POST)
 	public String updateUser(@Valid @ModelAttribute("role") Role role, BindingResult result, Model model,
 			@PathVariable("roleId") int roleId) {
 
@@ -129,7 +129,7 @@ public class RoleController {
 	}
 
 	// deletes the selected role completely
-	@RequestMapping(value = { "/delete/{roleId}" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/delete/{roleId:\\d+}" }, method = RequestMethod.GET)
 	public String deleteRole(@PathVariable int roleId) {
 		this.r_service.removeRole(roleId);
 		return "redirect:/admin/role/view";

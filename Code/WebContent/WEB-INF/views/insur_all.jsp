@@ -26,7 +26,7 @@
 				<div>${msg}</div>
 				<div class="form-group">
 					<form:errors path="licensePlate" style="color:red" />
-					<div class="input-group col-xs-10">
+					<div class="input-group col-xs-10 col-md-12">
 						<form:input id="ins-search" cssClass="form-control"
 							placeholder="Search a specific insurance" path="licensePlate" />
 
@@ -58,6 +58,7 @@
 							<th>Duration</th>
 							<th>New Driver</th>
 							<th>Price</th>
+							<th>Paid</th>
 							<th width="100"></th>
 							<th width="100"></th>
 						</tr>
@@ -74,6 +75,7 @@
 								<td>${insurance.duration}(Year/s)</td>
 								<td>${insurance.newDriver}</td>
 								<td>${insurance.price}&euro;</td>
+								<td>${insurance.paid}</td>
 								<td><a
 									href="<spring:url
 							value="/cms/insurance/${insurance.id}/delete"/>"

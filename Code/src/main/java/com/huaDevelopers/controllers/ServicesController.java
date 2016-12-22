@@ -61,21 +61,21 @@ public class ServicesController {
 	}
 	
 	//deletes completely a specific service
-	@RequestMapping(value="/delete/{serviceId}", method= RequestMethod.GET)
+	@RequestMapping(value="/delete/{serviceId:\\d+}", method= RequestMethod.GET)
 	public String DeleteService(@PathVariable("serviceId") int serviceId, Model model, RedirectAttributes redirectAttributes) {
 		this.s_service.removeService(serviceId);;
 		return "redirect:/admin/service/view";
 	}
 
 	//edits a selected service
-	@RequestMapping(value = "/edit/{serviceId}")
+	@RequestMapping(value = "/edit/{serviceId:\\d+}")
 	public String UpdateService(@PathVariable("serviceId") int serviceId, Model model) {
 		model.addAttribute("service",this.s_service.getServiceByID(serviceId));
 		return "service_edit";
 	}
 
 	//saves the edited service to db
-	@RequestMapping(value = "/edit/{serviceId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/edit/{serviceId:\\d+}", method = RequestMethod.POST)
 	public String saveEditedUser(Model model, @PathVariable("serviceId") int serviceId,
 			@Valid @ModelAttribute("service") Services service, Errors errors) {
 		if (errors.hasErrors()) {
@@ -86,7 +86,7 @@ public class ServicesController {
 		return "redirect:/admin/service/view";
 	}
 	
-	@RequestMapping(value = "/disable/{serviceId}")
+	@RequestMapping(value = "/disable/{serviceId:\\d+}")
 	public String disableService(@PathVariable("serviceId") int serviceId, Model model) {
 		Services service = this.s_service.getServiceByID(serviceId);
 		service.setDisabled(true);
@@ -94,7 +94,7 @@ public class ServicesController {
 		return "redirect:/admin/service/view";
 	}
 	
-	@RequestMapping(value = "/enable/{serviceId}")
+	@RequestMapping(value = "/enable/{serviceId:\\d+}")
 	public String enableService(@PathVariable("serviceId") int serviceId, Model model) {
 		Services service = this.s_service.getServiceByID(serviceId);
 		service.setDisabled(false);

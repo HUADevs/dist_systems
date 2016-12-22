@@ -44,7 +44,7 @@
 								<c:when test="${serv.disabled == true}">
 									<td><a
 										href="<c:url value='/admin/service/enable/${serv.serviceId}' />"
-										class="btn btn-danger"><span><i
+										class="btn btn-danger pull-right"><span><i
 												class="glyphicon glyphicon-ban-circle"></i></span> Disabled</a></td>
 									<td></td>
 									<td></td>
@@ -52,14 +52,16 @@
 								<c:when test="${serv.disabled == false}">
 									<td><a
 										href="<c:url value='/admin/service/disable/${serv.serviceId}' />"
-										class="btn btn-success"><span><i
+										class="btn btn-success bth-lg pull-right"><span><i
 												class="glyphicon glyphicon-ok-circle"></i></span> Enabled</a></td>
 									<td></td>
 									<td></td>
 								</c:when>
 								<c:otherwise>
 									<td><a href="#" class="btn btn-warning"><span><i
-												class="glyphicon glyphicon-ok-circle"></i></span> Not Available</a></td>
+												class="glyphicon glyphicon-ok-circle"
+												onclick="alert(' Please contact the IT Company to use this service')"></i></span>
+											Not Available</a></td>
 									<td><a
 										href="<c:url value='/admin/service/edit/${serv.serviceId}'/>"
 										class="btn btn-success"><span><i

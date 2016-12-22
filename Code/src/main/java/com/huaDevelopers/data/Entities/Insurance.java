@@ -62,6 +62,12 @@ public class Insurance implements Serializable {
 	@Column(name = "new_driver", nullable = true)
 	private Boolean newDriver;
 
+	@Column(name = "expired", nullable = false)
+	private Boolean expired;
+
+	@Column(name = "paid", nullable = false)
+	private Boolean paid;
+
 	public Insurance() {
 		// TODO Auto-generated constructor stub
 	}
@@ -128,6 +134,22 @@ public class Insurance implements Serializable {
 
 	public void setNewDriver(Boolean newDriver) {
 		this.newDriver = newDriver;
+	}
+
+	public Boolean getExpired() {
+		return expired;
+	}
+
+	public void setExpired(Boolean expired) {
+		this.expired = expired;
+	}
+
+	public Boolean getPaid() {
+		return paid;
+	}
+
+	public void setPaid(Boolean paid) {
+		this.paid = paid;
 	}
 
 	public static boolean isEqual(Object obj1, Object obj2) {
