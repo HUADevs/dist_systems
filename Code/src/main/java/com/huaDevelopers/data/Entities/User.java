@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -41,6 +42,7 @@ public class User implements Serializable {
 	@Column(name="email", nullable=false,unique=true)
 	private String emailAdress;
 	
+	@Max (10)
 	@Column(name="phone", nullable=true)
 	private String telephone;
 	
