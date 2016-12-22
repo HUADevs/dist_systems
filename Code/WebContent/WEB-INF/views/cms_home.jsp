@@ -23,11 +23,13 @@
 	<jsp:include page="../views/fragments/cms-header.jsp"></jsp:include>
 	<div class="jumbotron">
 		<div class="container">
+		<sec:authorize access="isAuthenticated()">
 			<h2 class="display-3">
 				Hello,
 				<sec:authentication property="principal.username" />
 				!
 			</h2>
+		</sec:authorize>
 			<p>From this console you can create, edit and remove insurances.
 				You can declare or edit a damage incident and approve or decline a
 				pending damage incident request (if you have the authority).</p>
