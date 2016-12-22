@@ -76,11 +76,6 @@
 								<td>${insurance.price}&euro;</td>
 								<td><a
 									href="<spring:url
-							value="/cms/insurance/${insurance.id}/edit"/>?press=1"
-									class="btn btn-success"><span><i
-											class="glyphicon glyphicon-pencil"></i></span> Edit</a></td>
-								<td><a
-									href="<spring:url
 							value="/cms/insurance/${insurance.id}/delete"/>"
 									class="btn btn-danger"><span><i
 											class="glyphicon glyphicon-trash"></i></span> Delete</a></td>

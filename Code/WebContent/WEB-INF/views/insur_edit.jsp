@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,15 +71,15 @@
 							items="${typeOptions}" />
 					</div>
 					<div class="form-group">
-						<label for="duration">Duration of Contract (In Years)</label>
 						<form:errors path="duration" style="color:red" />
+						<label for="duration">Duration of Contract (In Years)</label>
 						<form:radiobuttons id="duration" path="duration"
 							items="${durationOptions}" />
 					</div>
 					<c:choose>
 						<c:when test="${insurance.newDriver}">
 							<div class="form-group">
-								<span>Driver under 23 is detected</span>	
+								<span>Driver under 23 is detected</span>
 							</div>
 						</c:when>
 						<c:otherwise>
