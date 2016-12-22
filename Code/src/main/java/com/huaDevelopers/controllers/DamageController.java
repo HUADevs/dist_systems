@@ -37,7 +37,7 @@ public class DamageController {
 	private VehicleService vService;
 
 	// submit the form for the declaration of the damage
-	@RequestMapping(value = "/declare/{lp}", method = RequestMethod.GET)
+	@RequestMapping(value = "/declare/{lp:[A-Z]{3}[0-9]{4}}", method = RequestMethod.GET)
 	public String declareDamage(Model model, @PathVariable("lp") String lp) {
 		model.addAttribute("lp", lp);
 		model.addAttribute("dform", new DamageForm());
@@ -45,7 +45,7 @@ public class DamageController {
 	}
 
 	// save form into db for possible retrieval from approval purposes
-	@RequestMapping(value = "/declare/{lp}", method = RequestMethod.POST)
+	@RequestMapping(value = "/declare/{lp:[A-Z]{3}[0-9]{4}}", method = RequestMethod.POST)
 	public String saveDamage(@Valid @ModelAttribute("dform") DamageForm dform, Errors errors,
 			@PathVariable("lp") String lp, @RequestParam("file") MultipartFile file) {
 		if (file.isEmpty()) {
@@ -99,7 +99,7 @@ public class DamageController {
 	}
 
 	// helper method - managing the view of the image to the reviewer
-	@RequestMapping(value = "/{id}/imageDisplay", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id:\\d+}/imageDisplay", method = RequestMethod.GET)
 	public void showImage(@PathVariable("id") int id, HttpServletResponse response, HttpServletRequest request)
 			throws ServletException, IOException {
 		DamageForm dform = this.dmgService.getFormById(id);
@@ -110,7 +110,7 @@ public class DamageController {
 
 	// make the approval of the form and update status of approval in the
 	// database
-	@RequestMapping(value = "/{id}/approve", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id:\\d+}/approve", method = RequestMethod.GET)
 	public String approve(@PathVariable("id") int id) {
 		DamageForm dform = this.dmgService.getFormById(id);
 		dform.setApproval(true);
@@ -119,7 +119,7 @@ public class DamageController {
 	}
 
 	// same logic as above but for denial
-	@RequestMapping(value = "/{id}/deny", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id:\\d+}/deny", method = RequestMethod.GET)
 	public String deny(@PathVariable("id") int id) {
 		DamageForm dform = this.dmgService.getFormById(id);
 		dform.setApproval(false);

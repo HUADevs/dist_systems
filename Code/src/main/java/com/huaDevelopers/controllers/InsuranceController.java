@@ -101,7 +101,7 @@ public class InsuranceController {
 	}
 
 	// provide the form for adding a new insurance
-	@RequestMapping(value = "/{id}/create", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id:\\d+}/create", method = RequestMethod.GET)
 	public String addInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("vehicle") Vehicle vehicle) {
 		vehicle = this.vService.getVehicleByPID(id);
 		Customer cust = this.customerService.getCustomerByID(vehicle.getCustomerPersonID().getPersonalId());
@@ -116,7 +116,7 @@ public class InsuranceController {
 	}
 
 	// send the insurance form for review (either edit, cancel, or save)
-	@RequestMapping(value = "/{id}/review", method = RequestMethod.POST)
+	@RequestMapping(value = "/{id:\\d+}/review", method = RequestMethod.POST)
 	public String reviewInsurance(@PathVariable("id") Long id, Model model,
 			@Valid @ModelAttribute("insurance") Insurance insur, Errors errors) {
 		Vehicle vehicle = this.vService.getVehicleByPID(id);
@@ -143,7 +143,7 @@ public class InsuranceController {
 	}
 
 	// returns success page message in case of saving the new insurance
-	@RequestMapping(value = "/{id}/save", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id:\\d+}/save", method = RequestMethod.GET)
 	public String saveInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("insurance") Insurance insur,
 			SessionStatus status) {
 
@@ -182,7 +182,7 @@ public class InsuranceController {
 	}
 
 	// edit insurance's type, or duration
-	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id:\\d+}/edit", method = RequestMethod.GET)
 	public String editInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("vehicle") Vehicle vehicle) {
 		vehicle = this.vService.getVehicleByPID(id);
 		Customer cust = this.customerService.getCustomerByID(vehicle.getCustomerPersonID().getPersonalId());
@@ -199,7 +199,7 @@ public class InsuranceController {
 
 	// delete insurance as well as the vehicle and the customer, provided that
 	// he hasn't any other vehicle insured, from database
-	@RequestMapping(value = "/{id}/delete")
+	@RequestMapping(value = "/{id:\\d+}/delete",method = RequestMethod.GET)
 	public String deleteInsurance(@PathVariable("id") Long id) {
 		Customer cust = this.vService.getVehicleByPID(id).getCustomerPersonID();
 		this.vService.removeVehicle(id);
