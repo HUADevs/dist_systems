@@ -9,22 +9,24 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Review Insurance</title>
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-</head>
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<body>
-	<jsp:include page="../views/fragments/cms-header.jsp"></jsp:include>
-	<style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<style>
 hr {
 	border: 0;
 	border-top: 1px solid #8c8c8c;
 	border-bottom: 1px solid #fff;
 }
 </style>
+</head>
+
+<body>
+	<jsp:include page="../views/fragments/cms-header.jsp"></jsp:include>
 	<div class="container">
 		<div class="row">
 			<h1 class="text-center">Review Insurance</h1>
@@ -98,7 +100,7 @@ hr {
 						class="btn btn-warning btn-lg">Edit</a> <a
 						href="<c:url value='/cms/insurance/${insurance.id}/save' />"
 						class="btn btn-success btn-lg pull-right">Save</a>
-					
+
 				</div>
 			</div>
 		</div>

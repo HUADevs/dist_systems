@@ -9,11 +9,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Add Insurance</title>
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<jsp:include page="../views/fragments/cms-header.jsp"></jsp:include>
@@ -66,9 +67,9 @@
 				<form:form modelAttribute="insurance" action="${formUrl}"
 					method="post" cssClass="col-md-8 col-md-offset-2">
 					<div class="form-group">
-						<form:errors path="type" style="color:red" /><br>
-						<form:radiobuttons cssClass="" path="type"
-							items="${typeOptions}" />
+						<form:errors path="type" style="color:red" />
+						<br>
+						<form:radiobuttons cssClass="" path="type" items="${typeOptions}" />
 					</div>
 					<div class="form-group">
 						<label for="duration">Duration of Contract (In Years)</label>
@@ -79,7 +80,7 @@
 					<c:choose>
 						<c:when test="${insurance.newDriver }">
 							<div class="form-group">
-								<span>Driver under 23 is detected</span>	
+								<span>Driver under 23 is detected</span>
 							</div>
 						</c:when>
 						<c:otherwise>

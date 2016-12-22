@@ -9,13 +9,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Approve Damage</title>
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-</head>
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <body>
 	<jsp:include page="../views/fragments/cms-header.jsp"></jsp:include>
 	<div class="container">
@@ -56,8 +55,9 @@
 									<hr>
 									<p>Description: ${damage.damageDescription}</p>
 									<hr>
-									<label for="photo">Photo of the Incident</label>
-									<img id="photo" class="img-responsive" alt="damage-photo" src="/Car-insurance/cms/damage/${damage.id}/imageDisplay">
+									<label for="photo">Photo of the Incident</label> <img
+										id="photo" class="img-responsive" alt="damage-photo"
+										src="/Car-insurance/cms/damage/${damage.id}/imageDisplay">
 								</section>
 							</div>
 						</div>
