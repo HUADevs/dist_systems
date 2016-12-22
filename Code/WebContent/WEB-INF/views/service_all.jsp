@@ -39,20 +39,24 @@
 						<tr>
 							<td>${serv.serviceId}</td>
 							<td>${serv.serviceName}</td>
-							<td>
-							<c:choose>
-								<c:when test="${serv.disabled}">
-									<a
-								href="<c:url value='/admin/service/enable/${serv.serviceId}' />"
-								class="btn btn-danger"><span><i class="glyphicon glyphicon-ban-circle"></i></span> Disable</a>								
-								</c:when>
-								<c:otherwise>
-									<a
-								href="<c:url value='/admin/service/disable/${serv.serviceId}' />"
-								class="btn btn-success"><span><i class="glyphicon glyphicon-ok-circle"></i></span> Enable</a>
-								</c:otherwise>
-							</c:choose>
-							</td>
+							<td><c:choose>
+									<c:when test="${serv.disabled}">
+										<a
+											href="<c:url value='/admin/service/enable/${serv.serviceId}' />"
+											class="btn btn-danger"><span><i
+												class="glyphicon glyphicon-ban-circle"></i></span> Disable</a>
+									</c:when>
+									<c:when test="${!serv.disabled}">
+										<a
+											href="<c:url value='/admin/service/disable/${serv.serviceId}' />"
+											class="btn btn-success"><span><i
+												class="glyphicon glyphicon-ok-circle"></i></span> Enable</a>
+									</c:when>
+									<c:otherwise>
+										<a href="#" class="btn btn-info"><span><i
+												class="glyphicon glyphicon-ok-circle"></i></span> Not Available</a>
+									</c:otherwise>
+								</c:choose></td>
 						</tr>
 					</c:forEach>
 				</tbody>

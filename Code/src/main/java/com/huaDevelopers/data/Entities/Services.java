@@ -31,7 +31,7 @@ public class Services implements Serializable {
 	@Column(name = "name", nullable = false)
 	private String serviceName;
 	
-	@Column(name="disabled", nullable=false)
+	@Column(name="disabled", nullable=true)
 	private Boolean disabled;
 
 	@ManyToMany(mappedBy = "services")

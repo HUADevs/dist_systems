@@ -40,7 +40,7 @@
 					<br>
 				</c:if>
 				<input name="username" type="text" class="form-control"
-					placeholder="Username" /> <input name="password" type="password"
+					placeholder="Username or Email" /> <input name="password" type="password"
 					class="form-control" placeholder="Password" />
 				<c:if test="${error!=null }">
 					<br>

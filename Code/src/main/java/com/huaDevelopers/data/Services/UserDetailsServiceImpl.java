@@ -26,7 +26,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		com.huaDevelopers.data.Entities.User user = usrDAO.getUserByUsername(username);
+		com.huaDevelopers.data.Entities.User user;
+		if (username.contains("@") && username.contains(".")) {
+			user = usrDAO.getUserByEmail(username);
+		} else {
+			user = usrDAO.getUserByUsername(username);
+		}
 		if (user != null) {
 			List<GrantedAuthority> authorities = buildUserAuthority(user.getAssignedRole());
 			return buildUserForAuthentication(user, authorities);
