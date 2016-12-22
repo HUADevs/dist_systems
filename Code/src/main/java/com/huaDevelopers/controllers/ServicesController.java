@@ -68,7 +68,7 @@ public class ServicesController {
 	}
 
 	//edits a selected service
-	@RequestMapping(value = "/edit/{serviceId:\\d+}")
+	@RequestMapping(value = "/edit/{serviceId:\\d+}",method = RequestMethod.GET)
 	public String UpdateService(@PathVariable("serviceId") int serviceId, Model model) {
 		model.addAttribute("service",this.s_service.getServiceByID(serviceId));
 		return "service_edit";
@@ -85,16 +85,16 @@ public class ServicesController {
 
 		return "redirect:/admin/service/view";
 	}
-	
-	@RequestMapping(value = "/disable/{serviceId:\\d+}")
+
+	@RequestMapping(value = "/disable/{serviceId:\\d+}",method = RequestMethod.GET)
 	public String disableService(@PathVariable("serviceId") int serviceId, Model model) {
 		Services service = this.s_service.getServiceByID(serviceId);
 		service.setDisabled(true);
 		this.s_service.updateService(service);
 		return "redirect:/admin/service/view";
 	}
-	
-	@RequestMapping(value = "/enable/{serviceId:\\d+}")
+
+	@RequestMapping(value = "/enable/{serviceId:\\d+}",method = RequestMethod.GET)
 	public String enableService(@PathVariable("serviceId") int serviceId, Model model) {
 		Services service = this.s_service.getServiceByID(serviceId);
 		service.setDisabled(false);

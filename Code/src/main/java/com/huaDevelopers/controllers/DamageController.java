@@ -37,7 +37,7 @@ public class DamageController {
 	private VehicleService vService;
 
 	// submit the form for the declaration of the damage
-	@RequestMapping(value = "/declare/{lp}", method = RequestMethod.GET)
+	@RequestMapping(value = "/declare/{lp:[A-Z]{3}[0-9]{4}}", method = RequestMethod.GET)
 	public String declareDamage(Model model, @PathVariable("lp") String lp) {
 		model.addAttribute("lp", lp);
 		model.addAttribute("dform", new DamageForm());
@@ -45,7 +45,7 @@ public class DamageController {
 	}
 
 	// save form into db for possible retrieval from approval purposes
-	@RequestMapping(value = "/declare/{lp}", method = RequestMethod.POST)
+	@RequestMapping(value = "/declare/{lp:[A-Z]{3}[0-9]{4}}", method = RequestMethod.POST)
 	public String saveDamage(@Valid @ModelAttribute("dform") DamageForm dform, Errors errors,
 			@PathVariable("lp") String lp, @RequestParam("file") MultipartFile file) {
 		if (file.isEmpty()) {

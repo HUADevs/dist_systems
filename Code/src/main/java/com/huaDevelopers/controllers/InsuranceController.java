@@ -201,7 +201,7 @@ public class InsuranceController {
 
 	// delete insurance as well as the vehicle and the customer, provided that
 	// he hasn't any other vehicle insured, from database
-	@RequestMapping(value = "/{id:\\d+}/delete")
+	@RequestMapping(value = "/{id:\\d+}/delete",method = RequestMethod.GET)
 	public String deleteInsurance(@PathVariable("id") Long id) {
 		Customer cust = this.vService.getVehicleByPID(id).getCustomerPersonID();
 		this.vService.removeVehicle(id);
