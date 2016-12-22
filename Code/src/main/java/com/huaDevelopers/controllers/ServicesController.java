@@ -79,5 +79,21 @@ public class ServicesController {
 
 		return "redirect:/admin/service/view";
 	}
+	
+	@RequestMapping(value = "/disable/{serviceId}")
+	public String disableService(@PathVariable("serviceId") int serviceId, Model model) {
+		Services service = this.s_service.getServiceByID(serviceId);
+		service.setDisabled(true);
+		this.s_service.updateService(service);
+		return "redirect:/admin/service/view";
+	}
+	
+	@RequestMapping(value = "/enable/{serviceId}")
+	public String enableService(@PathVariable("serviceId") int serviceId, Model model) {
+		Services service = this.s_service.getServiceByID(serviceId);
+		service.setDisabled(false);
+		this.s_service.updateService(service);
+		return "redirect:/admin/service/view";
+	}
 
 }

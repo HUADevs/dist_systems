@@ -53,12 +53,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		 * 
 		 * List<GrantedAuthority> Result = new
 		 * ArrayList<GrantedAuthority>(setAuths);
-		 */ 
+		 */
 		if (role.getRoleName().equals("Admin")) {
 			setAuths.add(new SimpleGrantedAuthority("Admin"));
 		}
 		for (Services userService : role.getServices()) {
-			setAuths.add(new SimpleGrantedAuthority(userService.getServiceName()));
+			if (!userService.getDisabled()) {
+				setAuths.add(new SimpleGrantedAuthority(userService.getServiceName()));
+			}
 		}
 
 		List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
