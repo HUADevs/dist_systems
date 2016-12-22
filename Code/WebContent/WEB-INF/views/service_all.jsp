@@ -32,6 +32,7 @@
 						<th>Service Name</th>
 						<th width="100"></th>
 						<th width="100"></th>
+						<th width="100"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -39,24 +40,36 @@
 						<tr>
 							<td>${serv.serviceId}</td>
 							<td>${serv.serviceName}</td>
-							<td><c:choose>
-									<c:when test="${serv.disabled}">
-										<a
-											href="<c:url value='/admin/service/enable/${serv.serviceId}' />"
-											class="btn btn-danger"><span><i
-												class="glyphicon glyphicon-ban-circle"></i></span> Disable</a>
-									</c:when>
-									<c:when test="${!serv.disabled}">
-										<a
-											href="<c:url value='/admin/service/disable/${serv.serviceId}' />"
-											class="btn btn-success"><span><i
-												class="glyphicon glyphicon-ok-circle"></i></span> Enable</a>
-									</c:when>
-									<c:otherwise>
-										<a href="#" class="btn btn-info"><span><i
-												class="glyphicon glyphicon-ok-circle"></i></span> Not Available</a>
-									</c:otherwise>
-								</c:choose></td>
+							<c:choose>
+								<c:when test="${serv.disabled == true}">
+									<td><a
+										href="<c:url value='/admin/service/enable/${serv.serviceId}' />"
+										class="btn btn-danger"><span><i
+												class="glyphicon glyphicon-ban-circle"></i></span> Disabled</a></td>
+									<td></td>
+									<td></td>
+								</c:when>
+								<c:when test="${serv.disabled == false}">
+									<td><a
+										href="<c:url value='/admin/service/disable/${serv.serviceId}' />"
+										class="btn btn-success"><span><i
+												class="glyphicon glyphicon-ok-circle"></i></span> Enabled</a></td>
+									<td></td>
+									<td></td>
+								</c:when>
+								<c:otherwise>
+									<td><a href="#" class="btn btn-warning"><span><i
+												class="glyphicon glyphicon-ok-circle"></i></span> Not Available</a></td>
+									<td><a
+										href="<c:url value='/admin/service/edit/${serv.serviceId}'/>"
+										class="btn btn-success"><span><i
+												class="glyphicon glyphicon-pencil"></i></span> Edit</a></td>
+									<td><a
+										href="<c:url value='/admin/service/delete/${serv.serviceId}' />"
+										class="btn btn-danger"><span><i
+												class="glyphicon glyphicon-trash"></i></span> Delete</a></td>
+								</c:otherwise>
+							</c:choose>
 						</tr>
 					</c:forEach>
 				</tbody>
