@@ -30,6 +30,9 @@ public class Services implements Serializable {
 	@NotEmpty
 	@Column(name = "name", nullable = false)
 	private String serviceName;
+	
+	@Column(name="disabled", nullable=false)
+	private Boolean disabled;
 
 	@ManyToMany(mappedBy = "services")
 	private Set<Role> roles;
@@ -48,6 +51,14 @@ public class Services implements Serializable {
 
 	public void setServiceName(String serviceName) {
 		this.serviceName = serviceName;
+	}
+
+	public Boolean getDisabled() {
+		return disabled;
+	}
+
+	public void setDisabled(Boolean disabled) {
+		this.disabled = disabled;
 	}
 
 	public Set<Role> getRoles() {

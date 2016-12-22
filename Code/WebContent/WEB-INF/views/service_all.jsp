@@ -39,12 +39,20 @@
 						<tr>
 							<td>${serv.serviceId}</td>
 							<td>${serv.serviceName}</td>
-							<td><a
-								href="<c:url value='/admin/service/edit/${serv.serviceId}' />"
-								class="btn btn-success"><span><i class="glyphicon glyphicon-pencil"></i></span> Edit</a></td>
-							<td><a
-								href="<c:url value='/admin/service/delete/${serv.serviceId}' />"
-								class="btn btn-danger"><span><i class="glyphicon glyphicon-trash"></i></span> Delete</a></td>
+							<td>
+							<c:choose>
+								<c:when test="${serv.disabled}">
+									<a
+								href="<c:url value='/admin/service/enable/${serv.serviceId}' />"
+								class="btn btn-danger"><span><i class="glyphicon glyphicon-ban-circle"></i></span> Disable</a>								
+								</c:when>
+								<c:otherwise>
+									<a
+								href="<c:url value='/admin/service/disable/${serv.serviceId}' />"
+								class="btn btn-success"><span><i class="glyphicon glyphicon-ok-circle"></i></span> Enable</a>
+								</c:otherwise>
+							</c:choose>
+							</td>
 						</tr>
 					</c:forEach>
 				</tbody>

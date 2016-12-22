@@ -86,7 +86,7 @@ public class UserController {
 	}
 
 	/*Populate fields  and dropdown lists of user form for editing a user*/
-	@RequestMapping(value = "/edit/{userId}")
+	@RequestMapping(value = "/edit/{userId:\\d+}",method = RequestMethod.GET)
 	public String UpdateUserInfo(@PathVariable("userId") int userId, Model model) {
 		model.addAttribute("roles", this.roleService.listAllRoles());
 		model.addAttribute("departments", this.deptService.getAllDepts());
@@ -95,7 +95,7 @@ public class UserController {
 	}
 
 	/*form to edit user by his id*/
-	@RequestMapping(value = "/edit/{userId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/edit/{userId:\\d+}", method = RequestMethod.POST)
 	public String saveEditedUser(Model model, @PathVariable("userId") int userId,
 			@Valid @ModelAttribute("user") User user, Errors errors) {
 		/*validation of fields*/
@@ -128,7 +128,7 @@ public class UserController {
 	}
 
 	/* delete a user by his id*/
-	@RequestMapping(value = "/delete/{userId}")
+	@RequestMapping(value = "/delete/{userId:\\d+}",method = RequestMethod.GET)
 	public String DeleteUser(@PathVariable("userId") int userId, Model model, RedirectAttributes redirectAttributes) {
 		this.userService.removeUser(userId);
 		return "redirect:/admin/user/view";

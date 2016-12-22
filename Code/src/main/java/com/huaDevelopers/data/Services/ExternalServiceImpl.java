@@ -50,6 +50,11 @@ public class ExternalServiceImpl implements ExternalService {
 		this.incDAO = incDAO;
 	}
 
+	/*
+	 * search the national db for citizen , vehicles and histories using
+	 * Transformers it makes easy to obtain the correct objects and everything
+	 * that we display in the user is from our database objects
+	 */
 	@Override
 	@Transactional
 	public Vehicle searchNationalDB(String lp) {
@@ -64,7 +69,7 @@ public class ExternalServiceImpl implements ExternalService {
 		Customer cust = optimusPrime.externalCitToMyCust.apply(extCit);
 
 		List<History> hList = extHistList.stream().map(optimusPrime.externalHistToMyHist)
-				.collect(Collectors.<History> toList());
+				.collect(Collectors.<History>toList());
 		System.out.println(hList.size());
 		Customer myCust = this.custDAO.getCustomerByID(cust.getPersonalId());
 		if (!Customer.isEqual(myCust, cust)) {

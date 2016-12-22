@@ -19,7 +19,6 @@
 <body>
 	<jsp:include page="../views/fragments/cms-header.jsp"></jsp:include>
 
-
 	<div class="container">
 		<div class="row">
 			<h1 class="text-center">Create New Insurance</h1>
