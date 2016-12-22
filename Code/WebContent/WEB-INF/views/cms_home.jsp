@@ -121,30 +121,30 @@
 			<div class="row">
 				<div class="col-md-4">
 					<h2>Manage Insurances</h2>
-					<p>Add a new insurance. Edit and delete existing insurances.</p>
+					<p>Add a new insurance. View all existing insurances.</p>
 					<p>
 						<a class="btn btn-secondary"
 							href="<spring:url value="/cms/insurance/findVehicle"/>"
 							role="button">Add »</a> <a class="btn btn-secondary"
-							href="<spring:url value="/cms/insurance/view"/>" role="button">Edit
+							href="<spring:url value="/cms/insurance/view"/>" role="button">View
 							»</a>
 					</p>
 				</div>
 				<div class="col-md-4">
 					<h2>Manage Damage Incidents</h2>
-					<p>Declare a new Damage Incident Form. Edit existing forms.</p>
+					<p>Declare a new Damage Incident Form. View all existing forms. Approve or deny them.</p>
 					<p>
 						<a class="btn btn-secondary"
 							href="<spring:url value="/cms/insurance/view"/>" role="button">Add
 							»</a> <a class="btn btn-secondary"
-							href="<spring:url value="/cms/damage/view"/>" role="button">Edit
+							href="<spring:url value="/cms/damage/view"/>" role="button">View
 							»</a>
 					</p>
 				</div>
 				<sec:authorize access="hasAnyAuthority('Damage Approval more than 2000', 'Damage Approval 300-2000')">
 					<div class="col-md-4">
 						<h2>Approve Damage Forms</h2>
-						<p>Approve or deny a damage form.</p>
+						<p>Approve or deny pending damage forms.</p>
 						<p>
 							<a class="btn btn-secondary"
 								href="<spring:url value="/cms/damage/view/specific"/>"
