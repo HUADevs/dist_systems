@@ -13,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -31,7 +32,8 @@ public class Role implements Serializable {
 	private int roleId;
 
 	@NotEmpty
-	@Column(name = "name", nullable = false)
+	@Size(max=50)
+	@Column(name = "name",length=50, nullable = false)
 	private String roleName;
 
 	@ManyToMany

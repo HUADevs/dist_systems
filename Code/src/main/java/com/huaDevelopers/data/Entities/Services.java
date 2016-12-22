@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -28,7 +29,8 @@ public class Services implements Serializable {
 	private int serviceId;
 
 	@NotEmpty
-	@Column(name = "name", nullable = false)
+	@Size(max=50)
+	@Column(name = "name",length=50, nullable = false)
 	private String serviceName;
 	
 	@Column(name="disabled", nullable=true)

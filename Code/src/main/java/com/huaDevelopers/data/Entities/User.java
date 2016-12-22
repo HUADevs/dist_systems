@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -30,19 +31,22 @@ public class User implements Serializable {
 	private int userId;
 	
 	@NotEmpty(message="This field is required")
-	@Column(name="first_name", nullable=false)
+	@Size(max=50)
+	@Column(name="first_name",length=50, nullable=false)
 	private String firstName;
 	
 	@NotEmpty(message="This field is required")
-	@Column(name="last_name", nullable=false)
+	@Size(max=50)
+	@Column(name="last_name",length=50, nullable=false)
 	private String lastName;
 
 	@Email
+	@Size(max=50)
 	@NotEmpty(message="This field is required")
-	@Column(name="email", nullable=false,unique=true)
+	@Column(name="email", length=50,nullable=false,unique=true)
 	private String emailAdress;
 	
-	@Max (10)
+	@Size(max=10)
 	@Column(name="phone", nullable=true)
 	private String telephone;
 	
@@ -55,11 +59,13 @@ public class User implements Serializable {
 	private Department workingDept;
 	
 	@NotEmpty(message="This field is required")
-	@Column(name="username", nullable=false,unique=true)
+	@Size(max=50)
+	@Column(name="username", length=50, nullable=false,unique=true)
 	private String userName;
 	
 	@NotEmpty(message="This field is required")
-	@Column(name="password", nullable=false)
+	@Size(min=6, max=250)
+	@Column(name="password",length=50, nullable=false)
 	private String password;
 
 	public int getUserId() {
