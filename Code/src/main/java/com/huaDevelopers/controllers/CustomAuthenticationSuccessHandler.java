@@ -26,15 +26,16 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 			Authentication authentication) throws IOException, ServletException {
 		/* Redirect on the successful authentication of the user */
 		logger.info("Hit the AuthSuccessHandler");
+
 		String auths = authentication.getAuthorities().toString();
 		if (auths.contains("Admin")) {
 			response.sendRedirect(response.encodeURL(context.getContextPath() + "/admin/home"));
 		} else if (auths.contains("Add Insurance") || auths.contains("Edit Insurance")
 				|| auths.contains("Declare Damage") || auths.contains("Damage Approval less than 300")
 				|| auths.contains("Damage Approval 300-2000") || auths.contains("Damage Approval more than 2000")) {
-			response.sendRedirect(context.getContextPath() + "/cms/home");
+			response.sendRedirect(response.encodeURL(context.getContextPath() + "/cms/home"));
 		} else {
-			response.sendRedirect(context.getContextPath());
+			response.sendRedirect(response.encodeURL(context.getContextPath()+ "/home"));
 		}
 
 	}

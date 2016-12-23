@@ -20,9 +20,4 @@ public class LoginController {
         return "login";
     }
 
-    @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
-    public String welcome(Model model) {
-        return "redirect://cms/home";
-    }
-
 }

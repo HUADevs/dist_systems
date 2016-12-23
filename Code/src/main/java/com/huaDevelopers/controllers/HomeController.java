@@ -15,4 +15,9 @@ public class HomeController {
 	public String cmsHome(){
 		return "cms_home";
 	}
+	
+	@RequestMapping(value={"/home","/"})
+	public String home(){
+		return "welcome";
+	}
 }
