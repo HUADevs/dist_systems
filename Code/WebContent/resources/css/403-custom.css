@@ -1,0 +1,87 @@
+body {
+	background: #333;
+	font-family: "Droid Sans", sans-serif;
+}
+
+#title {
+	margin: 25px auto;
+	text-align: center;
+}
+
+#title span {
+	font-size: 96pt;
+	display: inline-block;
+	font-weight: 900;
+	vertical-align: middle;
+	text-shadow: 4px 4px 8px #222;
+}
+
+.red {
+	color: #f22;
+}
+
+.white {
+	color: #fff;
+}
+
+#do-not {
+	background: #f22;
+	border-radius: 50% 50%;
+	box-shadow: 4px -4px 8px #222;
+	position: relative;
+	width: 110px;
+	height: 110px;
+	transform: rotate(90deg);
+}
+
+.hole {
+	background: #333;
+	position: absolute;
+	width: 80px;
+	height: 37.5px;
+	box-shadow: 4px 4px 8px #222 inset;
+	left: 13%;
+}
+
+.one {
+	border-radius: 100px 100px 0 0;
+	border-bottom: 0;
+	top: 10%;
+}
+
+hr {
+	border: 1px solid #991111;
+	position: absolute;
+	top: -9%;
+	width: 98%;
+}
+
+.two {
+	border-radius: 0 0 100px 100px;
+	border-top: 0;
+	bottom: 10%;
+}
+
+p {
+	color: #fff;
+	font-size: 16pt;
+	text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+	#title span {
+		font-size: 48pt;
+	}
+	#do-not {
+		width: 55px;
+		height: 55px;
+	}
+	.hole {
+		width: 40px;
+		height: 17.5px;
+		left: 15%;
+	}
+	p {
+		font-size: 12pt;
+	}
+}
