@@ -12,7 +12,7 @@ public interface DamFormDAO {
 
 	public void deleteDamageForm(int id);
 
-	public List<DamageForm> listDamageFormsPerVehicle(String plate);
+	public List<DamageForm> listDamageFormsPerVehicle(Long v_id);
 
 	public DamageForm getFormById(int id);
 

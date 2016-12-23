@@ -2,6 +2,7 @@ package com.huaDevelopers.controllers;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -74,12 +75,33 @@ public class DamageController {
 		return "redirect:/cms/damage/view";
 	}
 
-	@RequestMapping(value = "/view")
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public String find(Model model) {
+		Vehicle veh = new Vehicle();
+		model.addAttribute("search", veh);
 		model.addAttribute("dmg_forms", this.dmgService.listAllDamageForms());
 		return "dmg_all";
 	}
 
+	// view table with only DamageForm from a searched vehicle - the one that provided in the search
+	// bar
+	@RequestMapping(value = "/view", method = RequestMethod.POST)
+	public String findDamagesofSpecificVehicle(Model model, @Valid @ModelAttribute("search") Vehicle veh, Errors errors) {
+		Vehicle searchedveh=this.vService.getVehicleByLP(veh.getLicensePlate());
+		List<DamageForm> searched= null;
+		if(!Vehicle.isEqual(searchedveh, null)){
+			searched = dmgService.listDamageFormsPerVehicle(searchedveh.getId());
+		}
+		if (searched == null) {
+			model.addAttribute("msg", "There are no damages for the vehicle you searched");
+			model.addAttribute("dmg_forms", this.dmgService.listAllDamageForms());
+			return "dmg_all";
+		}
+		model.addAttribute("dmg_forms", searched);
+		return "dmg_all";
+	}
+
+	//returns only the pending list of damage forms
 	@RequestMapping(value = "/view/specific")
 	public String findSpecific(Model model) {
 		model.addAttribute("dmg_forms", this.dmgService.listAllDamageForms());

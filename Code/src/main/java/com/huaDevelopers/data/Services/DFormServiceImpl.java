@@ -40,8 +40,8 @@ public class DFormServiceImpl implements DamFormService {
 
 	@Override
 	@Transactional
-	public List<DamageForm> listDamageFormsPerVehicle(String plate) {
-		return this.formDAO.listDamageFormsPerVehicle(plate);
+	public List<DamageForm> listDamageFormsPerVehicle(Long v_id) {
+		return this.formDAO.listDamageFormsPerVehicle(v_id);
 	}
 
 	@Override

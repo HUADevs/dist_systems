@@ -50,9 +50,9 @@ public class DFormDAOImpl implements DamFormDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	// no security
-	public List<DamageForm> listDamageFormsPerVehicle(String plate) {
+	public List<DamageForm> listDamageFormsPerVehicle(Long v_id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<DamageForm> Formlist = session.createQuery("from DamageForm where license_plate='" + plate + "'")
+		List<DamageForm> Formlist = session.createQuery("from DamageForm where vehicle_id='" + v_id + "'")
 				.getResultList();
 		return Formlist;
 	}
