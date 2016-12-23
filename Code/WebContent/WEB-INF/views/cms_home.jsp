@@ -34,7 +34,7 @@
 				You can declare or edit a damage incident and approve or decline a
 				pending damage incident request (if you have the authority).</p>
 			<p>
-				<a class="btn btn-primary btn-lg" href="#">Learn more »</a>
+				<a class="btn btn-primary btn-lg" href="https://drive.google.com/file/d/0B9erbBG0AbgAZ0UtbE1LdndPc1U/view?usp=sharing">Learn more »</a>
 			</p>
 		</div>
 	</div>

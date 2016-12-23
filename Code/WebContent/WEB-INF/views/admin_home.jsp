@@ -22,7 +22,7 @@
 			<h1 class="display-3">Hello, admin!</h1>
 			<p>From this console you can create, edit and remove users , roles and services supported by your website.</p>
 			<p>
-				<a class="btn btn-primary btn-lg" href="#">Learn
+				<a class="btn btn-primary btn-lg" href="https://drive.google.com/file/d/0B9erbBG0AbgAZ0UtbE1LdndPc1U/view?usp=sharing">Learn
 					more »</a>
 			</p>
 		</div>
