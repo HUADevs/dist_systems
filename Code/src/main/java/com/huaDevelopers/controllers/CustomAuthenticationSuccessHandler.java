@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
 // Handler that redirects the user to the appropriate page based on his role
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
@@ -27,11 +28,13 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 		logger.info("Hit the AuthSuccessHandler");
 		String auths = authentication.getAuthorities().toString();
 		if (auths.contains("Admin")) {
-			response.sendRedirect(response.encodeURL(context.getContextPath()+"/admin/home"));
-		} else if (auths.contains("User")) {
-			response.sendRedirect(context.getContextPath());
+			response.sendRedirect(response.encodeURL(context.getContextPath() + "/admin/home"));
+		} else if (auths.contains("Add Insurance") || auths.contains("Edit Insurance")
+				|| auths.contains("Declare Damage") || auths.contains("Damage Approval less than 300")
+				|| auths.contains("Damage Approval 300-2000") || auths.contains("Damage Approval more than 2000")) {
+			response.sendRedirect(context.getContextPath() + "/cms/home");
 		} else {
-			response.sendRedirect(context.getContextPath()+"/cms/home");
+			response.sendRedirect(context.getContextPath());
 		}
 
 	}
