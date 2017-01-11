@@ -13,6 +13,8 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Department")
 public class Department implements Serializable {
@@ -43,9 +45,13 @@ public class Department implements Serializable {
 	@Column(name = "address", nullable = false)
 	private String address;
 
+	@Column(name = "phone", nullable = false)
+	private int phone;
+
 	@Column(name = "num_of_emp", nullable = false)
 	private int numEmp;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "workingDept")
 	private Set<User> users;
 
@@ -79,6 +85,14 @@ public class Department implements Serializable {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public int getPhone() {
+		return phone;
+	}
+
+	public void setPhone(int phone) {
+		this.phone = phone;
 	}
 
 	public int getNumEmp() {
