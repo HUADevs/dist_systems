@@ -10,11 +10,15 @@
 <title>Approve Damage</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/123941/modaal-0.3.1.min.css">
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/123941/modaal-0.3.1.min.js"></script>
 <body>
 	<jsp:include page="../views/fragments/cms-header.jsp"></jsp:include>
 	<div class="container">
@@ -55,9 +59,15 @@
 									<hr>
 									<p>Description: ${damage.damageDescription}</p>
 									<hr>
-									<label for="photo">Photo of the Incident</label> <img
+									<label for="photo">Photo of the Incident</label> <%-- <a
+										href="#inline" data-modaal-type="inline"
+										data-modaal-animation="fade" class="btn modaal"><img
+										id="photo" class="img-responsive" alt="damage-photo"
+										src="/Car-insurance/cms/damage/${damage.id}/imageDisplay"></a> --%>
+										<button type="button" data-toggle="modal" data-target="#myModal"><img
 										id="photo" class="img-responsive" alt="damage-photo"
 										src="/Car-insurance/cms/damage/${damage.id}/imageDisplay">
+										</button>
 								</section>
 							</div>
 						</div>
@@ -83,6 +93,12 @@
 			</div>
 		</div>
 	</div>
-
+	<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+        <div class="modal-body">
+            <img src="/Car-insurance/cms/damage/${damage.id}/imageDisplay" class="img-responsive center-block">
+        </div>
+  </div>
+</div>
 </body>
 </html>
