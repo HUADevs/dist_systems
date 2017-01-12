@@ -21,17 +21,21 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.huaDevelopers.data.Entities.Customer;
 import com.huaDevelopers.data.Entities.Insurance;
+import com.huaDevelopers.data.Entities.User;
 import com.huaDevelopers.data.Entities.Vehicle;
 import com.huaDevelopers.data.Entities.External.ExternalVehicle;
 import com.huaDevelopers.data.Services.Transformers;
 import com.huaDevelopers.data.Services.Interfaces.CustomerService;
+import com.huaDevelopers.data.Services.Interfaces.DepartmentService;
 import com.huaDevelopers.data.Services.Interfaces.ExternalService;
 import com.huaDevelopers.data.Services.Interfaces.InsuranceService;
+import com.huaDevelopers.data.Services.Interfaces.RoleService;
+import com.huaDevelopers.data.Services.Interfaces.UserService;
 import com.huaDevelopers.data.Services.Interfaces.VehicleService;
 
 @Controller
 @RequestMapping("/cms/insurance")
-@SessionAttributes("insurance")
+@SessionAttributes({"insurance","customer"})
 public class InsuranceController {
 
 	@Autowired
@@ -45,6 +49,15 @@ public class InsuranceController {
 
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private RoleService roleService;
+
+	@Autowired
+	private DepartmentService deptService;
 
 	// returns the search form to find vehicle and customer from the national
 	// database
@@ -140,6 +153,7 @@ public class InsuranceController {
 		model.addAttribute("customer", cust);
 		model.addAttribute("vehicle", vehicle);
 		model.addAttribute("insurance", insur);
+		model.addAttribute("user", new User());
 		return "insur_review";
 
 	}
@@ -153,6 +167,51 @@ public class InsuranceController {
 			this.insuranceService.updateInsurance(insur);
 		else
 			this.insuranceService.addInsurance(insur);
+		model.addAttribute("insurance", insur);
+		status.setComplete();
+		return "insur_success";
+	}
+
+	@RequestMapping(value = "/{id:\\d+}/save", method = RequestMethod.POST)
+	public String saveInsuranceAndUser(@PathVariable("id") Long id, Model model,
+			@ModelAttribute("insurance") Insurance insur,@ModelAttribute("customer") Customer cust, @Valid @ModelAttribute("user") User user, Errors errors,
+			SessionStatus status) {
+
+		if (!Insurance.isEqual(this.insuranceService.getInsuranceByID(insur.getId()), null))
+			this.insuranceService.updateInsurance(insur);
+		else {
+			this.insuranceService.addInsurance(insur);
+			/*Email validation*/
+			if (!user.getEmailAdress().isEmpty()) {
+				if (this.userService.getUserByEmail(user.getEmailAdress()) != null) {
+					errors.rejectValue("emailAdress", "user.emailAdress", "This email is already in use.");
+					model.addAttribute("roles", this.roleService.listAllRoles());
+					model.addAttribute("departments", this.deptService.getAllDepts());
+					return "insur_review";
+				} 
+			}
+			/*username validation*/
+			if (!user.getUserName().isEmpty()) {
+				if (this.userService.getUserByUsername(user.getUserName()) != null) {
+					errors.rejectValue("userName", "user.userName", "This username is already in use.");
+					model.addAttribute("roles", this.roleService.listAllRoles());
+					model.addAttribute("departments", this.deptService.getAllDepts());
+					return "insur_review";
+				} 
+			}
+			/*Validation for the rest of the fields*/
+			if (errors.hasErrors()) {
+				return "insur_review";
+			} else {/*if there are no errors add the user to the database*/
+				/*set existing role and department to the user*/
+				user.setAssignedRole(this.roleService.getRoleByID(6));
+				if (user.getWorkingDept() == null)
+					user.setWorkingDept(this.deptService.getDeptByID(6));
+				user.setFirstName(cust.getFirstName());
+				user.setLastName(cust.getLastName());
+				this.userService.addUser(user);
+			}
+		}
 		model.addAttribute("insurance", insur);
 		status.setComplete();
 		return "insur_success";
@@ -201,7 +260,7 @@ public class InsuranceController {
 
 	// delete insurance as well as the vehicle and the customer, provided that
 	// he hasn't any other vehicle insured, from database
-	@RequestMapping(value = "/{id:\\d+}/delete",method = RequestMethod.GET)
+	@RequestMapping(value = "/{id:\\d+}/delete", method = RequestMethod.GET)
 	public String deleteInsurance(@PathVariable("id") Long id) {
 		Customer cust = this.vService.getVehicleByPID(id).getCustomerPersonID();
 		this.vService.removeVehicle(id);

@@ -105,6 +105,44 @@ hr {
 			</div>
 		</div>
 	</div>
+	
+	<div class="container">
+		<div class="row">
+			<h1 class="text-center">Add User</h1>
+		</div>
+	<div class="row">
+		<spring:url value="/cms/insurance/${insurance.id}/save" var="formUrl" />
+		<form:form modelAttribute="user" action="${formUrl }" method="post"
+			cssClass="col-md-8 col-md-offset-2">
+			<div class="form-group">
+				<label for="user-emailAdress">Email</label>
+				<form:errors path="emailAdress" style="color:red" />
+				<form:input id="user-emailAdress" cssClass="form-control"
+					path="emailAdress" />
+			</div>
+			<div class="form-group">
+				<label for="user-telephone">Phone</label>
+				<form:errors path="telephone" style="color:red" />
+				<form:input id="user-telephone" cssClass="form-control"
+					path="telephone" />
+			</div>
+			<div class="form-group">
+				<label for="user-userName">Username</label>
+				<form:errors path="userName" style="color:red" />
+				<form:input id="user-userName" cssClass="form-control"
+					path="userName" />
+			</div>
+			<div class="form-group">
+				<label for="user-password">Password</label>
+				<form:errors path="password" style="color:red" />
+				<form:input id="user-password" cssClass="form-control"
+					path="password" />
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form:form>
+
+	</div>
+	</div>
 
 </body>
 </html>
