@@ -222,8 +222,15 @@ public class InsuranceController {
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	public String viewAllInsurance(Model model) {
 		Vehicle veh = new Vehicle();
+		List<Insurance> viewAllList = this.insuranceService.listAllInsurances();
+		for (Insurance insur : viewAllList) {
+			if (insur.getExpired() != this.insuranceService.checkExpiration(insur)) {
+				insur.setExpired(this.insuranceService.checkExpiration(insur));
+				this.insuranceService.updateInsurance(insur);
+			}
+		}
 		model.addAttribute("search", veh);
-		model.addAttribute("insurances", this.insuranceService.listAllInsurances());
+		model.addAttribute("insurances", viewAllList);
 		return "insur_all";
 	}
 

@@ -138,7 +138,8 @@ public class InsurServiceImpl implements InsuranceService {
 		LocalDate now = LocalDate.now();
 		int yearNow = now.getYear();
 		int dayNow = now.getDayOfYear();
-		if ((yearNow - startYear <= 0) && (dayNow > startDay))
+		if (((yearNow - startYear == insur.getDuration()) && (dayNow > startDay))
+				|| (yearNow - startYear > insur.getDuration()))
 			return true;
 		return false;
 	}
