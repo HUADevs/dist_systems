@@ -131,16 +131,19 @@ public class InsurServiceImpl implements InsuranceService {
 
 	@Override
 	@Transactional
-	public boolean checkExpiration(Insurance insur) {
+	public Boolean checkExpiration(Insurance insur) {
 		LocalDate startContract = insur.getInsuranceDate();
 		int startYear = startContract.getYear();
 		int startDay = startContract.getDayOfYear();
 		LocalDate now = LocalDate.now();
 		int yearNow = now.getYear();
 		int dayNow = now.getDayOfYear();
+		System.out.println(insur.getDuration()+"now day"+dayNow+"startDay"+startDay);
 		if (((yearNow - startYear == insur.getDuration()) && (dayNow > startDay))
-				|| (yearNow - startYear > insur.getDuration()))
+				|| (yearNow - startYear > insur.getDuration())){
+			System.out.println("in function check");
 			return true;
+		}
 		return false;
 	}
 

@@ -223,8 +223,11 @@ public class InsuranceController {
 	public String viewAllInsurance(Model model) {
 		Vehicle veh = new Vehicle();
 		List<Insurance> viewAllList = this.insuranceService.listAllInsurances();
+		System.out.println("before loop");
 		for (Insurance insur : viewAllList) {
-			if (insur.getExpired() != this.insuranceService.checkExpiration(insur)) {
+			System.out.println("before check");
+			if (!insur.getExpired().equals(this.insuranceService.checkExpiration(insur))) {
+				System.out.println("in check");
 				insur.setExpired(this.insuranceService.checkExpiration(insur));
 				this.insuranceService.updateInsurance(insur);
 			}
@@ -236,7 +239,7 @@ public class InsuranceController {
 
 	// view table with only one insurance - the one that provided in the search
 	// bar
-	@RequestMapping(value = "/view", method = RequestMethod.POST)
+	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String viewSearchedInsurance(Model model, @Valid @ModelAttribute("search") Vehicle veh, Errors errors) {
 		Vehicle searched = vService.getVehicleByLP(veh.getLicensePlate());
 		if (searched == null) {

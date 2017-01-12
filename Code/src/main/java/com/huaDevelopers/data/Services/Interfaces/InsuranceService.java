@@ -27,7 +27,7 @@ public interface InsuranceService {
 
 	public boolean newDriver(Customer cust);
 
-	public boolean checkExpiration(Insurance insur);
+	public Boolean checkExpiration(Insurance insur);
 
 	public LocalDate expirationDateFunc(Insurance insur);
 
