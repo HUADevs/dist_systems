@@ -56,6 +56,7 @@
 							<th>Type</th>
 							<th>Start At</th>
 							<th>Duration</th>
+							<th>Ends At</th>
 							<th>New Driver</th>
 							<th>Price</th>
 							<th>Paid</th>
@@ -73,6 +74,7 @@
 								<td>${insurance.type}</td>
 								<td>${insurance.insuranceDate}</td>
 								<td>${insurance.duration}(Year/s)</td>
+								<td>${insurance.expirationDate}</td>
 								<td>${insurance.newDriver}</td>
 								<td>${insurance.price}&euro;</td>
 								<td>${insurance.paid}</td>
@@ -81,11 +83,22 @@
 							value="/cms/insurance/${insurance.id}/delete"/>"
 									class="btn btn-danger"><span><i
 											class="glyphicon glyphicon-trash"></i></span> Delete</a></td>
-								<td><a
-									href="<spring:url
+								<c:choose>
+									<c:when test="${insurance.expired}">
+										<td><a
+											href="<spring:url
+							value="/cms/insurance/view"/>"
+											class="btn btn-warning"><span><i
+													class="glyphicon glyphicon-list-alt"></i></span> Expand/Update</a></td>
+									</c:when>
+									<c:otherwise>
+										<td><a
+											href="<spring:url
 							value="/cms/damage/declare/${insurance.licensePlate.licensePlate}"/>"
-									class="btn btn-warning"><span><i
-											class="glyphicon glyphicon-list-alt"></i></span> Declare Damage</a></td>
+											class="btn btn-warning"><span><i
+													class="glyphicon glyphicon-list-alt"></i></span> Declare Damage</a></td>
+									</c:otherwise>
+								</c:choose>
 							</tr>
 						</c:forEach>
 					</tbody>

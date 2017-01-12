@@ -1,5 +1,6 @@
 package com.huaDevelopers.data.Services.Interfaces;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.huaDevelopers.data.Entities.Customer;
@@ -21,9 +22,13 @@ public interface InsuranceService {
 	public void removeInsurance(Long id);
 
 	public double countInsurCost(Vehicle vehicle, Customer cust, String type, int duration, boolean flag);
-	
+
 	public double countInsurDiscount(Customer cust, int duration);
-		
+
 	public boolean newDriver(Customer cust);
+
+	public boolean checkExpiration(Insurance insur);
+
+	public LocalDate expirationDateFunc(Insurance insur);
 
 }

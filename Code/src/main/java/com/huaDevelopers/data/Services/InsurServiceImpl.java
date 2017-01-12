@@ -113,7 +113,8 @@ public class InsurServiceImpl implements InsuranceService {
 		return yearNow - initialYear;
 	}
 
-	//checks if the driver is under 23 and make sure that will take the extra new Driver fee
+	// checks if the driver is under 23 and make sure that will take the extra
+	// new Driver fee
 	@Override
 	@Transactional
 	public boolean newDriver(Customer cust) {
@@ -126,5 +127,30 @@ public class InsurServiceImpl implements InsuranceService {
 		if ((yearNow - year < 23) && (dayNow > day))
 			return true;
 		return false;
+	}
+
+	@Override
+	@Transactional
+	public boolean checkExpiration(Insurance insur) {
+		LocalDate startContract = insur.getInsuranceDate();
+		int startYear = startContract.getYear();
+		int startDay = startContract.getDayOfYear();
+		LocalDate now = LocalDate.now();
+		int yearNow = now.getYear();
+		int dayNow = now.getDayOfYear();
+		if ((yearNow - startYear <= 0) && (dayNow > startDay))
+			return true;
+		return false;
+	}
+
+	@Override
+	@Transactional
+	public LocalDate expirationDateFunc(Insurance insur) {
+		LocalDate startContract = insur.getInsuranceDate();
+		int startYear = startContract.getYear();
+		int duration = insur.getDuration();
+		int expireYear = startYear + duration;
+		LocalDate endContract = LocalDate.ofYearDay(expireYear, startContract.getDayOfYear());
+		return endContract;
 	}
 }
