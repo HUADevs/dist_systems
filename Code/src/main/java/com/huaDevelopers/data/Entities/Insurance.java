@@ -65,6 +65,9 @@ public class Insurance implements Serializable {
 	@Column(name = "expired", nullable = false)
 	private Boolean expired;
 
+	@Column(name="expiration_date", nullable = false)
+	private LocalDate expirationDate;
+	
 	@Column(name = "paid", nullable = false)
 	private Boolean paid;
 
@@ -142,6 +145,14 @@ public class Insurance implements Serializable {
 
 	public void setExpired(Boolean expired) {
 		this.expired = expired;
+	}
+
+	public LocalDate getExpirationDate() {
+		return expirationDate;
+	}
+
+	public void setExpirationDate(LocalDate expirationDate) {
+		this.expirationDate = expirationDate;
 	}
 
 	public Boolean getPaid() {

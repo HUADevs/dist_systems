@@ -136,6 +136,7 @@ public class InsuranceController {
 		insur.setNewDriver(flag);
 		insur.setLicensePlate(vehicle);
 		insur.setExpired(false);
+		insur.setExpirationDate(this.insuranceService.expirationDateFunc(insur));
 		insur.setPaid(true);
 		model.addAttribute("customer", cust);
 		model.addAttribute("vehicle", vehicle);
