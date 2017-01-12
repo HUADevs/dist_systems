@@ -1,6 +1,8 @@
 package com.huaDevelopers.controllers.Rest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +20,11 @@ public class DepartRestController {
 	private DepartmentService deptService;
 
 	@GetMapping("/departments")
-	public List<Department> getDepts() {	
-		return this.deptService.getAllDepts();		
+	public Map<String,Map<String,List<Department>>> getDepts() {	
+		List<Department> deptlist = this.deptService.getAllDepts();
+		
+		return JsonObjectWrapper.withLabel("root", JsonObjectWrapper.withLabel("depts", deptlist));
+		 
+		
 	}
 }
