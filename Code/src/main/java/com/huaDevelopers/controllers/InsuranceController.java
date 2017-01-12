@@ -35,7 +35,7 @@ import com.huaDevelopers.data.Services.Interfaces.VehicleService;
 
 @Controller
 @RequestMapping("/cms/insurance")
-@SessionAttributes({"insurance","customer"})
+@SessionAttributes({ "insurance", "customer" })
 public class InsuranceController {
 
 	@Autowired
@@ -49,7 +49,7 @@ public class InsuranceController {
 
 	@Autowired
 	private CustomerService customerService;
-	
+
 	@Autowired
 	private UserService userService;
 
@@ -154,13 +154,12 @@ public class InsuranceController {
 		model.addAttribute("customer", cust);
 		model.addAttribute("vehicle", vehicle);
 		model.addAttribute("insurance", insur);
-		model.addAttribute("user", new User());
 		return "insur_review";
 
 	}
 
 	// returns success page message in case of saving the new insurance
-	@RequestMapping(value = "/{id:\\d+}/save", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id:\\d+}/adduser", method = RequestMethod.GET)
 	public String saveInsurance(@PathVariable("id") Long id, Model model, @ModelAttribute("insurance") Insurance insur,
 			SessionStatus status) {
 
@@ -169,51 +168,36 @@ public class InsuranceController {
 		else
 			this.insuranceService.addInsurance(insur);
 		model.addAttribute("insurance", insur);
-		status.setComplete();
-		return "insur_success";
+		model.addAttribute("user", new User());
+		return "insur_user_add";
 	}
 
-	@RequestMapping(value = "/{id:\\d+}/save", method = RequestMethod.POST)
+	@RequestMapping(value = "/{id:\\d+}/adduser", method = RequestMethod.POST)
 	public String saveInsuranceAndUser(@PathVariable("id") Long id, Model model,
-			@ModelAttribute("insurance") Insurance insur,@ModelAttribute("customer") Customer cust, @Valid @ModelAttribute("user") User user, Errors errors,
-			SessionStatus status) {
-
-		if (!Insurance.isEqual(this.insuranceService.getInsuranceByID(insur.getId()), null))
-			this.insuranceService.updateInsurance(insur);
-		else {
-			this.insuranceService.addInsurance(insur);
-			/*Email validation*/
-			if (!user.getEmailAdress().isEmpty()) {
-				if (this.userService.getUserByEmail(user.getEmailAdress()) != null) {
-					errors.rejectValue("emailAdress", "user.emailAdress", "This email is already in use.");
-					model.addAttribute("roles", this.roleService.listAllRoles());
-					model.addAttribute("departments", this.deptService.getAllDepts());
-					return "insur_review";
-				} 
-			}
-			/*username validation*/
-			if (!user.getUserName().isEmpty()) {
-				if (this.userService.getUserByUsername(user.getUserName()) != null) {
-					errors.rejectValue("userName", "user.userName", "This username is already in use.");
-					model.addAttribute("roles", this.roleService.listAllRoles());
-					model.addAttribute("departments", this.deptService.getAllDepts());
-					return "insur_review";
-				} 
-			}
-			/*Validation for the rest of the fields*/
-			if (errors.hasErrors()) {
-				return "insur_review";
-			} else {/*if there are no errors add the user to the database*/
-				/*set existing role and department to the user*/
-				user.setAssignedRole(this.roleService.getRoleByID(6));
-				if (user.getWorkingDept() == null)
-					user.setWorkingDept(this.deptService.getDeptByID(6));
-				user.setFirstName(cust.getFirstName());
-				user.setLastName(cust.getLastName());
-				this.userService.addUser(user);
+			@ModelAttribute("insurance") Insurance insur, @ModelAttribute("customer") Customer cust,
+			@Valid @ModelAttribute("user") User user, Errors errors, SessionStatus status) {
+		/* Email validation */
+		if (!user.getEmailAdress().isEmpty()) {
+			if (this.userService.getUserByEmail(user.getEmailAdress()) != null) {
+				errors.rejectValue("emailAdress", "user.emailAdress", "This email is already in use.");
+				return "insur_user_add";
 			}
 		}
-		model.addAttribute("insurance", insur);
+		/* username validation */
+		if (!user.getUserName().isEmpty()) {
+			if (this.userService.getUserByUsername(user.getUserName()) != null) {
+				errors.rejectValue("userName", "user.userName", "This username is already in use.");
+				return "insur_user_add";
+			}
+		}
+		/* Validation for the rest of the fields */
+		/* set existing role and department to the user */
+		user.setAssignedRole(this.roleService.getRoleByID(6));
+		if (user.getWorkingDept() == null)
+			user.setWorkingDept(this.deptService.getDeptByID(6));
+		user.setFirstName(cust.getFirstName());
+		user.setLastName(cust.getLastName());
+		this.userService.addUser(user);
 		status.setComplete();
 		return "insur_success";
 	}
@@ -239,7 +223,7 @@ public class InsuranceController {
 
 	// view table with only one insurance - the one that provided in the search
 	// bar
-	@RequestMapping(value = "/", method = RequestMethod.POST)
+	@RequestMapping(value = "/view", method = RequestMethod.POST)
 	public String viewSearchedInsurance(Model model, @Valid @ModelAttribute("search") Vehicle veh, Errors errors) {
 		Vehicle searched = vService.getVehicleByLP(veh.getLicensePlate());
 		if (searched == null) {
