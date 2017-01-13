@@ -191,19 +191,23 @@ public class InsuranceController {
 			}
 		}
 		/* Validation for the rest of the fields */
-		/* set existing role and department to the user */
-		user.setAssignedRole(this.roleService.getRoleByID(6));
-		if (user.getWorkingDept() == null)
-			user.setWorkingDept(this.deptService.getDeptByID(6));
-		user.setFirstName(cust.getFirstName());
-		user.setLastName(cust.getLastName());
-		System.out.println("Customer: ID:" + cust.getId() + ",Name:" + cust.getFirstName() + cust.getLastName()
-				+ ",User: " + cust.getUserEmail());
-		this.userService.addUser(user);
-		cust = this.customerService.getCustomerByID(cust.getPersonalId());
-		cust.setUserEmail(user.getEmailAdress());
-		this.customerService.updateCustomer(cust);
-		status.setComplete();
+		if (errors.hasErrors()) {
+			return "insur_user_add";
+		} else {
+			/* set existing role and department to the user */
+			user.setAssignedRole(this.roleService.getRoleByID(6));
+			if (user.getWorkingDept() == null)
+				user.setWorkingDept(this.deptService.getDeptByID(6));
+			user.setFirstName(cust.getFirstName());
+			user.setLastName(cust.getLastName());
+			System.out.println("Customer: ID:" + cust.getId() + ",Name:" + cust.getFirstName() + cust.getLastName()
+					+ ",User: " + cust.getUserEmail());
+			this.userService.addUser(user);
+			cust = this.customerService.getCustomerByID(cust.getPersonalId());
+			cust.setUserEmail(user.getEmailAdress());
+			this.customerService.updateCustomer(cust);
+			status.setComplete();
+		}
 		return "insur_success";
 	}
 
