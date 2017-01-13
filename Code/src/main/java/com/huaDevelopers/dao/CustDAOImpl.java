@@ -61,9 +61,9 @@ public class CustDAOImpl implements CustomerDAO {
 	}
 
 	@Override
-	public void removeCustomer(int id) {
+	public void removeCustomer(Long id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Customer cust = session.load(Customer.class, new Integer(id));
+		Customer cust = session.load(Customer.class, id);
 		if (cust != null) {
 			session.delete(cust);
 			logger.info("Customer has successfully deleted from db" + cust.toString());

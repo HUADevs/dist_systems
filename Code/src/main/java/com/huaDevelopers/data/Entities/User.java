@@ -14,9 +14,10 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+
 /*Link the class,fields with the database table,columns.Declare constraints and relations with other entities*/
 @Entity
-@Table(name="User")
+@Table(name = "User")
 public class User implements Serializable {
 
 	/**
@@ -26,52 +27,52 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
-	private int userId;
-	
-	@NotEmpty(message="This field is required")
-	@Size(max=50)
-	@Column(name="first_name",length=50, nullable=false)
+	@Column(name = "id")
+	private Long userId;
+
+	@NotEmpty(message = "This field is required")
+	@Size(max = 50)
+	@Column(name = "first_name", length = 50, nullable = false)
 	private String firstName;
-	
-	@NotEmpty(message="This field is required")
-	@Size(max=50)
-	@Column(name="last_name",length=50, nullable=false)
+
+	@NotEmpty(message = "This field is required")
+	@Size(max = 50)
+	@Column(name = "last_name", length = 50, nullable = false)
 	private String lastName;
 
 	@Email
-	@Size(max=50)
-	@NotEmpty(message="This field is required")
-	@Column(name="email", length=50,nullable=false,unique=true)
+	@Size(max = 50)
+	@NotEmpty(message = "This field is required")
+	@Column(name = "email", length = 50, nullable = false, unique = true)
 	private String emailAdress;
-	
-	@Size(max=10)
-	@Column(name="phone", nullable=true)
+
+	@Size(max = 10)
+	@Column(name = "phone", nullable = true)
 	private String telephone;
-	
+
 	@ManyToOne
-	@JoinColumn(name="role_id", nullable=true)
+	@JoinColumn(name = "role_id", nullable = true)
 	private Role assignedRole;
-	
+
 	@ManyToOne
-	@JoinColumn(name="department_id", nullable=true)
+	@JoinColumn(name = "department_id", nullable = true)
 	private Department workingDept;
-	
-	@NotEmpty(message="This field is required")
-	@Size(max=50)
-	@Column(name="username", length=50, nullable=false,unique=true)
+
+	@NotEmpty(message = "This field is required")
+	@Size(max = 50)
+	@Column(name = "username", length = 50, nullable = false, unique = true)
 	private String userName;
-	
-	@NotEmpty(message="This field is required")
-	@Size(min=6, max=250)
-	@Column(name="password",length=50, nullable=false)
+
+	@NotEmpty(message = "This field is required")
+	@Size(min = 6, max = 250)
+	@Column(name = "password", length = 50, nullable = false)
 	private String password;
 
-	public int getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
@@ -138,5 +139,5 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 }

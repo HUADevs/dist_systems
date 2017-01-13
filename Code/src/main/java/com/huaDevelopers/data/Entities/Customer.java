@@ -26,7 +26,7 @@ public class Customer implements Serializable {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 
 	@NotEmpty
 	@Column(name = "first_name", nullable = false)
@@ -49,6 +49,9 @@ public class Customer implements Serializable {
 	@Column(name = "license_date", nullable = false)
 	private LocalDate licenseAqquired;
 
+	@Column(name = "email", nullable = true)
+	private String userEmail;
+
 	@OneToMany(mappedBy = "personalId")
 	private Set<History> history;
 
@@ -59,11 +62,11 @@ public class Customer implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -113,6 +116,14 @@ public class Customer implements Serializable {
 
 	public void setLicenseAqquired(LocalDate licenseAqquired) {
 		this.licenseAqquired = licenseAqquired;
+	}
+
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 
 	public Set<History> getHistory() {

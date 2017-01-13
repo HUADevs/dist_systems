@@ -14,10 +14,10 @@ public interface UserService {
 
 	public User getUserByEmail(String email);
 
-	public User getUserById(int id);
+	public User getUserById(Long id);
 
 	public List<User> listAllUser();
 
-	public void removeUser(int userId);
+	public void removeUser(Long userId);
 
 }

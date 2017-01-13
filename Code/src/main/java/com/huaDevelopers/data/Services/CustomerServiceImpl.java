@@ -47,7 +47,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	@Transactional
-	public void removeCustomer(int id) {
+	public void removeCustomer(Long id) {
 		this.custDAO.removeCustomer(id);
 	}
 

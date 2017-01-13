@@ -87,7 +87,7 @@ public class UserController {
 
 	/*Populate fields  and dropdown lists of user form for editing a user*/
 	@RequestMapping(value = "/edit/{userId:\\d+}",method = RequestMethod.GET)
-	public String UpdateUserInfo(@PathVariable("userId") int userId, Model model) {
+	public String UpdateUserInfo(@PathVariable("userId") Long userId, Model model) {
 		model.addAttribute("roles", this.roleService.listAllRoles());
 		model.addAttribute("departments", this.deptService.getAllDepts());
 		model.addAttribute("user", this.userService.getUserById(userId));
@@ -129,7 +129,7 @@ public class UserController {
 
 	/* delete a user by his id*/
 	@RequestMapping(value = "/delete/{userId:\\d+}",method = RequestMethod.GET)
-	public String DeleteUser(@PathVariable("userId") int userId, Model model, RedirectAttributes redirectAttributes) {
+	public String DeleteUser(@PathVariable("userId") Long userId, Model model, RedirectAttributes redirectAttributes) {
 		this.userService.removeUser(userId);
 		return "redirect:/admin/user/view";
 	}
