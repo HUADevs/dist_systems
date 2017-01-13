@@ -282,6 +282,12 @@ public class InsuranceController {
 		return "redirect:/cms/insurance/view";
 	}
 
+	@RequestMapping(value = "/{id:\\d+}/expand", method = RequestMethod.PUT)
+	public String expandContract(@PathVariable("id") Long id, Model model, @ModelAttribute("vehicle") Vehicle vehicle) {
+		String resultJSP = editInsurance(id, model, vehicle);
+		return resultJSP;
+	}
+
 	/*
 	 * global for the scope of InsuranceController model attributes passed only
 	 * once in the ORM due to sessionAttributes tag and once the insurance has

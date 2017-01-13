@@ -87,8 +87,8 @@
 									<c:when test="${insurance.expired}">
 										<td><a
 											href="<spring:url
-							value="/cms/insurance/view"/>"
-											class="btn btn-warning"><span><i
+							value="/cms/insurance/${insurance.id}/edit"/>"
+											class="btn btn-success"><span><i
 													class="glyphicon glyphicon-list-alt"></i></span> Expand/Update</a></td>
 									</c:when>
 									<c:otherwise>
