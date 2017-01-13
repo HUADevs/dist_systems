@@ -200,7 +200,7 @@ public class InsuranceController {
 		System.out.println("Customer: ID:" + cust.getId() + ",Name:" + cust.getFirstName() + cust.getLastName()
 				+ ",User: " + cust.getUserEmail());
 		this.userService.addUser(user);
-		cust=this.customerService.getCustomerByID(cust.getPersonalId());
+		cust = this.customerService.getCustomerByID(cust.getPersonalId());
 		cust.setUserEmail(user.getEmailAdress());
 		this.customerService.updateCustomer(cust);
 		status.setComplete();
@@ -266,11 +266,17 @@ public class InsuranceController {
 		this.vService.removeVehicle(id);
 		List<Vehicle> vList = this.vService.listAllVehiclesPerCustomer(cust.getPersonalId());
 		if (vList.isEmpty()) {
-			User user=this.userService.getUserByEmail(cust.getUserEmail());
+			User user = this.userService.getUserByEmail(cust.getUserEmail());
 			this.userService.removeUser(user.getUserId());
 			this.customerService.removeCustomer(cust.getId());
 		}
 		return "redirect:/cms/insurance/view";
+	}
+
+	@RequestMapping(value = "/{id:\\d+}/expand", method = RequestMethod.PUT)
+	public String expandContract(@PathVariable("id") Long id, Model model, @ModelAttribute("vehicle") Vehicle vehicle) {
+		String resultJSP = editInsurance(id, model, vehicle);
+		return resultJSP;
 	}
 
 	/*

@@ -124,7 +124,7 @@ public class InsurServiceImpl implements InsuranceService {
 		LocalDate now = LocalDate.now();
 		int yearNow = now.getYear();
 		int dayNow = now.getDayOfYear();
-		if ((yearNow - year < 23) && (dayNow > day))
+		if (((yearNow - year == 23) && (dayNow > day)) || (yearNow - year < 23))
 			return true;
 		return false;
 	}
@@ -138,12 +138,10 @@ public class InsurServiceImpl implements InsuranceService {
 		LocalDate now = LocalDate.now();
 		int yearNow = now.getYear();
 		int dayNow = now.getDayOfYear();
-		System.out.println(insur.getDuration()+"now day"+dayNow+"startDay"+startDay);
 		if (((yearNow - startYear == insur.getDuration()) && (dayNow > startDay))
-				|| (yearNow - startYear > insur.getDuration())){
-			System.out.println("in function check");
+				|| (yearNow - startYear > insur.getDuration()))
 			return true;
-		}
+
 		return false;
 	}
 
