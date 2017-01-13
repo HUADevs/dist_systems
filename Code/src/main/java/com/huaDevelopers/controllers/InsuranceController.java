@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -175,7 +176,7 @@ public class InsuranceController {
 	@RequestMapping(value = "/{id:\\d+}/adduser", method = RequestMethod.POST)
 	public String saveInsuranceAndUser(@PathVariable("id") Long id, Model model,
 			@ModelAttribute("insurance") Insurance insur, @ModelAttribute("customer") Customer cust,
-			@Valid @ModelAttribute("user") User user, Errors errors, SessionStatus status) {
+			@Validated(User.ValidationStepTwo.class) @ModelAttribute("user") User user, Errors errors, SessionStatus status) {
 		/* Email validation */
 		if (!user.getEmailAdress().isEmpty()) {
 			if (this.userService.getUserByEmail(user.getEmailAdress()) != null) {
@@ -190,24 +191,28 @@ public class InsuranceController {
 				return "insur_user_add";
 			}
 		}
+		user.setAssignedRole(this.roleService.getRoleByID(6));
+		if (user.getWorkingDept() == null)
+			user.setWorkingDept(this.deptService.getDeptByID(6));
+		user.setFirstName(cust.getFirstName());
+		user.setLastName(cust.getLastName());
 		/* Validation for the rest of the fields */
 		if (errors.hasErrors()) {
+			System.out.println(errors.getAllErrors().toString());
+			System.out.println(cust.getFirstName()+cust.getLastName());
+			System.out.println(user.getEmailAdress() + user.getFirstName() + user.getLastName() + user.getPassword()
+			+ user.getTelephone() + user.getUserName() + user.getUserId() + user.getAssignedRole()
+			+ user.getWorkingDept());
 			return "insur_user_add";
 		} else {
 			/* set existing role and department to the user */
-			user.setAssignedRole(this.roleService.getRoleByID(6));
-			if (user.getWorkingDept() == null)
-				user.setWorkingDept(this.deptService.getDeptByID(6));
-			user.setFirstName(cust.getFirstName());
-			user.setLastName(cust.getLastName());
-			System.out.println("Customer: ID:" + cust.getId() + ",Name:" + cust.getFirstName() + cust.getLastName()
-					+ ",User: " + cust.getUserEmail());
 			this.userService.addUser(user);
 			cust = this.customerService.getCustomerByID(cust.getPersonalId());
 			cust.setUserEmail(user.getEmailAdress());
 			this.customerService.updateCustomer(cust);
-			status.setComplete();
+
 		}
+		status.setComplete();
 		return "insur_success";
 	}
 

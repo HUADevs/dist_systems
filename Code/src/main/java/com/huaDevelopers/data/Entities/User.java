@@ -19,6 +19,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @Table(name = "User")
 public class User implements Serializable {
+	public interface ValidationStepOne {
+		// validation group marker interface
+	}
+
+	public interface ValidationStepTwo {
+		// validation group marker interface
+	}
 
 	/**
 	 * 
@@ -30,19 +37,19 @@ public class User implements Serializable {
 	@Column(name = "id")
 	private Long userId;
 
-	@NotEmpty(message = "This field is required")
+	@NotEmpty(groups = { ValidationStepOne.class }, message = "This field is required")
 	@Size(max = 50)
 	@Column(name = "first_name", length = 50, nullable = false)
 	private String firstName;
 
-	@NotEmpty(message = "This field is required")
+	@NotEmpty(groups = { ValidationStepOne.class }, message = "This field is required")
 	@Size(max = 50)
 	@Column(name = "last_name", length = 50, nullable = false)
 	private String lastName;
 
 	@Email
 	@Size(max = 50)
-	@NotEmpty(message = "This field is required")
+	@NotEmpty(groups = { ValidationStepOne.class, ValidationStepTwo.class }, message = "This field is required")
 	@Column(name = "email", length = 50, nullable = false, unique = true)
 	private String emailAdress;
 
@@ -58,12 +65,12 @@ public class User implements Serializable {
 	@JoinColumn(name = "department_id", nullable = true)
 	private Department workingDept;
 
-	@NotEmpty(message = "This field is required")
+	@NotEmpty(groups = { ValidationStepOne.class, ValidationStepTwo.class }, message = "This field is required")
 	@Size(max = 50)
 	@Column(name = "username", length = 50, nullable = false, unique = true)
 	private String userName;
 
-	@NotEmpty(message = "This field is required")
+	@NotEmpty(groups = { ValidationStepOne.class, ValidationStepTwo.class }, message = "This field is required")
 	@Size(min = 6, max = 250)
 	@Column(name = "password", length = 50, nullable = false)
 	private String password;

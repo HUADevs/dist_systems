@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,7 +51,7 @@ public class UserController {
 
 	/*Form to add new user*/
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String saveUser(Model model, @Valid @ModelAttribute("user") User user, Errors errors) {
+	public String saveUser(Model model, @Validated(User.ValidationStepOne.class) @ModelAttribute("user") User user, Errors errors) {
 		/*Email validation*/
 		if (!user.getEmailAdress().isEmpty()) {
 			if (this.userService.getUserByEmail(user.getEmailAdress()) != null) {
