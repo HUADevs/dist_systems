@@ -43,17 +43,17 @@ public class User implements Serializable {
 	private String firstName;
 
 	@NotEmpty(groups = { ValidationStepOne.class }, message = "This field is required")
-	@Size(max = 50)
+	@Size(max = 50, groups = { ValidationStepOne.class })
 	@Column(name = "last_name", length = 50, nullable = false)
 	private String lastName;
 
-	@Email
-	@Size(max = 50)
+	@Email(groups = { ValidationStepOne.class, ValidationStepTwo.class })
+	@Size(max = 50, groups = { ValidationStepOne.class })
 	@NotEmpty(groups = { ValidationStepOne.class, ValidationStepTwo.class }, message = "This field is required")
 	@Column(name = "email", length = 50, nullable = false, unique = true)
 	private String emailAdress;
 
-	@Size(max = 10)
+	@Size(max = 10, groups = { ValidationStepOne.class, ValidationStepTwo.class })
 	@Column(name = "phone", nullable = true)
 	private String telephone;
 
@@ -66,12 +66,12 @@ public class User implements Serializable {
 	private Department workingDept;
 
 	@NotEmpty(groups = { ValidationStepOne.class, ValidationStepTwo.class }, message = "This field is required")
-	@Size(max = 50)
+	@Size(max = 50, groups = { ValidationStepOne.class, ValidationStepTwo.class })
 	@Column(name = "username", length = 50, nullable = false, unique = true)
 	private String userName;
 
 	@NotEmpty(groups = { ValidationStepOne.class, ValidationStepTwo.class }, message = "This field is required")
-	@Size(min = 6, max = 250)
+	@Size(min = 6, max = 250, groups = { ValidationStepOne.class, ValidationStepTwo.class })
 	@Column(name = "password", length = 50, nullable = false)
 	private String password;
 

@@ -176,7 +176,8 @@ public class InsuranceController {
 	@RequestMapping(value = "/{id:\\d+}/adduser", method = RequestMethod.POST)
 	public String saveInsuranceAndUser(@PathVariable("id") Long id, Model model,
 			@ModelAttribute("insurance") Insurance insur, @ModelAttribute("customer") Customer cust,
-			@Validated(User.ValidationStepTwo.class) @ModelAttribute("user") User user, Errors errors, SessionStatus status) {
+			@Validated(User.ValidationStepTwo.class) @ModelAttribute("user") User user, Errors errors,
+			SessionStatus status) {
 		/* Email validation */
 		if (!user.getEmailAdress().isEmpty()) {
 			if (this.userService.getUserByEmail(user.getEmailAdress()) != null) {
@@ -199,10 +200,10 @@ public class InsuranceController {
 		/* Validation for the rest of the fields */
 		if (errors.hasErrors()) {
 			System.out.println(errors.getAllErrors().toString());
-			System.out.println(cust.getFirstName()+cust.getLastName());
+			System.out.println(cust.getFirstName() + cust.getLastName());
 			System.out.println(user.getEmailAdress() + user.getFirstName() + user.getLastName() + user.getPassword()
-			+ user.getTelephone() + user.getUserName() + user.getUserId() + user.getAssignedRole()
-			+ user.getWorkingDept());
+					+ user.getTelephone() + user.getUserName() + user.getUserId() + user.getAssignedRole()
+					+ user.getWorkingDept());
 			return "insur_user_add";
 		} else {
 			/* set existing role and department to the user */
@@ -276,7 +277,9 @@ public class InsuranceController {
 		List<Vehicle> vList = this.vService.listAllVehiclesPerCustomer(cust.getPersonalId());
 		if (vList.isEmpty()) {
 			User user = this.userService.getUserByEmail(cust.getUserEmail());
-			this.userService.removeUser(user.getUserId());
+			if (user != null) {
+				this.userService.removeUser(user.getUserId());
+			}
 			this.customerService.removeCustomer(cust.getId());
 		}
 		return "redirect:/cms/insurance/view";
