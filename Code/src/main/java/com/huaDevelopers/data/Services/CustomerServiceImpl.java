@@ -51,4 +51,11 @@ public class CustomerServiceImpl implements CustomerService {
 		this.custDAO.removeCustomer(id);
 	}
 
+	@Override
+	@Transactional
+	public Customer getCustomerByEmail(String email) {
+		return this.custDAO.getCustomerByEmail(email);
+	}
+	
+
 }

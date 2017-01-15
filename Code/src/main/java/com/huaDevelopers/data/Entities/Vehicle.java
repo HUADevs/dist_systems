@@ -18,6 +18,8 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Vehicle")
 public class Vehicle implements Serializable {
@@ -52,9 +54,11 @@ public class Vehicle implements Serializable {
 	@Column(name = "color", nullable = false)
 	private String color;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "licensePlate")
 	private Set<DamageForm> dmgForms;
 
+	@JsonIgnore
 	@OneToOne(mappedBy = "licensePlate", cascade = CascadeType.ALL)
 	private Insurance insurance;
 

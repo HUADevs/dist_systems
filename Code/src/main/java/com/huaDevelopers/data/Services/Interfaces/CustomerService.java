@@ -15,4 +15,6 @@ public interface CustomerService {
 	public List<Customer> listAllCustomers();
 
 	public void removeCustomer(Long id);
+	
+	public Customer getCustomerByEmail(String email);
 }

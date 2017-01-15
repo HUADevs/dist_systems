@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Customers")
 public class Customer implements Serializable {
@@ -52,9 +54,11 @@ public class Customer implements Serializable {
 	@Column(name = "email", nullable = true)
 	private String userEmail;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "personalId")
 	private Set<History> history;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "customerPersonID")
 	private Set<Vehicle> vehicles;
 

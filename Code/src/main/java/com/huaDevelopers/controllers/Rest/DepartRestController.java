@@ -12,7 +12,7 @@ import com.huaDevelopers.data.Entities.Department;
 import com.huaDevelopers.data.Services.Interfaces.DepartmentService;
 
 @RestController
-@RequestMapping("/rest")
+@RequestMapping("/rest/department")
 public class DepartRestController {
 
 	@Autowired

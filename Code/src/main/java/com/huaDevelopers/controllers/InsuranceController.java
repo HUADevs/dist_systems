@@ -199,11 +199,6 @@ public class InsuranceController {
 		user.setLastName(cust.getLastName());
 		/* Validation for the rest of the fields */
 		if (errors.hasErrors()) {
-			System.out.println(errors.getAllErrors().toString());
-			System.out.println(cust.getFirstName() + cust.getLastName());
-			System.out.println(user.getEmailAdress() + user.getFirstName() + user.getLastName() + user.getPassword()
-					+ user.getTelephone() + user.getUserName() + user.getUserId() + user.getAssignedRole()
-					+ user.getWorkingDept());
 			return "insur_user_add";
 		} else {
 			/* set existing role and department to the user */
@@ -222,11 +217,8 @@ public class InsuranceController {
 	public String viewAllInsurance(Model model) {
 		Vehicle veh = new Vehicle();
 		List<Insurance> viewAllList = this.insuranceService.listAllInsurances();
-		System.out.println("before loop");
 		for (Insurance insur : viewAllList) {
-			System.out.println("before check");
 			if (!insur.getExpired().equals(this.insuranceService.checkExpiration(insur))) {
-				System.out.println("in check");
 				insur.setExpired(this.insuranceService.checkExpiration(insur));
 				this.insuranceService.updateInsurance(insur);
 			}

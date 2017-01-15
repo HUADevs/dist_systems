@@ -71,4 +71,19 @@ public class CustDAOImpl implements CustomerDAO {
 			logger.info("Something went completely wrong");
 	}
 
+	@Override
+	public Customer getCustomerByEmail(String email) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Customer cust;
+		try {
+			cust = (Customer) session.createQuery("from Customer where email='" + email + "'")
+					.getSingleResult();
+		} catch (NoResultException ex) {
+			return null;
+		}
+		logger.info("Customer successfully selected from db" + cust.toString());
+		return cust;
+	}
+	
+
 }
