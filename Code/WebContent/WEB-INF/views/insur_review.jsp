@@ -48,12 +48,13 @@ hr {
 										Name: <strong>${customer.firstName}
 											${customer.lastName}</strong>
 									</p>
-									<c:forEach items="${customer.history}" var="history">
-										<p>History:</p>
-										<ol>
+									<p>History:</p>
+									<ol>
+										<c:forEach items="${customer.history}" var="history">
+
 											<li>${history.incident}</li>
-										</ol>
-									</c:forEach>
+										</c:forEach>
+									</ol>
 									<p>
 										Vehicle: <strong>${vehicle.licensePlate}</strong>
 									</p>
