@@ -37,10 +37,10 @@ public class InsurRestController {
 	@Autowired
 	private VehicleService vService;
 	
-	@GetMapping("/{id:\\d+}/view")
-	public  Map<String,Map<String,List<Insurance>>> getInsurByUserEmail(@PathVariable("id") Long id){
+	@GetMapping("/{username}/view")
+	public  Map<String,Map<String,List<Insurance>>> getInsurByUserEmail(@PathVariable("username") String id){
 		List<Insurance> insurances = new ArrayList<Insurance>();
-		Customer cust = this.customerService.getCustomerByEmail(this.userService.getUserById(id).getEmailAdress());
+		Customer cust = this.customerService.getCustomerByEmail(this.userService.getUserByUsername(id).getEmailAdress());
 		System.out.println("Customer:"+cust.getFirstName()+" "+cust.getLastName());
 		List<Vehicle> vehicles = this.vService.listAllVehiclesPerCustomer(cust.getPersonalId());
 		for(Vehicle veh: vehicles){
@@ -53,7 +53,7 @@ public class InsurRestController {
 	}
 	
 	@GetMapping("/{id:\\d+}")
-	public Map<String,Map<String,Insurance>> getInsuranSce(@PathVariable("id") Long id){
+	public Map<String,Map<String,Insurance>> getInsurance(@PathVariable("id") Long id){
 		Insurance insur = this.insuranceService.getInsuranceByID(id);
 		return JsonObjectWrapper.withLabel("root", JsonObjectWrapper.withLabel("insurance", insur));
 	}

@@ -68,7 +68,7 @@
 					<div class="form-group">
 						<form:errors path="type" style="color:red" />
 						<br>
-						<form:radiobuttons cssClass="" path="type" items="${typeOptions}" />
+						<form:radiobuttons path="type" items="${typeOptions}" />
 					</div>
 					<div class="form-group">
 						<label for="duration">Duration of Contract (In Years)</label>
