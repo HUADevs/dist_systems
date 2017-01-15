@@ -38,7 +38,7 @@ public class InsurRestController {
 	private VehicleService vService;
 
 	@GetMapping("/{username}/view")
-	public Map<String, Map<String, List<Insurance>>> getInsurByUserEmail(@PathVariable("username") String id) {
+	public List<Insurance> getInsurByUserEmail(@PathVariable("username") String id) {
 		List<Insurance> insurances = new ArrayList<Insurance>();
 		Customer cust = this.customerService
 				.getCustomerByEmail(this.userService.getUserByUsername(id).getEmailAdress());
@@ -50,27 +50,26 @@ public class InsurRestController {
 
 			insurances.add(this.insuranceService.getInsuranceByID(veh.getId()));
 		}
-		return JsonObjectWrapper.withLabel("root", JsonObjectWrapper.withLabel("insurances", insurances));
+		return  insurances;
 	}
 
 	@GetMapping("/{id:\\d+}")
-	public Map<String, Map<String, Insurance>> getInsurance(@PathVariable("id") Long id) {
-		Insurance insur = this.insuranceService.getInsuranceByID(id);
-		return JsonObjectWrapper.withLabel("root", JsonObjectWrapper.withLabel("insurance", insur));
+	public Insurance getInsurance(@PathVariable("id") Long id) {
+		return this.insuranceService.getInsuranceByID(id);
 	}
 
 	@GetMapping("/{id:\\d+}/expand")
-	public Map<String, Map<String, Insurance>> expandInsur(@PathVariable("id") Long id) {
+	public  Insurance expandInsur(@PathVariable("id") Long id) {
 		Insurance insur = this.insuranceService.getInsuranceByID(id);
 		Vehicle vehicle = insur.getLicensePlate();
 		Customer cust = vehicle.getCustomerPersonID();
 		boolean flag = this.insuranceService.newDriver(cust);
 		insur.setNewDriver(flag);
-		return JsonObjectWrapper.withLabel("root", JsonObjectWrapper.withLabel("insurance", insur));
+		return  insur;
 	}
 
 	@PutMapping("/{id:\\d+}/expand")
-	public Map<String, Map<String, Insurance>> expandInsurance(@PathVariable("id") Long id,
+	public Insurance expandInsurance(@PathVariable("id") Long id,
 			@RequestBody Insurance JSONInsur) {
 		Vehicle vehicle = JSONInsur.getLicensePlate();
 		Customer cust = vehicle.getCustomerPersonID();
@@ -84,11 +83,11 @@ public class InsurRestController {
 
 		this.insuranceService.updateInsurance(JSONInsur);
 
-		return JsonObjectWrapper.withLabel("root", JsonObjectWrapper.withLabel("paymentCode", JSONInsur));
+		return JSONInsur;
 	}
 
 	@PutMapping("/{id:\\d+}/pay")
-	public Map<String, Map<String, String>> payInsurance(@PathVariable("id") Long id,
+	public String payInsurance(@PathVariable("id") Long id,
 			@RequestBody Insurance JSONInsur) {
 		Vehicle vehicle = JSONInsur.getLicensePlate();
 		Customer cust = vehicle.getCustomerPersonID();
@@ -101,7 +100,7 @@ public class InsurRestController {
 
 		String paymentCode = cust.getId() + "/" + vehicle.getLicensePlate();
 
-		return JsonObjectWrapper.withLabel("root", JsonObjectWrapper.withLabel("paymentCode", paymentCode));
+		return paymentCode;
 
 	}
 

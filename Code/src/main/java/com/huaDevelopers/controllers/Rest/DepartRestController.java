@@ -19,10 +19,10 @@ public class DepartRestController {
 	private DepartmentService deptService;
 
 	@GetMapping("/departments")
-	public Map<String,Map<String,List<Department>>> getDepts() {	
+	public List<Department> getDepts() {	
 		List<Department> deptlist = this.deptService.getAllDepts();
 		
-		return JsonObjectWrapper.withLabel("root", JsonObjectWrapper.withLabel("depts", deptlist));
+		return deptlist;
 		 
 		
 	}
