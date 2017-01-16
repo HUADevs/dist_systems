@@ -49,27 +49,34 @@ public class InsurRestController {
 
 			insurances.add(this.insuranceService.getInsuranceByID(veh.getId()));
 		}
-		return  insurances;
+		return insurances;
 	}
 
 	@GetMapping("/{id:\\d+}")
 	public Insurance getInsurance(@PathVariable("id") Long id) {
-		return this.insuranceService.getInsuranceByID(id);
+
+		Insurance insur = this.insuranceService.getInsuranceByID(id);
+
+		if (!insur.getExpired().equals(this.insuranceService.checkExpiration(insur))) {
+			insur.setExpired(this.insuranceService.checkExpiration(insur));
+			this.insuranceService.updateInsurance(insur);
+		}
+
+		return insur;
 	}
 
 	@GetMapping("/{id:\\d+}/expand")
-	public  Insurance expandInsur(@PathVariable("id") Long id) {
+	public Insurance expandInsur(@PathVariable("id") Long id) {
 		Insurance insur = this.insuranceService.getInsuranceByID(id);
 		Vehicle vehicle = insur.getLicensePlate();
 		Customer cust = vehicle.getCustomerPersonID();
 		boolean flag = this.insuranceService.newDriver(cust);
 		insur.setNewDriver(flag);
-		return  insur;
+		return insur;
 	}
 
 	@PutMapping("/{id:\\d+}/expand")
-	public Insurance expandInsurance(@PathVariable("id") Long id,
-			@RequestBody Insurance JSONInsur) {
+	public Insurance expandInsurance(@PathVariable("id") Long id, @RequestBody Insurance JSONInsur) {
 		Vehicle vehicle = JSONInsur.getLicensePlate();
 		Customer cust = vehicle.getCustomerPersonID();
 		int duration = JSONInsur.getDuration();
@@ -86,8 +93,7 @@ public class InsurRestController {
 	}
 
 	@PutMapping("/{id:\\d+}/pay")
-	public String payInsurance(@PathVariable("id") Long id,
-			@RequestBody Insurance JSONInsur) {
+	public String payInsurance(@PathVariable("id") Long id, @RequestBody Insurance JSONInsur) {
 		Vehicle vehicle = JSONInsur.getLicensePlate();
 		Customer cust = vehicle.getCustomerPersonID();
 		JSONInsur.setInsuranceDate(LocalDate.now());

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.huaDevelopers.data.Entities.Customer;
-import com.huaDevelopers.data.Entities.History;
 import com.huaDevelopers.data.Entities.Insurance;
 import com.huaDevelopers.data.Entities.User;
 import com.huaDevelopers.data.Entities.Vehicle;
