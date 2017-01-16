@@ -12,14 +12,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "DamageForm")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class DamageForm implements Serializable {
 
 	/**
@@ -43,6 +46,7 @@ public class DamageForm implements Serializable {
 	//Lob annotation and byte array for saving and retrieving image objects from database
 	@Lob
 	@Column(name = "photo", nullable = false)
+	@JsonIgnore
 	private byte[] damagePhotoShoots;
 
 	@DecimalMax(value = "99999.999", message = "The decimal value can not be more than 99999.999 ")
@@ -55,12 +59,6 @@ public class DamageForm implements Serializable {
 
 	@Column(name = "date", nullable = false)
 	private LocalDate dateAdded;
-
-	@Transient
-	private int ceoCounter;
-	
-	@Transient
-	private int salesCounter;
 
 	public DamageForm() {
 		// TODO Auto-generated constructor stub
@@ -120,22 +118,6 @@ public class DamageForm implements Serializable {
 
 	public void setDateAdded(LocalDate dateAdded) {
 		this.dateAdded = dateAdded;
-	}
-
-	public int getCounter() {
-		return ceoCounter;
-	}
-
-	public void setCounter(int ceoCounter) {
-		this.ceoCounter = ceoCounter;
-	}
-
-	public int getSalesCounter() {
-		return salesCounter;
-	}
-
-	public void setSalesCounter(int salesCounter) {
-		this.salesCounter = salesCounter;
 	}
 
 }
