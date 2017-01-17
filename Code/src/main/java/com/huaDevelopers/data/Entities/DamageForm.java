@@ -46,7 +46,6 @@ public class DamageForm implements Serializable {
 	//Lob annotation and byte array for saving and retrieving image objects from database
 	@Lob
 	@Column(name = "photo", nullable = false)
-	@JsonIgnore
 	private byte[] damagePhotoShoots;
 
 	@DecimalMax(value = "99999.999", message = "The decimal value can not be more than 99999.999 ")

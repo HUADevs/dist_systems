@@ -33,6 +33,11 @@ public class DamageRestController {
 	@Autowired
 	private VehicleService vService;
 	
+	@GetMapping("/dform")
+	public DamageForm CreateForm(){
+		return new DamageForm();
+	}
+	
 	@GetMapping("/viewAll/{id:\\d+}")
 	public List<DamageForm> findVehicleDForms(@PathVariable("id") Long id) {
 		return this.dmgService.listDamageFormsPerVehicle(id);
@@ -53,23 +58,10 @@ public class DamageRestController {
 	}
 
 	@PostMapping("/declare/{lp:[A-Z]{3}[0-9]{4}}")
-	public String declareDamage(@RequestBody DamageForm dform, @PathVariable("lp") String lp,
-			@RequestParam("file") MultipartFile file) {
-		if (file.isEmpty()) {
-			return "A file must be selected";
-		}
-		if (!file.getContentType().equals("image/png") && !file.getContentType().equals("image/jpeg")
-				&& !file.equals("image/jpg")) {
-			return "jpeg/jpg/png file types are only supported";
-		}
+	public String declareDamage(@RequestBody DamageForm dform, @PathVariable("lp") String lp
+			) {
 
 		dform.setDateAdded(LocalDate.now());
-		try {
-			dform.setDamagePhotoShoots(file.getBytes());
-		} catch (IOException e) {
-			System.out.println("failed to upload file");
-			e.printStackTrace();
-		}
 		Vehicle veh = this.vService.getVehicleByLP(lp);
 		dform.setLicensePlate(this.vService.getVehicleByPID(veh.getId()));
 		this.dmgService.addDamageForm(dform);
