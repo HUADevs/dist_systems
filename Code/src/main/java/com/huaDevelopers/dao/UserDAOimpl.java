@@ -89,4 +89,19 @@ public class UserDAOimpl implements UserDAO {
 			logger.info("Something went completely wrong");
 	}
 
+	@Override
+	public User login(String username, String password) {
+		Session session = this.sessionFactory.getCurrentSession();
+		User usr;
+		try {
+			usr = (User) session
+					.createQuery("from User where username ='" + username + "' and password ='" + password + "'")
+					.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
+		logger.info("User successfully selected  by username and password from db" + usr.toString());
+		return usr;
+	}
+
 }

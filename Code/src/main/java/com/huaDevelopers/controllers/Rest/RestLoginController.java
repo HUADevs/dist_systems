@@ -1,5 +1,8 @@
 package com.huaDevelopers.controllers.Rest;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +40,13 @@ public class RestLoginController {
 			HttpServletResponse response) {
 		User user = new User();
 
-		try {
-			user = userService.login(username, password);
-			response.setHeader("Token", jwtService.tokenFor(user));
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
+			try {
+				user = this.userService.login(username, password);
+				response.setHeader("Token", jwtService.tokenFor(user));
+			} catch (IOException | URISyntaxException | NullPointerException e) {
+				return new User();
+			}
+		
 		return user;
 	}
 

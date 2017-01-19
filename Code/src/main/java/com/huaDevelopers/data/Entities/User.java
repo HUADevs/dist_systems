@@ -15,6 +15,8 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /*Link the class,fields with the database table,columns.Declare constraints and relations with other entities*/
 @Entity
 @Table(name = "User")
@@ -59,10 +61,12 @@ public class User implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "role_id", nullable = true)
+	@JsonIgnore
 	private Role assignedRole;
 
 	@ManyToOne
 	@JoinColumn(name = "department_id", nullable = true)
+	@JsonIgnore
 	private Department workingDept;
 
 	@NotEmpty(groups = { ValidationStepOne.class, ValidationStepTwo.class }, message = "This field is required")
@@ -73,6 +77,7 @@ public class User implements Serializable {
 	@NotEmpty(groups = { ValidationStepOne.class, ValidationStepTwo.class }, message = "This field is required")
 	@Size(min = 6, max = 250, groups = { ValidationStepOne.class, ValidationStepTwo.class })
 	@Column(name = "password", length = 50, nullable = false)
+	@JsonIgnore
 	private String password;
 
 	public Long getUserId() {
