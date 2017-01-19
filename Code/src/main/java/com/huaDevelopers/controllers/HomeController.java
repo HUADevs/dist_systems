@@ -18,6 +18,6 @@ public class HomeController {
 	
 	@RequestMapping(value={"/home","/"})
 	public String home(){
-		return "login";
+		return "redirect:/login";
 	}
 }

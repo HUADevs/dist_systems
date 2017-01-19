@@ -63,7 +63,7 @@
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a onclick="document.forms['logoutForm'].submit()"><i
+				<li><a onclick="document.forms['logoutForm'].submit()" style="cursor: pointer;"><i
 						class="glyphicon glyphicon-off"></i><span></span> Logout</a></li>
 			</ul>
 		</div>
