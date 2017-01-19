@@ -59,15 +59,13 @@
 									<hr>
 									<p>Description: ${damage.damageDescription}</p>
 									<hr>
-									<label for="photo">Photo of the Incident</label> <%-- <a
-										href="#inline" data-modaal-type="inline"
-										data-modaal-animation="fade" class="btn modaal"><img
-										id="photo" class="img-responsive" alt="damage-photo"
-										src="/Car-insurance/cms/damage/${damage.id}/imageDisplay"></a> --%>
-										<button type="button" data-toggle="modal" data-target="#myModal"><img
-										id="photo" class="img-responsive" alt="damage-photo"
-										src="/Car-insurance/cms/damage/${damage.id}/imageDisplay">
-										</button>
+									<label for="photo">Photo of the Incident</label><br>
+									<button type="button" data-toggle="modal" class="display:block-center"
+										data-target="#myModal">
+										<img id="photo" class="img-responsive" alt="damage-photo"
+											src="/Car-insurance/cms/damage/${damage.id}/imageDisplay"
+											width="200" height="100">
+									</button>
 								</section>
 							</div>
 						</div>
@@ -93,12 +91,14 @@
 			</div>
 		</div>
 	</div>
-	<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-        <div class="modal-body">
-            <img src="/Car-insurance/cms/damage/${damage.id}/imageDisplay" class="img-responsive center-block">
-        </div>
-  </div>
-</div>
+	<div id="myModal" class="modal fade" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-body">
+				<img src="/Car-insurance/cms/damage/${damage.id}/imageDisplay"
+					class="img-responsive center-block">
+			</div>
+		</div>
+	</div>
 </body>
 </html>
