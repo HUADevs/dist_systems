@@ -80,6 +80,25 @@
 										</tr>
 									</sec:authorize>
 								</c:when>
+								<c:when test="${dmg.damageCost <= 300 and empty dmg.approval}">
+									<sec:authorize
+										access="hasAnyAuthority('Damage Approval less than 300')">
+										<tr>
+											<td>${dmg.id}</td>
+											<td>${dmg.licensePlate.licensePlate}</td>
+											<td>${dmg.damageCost}<i class="glyphicon glyphicon-euro"></i></td>
+											<td><span></span></td>
+											<td>${dmg.dateAdded}</td>
+											<td><c:if test="${dmg.approval == null}">
+													<a
+														href="<spring:url
+							value="/cms/damage/${dmg.id}/review"/>"
+														class="btn btn-success"><span><i
+															class="glyphicon glyphicon-pencil"></i></span> Review</a>
+												</c:if></td>
+										</tr>
+									</sec:authorize>
+								</c:when>
 								<c:otherwise>
 								</c:otherwise>
 							</c:choose>

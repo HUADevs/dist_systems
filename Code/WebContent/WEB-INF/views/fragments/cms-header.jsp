@@ -16,15 +16,18 @@
 			value="${_csrf.token}" />
 	</form>
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$.ajax({
-				type : "get",
-				url : "<spring:url value="/cms/damage/formCount/${role}"></spring:url>",
-				success : function(msg) {
-					$('#badge').text(msg);
-				}
-			});
-		});
+		$(document)
+				.ready(
+						function() {
+							$
+									.ajax({
+										type : "get",
+										url : "<spring:url value="/cms/damage/formCount/${role}"></spring:url>",
+										success : function(msg) {
+											$('#badge').text(msg);
+										}
+									});
+						});
 	</script>
 </c:if>
 <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -36,7 +39,9 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="<spring:url value="/cms/home"></spring:url>"><span></span>CMS </a>
+			<a class="navbar-brand"
+				href="<spring:url value="/cms/home"></spring:url>"><span></span>CMS
+			</a>
 		</div>
 
 		<div class="collapse navbar-collapse" id="cmsNavbar">
@@ -53,7 +58,8 @@
 							href="<spring:url value="/cms/insurance/findVehicle"></spring:url>">Create
 								Insurance</a></li>
 						<li><a
-							href="<spring:url value="/cms/insurance/view"></spring:url>">View All</a></li>
+							href="<spring:url value="/cms/insurance/view"></spring:url>">View
+								All</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -66,10 +72,13 @@
 						<li><a
 							href="<spring:url value="/cms/damage/view"></spring:url>">Damage
 								History</a></li>
-						<sec:authorize access="hasAnyAuthority('Damage Approval 300-2000', 'Damage Approval more than 2000')">
+						<sec:authorize
+							access="hasAnyAuthority('Damage Approval less than 300','Damage Approval 300-2000', 'Damage Approval more than 2000')">
 							<li role="separator" class="divider"></li>
-							<li><a href="<spring:url value="/cms/damage/view/specific"/>">Damage Approval <span id=badge
-									class="badge">0</span>
+							<li><a
+								href="<spring:url value="/cms/damage/view/specific"/>">Damage
+									Approval <span id=badge class="badge"
+									style="background-color: red;">0</span>
 							</a></li>
 						</sec:authorize>
 					</ul></li>
@@ -77,8 +86,9 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#"><i class="glyphicon glyphicon-blackboard"></i><span></span>
 						Statistics</a></li>
-				<li><a onclick="document.forms['logoutForm'].submit()" style="cursor: pointer;"><i
-						class="glyphicon glyphicon-off"></i><span></span> Logout</a></li>
+				<li><a onclick="document.forms['logoutForm'].submit()"
+					style="cursor: pointer;"><i class="glyphicon glyphicon-off"></i><span></span>
+						Logout</a></li>
 			</ul>
 		</div>
 	</div>
