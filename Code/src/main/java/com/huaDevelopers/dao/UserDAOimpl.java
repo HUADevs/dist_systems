@@ -108,7 +108,7 @@ public class UserDAOimpl implements UserDAO {
 			servStr+=s.getServiceName();
 		}
 		System.out.println(servStr);
-		if(!servStr.contains("UserSevice")){
+		if(!servStr.contains("UserService")){
 			return null;
 		}
 		logger.info("User successfully selected  by username and password from db" + usr.toString());
