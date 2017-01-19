@@ -1,6 +1,7 @@
 package com.huaDevelopers.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.huaDevelopers.dao.Interfaces.UserDAO;
+import com.huaDevelopers.data.Entities.Services;
 import com.huaDevelopers.data.Entities.User;
 
 @Repository
@@ -98,6 +100,15 @@ public class UserDAOimpl implements UserDAO {
 					.createQuery("from User where username ='" + username + "' and password ='" + password + "'")
 					.getSingleResult();
 		} catch (Exception e) {
+			return null;
+		}
+		Set<Services> services= usr.getAssignedRole().getServices();
+		String servStr="";
+		for(Services s: services){
+			servStr+=s.getServiceName();
+		}
+		System.out.println(servStr);
+		if(!servStr.contains("UserSevice")){
 			return null;
 		}
 		logger.info("User successfully selected  by username and password from db" + usr.toString());
