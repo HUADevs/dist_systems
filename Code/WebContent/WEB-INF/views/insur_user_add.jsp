@@ -55,8 +55,10 @@
 					<form:input id="user-password" cssClass="form-control"
 						path="password" />
 				</div>
-				<button type="submit" class="btn btn-primary">Save</button>
+				<a href='<spring:url value="/cms/insurance/view"></spring:url>' class="btn btn-default btn-lg">Skip</a>
+				<button type="submit" class="btn btn-success btn-lg">Save</button>
 			</form:form>
+			
 
 		</div>
 	</div>
