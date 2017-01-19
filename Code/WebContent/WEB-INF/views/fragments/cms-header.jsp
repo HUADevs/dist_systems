@@ -84,11 +84,11 @@
 					</ul></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><i class="glyphicon glyphicon-blackboard"></i><span></span>
-						Statistics</a></li>
+				<!-- <li><a href="#"><i class="glyphicon glyphicon-blackboard"></i><span></span>
+						Statistics</a></li> -->
 				<li><a onclick="document.forms['logoutForm'].submit()"
 					style="cursor: pointer;"><i class="glyphicon glyphicon-off"></i><span></span>
-						Logout</a></li>
+						<sec:authentication property="principal.username" />, Logout</a></li>
 			</ul>
 		</div>
 	</div>
