@@ -2,7 +2,12 @@ package com.huaDevelopers.data.Services;
 
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +20,14 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDAO usrDAO;
+	
+	@Autowired
+	@Qualifier("dataSource")
+	private DataSource dataSource;
+
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
 
 	public void setUsrDAO(UserDAO usrDAO) {
 		this.usrDAO = usrDAO;
@@ -60,6 +73,20 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public void removeUser(Long userId) {
 		this.usrDAO.removeUser(userId);
+	}
+	
+	@Override
+	public User login(String username, String password) {
+		Boolean state=false;
+		
+		String query = "select * from User where username = ? and password = ?";
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+
+		Object queryForObject = jdbcTemplate.queryForObject(query, new Object[] { username, password },
+				new BeanPropertyRowMapper<User>(User.class));
+		User user = (User) queryForObject;
+
+		return user;
 	}
 
 }

@@ -19,5 +19,7 @@ public interface UserService {
 	public List<User> listAllUser();
 
 	public void removeUser(Long userId);
+	
+	public User login(String username, String password);
 
 }
