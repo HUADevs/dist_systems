@@ -86,6 +86,7 @@ public class InsurRestController {
 		JSONInsur.setDiscount(this.insuranceService.countInsurDiscount(cust, duration));
 		JSONInsur.setNewDriver(flag);
 		JSONInsur.setLicensePlate(vehicle);
+		JSONInsur.setPaid(false);
 
 		this.insuranceService.updateInsurance(JSONInsur);
 
