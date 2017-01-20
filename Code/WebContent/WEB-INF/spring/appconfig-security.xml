@@ -31,6 +31,8 @@
 
 	<security:http pattern="/rest/login" security="none" />
 	<security:http pattern="/rest/department/**" security="none" />
+	<security:http pattern="/rest/insurance/calculate" security="none" />
+	
 
 	<security:http pattern="/rest/**" entry-point-ref="restAuthenticationEntryPoint"
 		create-session="stateless">

@@ -7,9 +7,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.huaDevelopers.data.Entities.Customer;
@@ -35,6 +37,23 @@ public class InsurRestController {
 
 	@Autowired
 	private VehicleService vService;
+	
+	@PostMapping("/calculate")
+	public List<Double> calculatecost( @RequestParam("type") String type , @RequestParam("duration") int duration , @RequestParam("lacquired") String lacquired ,  @RequestParam("cubic") int cubic, @RequestParam("driver23") boolean driver23  ){
+		LocalDate dateacq = LocalDate.parse(lacquired);
+		Vehicle cubics = new Vehicle();
+		cubics.setCubic(cubic);
+		Customer cust = new Customer();
+		LocalDate bday = LocalDate.parse("1900-01-01");
+		cust.setBirthdayDate(bday);
+		cust.setLicenseAqquired(dateacq);
+		double cost = this.insuranceService.countInsurCost(cubics, cust, type, duration, driver23);
+		double discount = this.insuranceService.countInsurDiscount(cust, duration);
+		List<Double> price = new ArrayList<Double>();
+		price.add(cost);
+		price.add(discount);
+		return price;
+	}
 
 	@GetMapping("/{username}/view")
 	public List<Insurance> getInsurByUserEmail(@PathVariable("username") String id) {
