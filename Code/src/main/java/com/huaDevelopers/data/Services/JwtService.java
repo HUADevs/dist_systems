@@ -36,7 +36,7 @@ public class JwtService {
         String secretKey = "testKEY";
 
         
-        Date expiration = Date.from(LocalDateTime.now().plusHours(2).toInstant(UTC));
+        Date expiration = Date.from(LocalDateTime.now().plusHours(240).toInstant(UTC));
         return Jwts.builder()
                 .setSubject(user.getLastName())
                 .setId(String.valueOf(user.getUserId()))
