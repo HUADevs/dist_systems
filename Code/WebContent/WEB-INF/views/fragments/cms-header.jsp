@@ -30,6 +30,11 @@
 						});
 	</script>
 </c:if>
+<div class="container-fluid">
+<div class="row text-center">
+	<img style="margin-top:20px; margin-bottom:20px;" class="col-xs-3 col-xs-offset-4" alt="CARINS logo" src='<spring:url value="/resources/images/LOGONAME.png"/>'>
+</div>
+</div>
 <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
 	<div class="container-fluid">
 		<div class="navbar-header">

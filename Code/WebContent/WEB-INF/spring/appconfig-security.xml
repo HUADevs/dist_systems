@@ -27,7 +27,7 @@
 	<bean id="restAuthenticationEntryPoint" class="com.huaDevelopers.RestAuthenticationEntryPoint">
 	</bean>
 
-	<security:http security="none" pattern="/resource/**" />
+	<security:http security="none" pattern="/resources/**" />
 
 	<security:http pattern="/rest/login" security="none" />
 	<security:http pattern="/rest/department/**" security="none" />
