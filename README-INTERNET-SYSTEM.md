@@ -4,7 +4,7 @@
 
 ## 2.1 Login
 
-![](https://drive.google.com/uc?export=view&id=13HhTa6T2oDrOdrkSsphyDExtw-XK_ng_)
+![](https://drive.google.com/uc?id=13HhTa6T2oDrOdrkSsphyDExtw-XK_ng_)
 
 Upon entering the system, the following fields will appear where the user must enter his Username**(1)** (or Email) and Password**(2).** By entering the correct login information, the user is directed to the home page of the system.
 
